@@ -1,0 +1,53 @@
+name: Sovereign Reconstruction Engine CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -e ".[dev]"
+
+      - name: Lint
+        run: |
+          ruff check src/ tests/
+
+      - name: Run tests
+        run: |
+          pytest -q
+
+      - name: Constitutional Artifact Check
+        run: |
+          echo "Verifying constitutional artifacts..."
+          test -f docs/architecture/EvidenceRegistry.md
+          test -f docs/architecture/FRA_Methodology.md
+          test -f docs/architecture/ConstitutionalValidationPipeline.md
+          test -f docs/architecture/DantomaxIntegration.md
+          test -f docs/architecture/HLRMAIAgent.md
+          test -f docs/architecture/EnterpriseTopology.md
+          test -f docs/architecture/MCRL_Rosetta.md
+          test -f docs/governance/CIH_Workflow.md
+          test -f docs/governance/GovernanceConsensusMap_v01.md
+          test -f docs/governance/PromotionPlan_v01.md
+          test -f docs/specs/API_Contracts.md
+          test -f docs/specs/ConstitutionalSpecification_v01.md
+          test -f docs/specs/ConstitutionalLogging.md
+          test -f docs/specs/ConstitutionalPromotionGates.md
+          test -f docs/specs/openapi.yaml
+          test -f schemas/sovereign_certificate.schema.json
+          test -f schemas/governance_trace.schema.json
+          test -f data/fra_corpus_v01.json

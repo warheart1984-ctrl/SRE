@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GovernanceTrace",
+  "type": "object",
+  "required": [
+    "trace_id",
+    "reconstruction_id",
+    "project_id",
+    "created_at",
+    "principal",
+    "events",
+    "constitutional_summary"
+  ],
+  "properties": {
+    "trace_id": { "type": "string" },
+    "reconstruction_id": { "type": "string" },
+    "project_id": { "type": "string" },
+    "certificate_id": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "principal": { "type": "string" },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_id", "timestamp", "actor", "type", "payload", "evidence_links"],
+        "properties": {
+          "event_id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "actor": { "type": "string" },
+          "type": { "type": "string" },
+          "payload": { "type": "object" },
+          "evidence_links": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "constitutional_summary": {
+      "type": "object",
+      "required": ["fac_e", "fac_v"],
+      "properties": {
+        "fac_e": { "type": "object" },
+        "fac_v": { "type": "object" }
+      }
+    }
+  }
+}

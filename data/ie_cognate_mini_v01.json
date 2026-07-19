@@ -1,0 +1,726 @@
+{
+  "corpus_id": "ie_cognate_mini_v01",
+  "description": "Mini Indo-European comparative set for SRE vertical slice. Includes kinship (father/mother), body parts (foot/heart/eye/tooth/knee/blood), numbers (one–five), and core verbs (be/bear/know/eat). Forms and glosses are standard textbook cognates; bibliographic source_reference values satisfy FAC-E1.",
+  "references": [
+    "Fortson, Benjamin W. IV. 2010. Indo-European Language and Culture. 2nd ed. Wiley-Blackwell.",
+    "Beekes, Robert S. P. 2011. Comparative Indo-European Linguistics. 2nd ed. John Benjamins."
+  ],
+  "languages": [
+    {
+      "code": "LAT",
+      "name": "Latin",
+      "periods": [
+        {
+          "name": "Classical",
+          "evidence": [
+            {
+              "evidence_id": "evid_lat_pater",
+              "type": "lexical_item",
+              "form": "pater",
+              "meaning": "father",
+              "metadata": {
+                "source": "Fortson 2010 §1.2 / Latin pater",
+                "date": "1st c. BCE"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_mater",
+              "type": "lexical_item",
+              "form": "mater",
+              "meaning": "mother",
+              "metadata": {
+                "source": "Fortson 2010 §1.2 / Latin mater"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_ped",
+              "type": "lexical_item",
+              "form": "pes",
+              "meaning": "foot",
+              "metadata": {
+                "source": "Beekes 2011 / Latin pes, pedis"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_cord",
+              "type": "lexical_item",
+              "form": "cor",
+              "meaning": "heart",
+              "metadata": {
+                "source": "Beekes 2011 / Latin cor, cordis"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_unus",
+              "type": "lexical_item",
+              "form": "unus",
+              "meaning": "one",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Latin unus"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_duo",
+              "type": "lexical_item",
+              "form": "duo",
+              "meaning": "two",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Latin duo"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_tres",
+              "type": "lexical_item",
+              "form": "tres",
+              "meaning": "three",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Latin tres"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_quattuor",
+              "type": "lexical_item",
+              "form": "quattuor",
+              "meaning": "four",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Latin quattuor"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_quinque",
+              "type": "lexical_item",
+              "form": "quinque",
+              "meaning": "five",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Latin quinque"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_oculus",
+              "type": "lexical_item",
+              "form": "oculus",
+              "meaning": "eye",
+              "metadata": {
+                "source": "Beekes 2011 / Latin oculus"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_dens",
+              "type": "lexical_item",
+              "form": "dens",
+              "meaning": "tooth",
+              "metadata": {
+                "source": "Beekes 2011 / Latin dens, dentis"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_genu",
+              "type": "lexical_item",
+              "form": "genu",
+              "meaning": "knee",
+              "metadata": {
+                "source": "Beekes 2011 / Latin genu"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_sanguis",
+              "type": "lexical_item",
+              "form": "sanguis",
+              "meaning": "blood",
+              "metadata": {
+                "source": "Beekes 2011 / Latin sanguis"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_esse",
+              "type": "lexical_item",
+              "form": "est",
+              "meaning": "be",
+              "metadata": {
+                "source": "Fortson 2010 verbs / Latin esse (est)"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_ferre",
+              "type": "lexical_item",
+              "form": "ferre",
+              "meaning": "bear",
+              "metadata": {
+                "source": "Fortson 2010 verbs / Latin ferre"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_gnoscere",
+              "type": "lexical_item",
+              "form": "gnoscere",
+              "meaning": "know",
+              "metadata": {
+                "source": "Beekes 2011 / Latin (g)noscere"
+              }
+            },
+            {
+              "evidence_id": "evid_lat_edere",
+              "type": "lexical_item",
+              "form": "edere",
+              "meaning": "eat",
+              "metadata": {
+                "source": "Beekes 2011 / Latin edere"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "SPA",
+      "name": "Spanish",
+      "periods": [
+        {
+          "name": "Modern",
+          "evidence": [
+            {
+              "evidence_id": "evid_spa_padre",
+              "type": "lexical_item",
+              "form": "padre",
+              "meaning": "father",
+              "metadata": {
+                "source": "Fortson 2010 Romance reflexes / Spanish padre"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_madre",
+              "type": "lexical_item",
+              "form": "madre",
+              "meaning": "mother",
+              "metadata": {
+                "source": "Fortson 2010 Romance reflexes / Spanish madre"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_pie",
+              "type": "lexical_item",
+              "form": "pie",
+              "meaning": "foot",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish pie"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_corazon",
+              "type": "lexical_item",
+              "form": "corazon",
+              "meaning": "heart",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish corazon"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_uno",
+              "type": "lexical_item",
+              "form": "uno",
+              "meaning": "one",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / Spanish uno"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_dos",
+              "type": "lexical_item",
+              "form": "dos",
+              "meaning": "two",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / Spanish dos"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_tres",
+              "type": "lexical_item",
+              "form": "tres",
+              "meaning": "three",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / Spanish tres"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_cuatro",
+              "type": "lexical_item",
+              "form": "cuatro",
+              "meaning": "four",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / Spanish cuatro"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_cinco",
+              "type": "lexical_item",
+              "form": "cinco",
+              "meaning": "five",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / Spanish cinco"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_ojo",
+              "type": "lexical_item",
+              "form": "ojo",
+              "meaning": "eye",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish ojo"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_diente",
+              "type": "lexical_item",
+              "form": "diente",
+              "meaning": "tooth",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish diente"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_rodilla",
+              "type": "lexical_item",
+              "form": "rodilla",
+              "meaning": "knee",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish rodilla"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_sangre",
+              "type": "lexical_item",
+              "form": "sangre",
+              "meaning": "blood",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish sangre"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_ser",
+              "type": "lexical_item",
+              "form": "ser",
+              "meaning": "be",
+              "metadata": {
+                "source": "Fortson 2010 Romance verbs / Spanish ser"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_llevar",
+              "type": "lexical_item",
+              "form": "llevar",
+              "meaning": "bear",
+              "metadata": {
+                "source": "Fortson 2010 Romance verbs / Spanish llevar"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_conocer",
+              "type": "lexical_item",
+              "form": "conocer",
+              "meaning": "know",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish conocer"
+              }
+            },
+            {
+              "evidence_id": "evid_spa_comer",
+              "type": "lexical_item",
+              "form": "comer",
+              "meaning": "eat",
+              "metadata": {
+                "source": "Beekes 2011 Romance / Spanish comer"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "FRA",
+      "name": "French",
+      "periods": [
+        {
+          "name": "Modern",
+          "evidence": [
+            {
+              "evidence_id": "evid_fra_pere",
+              "type": "lexical_item",
+              "form": "pere",
+              "meaning": "father",
+              "metadata": {
+                "source": "Fortson 2010 Romance reflexes / French pere"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_mere",
+              "type": "lexical_item",
+              "form": "mere",
+              "meaning": "mother",
+              "metadata": {
+                "source": "Fortson 2010 Romance reflexes / French mere"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_pied",
+              "type": "lexical_item",
+              "form": "pied",
+              "meaning": "foot",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French pied"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_coeur",
+              "type": "lexical_item",
+              "form": "coeur",
+              "meaning": "heart",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French coeur"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_un",
+              "type": "lexical_item",
+              "form": "un",
+              "meaning": "one",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / French un"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_deux",
+              "type": "lexical_item",
+              "form": "deux",
+              "meaning": "two",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / French deux"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_trois",
+              "type": "lexical_item",
+              "form": "trois",
+              "meaning": "three",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / French trois"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_quatre",
+              "type": "lexical_item",
+              "form": "quatre",
+              "meaning": "four",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / French quatre"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_cinq",
+              "type": "lexical_item",
+              "form": "cinq",
+              "meaning": "five",
+              "metadata": {
+                "source": "Fortson 2010 Romance numerals / French cinq"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_oeil",
+              "type": "lexical_item",
+              "form": "oeil",
+              "meaning": "eye",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French oeil"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_dent",
+              "type": "lexical_item",
+              "form": "dent",
+              "meaning": "tooth",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French dent"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_genou",
+              "type": "lexical_item",
+              "form": "genou",
+              "meaning": "knee",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French genou"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_sang",
+              "type": "lexical_item",
+              "form": "sang",
+              "meaning": "blood",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French sang"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_etre",
+              "type": "lexical_item",
+              "form": "etre",
+              "meaning": "be",
+              "metadata": {
+                "source": "Fortson 2010 Romance verbs / French etre"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_porter",
+              "type": "lexical_item",
+              "form": "porter",
+              "meaning": "bear",
+              "metadata": {
+                "source": "Fortson 2010 Romance verbs / French porter"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_connaitre",
+              "type": "lexical_item",
+              "form": "connaitre",
+              "meaning": "know",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French connaitre"
+              }
+            },
+            {
+              "evidence_id": "evid_fra_manger",
+              "type": "lexical_item",
+              "form": "manger",
+              "meaning": "eat",
+              "metadata": {
+                "source": "Beekes 2011 Romance / French manger"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "SKT",
+      "name": "Sanskrit",
+      "periods": [
+        {
+          "name": "Vedic",
+          "evidence": [
+            {
+              "evidence_id": "evid_skt_pitar",
+              "type": "lexical_item",
+              "form": "pitar",
+              "meaning": "father",
+              "metadata": {
+                "source": "Fortson 2010 §1.2 / Sanskrit pitar-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_matar",
+              "type": "lexical_item",
+              "form": "matar",
+              "meaning": "mother",
+              "metadata": {
+                "source": "Fortson 2010 §1.2 / Sanskrit matar-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_pad",
+              "type": "lexical_item",
+              "form": "pad",
+              "meaning": "foot",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit pad-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_hrd",
+              "type": "lexical_item",
+              "form": "hrd",
+              "meaning": "heart",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit hrd-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_eka",
+              "type": "lexical_item",
+              "form": "eka",
+              "meaning": "one",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Sanskrit eka-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_dva",
+              "type": "lexical_item",
+              "form": "dva",
+              "meaning": "two",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Sanskrit dva-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_tri",
+              "type": "lexical_item",
+              "form": "tri",
+              "meaning": "three",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Sanskrit tri-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_catur",
+              "type": "lexical_item",
+              "form": "catur",
+              "meaning": "four",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Sanskrit catur-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_panca",
+              "type": "lexical_item",
+              "form": "panca",
+              "meaning": "five",
+              "metadata": {
+                "source": "Fortson 2010 numerals / Sanskrit pañca-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_aksi",
+              "type": "lexical_item",
+              "form": "aksi",
+              "meaning": "eye",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit akṣi-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_dant",
+              "type": "lexical_item",
+              "form": "dant",
+              "meaning": "tooth",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit dant-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_janu",
+              "type": "lexical_item",
+              "form": "janu",
+              "meaning": "knee",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit jānu-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_asrj",
+              "type": "lexical_item",
+              "form": "asrj",
+              "meaning": "blood",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit asṛj-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_as",
+              "type": "lexical_item",
+              "form": "as",
+              "meaning": "be",
+              "metadata": {
+                "source": "Fortson 2010 verbs / Sanskrit as-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_bhar",
+              "type": "lexical_item",
+              "form": "bhar",
+              "meaning": "bear",
+              "metadata": {
+                "source": "Fortson 2010 verbs / Sanskrit bhar-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_jna",
+              "type": "lexical_item",
+              "form": "jna",
+              "meaning": "know",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit jñā-"
+              }
+            },
+            {
+              "evidence_id": "evid_skt_ad",
+              "type": "lexical_item",
+              "form": "ad",
+              "meaning": "eat",
+              "metadata": {
+                "source": "Beekes 2011 / Sanskrit ad-"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "PIE",
+      "name": "Proto-Indo-European (reference)",
+      "periods": [
+        {
+          "name": "Reconstructed",
+          "evidence": [
+            {
+              "evidence_id": "evid_pie_phter",
+              "type": "phonological_rule",
+              "rule": "PIE *ph₂tēr → Lat pater / Skt pitar / Romance padre~pere",
+              "metadata": {
+                "source": "Fortson 2010 reconstruction *ph₂tēr"
+              }
+            },
+            {
+              "evidence_id": "evid_pie_mehter",
+              "type": "phonological_rule",
+              "rule": "PIE *méh₂tēr → Lat mater / Skt matar / Romance madre~mere",
+              "metadata": {
+                "source": "Fortson 2010 reconstruction *méh₂tēr"
+              }
+            },
+            {
+              "evidence_id": "evid_pie_oynos",
+              "type": "phonological_rule",
+              "rule": "PIE *óynos → Lat unus / Romance un~uno / (cf. Skt eka-)",
+              "metadata": {
+                "source": "Fortson 2010 reconstruction *óynos"
+              }
+            },
+            {
+              "evidence_id": "evid_pie_dwoh1",
+              "type": "phonological_rule",
+              "rule": "PIE *dwóh₁ → Lat duo / Skt dva / Romance dos~deux",
+              "metadata": {
+                "source": "Fortson 2010 reconstruction *dwóh₁"
+              }
+            },
+            {
+              "evidence_id": "evid_pie_h3ekw",
+              "type": "phonological_rule",
+              "rule": "PIE *h₃ekʷ- → Lat oculus / Skt akṣi / Romance ojo~oeil",
+              "metadata": {
+                "source": "Beekes 2011 reconstruction *h₃ekʷ-"
+              }
+            },
+            {
+              "evidence_id": "evid_pie_bher",
+              "type": "phonological_rule",
+              "rule": "PIE *bʰer- → Lat ferre / Skt bhar / Romance porter~llevar",
+              "metadata": {
+                "source": "Fortson 2010 reconstruction *bʰer-"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

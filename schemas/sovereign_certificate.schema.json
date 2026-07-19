@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SovereignCertificate",
+  "type": "object",
+  "required": [
+    "certificate_id",
+    "version",
+    "issued_at",
+    "issuer",
+    "subject",
+    "scope",
+    "constitutional_status",
+    "signatures",
+    "validity"
+  ],
+  "properties": {
+    "certificate_id": { "type": "string" },
+    "version": { "type": "string" },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "issuer": {
+      "type": "object",
+      "required": ["authority", "authority_id"],
+      "properties": {
+        "authority": { "type": "string" },
+        "authority_id": { "type": "string" }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "required": ["project_id", "reconstruction_id", "target_language", "time_period"],
+      "properties": {
+        "project_id": { "type": "string" },
+        "reconstruction_id": { "type": "string" },
+        "target_language": { "type": "string" },
+        "time_period": { "type": "string" }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["domains", "constraints"],
+      "properties": {
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "constraints": { "type": "object" }
+      }
+    },
+    "constitutional_status": {
+      "type": "object",
+      "required": ["fac_e", "fac_v"],
+      "properties": {
+        "fac_e": { "type": "object" },
+        "fac_v": { "type": "object" }
+      }
+    },
+    "signatures": {
+      "type": "object",
+      "required": ["council_signature", "ledger_entry_id"],
+      "properties": {
+        "council_signature": { "type": "string" },
+        "ledger_entry_id": { "type": "string" }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["not_before", "not_after", "revocation_status"],
+      "properties": {
+        "not_before": { "type": "string", "format": "date-time" },
+        "not_after": { "type": "string", "format": "date-time" },
+        "revocation_status": { "type": "string" }
+      }
+    }
+  }
+}

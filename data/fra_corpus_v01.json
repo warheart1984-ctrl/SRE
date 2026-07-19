@@ -1,0 +1,148 @@
+{
+  "corpus_id": "fra_test_v01",
+  "languages": [
+    {
+      "code": "MYT",
+      "name": "Mythar",
+      "periods": [
+        {
+          "name": "Phase I",
+          "evidence": [
+            {
+              "evidence_id": "evid_myt_001",
+              "type": "inscription",
+              "text": "ma taru en",
+              "gloss": "breath rises",
+              "metadata": {
+                "site": "Mythar Plain",
+                "date": "1200 BCE"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_002",
+              "type": "lexical_item",
+              "form": "ma",
+              "meaning": "breath",
+              "metadata": {
+                "source": "Ritual Hymn A"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase II",
+          "evidence": [
+            {
+              "evidence_id": "evid_myt_101",
+              "type": "inscription",
+              "text": "mahar enu",
+              "gloss": "spirit rises",
+              "metadata": {
+                "site": "High Plain",
+                "date": "900 BCE"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_102",
+              "type": "phonological_rule",
+              "rule": "a → ah / _r",
+              "metadata": {
+                "source": "Grammar Fragment I"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase III",
+          "evidence": [
+            {
+              "evidence_id": "evid_myt_201",
+              "type": "lexical_item",
+              "form": "mara",
+              "meaning": "breath, wind",
+              "metadata": {
+                "source": "Song Cycle B"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase IV",
+          "evidence": [
+            {
+              "evidence_id": "evid_myt_301",
+              "type": "corpus_sample",
+              "text": "mara enu tal",
+              "gloss": "wind rises again",
+              "metadata": {
+                "source": "Epic C",
+                "date": "300 BCE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "REL",
+      "name": "Related Branch",
+      "periods": [
+        {
+          "name": "Phase I",
+          "evidence": [
+            {
+              "evidence_id": "evid_rel_001",
+              "type": "lexical_item",
+              "form": "mah",
+              "meaning": "breath, spirit",
+              "metadata": {
+                "source": "Inscription B"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase II",
+          "evidence": [
+            {
+              "evidence_id": "evid_rel_101",
+              "type": "lexical_item",
+              "form": "mar",
+              "meaning": "air, breath",
+              "metadata": {
+                "source": "Inscription C"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase III",
+          "evidence": [
+            {
+              "evidence_id": "evid_rel_201",
+              "type": "phonological_rule",
+              "rule": "ah → a / _#",
+              "metadata": {
+                "source": "Grammar Fragment II"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Phase IV",
+          "evidence": [
+            {
+              "evidence_id": "evid_rel_301",
+              "type": "corpus_sample",
+              "text": "mar en tal",
+              "gloss": "air rises again",
+              "metadata": {
+                "source": "Epic D"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

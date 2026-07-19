@@ -1,0 +1,316 @@
+openapi: 3.0.3
+info:
+  title: Sovereign Reconstruction Engine API
+  version: 0.1.0
+servers:
+  - url: https://api.sre.local
+paths:
+  /api/v1/evidence:
+    post:
+      summary: Submit linguistic evidence for constitutional validation
+      operationId: submitEvidence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvidenceSubmission'
+      responses:
+        '201':
+          description: Evidence accepted or rejected with validation report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceSubmissionResult'
+  /api/v1/evidence/{evidence_id}:
+    get:
+      summary: Get evidence record and constitutional status
+      operationId: getEvidence
+      parameters:
+        - name: evidence_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Evidence record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceRecord'
+  /api/v1/evidence/{evidence_id}/validation:
+    get:
+      summary: Get FAC-E1–E4 validation report
+      operationId: getEvidenceValidation
+      parameters:
+        - name: evidence_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Validation report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstitutionalValidationResult'
+  /api/v1/reconstruction:
+    post:
+      summary: Start FRA reconstruction
+      operationId: startReconstruction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReconstructionRequest'
+      responses:
+        '202':
+          description: Reconstruction started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconstructionStatus'
+  /api/v1/reconstruction/{reconstruction_id}:
+    get:
+      summary: Get reconstruction state
+      operationId: getReconstruction
+      parameters:
+        - name: reconstruction_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reconstruction state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconstructionDetail'
+  /api/v1/reconstruction/{reconstruction_id}/validation:
+    get:
+      summary: Get FAC-V1–V5 validation report
+      operationId: getReconstructionValidation
+      parameters:
+        - name: reconstruction_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reconstruction validation report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstitutionalValidationResult'
+  /api/v1/ai/analyze:
+    post:
+      summary: Analyze evidence patterns
+      operationId: analyzeEvidencePatterns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                evidence_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Evidence analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvidenceAnalysis'
+  /api/v1/ai/protoforms:
+    post:
+      summary: Generate proto-form hypotheses
+      operationId: generateProtoForms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                analysis_id:
+                  type: string
+                target_language:
+                  type: string
+      responses:
+        '200':
+          description: Proto-form hypotheses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtoFormHypotheses'
+  /api/v1/cih/projects:
+    post:
+      summary: Register reconstruction project for CIH approval
+      operationId: registerProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectSpec'
+      responses:
+        '201':
+          description: Project registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectStatus'
+  /api/v1/cih/projects/{project_id}/approve:
+    post:
+      summary: Execute CIH approval workflow
+      operationId: approveProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project approved and certificate issued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalResult'
+  /api/v1/certificates/{certificate_id}:
+    get:
+      summary: Get Sovereign Certificate
+      operationId: getCertificate
+      parameters:
+        - name: certificate_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Certificate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SovereignCertificate'
+components:
+  schemas:
+    EvidenceSubmission:
+      type: object
+      required: [evidence_id, evidence_type, source_reference, content, submitted_by]
+      properties:
+        evidence_id: { type: string }
+        evidence_type: { type: string }
+        source_reference: { type: string }
+        content: { type: object }
+        submitted_by: { type: string }
+        provenance_chain:
+          type: array
+          items: { type: string }
+        constitutional_tags:
+          type: array
+          items: { type: string }
+    EvidenceSubmissionResult:
+      type: object
+      properties:
+        evidence_id: { type: string }
+        status: { type: string }
+        sha256_hash: { type: string }
+        validation_report_id: { type: string }
+    EvidenceRecord:
+      type: object
+      properties:
+        evidence: { type: object }
+        status: { type: string }
+        validation_report: { $ref: '#/components/schemas/ConstitutionalValidationResult' }
+    ConstitutionalValidationResult:
+      type: object
+      properties:
+        evidence_id: { type: string }
+        is_valid: { type: boolean }
+        failed_checks:
+          type: array
+          items: { type: string }
+        report: { type: object }
+        validated_at: { type: string, format: date-time }
+    ReconstructionRequest:
+      type: object
+      required: [project_id, target_language, time_period, evidence_sources]
+      properties:
+        project_id: { type: string }
+        target_language: { type: string }
+        time_period: { type: string }
+        evidence_sources:
+          type: array
+          items: { type: string }
+        constraints: { type: object }
+    ReconstructionStatus:
+      type: object
+      properties:
+        reconstruction_id: { type: string }
+        status: { type: string }
+        fra_stage: { type: string }
+    ReconstructionDetail:
+      type: object
+      properties:
+        reconstruction_id: { type: string }
+        status: { type: string }
+        fra_stage: { type: string }
+        proto_language_model: { type: object }
+        certificate_id: { type: string }
+    EvidenceAnalysis:
+      type: object
+      properties:
+        analysis_id: { type: string }
+        lexical_clusters: { type: array, items: { type: object } }
+        phonological_shifts: { type: array, items: { type: object } }
+        cognate_groups: { type: array, items: { type: object } }
+    ProtoFormHypotheses:
+      type: object
+      properties:
+        hypotheses:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              form: { type: string }
+              confidence: { type: number }
+              ancestor_hint: { type: string }
+    ProjectSpec:
+      type: object
+      properties:
+        project_id: { type: string }
+        spec: { type: object }
+    ProjectStatus:
+      type: object
+      properties:
+        project_id: { type: string }
+        status: { type: string }
+    ApprovalResult:
+      type: object
+      properties:
+        project_id: { type: string }
+        status: { type: string }
+        certificate_id: { type: string }
+    SovereignCertificate:
+      type: object
+      properties:
+        certificate_id: { type: string }
+        version: { type: string }
+        issued_at: { type: string, format: date-time }
+        issuer: { type: object }
+        subject: { type: object }
+        scope: { type: object }
+        constitutional_status: { type: object }
+        signatures: { type: object }
+        validity: { type: object }
