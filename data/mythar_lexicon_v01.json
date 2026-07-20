@@ -1,6 +1,6 @@
 {
   "lexicon_id": "mythar_lexicon_v01",
-  "description": "Mythar Living Lexicon — gap-fill clusters 12–64 with atomic roots, compounds (kra/blessing/naming/emergence/grounding/threshold/growth axes), domain tags, and Proto-World comparisons.",
+  "description": "Mythar Living Lexicon — gap-fill clusters 12–80 with atomic roots, compounds (kra/blessing/naming/emergence/grounding/threshold/growth/triad arcs), domain tags, and Proto-World comparisons.",
   "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
   "proposals": {
     "A": "Fill kinship triad gaps (pa/ma/ti/ne/bro)",
@@ -11,7 +11,8 @@
     "F": "Kra-axis compounds (lmakra / yuckara — cluster 47)",
     "G": "Blessing / birth triad (tiki / yocfua / manalara — cluster 48)",
     "H": "Naming / blessing / sealing axis (makra–makora — clusters 49–60)",
-    "I": "Ritual invocation lines (ebro…mufay — clusters 61–64)"
+    "I": "Ritual invocation lines (ebro…mufay — clusters 61–64)",
+    "J": "Extended ritual triads (yafora…torlu — clusters 65–80)"
   },
   "roots": [
     {
@@ -762,6 +763,433 @@
       "domain": "abstract",
       "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
       "evidence_id": "evid_myt_root_morkfu"
+    },
+    {
+      "form": "lu",
+      "meaning": "flow-light / present movement",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lu"
+    },
+    {
+      "form": "fro",
+      "meaning": "force-rest / power-peace (ka+ro)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_fro"
+    },
+    {
+      "form": "fra",
+      "meaning": "proclamation glide (ra-soft)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_fra"
+    },
+    {
+      "form": "kyo",
+      "meaning": "force-knowing / light-craft",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kyo"
+    },
+    {
+      "form": "yor",
+      "meaning": "force-divine / yo-force",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yor"
+    },
+    {
+      "form": "klu",
+      "meaning": "existence-flow (ma+lu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_klu"
+    },
+    {
+      "form": "pra",
+      "meaning": "proclaim / intensify-good",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pra"
+    },
+    {
+      "form": "pli",
+      "meaning": "open variant of pla",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pli"
+    },
+    {
+      "form": "fya",
+      "meaning": "grace-power (ka+ya)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_fya"
+    },
+    {
+      "form": "lor",
+      "meaning": "light-protect (la+pa)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lor"
+    },
+    {
+      "form": "ku",
+      "meaning": "place-power / grounded force",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ku"
+    },
+    {
+      "form": "flu",
+      "meaning": "divine flow (ya+lu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_flu"
+    },
+    {
+      "form": "pta",
+      "meaning": "this-place / present ground",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pta"
+    },
+    {
+      "form": "ru",
+      "meaning": "rest-flow (ro+lu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ru"
+    },
+    {
+      "form": "pro",
+      "meaning": "bearing / proclaim forward",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pro"
+    },
+    {
+      "form": "tik",
+      "meaning": "child-name sacred (ti+na lighter)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tik"
+    },
+    {
+      "form": "kru",
+      "meaning": "heart-force (kra glide)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kru"
+    },
+    {
+      "form": "lam",
+      "meaning": "light-mother (la+ma)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lam"
+    },
+    {
+      "form": "yafora",
+      "meaning": "motion gathering proclaimed (ya+fo+ra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yafora"
+    },
+    {
+      "form": "mikra",
+      "meaning": "small vital-heart (mi+kra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_mikra"
+    },
+    {
+      "form": "talu",
+      "meaning": "this-flow / present-movement (ta+lu)",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_talu"
+    },
+    {
+      "form": "plamu",
+      "meaning": "open-mother ground (pla+mu)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_plamu"
+    },
+    {
+      "form": "yafika",
+      "meaning": "divine-truth-power (ya+fi+ka)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yafika"
+    },
+    {
+      "form": "torla",
+      "meaning": "gate-light (tor+la)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_torla"
+    },
+    {
+      "form": "kafro",
+      "meaning": "power-rest / force-peace (ka+fro)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kafro"
+    },
+    {
+      "form": "yami",
+      "meaning": "divine small-being (ya+mi)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yami"
+    },
+    {
+      "form": "supla",
+      "meaning": "good-open plain (su+pla)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_supla"
+    },
+    {
+      "form": "mufra",
+      "meaning": "mother-breath proclamation (mu+fra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_mufra"
+    },
+    {
+      "form": "lakyo",
+      "meaning": "light-force-knowing (la+kyo)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lakyo"
+    },
+    {
+      "form": "tinara",
+      "meaning": "child-name proclaimed (ti+na+ra)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tinara"
+    },
+    {
+      "form": "yorfa",
+      "meaning": "force-blessing (yor+fa)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yorfa"
+    },
+    {
+      "form": "maklu",
+      "meaning": "mother-existence-flow (ma+klu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_maklu"
+    },
+    {
+      "form": "sipra",
+      "meaning": "good-proclaimed (si+pra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_sipra"
+    },
+    {
+      "form": "plika",
+      "meaning": "open-power (pli+ka)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_plika"
+    },
+    {
+      "form": "yofra",
+      "meaning": "divine-proclamation (yo+fra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yofra"
+    },
+    {
+      "form": "tamu",
+      "meaning": "this-mother (ta+mu)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tamu"
+    },
+    {
+      "form": "kafya",
+      "meaning": "power-grace (ka+fya)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kafya"
+    },
+    {
+      "form": "lorpa",
+      "meaning": "light-protect (lor+pa)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lorpa"
+    },
+    {
+      "form": "minu",
+      "meaning": "small-spirit (mi+nu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_minu"
+    },
+    {
+      "form": "yupra",
+      "meaning": "motion proclaimed (yu+pra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yupra"
+    },
+    {
+      "form": "silu",
+      "meaning": "good-flow-light (si+lu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_silu"
+    },
+    {
+      "form": "torfa",
+      "meaning": "gate-blessing (tor+fa)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_torfa"
+    },
+    {
+      "form": "plaku",
+      "meaning": "open-power-place (pla+ku)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_plaku"
+    },
+    {
+      "form": "morka",
+      "meaning": "rising power (mor+ka)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_morka"
+    },
+    {
+      "form": "yaflu",
+      "meaning": "divine-flow (ya+flu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yaflu"
+    },
+    {
+      "form": "sipta",
+      "meaning": "good-this (si+pta)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_sipta"
+    },
+    {
+      "form": "lakra",
+      "meaning": "light-heart (la+kra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lakra"
+    },
+    {
+      "form": "yomu",
+      "meaning": "motion-mother (yo+mu)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yomu"
+    },
+    {
+      "form": "tafra",
+      "meaning": "this-proclaimed (ta+fra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tafra"
+    },
+    {
+      "form": "plina",
+      "meaning": "open-name (pli+na)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_plina"
+    },
+    {
+      "form": "yofka",
+      "meaning": "divine-craft-power (yo+fi+ka)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yofka"
+    },
+    {
+      "form": "maru",
+      "meaning": "mother-rest (ma+ru)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_maru"
+    },
+    {
+      "form": "sipro",
+      "meaning": "good-bearing (si+pro)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_sipro"
+    },
+    {
+      "form": "mufya",
+      "meaning": "mother-grace (mu+fya)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_mufya"
+    },
+    {
+      "form": "plaro",
+      "meaning": "open-rest (pla+ro)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_plaro"
+    },
+    {
+      "form": "tikna",
+      "meaning": "child-name (tik+na)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tikna"
+    },
+    {
+      "form": "yokru",
+      "meaning": "divine-heart-force (yo+kru)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yokru"
+    },
+    {
+      "form": "lamfa",
+      "meaning": "light-mother-blessing (lam+fa)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lamfa"
+    },
+    {
+      "form": "sipla",
+      "meaning": "good-open (si+pla)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_sipla"
+    },
+    {
+      "form": "makyo",
+      "meaning": "mother-knowing (ma+kyo)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_makyo"
+    },
+    {
+      "form": "torlu",
+      "meaning": "gate-flow (tor+lu)",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_torlu"
     }
   ],
   "clusters": [
@@ -3626,11 +4054,1746 @@
           "morkfu"
         ]
       }
+    },
+    {
+      "cluster_id": 65,
+      "name": "Yafora-mikra-talu",
+      "forms": [
+        "yafora",
+        "mikra",
+        "talu"
+      ],
+      "phrase": "Yafora mikra talu",
+      "domain": "abstract",
+      "interpretation": "Divine gathering proclaims the small heart in present flow",
+      "poetic": "Divine gathering proclaims the small heart in present flow.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_65",
+      "compounds": [
+        "Yafora ya",
+        "Mikra mi",
+        "Yafora mikra"
+      ],
+      "morphemes": [
+        {
+          "form": "yafora",
+          "gloss": "divine gathering proclaimed",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya",
+                "yo"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "fo",
+              "from": [
+                "fo"
+              ],
+              "gloss": "gathering"
+            },
+            {
+              "form": "ra",
+              "from": [
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        },
+        {
+          "form": "mikra",
+          "gloss": "small vital-heart",
+          "parts": [
+            {
+              "form": "mi",
+              "from": [
+                "mi",
+                "ni"
+              ],
+              "gloss": "small / spirit"
+            },
+            {
+              "form": "kra",
+              "from": [
+                "kra"
+              ],
+              "gloss": "vital heart"
+            }
+          ]
+        },
+        {
+          "form": "talu",
+          "gloss": "this-flow / present-movement",
+          "parts": [
+            {
+              "form": "ta",
+              "from": [
+                "ta"
+              ],
+              "gloss": "this / demonstrative"
+            },
+            {
+              "form": "lu",
+              "from": [
+                "lu",
+                "le"
+              ],
+              "gloss": "flow-light / movement"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ya",
+        "fo",
+        "ra",
+        "mi",
+        "kra",
+        "ta",
+        "lu"
+      ],
+      "metadata": {
+        "feeling": "gathering · small heart · present flow",
+        "provenance_note": "Opens extended ritual triad arc (65–80)",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 65,
+        "forms": [
+          "yafora",
+          "mikra",
+          "talu"
+        ]
+      }
+    },
+    {
+      "cluster_id": 66,
+      "name": "Plamu-yafika-torla",
+      "forms": [
+        "plamu",
+        "yafika",
+        "torla"
+      ],
+      "phrase": "Plamu yafika torla",
+      "domain": "nature",
+      "interpretation": "Mother-ground opens; divine truth-power enters the lighted gate",
+      "poetic": "Mother-ground opens, divine truth-power enters the lighted gate.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_66",
+      "compounds": [
+        "Plamu pl",
+        "Yafika ya",
+        "Plamu yafika"
+      ],
+      "morphemes": [
+        {
+          "form": "plamu",
+          "gloss": "open-mother ground",
+          "parts": [
+            {
+              "form": "pla",
+              "from": [
+                "pla",
+                "pli"
+              ],
+              "gloss": "open plain"
+            },
+            {
+              "form": "mu",
+              "from": [
+                "mu",
+                "ma"
+              ],
+              "gloss": "mother-breath / ground"
+            }
+          ]
+        },
+        {
+          "form": "yafika",
+          "gloss": "divine-truth-power",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "fi",
+              "from": [
+                "fi"
+              ],
+              "gloss": "truth"
+            },
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            }
+          ]
+        },
+        {
+          "form": "torla",
+          "gloss": "gate-light",
+          "parts": [
+            {
+              "form": "tor",
+              "from": [
+                "tor"
+              ],
+              "gloss": "gate"
+            },
+            {
+              "form": "la",
+              "from": [
+                "la"
+              ],
+              "gloss": "light"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "pla",
+        "mu",
+        "ya",
+        "fi",
+        "ka",
+        "tor",
+        "la"
+      ],
+      "metadata": {
+        "feeling": "mother-ground · truth-power · gate-light",
+        "provenance_note": "Ritual triad cluster 66",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "nature",
+        "cluster_id": 66,
+        "forms": [
+          "plamu",
+          "yafika",
+          "torla"
+        ]
+      }
+    },
+    {
+      "cluster_id": 67,
+      "name": "Kafro-yami-supla",
+      "forms": [
+        "kafro",
+        "yami",
+        "supla"
+      ],
+      "phrase": "Kafro yami supla",
+      "domain": "nature",
+      "interpretation": "Power rests; the divine small-being stands on the good open plain",
+      "poetic": "Power rests; the divine small-being stands on the good open plain.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_67",
+      "compounds": [
+        "Kafro ka",
+        "Yami ya",
+        "Kafro yami"
+      ],
+      "morphemes": [
+        {
+          "form": "kafro",
+          "gloss": "power-rest / force-peace",
+          "parts": [
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            },
+            {
+              "form": "fro",
+              "from": [
+                "fro",
+                "ro"
+              ],
+              "gloss": "force-rest"
+            }
+          ]
+        },
+        {
+          "form": "yami",
+          "gloss": "divine small-being",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya",
+                "yo"
+              ],
+              "gloss": "motion"
+            },
+            {
+              "form": "mi",
+              "from": [
+                "mi"
+              ],
+              "gloss": "small being"
+            }
+          ]
+        },
+        {
+          "form": "supla",
+          "gloss": "good-open plain",
+          "parts": [
+            {
+              "form": "su",
+              "from": [
+                "su"
+              ],
+              "gloss": "good"
+            },
+            {
+              "form": "pla",
+              "from": [
+                "pla"
+              ],
+              "gloss": "open plain"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ka",
+        "fro",
+        "ya",
+        "mi",
+        "su",
+        "pla"
+      ],
+      "metadata": {
+        "feeling": "power-rest · divine being · good plain",
+        "provenance_note": "Ritual triad cluster 67",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "nature",
+        "cluster_id": 67,
+        "forms": [
+          "kafro",
+          "yami",
+          "supla"
+        ]
+      }
+    },
+    {
+      "cluster_id": 68,
+      "name": "Mufra-lakyo-tinara",
+      "forms": [
+        "mufra",
+        "lakyo",
+        "tinara"
+      ],
+      "phrase": "Mufra lakyo tinara",
+      "domain": "kinship",
+      "interpretation": "Mother-breath proclaims light-knowing; the child-name is called forth",
+      "poetic": "Mother-breath proclaims light-knowing; the child-name is called forth.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_68",
+      "compounds": [
+        "Mufra mu",
+        "Lakyo la",
+        "Mufra lakyo"
+      ],
+      "morphemes": [
+        {
+          "form": "mufra",
+          "gloss": "mother-breath proclamation",
+          "parts": [
+            {
+              "form": "mu",
+              "from": [
+                "mu",
+                "ma"
+              ],
+              "gloss": "mother-breath"
+            },
+            {
+              "form": "fra",
+              "from": [
+                "fra",
+                "ra"
+              ],
+              "gloss": "proclamation"
+            }
+          ]
+        },
+        {
+          "form": "lakyo",
+          "gloss": "light-force-knowing",
+          "parts": [
+            {
+              "form": "la",
+              "from": [
+                "la"
+              ],
+              "gloss": "light"
+            },
+            {
+              "form": "kyo",
+              "from": [
+                "kyo",
+                "ki",
+                "wi"
+              ],
+              "gloss": "force-knowing"
+            }
+          ]
+        },
+        {
+          "form": "tinara",
+          "gloss": "child-name proclaimed",
+          "parts": [
+            {
+              "form": "ti",
+              "from": [
+                "ti",
+                "tik"
+              ],
+              "gloss": "child"
+            },
+            {
+              "form": "na",
+              "from": [
+                "na",
+                "ni"
+              ],
+              "gloss": "name"
+            },
+            {
+              "form": "ra",
+              "from": [
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "mu",
+        "fra",
+        "la",
+        "kyo",
+        "ti",
+        "na",
+        "ra"
+      ],
+      "metadata": {
+        "feeling": "mother-breath · light-knowing · child-name",
+        "provenance_note": "Ritual triad cluster 68",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "kinship",
+        "cluster_id": 68,
+        "forms": [
+          "mufra",
+          "lakyo",
+          "tinara"
+        ]
+      }
+    },
+    {
+      "cluster_id": 69,
+      "name": "Yorfa-maklu-sipra",
+      "forms": [
+        "yorfa",
+        "maklu",
+        "sipra"
+      ],
+      "phrase": "Yorfa maklu sipra",
+      "domain": "abstract",
+      "interpretation": "Blessed force flows from mother-existence; goodness is proclaimed",
+      "poetic": "Blessed force flows from mother-existence; goodness is proclaimed.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_69",
+      "compounds": [
+        "Yorfa yo",
+        "Maklu ma",
+        "Yorfa maklu"
+      ],
+      "morphemes": [
+        {
+          "form": "yorfa",
+          "gloss": "force-blessing",
+          "parts": [
+            {
+              "form": "yor",
+              "from": [
+                "yor",
+                "yo",
+                "ya"
+              ],
+              "gloss": "force-divine"
+            },
+            {
+              "form": "fa",
+              "from": [
+                "fa",
+                "fu"
+              ],
+              "gloss": "blessing"
+            }
+          ]
+        },
+        {
+          "form": "maklu",
+          "gloss": "mother-existence-flow",
+          "parts": [
+            {
+              "form": "ma",
+              "from": [
+                "ma"
+              ],
+              "gloss": "mother"
+            },
+            {
+              "form": "klu",
+              "from": [
+                "klu",
+                "lu"
+              ],
+              "gloss": "existence-flow"
+            }
+          ]
+        },
+        {
+          "form": "sipra",
+          "gloss": "good-proclaimed",
+          "parts": [
+            {
+              "form": "si",
+              "from": [
+                "si"
+              ],
+              "gloss": "good-see"
+            },
+            {
+              "form": "pra",
+              "from": [
+                "pra",
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "yor",
+        "fa",
+        "ma",
+        "klu",
+        "si",
+        "pra"
+      ],
+      "metadata": {
+        "feeling": "force-blessing · mother-flow · good proclaimed",
+        "provenance_note": "Ritual triad cluster 69",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 69,
+        "forms": [
+          "yorfa",
+          "maklu",
+          "sipra"
+        ]
+      }
+    },
+    {
+      "cluster_id": 70,
+      "name": "Plika-yofra-tamu",
+      "forms": [
+        "plika",
+        "yofra",
+        "tamu"
+      ],
+      "phrase": "Plika yofra tamu",
+      "domain": "nature",
+      "interpretation": "Open power meets divine proclamation in the mother-this",
+      "poetic": "Open power meets divine proclamation in the mother-this.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_70",
+      "compounds": [
+        "Plika pl",
+        "Yofra yo",
+        "Plika yofra"
+      ],
+      "morphemes": [
+        {
+          "form": "plika",
+          "gloss": "open-power",
+          "parts": [
+            {
+              "form": "pli",
+              "from": [
+                "pli",
+                "pla"
+              ],
+              "gloss": "open"
+            },
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            }
+          ]
+        },
+        {
+          "form": "yofra",
+          "gloss": "divine-proclamation",
+          "parts": [
+            {
+              "form": "yo",
+              "from": [
+                "yo",
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "fra",
+              "from": [
+                "fra",
+                "ra"
+              ],
+              "gloss": "proclamation"
+            }
+          ]
+        },
+        {
+          "form": "tamu",
+          "gloss": "this-mother",
+          "parts": [
+            {
+              "form": "ta",
+              "from": [
+                "ta"
+              ],
+              "gloss": "this"
+            },
+            {
+              "form": "mu",
+              "from": [
+                "mu",
+                "ma"
+              ],
+              "gloss": "mother"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "pli",
+        "ka",
+        "yo",
+        "fra",
+        "ta",
+        "mu"
+      ],
+      "metadata": {
+        "feeling": "open power · divine proclaim · this-mother",
+        "provenance_note": "Ritual triad cluster 70",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "nature",
+        "cluster_id": 70,
+        "forms": [
+          "plika",
+          "yofra",
+          "tamu"
+        ]
+      }
+    },
+    {
+      "cluster_id": 71,
+      "name": "Kafya-lorpa-minu",
+      "forms": [
+        "kafya",
+        "lorpa",
+        "minu"
+      ],
+      "phrase": "Kafya lorpa minu",
+      "domain": "abstract",
+      "interpretation": "Grace-power protects with light; the small spirit rises",
+      "poetic": "Grace-power protects with light; the small spirit rises.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_71",
+      "compounds": [
+        "Kafya ka",
+        "Lorpa lo",
+        "Kafya lorpa"
+      ],
+      "morphemes": [
+        {
+          "form": "kafya",
+          "gloss": "power-grace",
+          "parts": [
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            },
+            {
+              "form": "fya",
+              "from": [
+                "fya",
+                "ya"
+              ],
+              "gloss": "grace"
+            }
+          ]
+        },
+        {
+          "form": "lorpa",
+          "gloss": "light-protect",
+          "parts": [
+            {
+              "form": "lor",
+              "from": [
+                "lor",
+                "la"
+              ],
+              "gloss": "light"
+            },
+            {
+              "form": "pa",
+              "from": [
+                "pa"
+              ],
+              "gloss": "protect"
+            }
+          ]
+        },
+        {
+          "form": "minu",
+          "gloss": "small-spirit",
+          "parts": [
+            {
+              "form": "mi",
+              "from": [
+                "mi"
+              ],
+              "gloss": "small"
+            },
+            {
+              "form": "nu",
+              "from": [
+                "nu",
+                "ni"
+              ],
+              "gloss": "spirit / breath"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ka",
+        "fya",
+        "lor",
+        "pa",
+        "mi",
+        "nu"
+      ],
+      "metadata": {
+        "feeling": "grace-power · light-protect · small spirit",
+        "provenance_note": "Ritual triad cluster 71",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 71,
+        "forms": [
+          "kafya",
+          "lorpa",
+          "minu"
+        ]
+      }
+    },
+    {
+      "cluster_id": 72,
+      "name": "Yupra-makra-silu",
+      "forms": [
+        "yupra",
+        "makra",
+        "silu"
+      ],
+      "phrase": "Yupra makra silu",
+      "domain": "abstract",
+      "interpretation": "The divine proclaims the mother-heart; good light flows",
+      "poetic": "The divine proclaims the mother-heart; good light flows.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_72",
+      "compounds": [
+        "Yupra yu",
+        "Makra ma",
+        "Yupra makra"
+      ],
+      "morphemes": [
+        {
+          "form": "yupra",
+          "gloss": "divine-proclaimed",
+          "parts": [
+            {
+              "form": "yu",
+              "from": [
+                "yu",
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "pra",
+              "from": [
+                "pra",
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        },
+        {
+          "form": "makra",
+          "gloss": "mother-heart",
+          "parts": [
+            {
+              "form": "ma",
+              "from": [
+                "ma"
+              ],
+              "gloss": "mother"
+            },
+            {
+              "form": "kra",
+              "from": [
+                "kra"
+              ],
+              "gloss": "heart"
+            }
+          ]
+        },
+        {
+          "form": "silu",
+          "gloss": "good-flow-light",
+          "parts": [
+            {
+              "form": "si",
+              "from": [
+                "si",
+                "su"
+              ],
+              "gloss": "good"
+            },
+            {
+              "form": "lu",
+              "from": [
+                "lu",
+                "la"
+              ],
+              "gloss": "flow-light"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "yu",
+        "pra",
+        "ma",
+        "kra",
+        "si",
+        "lu"
+      ],
+      "metadata": {
+        "feeling": "divine proclaim · mother-heart · good flow",
+        "provenance_note": "Ritual triad cluster 72",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 72,
+        "forms": [
+          "yupra",
+          "makra",
+          "silu"
+        ]
+      }
+    },
+    {
+      "cluster_id": 73,
+      "name": "Torfa-yami-plaku",
+      "forms": [
+        "torfa",
+        "yami",
+        "plaku"
+      ],
+      "phrase": "Torfa yami plaku",
+      "domain": "nature",
+      "interpretation": "The gate blesses the divine small-being in the open place of power",
+      "poetic": "The gate blesses the divine small-being in the open place of power.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_73",
+      "compounds": [
+        "Torfa to",
+        "Yami ya",
+        "Torfa yami"
+      ],
+      "morphemes": [
+        {
+          "form": "torfa",
+          "gloss": "gate-blessing",
+          "parts": [
+            {
+              "form": "tor",
+              "from": [
+                "tor"
+              ],
+              "gloss": "gate"
+            },
+            {
+              "form": "fa",
+              "from": [
+                "fa",
+                "fu"
+              ],
+              "gloss": "blessing"
+            }
+          ]
+        },
+        {
+          "form": "yami",
+          "gloss": "motion small-being",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "mi",
+              "from": [
+                "mi"
+              ],
+              "gloss": "small being"
+            }
+          ]
+        },
+        {
+          "form": "plaku",
+          "gloss": "open-power-place",
+          "parts": [
+            {
+              "form": "pla",
+              "from": [
+                "pla"
+              ],
+              "gloss": "open"
+            },
+            {
+              "form": "ku",
+              "from": [
+                "ku",
+                "ka"
+              ],
+              "gloss": "place-power"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "tor",
+        "fa",
+        "ya",
+        "mi",
+        "pla",
+        "ku"
+      ],
+      "metadata": {
+        "feeling": "gate-blessing · divine being · open power-place",
+        "provenance_note": "Ritual triad cluster 73",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "nature",
+        "cluster_id": 73,
+        "forms": [
+          "torfa",
+          "yami",
+          "plaku"
+        ]
+      }
+    },
+    {
+      "cluster_id": 74,
+      "name": "Morka-yaflu-sipta",
+      "forms": [
+        "morka",
+        "yaflu",
+        "sipta"
+      ],
+      "phrase": "Morka yaflu sipta",
+      "domain": "abstract",
+      "interpretation": "Rising power flows divinely; goodness is here",
+      "poetic": "Rising power flows divinely; goodness is here.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_74",
+      "compounds": [
+        "Morka mo",
+        "Yaflu ya",
+        "Morka yaflu"
+      ],
+      "morphemes": [
+        {
+          "form": "morka",
+          "gloss": "rising power",
+          "parts": [
+            {
+              "form": "mor",
+              "from": [
+                "mor"
+              ],
+              "gloss": "rise"
+            },
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            }
+          ]
+        },
+        {
+          "form": "yaflu",
+          "gloss": "divine-flow",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "flu",
+              "from": [
+                "flu",
+                "lu"
+              ],
+              "gloss": "flow"
+            }
+          ]
+        },
+        {
+          "form": "sipta",
+          "gloss": "good-this",
+          "parts": [
+            {
+              "form": "si",
+              "from": [
+                "si",
+                "su"
+              ],
+              "gloss": "good"
+            },
+            {
+              "form": "pta",
+              "from": [
+                "pta",
+                "ta"
+              ],
+              "gloss": "this-place"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "mor",
+        "ka",
+        "ya",
+        "flu",
+        "si",
+        "pta"
+      ],
+      "metadata": {
+        "feeling": "rising power · divine flow · good-this",
+        "provenance_note": "Ritual triad cluster 74",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 74,
+        "forms": [
+          "morka",
+          "yaflu",
+          "sipta"
+        ]
+      }
+    },
+    {
+      "cluster_id": 75,
+      "name": "Lakra-yomu-tafra",
+      "forms": [
+        "lakra",
+        "yomu",
+        "tafra"
+      ],
+      "phrase": "Lakra yomu tafra",
+      "domain": "abstract",
+      "interpretation": "Light-heart meets divine-mother; this is proclaimed",
+      "poetic": "Light-heart meets divine-mother; this is proclaimed.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_75",
+      "compounds": [
+        "Lakra la",
+        "Yomu yo",
+        "Lakra yomu"
+      ],
+      "morphemes": [
+        {
+          "form": "lakra",
+          "gloss": "light-heart",
+          "parts": [
+            {
+              "form": "la",
+              "from": [
+                "la"
+              ],
+              "gloss": "light"
+            },
+            {
+              "form": "kra",
+              "from": [
+                "kra"
+              ],
+              "gloss": "heart"
+            }
+          ]
+        },
+        {
+          "form": "yomu",
+          "gloss": "divine-mother",
+          "parts": [
+            {
+              "form": "yo",
+              "from": [
+                "yo",
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "mu",
+              "from": [
+                "mu",
+                "ma"
+              ],
+              "gloss": "mother"
+            }
+          ]
+        },
+        {
+          "form": "tafra",
+          "gloss": "this-proclaimed",
+          "parts": [
+            {
+              "form": "ta",
+              "from": [
+                "ta"
+              ],
+              "gloss": "this"
+            },
+            {
+              "form": "fra",
+              "from": [
+                "fra",
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "la",
+        "kra",
+        "yo",
+        "mu",
+        "ta",
+        "fra"
+      ],
+      "metadata": {
+        "feeling": "light-heart · divine-mother · this proclaimed",
+        "provenance_note": "Ritual triad cluster 75",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 75,
+        "forms": [
+          "lakra",
+          "yomu",
+          "tafra"
+        ]
+      }
+    },
+    {
+      "cluster_id": 76,
+      "name": "Plina-yofka-maru",
+      "forms": [
+        "plina",
+        "yofka",
+        "maru"
+      ],
+      "phrase": "Plina yofka maru",
+      "domain": "abstract",
+      "interpretation": "The open name receives divine craft-power; mother rests",
+      "poetic": "The open name receives divine craft-power; mother rests.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_76",
+      "compounds": [
+        "Plina pl",
+        "Yofka yo",
+        "Plina yofka"
+      ],
+      "morphemes": [
+        {
+          "form": "plina",
+          "gloss": "open-name",
+          "parts": [
+            {
+              "form": "pli",
+              "from": [
+                "pli",
+                "pla"
+              ],
+              "gloss": "open"
+            },
+            {
+              "form": "na",
+              "from": [
+                "na",
+                "ni"
+              ],
+              "gloss": "name"
+            }
+          ]
+        },
+        {
+          "form": "yofka",
+          "gloss": "divine-craft-power",
+          "parts": [
+            {
+              "form": "yo",
+              "from": [
+                "yo"
+              ],
+              "gloss": "motion"
+            },
+            {
+              "form": "fi",
+              "from": [
+                "fi"
+              ],
+              "gloss": "truth-craft"
+            },
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            }
+          ]
+        },
+        {
+          "form": "maru",
+          "gloss": "mother-rest",
+          "parts": [
+            {
+              "form": "ma",
+              "from": [
+                "ma"
+              ],
+              "gloss": "mother"
+            },
+            {
+              "form": "ru",
+              "from": [
+                "ru",
+                "ro"
+              ],
+              "gloss": "rest-flow"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "pli",
+        "na",
+        "yo",
+        "fi",
+        "ka",
+        "ma",
+        "ru"
+      ],
+      "metadata": {
+        "feeling": "open name · divine craft · mother rest",
+        "provenance_note": "Ritual triad cluster 76",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 76,
+        "forms": [
+          "plina",
+          "yofka",
+          "maru"
+        ]
+      }
+    },
+    {
+      "cluster_id": 77,
+      "name": "Kafro-yala-sipro",
+      "forms": [
+        "kafro",
+        "yala",
+        "sipro"
+      ],
+      "phrase": "Kafro yala sipro",
+      "domain": "abstract",
+      "interpretation": "Power rests in divine light; goodness is carried forward",
+      "poetic": "Power rests in divine light; goodness is carried forward.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_77",
+      "compounds": [
+        "Kafro ka",
+        "Yala ya",
+        "Kafro yala"
+      ],
+      "morphemes": [
+        {
+          "form": "kafro",
+          "gloss": "power-rest",
+          "parts": [
+            {
+              "form": "ka",
+              "from": [
+                "ka"
+              ],
+              "gloss": "power"
+            },
+            {
+              "form": "fro",
+              "from": [
+                "fro",
+                "ro"
+              ],
+              "gloss": "rest"
+            }
+          ]
+        },
+        {
+          "form": "yala",
+          "gloss": "divine light",
+          "parts": [
+            {
+              "form": "ya",
+              "from": [
+                "ya"
+              ],
+              "gloss": "motion"
+            },
+            {
+              "form": "la",
+              "from": [
+                "la"
+              ],
+              "gloss": "light"
+            }
+          ]
+        },
+        {
+          "form": "sipro",
+          "gloss": "good-bearing",
+          "parts": [
+            {
+              "form": "si",
+              "from": [
+                "si",
+                "su"
+              ],
+              "gloss": "good"
+            },
+            {
+              "form": "pro",
+              "from": [
+                "pro",
+                "por"
+              ],
+              "gloss": "bearing"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ka",
+        "fro",
+        "ya",
+        "la",
+        "si",
+        "pro"
+      ],
+      "metadata": {
+        "feeling": "power-rest · divine light · good bearing",
+        "provenance_note": "Ritual triad cluster 77",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 77,
+        "forms": [
+          "kafro",
+          "yala",
+          "sipro"
+        ]
+      }
+    },
+    {
+      "cluster_id": 78,
+      "name": "Mufya-plaro-tikna",
+      "forms": [
+        "mufya",
+        "plaro",
+        "tikna"
+      ],
+      "phrase": "Mufya plaro tikna",
+      "domain": "kinship",
+      "interpretation": "Mother-grace rests openly; the child-name emerges",
+      "poetic": "Mother-grace rests openly; the child-name emerges.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_78",
+      "compounds": [
+        "Mufya mu",
+        "Plaro pl",
+        "Mufya plaro"
+      ],
+      "morphemes": [
+        {
+          "form": "mufya",
+          "gloss": "mother-grace",
+          "parts": [
+            {
+              "form": "mu",
+              "from": [
+                "mu",
+                "ma"
+              ],
+              "gloss": "mother"
+            },
+            {
+              "form": "fya",
+              "from": [
+                "fya",
+                "ya"
+              ],
+              "gloss": "grace"
+            }
+          ]
+        },
+        {
+          "form": "plaro",
+          "gloss": "open-rest",
+          "parts": [
+            {
+              "form": "pla",
+              "from": [
+                "pla"
+              ],
+              "gloss": "open"
+            },
+            {
+              "form": "ro",
+              "from": [
+                "ro"
+              ],
+              "gloss": "rest"
+            }
+          ]
+        },
+        {
+          "form": "tikna",
+          "gloss": "child-name",
+          "parts": [
+            {
+              "form": "tik",
+              "from": [
+                "tik",
+                "ti"
+              ],
+              "gloss": "child"
+            },
+            {
+              "form": "na",
+              "from": [
+                "na"
+              ],
+              "gloss": "name"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "mu",
+        "fya",
+        "pla",
+        "ro",
+        "tik",
+        "na"
+      ],
+      "metadata": {
+        "feeling": "mother-grace · open rest · child-name",
+        "provenance_note": "Ritual triad cluster 78",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "kinship",
+        "cluster_id": 78,
+        "forms": [
+          "mufya",
+          "plaro",
+          "tikna"
+        ]
+      }
+    },
+    {
+      "cluster_id": 79,
+      "name": "Yokru-lamfa-sipla",
+      "forms": [
+        "yokru",
+        "lamfa",
+        "sipla"
+      ],
+      "phrase": "Yokru lamfa sipla",
+      "domain": "abstract",
+      "interpretation": "Divine heart-force blesses the mother-light; goodness opens",
+      "poetic": "Divine heart-force blesses the mother-light; goodness opens.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_79",
+      "compounds": [
+        "Yokru yo",
+        "Lamfa la",
+        "Yokru lamfa"
+      ],
+      "morphemes": [
+        {
+          "form": "yokru",
+          "gloss": "divine-heart-force",
+          "parts": [
+            {
+              "form": "yo",
+              "from": [
+                "yo"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "kru",
+              "from": [
+                "kru",
+                "kra"
+              ],
+              "gloss": "heart-force"
+            }
+          ]
+        },
+        {
+          "form": "lamfa",
+          "gloss": "light-mother-blessing",
+          "parts": [
+            {
+              "form": "lam",
+              "from": [
+                "lam",
+                "la",
+                "ma"
+              ],
+              "gloss": "light-mother"
+            },
+            {
+              "form": "fa",
+              "from": [
+                "fa",
+                "fu"
+              ],
+              "gloss": "blessing"
+            }
+          ]
+        },
+        {
+          "form": "sipla",
+          "gloss": "good-open",
+          "parts": [
+            {
+              "form": "si",
+              "from": [
+                "si",
+                "su"
+              ],
+              "gloss": "good"
+            },
+            {
+              "form": "pla",
+              "from": [
+                "pla"
+              ],
+              "gloss": "open"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "yo",
+        "kru",
+        "lam",
+        "fa",
+        "si",
+        "pla"
+      ],
+      "metadata": {
+        "feeling": "divine heart-force · mother-light bless · good open",
+        "provenance_note": "Ritual triad cluster 79",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 79,
+        "forms": [
+          "yokru",
+          "lamfa",
+          "sipla"
+        ]
+      }
+    },
+    {
+      "cluster_id": 80,
+      "name": "Makyo-yupra-torlu",
+      "forms": [
+        "makyo",
+        "yupra",
+        "torlu"
+      ],
+      "phrase": "Makyo yupra torlu",
+      "domain": "abstract",
+      "interpretation": "Mother-knowing is divinely proclaimed; the gate flows",
+      "poetic": "Mother-knowing is divinely proclaimed; the gate flows.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_80",
+      "compounds": [
+        "Makyo ma",
+        "Yupra yu",
+        "Makyo yupra"
+      ],
+      "morphemes": [
+        {
+          "form": "makyo",
+          "gloss": "mother-knowing",
+          "parts": [
+            {
+              "form": "ma",
+              "from": [
+                "ma"
+              ],
+              "gloss": "mother"
+            },
+            {
+              "form": "kyo",
+              "from": [
+                "kyo",
+                "wi"
+              ],
+              "gloss": "knowing-force"
+            }
+          ]
+        },
+        {
+          "form": "yupra",
+          "gloss": "divine-proclaimed",
+          "parts": [
+            {
+              "form": "yu",
+              "from": [
+                "yu",
+                "ya"
+              ],
+              "gloss": "divine"
+            },
+            {
+              "form": "pra",
+              "from": [
+                "pra",
+                "ra"
+              ],
+              "gloss": "proclaimed"
+            }
+          ]
+        },
+        {
+          "form": "torlu",
+          "gloss": "gate-flow",
+          "parts": [
+            {
+              "form": "tor",
+              "from": [
+                "tor"
+              ],
+              "gloss": "gate"
+            },
+            {
+              "form": "lu",
+              "from": [
+                "lu",
+                "le"
+              ],
+              "gloss": "flow"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ma",
+        "kyo",
+        "yu",
+        "pra",
+        "tor",
+        "lu"
+      ],
+      "metadata": {
+        "feeling": "mother-knowing · divine proclaim · gate flow",
+        "provenance_note": "Closes extended ritual triad arc (65–80)",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 80,
+        "forms": [
+          "makyo",
+          "yupra",
+          "torlu"
+        ]
+      }
     }
   ],
-  "cluster_count": 53,
-  "root_count": 107,
-  "invocation": "Ye kra ro ya\nLmakra yuckara\nTiki yocfua manalara\nMakra yufala\nMakora yufina ro\nEbro la kajya lapio mufay\nPlafo micala haftar\nQaytra blapa torja\nVi porka yala morkfu\nWi su ni ve ro ya",
+  "cluster_count": 69,
+  "root_count": 168,
+  "invocation": "Ye kra ro ya\nLmakra yuckara\nTiki yocfua manalara\nMakra yufala\nMakora yufina ro\nEbro la kajya lapio mufay\nPlafo micala haftar\nQaytra blapa torja\nVi porka yala morkfu\nYafora mikra talu\nMakyo yupra torlu\nWi su ni ve ro ya",
   "proto_world_comparisons": [
     {
       "mythar": "pa",
@@ -5013,6 +7176,677 @@
               "metadata": {
                 "source": "Mythar Living Lexicon / Gap-Fill Draft",
                 "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lu",
+              "type": "lexical_item",
+              "form": "lu",
+              "meaning": "flow-light / present movement",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_fro",
+              "type": "lexical_item",
+              "form": "fro",
+              "meaning": "force-rest / power-peace (ka+ro)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_fra",
+              "type": "lexical_item",
+              "form": "fra",
+              "meaning": "proclamation glide (ra-soft)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kyo",
+              "type": "lexical_item",
+              "form": "kyo",
+              "meaning": "force-knowing / light-craft",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yor",
+              "type": "lexical_item",
+              "form": "yor",
+              "meaning": "force-divine / yo-force",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_klu",
+              "type": "lexical_item",
+              "form": "klu",
+              "meaning": "existence-flow (ma+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pra",
+              "type": "lexical_item",
+              "form": "pra",
+              "meaning": "proclaim / intensify-good",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pli",
+              "type": "lexical_item",
+              "form": "pli",
+              "meaning": "open variant of pla",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_fya",
+              "type": "lexical_item",
+              "form": "fya",
+              "meaning": "grace-power (ka+ya)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lor",
+              "type": "lexical_item",
+              "form": "lor",
+              "meaning": "light-protect (la+pa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ku",
+              "type": "lexical_item",
+              "form": "ku",
+              "meaning": "place-power / grounded force",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_flu",
+              "type": "lexical_item",
+              "form": "flu",
+              "meaning": "divine flow (ya+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pta",
+              "type": "lexical_item",
+              "form": "pta",
+              "meaning": "this-place / present ground",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ru",
+              "type": "lexical_item",
+              "form": "ru",
+              "meaning": "rest-flow (ro+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pro",
+              "type": "lexical_item",
+              "form": "pro",
+              "meaning": "bearing / proclaim forward",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tik",
+              "type": "lexical_item",
+              "form": "tik",
+              "meaning": "child-name sacred (ti+na lighter)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kru",
+              "type": "lexical_item",
+              "form": "kru",
+              "meaning": "heart-force (kra glide)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lam",
+              "type": "lexical_item",
+              "form": "lam",
+              "meaning": "light-mother (la+ma)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yafora",
+              "type": "lexical_item",
+              "form": "yafora",
+              "meaning": "motion gathering proclaimed (ya+fo+ra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_mikra",
+              "type": "lexical_item",
+              "form": "mikra",
+              "meaning": "small vital-heart (mi+kra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_talu",
+              "type": "lexical_item",
+              "form": "talu",
+              "meaning": "this-flow / present-movement (ta+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_plamu",
+              "type": "lexical_item",
+              "form": "plamu",
+              "meaning": "open-mother ground (pla+mu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yafika",
+              "type": "lexical_item",
+              "form": "yafika",
+              "meaning": "divine-truth-power (ya+fi+ka)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_torla",
+              "type": "lexical_item",
+              "form": "torla",
+              "meaning": "gate-light (tor+la)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kafro",
+              "type": "lexical_item",
+              "form": "kafro",
+              "meaning": "power-rest / force-peace (ka+fro)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yami",
+              "type": "lexical_item",
+              "form": "yami",
+              "meaning": "divine small-being (ya+mi)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_supla",
+              "type": "lexical_item",
+              "form": "supla",
+              "meaning": "good-open plain (su+pla)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_mufra",
+              "type": "lexical_item",
+              "form": "mufra",
+              "meaning": "mother-breath proclamation (mu+fra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lakyo",
+              "type": "lexical_item",
+              "form": "lakyo",
+              "meaning": "light-force-knowing (la+kyo)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tinara",
+              "type": "lexical_item",
+              "form": "tinara",
+              "meaning": "child-name proclaimed (ti+na+ra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yorfa",
+              "type": "lexical_item",
+              "form": "yorfa",
+              "meaning": "force-blessing (yor+fa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_maklu",
+              "type": "lexical_item",
+              "form": "maklu",
+              "meaning": "mother-existence-flow (ma+klu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_sipra",
+              "type": "lexical_item",
+              "form": "sipra",
+              "meaning": "good-proclaimed (si+pra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_plika",
+              "type": "lexical_item",
+              "form": "plika",
+              "meaning": "open-power (pli+ka)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yofra",
+              "type": "lexical_item",
+              "form": "yofra",
+              "meaning": "divine-proclamation (yo+fra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tamu",
+              "type": "lexical_item",
+              "form": "tamu",
+              "meaning": "this-mother (ta+mu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kafya",
+              "type": "lexical_item",
+              "form": "kafya",
+              "meaning": "power-grace (ka+fya)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lorpa",
+              "type": "lexical_item",
+              "form": "lorpa",
+              "meaning": "light-protect (lor+pa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_minu",
+              "type": "lexical_item",
+              "form": "minu",
+              "meaning": "small-spirit (mi+nu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yupra",
+              "type": "lexical_item",
+              "form": "yupra",
+              "meaning": "motion proclaimed (yu+pra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_silu",
+              "type": "lexical_item",
+              "form": "silu",
+              "meaning": "good-flow-light (si+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_torfa",
+              "type": "lexical_item",
+              "form": "torfa",
+              "meaning": "gate-blessing (tor+fa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_plaku",
+              "type": "lexical_item",
+              "form": "plaku",
+              "meaning": "open-power-place (pla+ku)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_morka",
+              "type": "lexical_item",
+              "form": "morka",
+              "meaning": "rising power (mor+ka)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yaflu",
+              "type": "lexical_item",
+              "form": "yaflu",
+              "meaning": "divine-flow (ya+flu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_sipta",
+              "type": "lexical_item",
+              "form": "sipta",
+              "meaning": "good-this (si+pta)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lakra",
+              "type": "lexical_item",
+              "form": "lakra",
+              "meaning": "light-heart (la+kra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yomu",
+              "type": "lexical_item",
+              "form": "yomu",
+              "meaning": "motion-mother (yo+mu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tafra",
+              "type": "lexical_item",
+              "form": "tafra",
+              "meaning": "this-proclaimed (ta+fra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_plina",
+              "type": "lexical_item",
+              "form": "plina",
+              "meaning": "open-name (pli+na)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yofka",
+              "type": "lexical_item",
+              "form": "yofka",
+              "meaning": "divine-craft-power (yo+fi+ka)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_maru",
+              "type": "lexical_item",
+              "form": "maru",
+              "meaning": "mother-rest (ma+ru)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_sipro",
+              "type": "lexical_item",
+              "form": "sipro",
+              "meaning": "good-bearing (si+pro)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_mufya",
+              "type": "lexical_item",
+              "form": "mufya",
+              "meaning": "mother-grace (mu+fya)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_plaro",
+              "type": "lexical_item",
+              "form": "plaro",
+              "meaning": "open-rest (pla+ro)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tikna",
+              "type": "lexical_item",
+              "form": "tikna",
+              "meaning": "child-name (tik+na)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yokru",
+              "type": "lexical_item",
+              "form": "yokru",
+              "meaning": "divine-heart-force (yo+kru)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lamfa",
+              "type": "lexical_item",
+              "form": "lamfa",
+              "meaning": "light-mother-blessing (lam+fa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_sipla",
+              "type": "lexical_item",
+              "form": "sipla",
+              "meaning": "good-open (si+pla)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_makyo",
+              "type": "lexical_item",
+              "form": "makyo",
+              "meaning": "mother-knowing (ma+kyo)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_torlu",
+              "type": "lexical_item",
+              "form": "torlu",
+              "meaning": "gate-flow (tor+lu)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
                 "kind": "root"
               }
             },
@@ -6945,6 +9779,1162 @@
                 "kind": "compound",
                 "cluster_id": 64,
                 "provenance_note": "Growth-axis culmination; vi particle + por/mor bearing roots"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_65",
+              "type": "corpus_sample",
+              "text": "Yafora mikra talu",
+              "gloss": "Divine gathering proclaims the small heart in present flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 65,
+                "forms": [
+                  "yafora",
+                  "mikra",
+                  "talu"
+                ],
+                "kind": "cluster",
+                "feeling": "gathering · small heart · present flow",
+                "provenance_note": "Opens extended ritual triad arc (65–80)",
+                "compounds": [
+                  "Yafora ya",
+                  "Mikra mi",
+                  "Yafora mikra"
+                ],
+                "poetic": "Divine gathering proclaims the small heart in present flow.",
+                "reinforces": [
+                  "ya",
+                  "fo",
+                  "ra",
+                  "mi",
+                  "kra",
+                  "ta",
+                  "lu"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yafora_ya",
+              "type": "lexical_item",
+              "form": "Yafora ya",
+              "meaning": "Divine gathering proclaims the small heart in present flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 65,
+                "provenance_note": "Opens extended ritual triad arc (65–80)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_mikra_mi",
+              "type": "lexical_item",
+              "form": "Mikra mi",
+              "meaning": "Divine gathering proclaims the small heart in present flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 65,
+                "provenance_note": "Opens extended ritual triad arc (65–80)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yafora_mikra",
+              "type": "lexical_item",
+              "form": "Yafora mikra",
+              "meaning": "Divine gathering proclaims the small heart in present flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 65,
+                "provenance_note": "Opens extended ritual triad arc (65–80)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_66",
+              "type": "corpus_sample",
+              "text": "Plamu yafika torla",
+              "gloss": "Mother-ground opens; divine truth-power enters the lighted gate",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 66,
+                "forms": [
+                  "plamu",
+                  "yafika",
+                  "torla"
+                ],
+                "kind": "cluster",
+                "feeling": "mother-ground · truth-power · gate-light",
+                "provenance_note": "Ritual triad cluster 66",
+                "compounds": [
+                  "Plamu pl",
+                  "Yafika ya",
+                  "Plamu yafika"
+                ],
+                "poetic": "Mother-ground opens, divine truth-power enters the lighted gate.",
+                "reinforces": [
+                  "pla",
+                  "mu",
+                  "ya",
+                  "fi",
+                  "ka",
+                  "tor",
+                  "la"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plamu_pl",
+              "type": "lexical_item",
+              "form": "Plamu pl",
+              "meaning": "Mother-ground opens; divine truth-power enters the lighted gate",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 66,
+                "provenance_note": "Ritual triad cluster 66"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yafika_ya",
+              "type": "lexical_item",
+              "form": "Yafika ya",
+              "meaning": "Mother-ground opens; divine truth-power enters the lighted gate",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 66,
+                "provenance_note": "Ritual triad cluster 66"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plamu_yafika",
+              "type": "lexical_item",
+              "form": "Plamu yafika",
+              "meaning": "Mother-ground opens; divine truth-power enters the lighted gate",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 66,
+                "provenance_note": "Ritual triad cluster 66"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_67",
+              "type": "corpus_sample",
+              "text": "Kafro yami supla",
+              "gloss": "Power rests; the divine small-being stands on the good open plain",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 67,
+                "forms": [
+                  "kafro",
+                  "yami",
+                  "supla"
+                ],
+                "kind": "cluster",
+                "feeling": "power-rest · divine being · good plain",
+                "provenance_note": "Ritual triad cluster 67",
+                "compounds": [
+                  "Kafro ka",
+                  "Yami ya",
+                  "Kafro yami"
+                ],
+                "poetic": "Power rests; the divine small-being stands on the good open plain.",
+                "reinforces": [
+                  "ka",
+                  "fro",
+                  "ya",
+                  "mi",
+                  "su",
+                  "pla"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafro_ka",
+              "type": "lexical_item",
+              "form": "Kafro ka",
+              "meaning": "Power rests; the divine small-being stands on the good open plain",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 67,
+                "provenance_note": "Ritual triad cluster 67"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yami_ya",
+              "type": "lexical_item",
+              "form": "Yami ya",
+              "meaning": "Power rests; the divine small-being stands on the good open plain",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 67,
+                "provenance_note": "Ritual triad cluster 67"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafro_yami",
+              "type": "lexical_item",
+              "form": "Kafro yami",
+              "meaning": "Power rests; the divine small-being stands on the good open plain",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 67,
+                "provenance_note": "Ritual triad cluster 67"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_68",
+              "type": "corpus_sample",
+              "text": "Mufra lakyo tinara",
+              "gloss": "Mother-breath proclaims light-knowing; the child-name is called forth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 68,
+                "forms": [
+                  "mufra",
+                  "lakyo",
+                  "tinara"
+                ],
+                "kind": "cluster",
+                "feeling": "mother-breath · light-knowing · child-name",
+                "provenance_note": "Ritual triad cluster 68",
+                "compounds": [
+                  "Mufra mu",
+                  "Lakyo la",
+                  "Mufra lakyo"
+                ],
+                "poetic": "Mother-breath proclaims light-knowing; the child-name is called forth.",
+                "reinforces": [
+                  "mu",
+                  "fra",
+                  "la",
+                  "kyo",
+                  "ti",
+                  "na",
+                  "ra"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_mufra_mu",
+              "type": "lexical_item",
+              "form": "Mufra mu",
+              "meaning": "Mother-breath proclaims light-knowing; the child-name is called forth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 68,
+                "provenance_note": "Ritual triad cluster 68"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lakyo_la",
+              "type": "lexical_item",
+              "form": "Lakyo la",
+              "meaning": "Mother-breath proclaims light-knowing; the child-name is called forth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 68,
+                "provenance_note": "Ritual triad cluster 68"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_mufra_lakyo",
+              "type": "lexical_item",
+              "form": "Mufra lakyo",
+              "meaning": "Mother-breath proclaims light-knowing; the child-name is called forth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 68,
+                "provenance_note": "Ritual triad cluster 68"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_69",
+              "type": "corpus_sample",
+              "text": "Yorfa maklu sipra",
+              "gloss": "Blessed force flows from mother-existence; goodness is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 69,
+                "forms": [
+                  "yorfa",
+                  "maklu",
+                  "sipra"
+                ],
+                "kind": "cluster",
+                "feeling": "force-blessing · mother-flow · good proclaimed",
+                "provenance_note": "Ritual triad cluster 69",
+                "compounds": [
+                  "Yorfa yo",
+                  "Maklu ma",
+                  "Yorfa maklu"
+                ],
+                "poetic": "Blessed force flows from mother-existence; goodness is proclaimed.",
+                "reinforces": [
+                  "yor",
+                  "fa",
+                  "ma",
+                  "klu",
+                  "si",
+                  "pra"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yorfa_yo",
+              "type": "lexical_item",
+              "form": "Yorfa yo",
+              "meaning": "Blessed force flows from mother-existence; goodness is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 69,
+                "provenance_note": "Ritual triad cluster 69"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_maklu_ma",
+              "type": "lexical_item",
+              "form": "Maklu ma",
+              "meaning": "Blessed force flows from mother-existence; goodness is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 69,
+                "provenance_note": "Ritual triad cluster 69"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yorfa_maklu",
+              "type": "lexical_item",
+              "form": "Yorfa maklu",
+              "meaning": "Blessed force flows from mother-existence; goodness is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 69,
+                "provenance_note": "Ritual triad cluster 69"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_70",
+              "type": "corpus_sample",
+              "text": "Plika yofra tamu",
+              "gloss": "Open power meets divine proclamation in the mother-this",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 70,
+                "forms": [
+                  "plika",
+                  "yofra",
+                  "tamu"
+                ],
+                "kind": "cluster",
+                "feeling": "open power · divine proclaim · this-mother",
+                "provenance_note": "Ritual triad cluster 70",
+                "compounds": [
+                  "Plika pl",
+                  "Yofra yo",
+                  "Plika yofra"
+                ],
+                "poetic": "Open power meets divine proclamation in the mother-this.",
+                "reinforces": [
+                  "pli",
+                  "ka",
+                  "yo",
+                  "fra",
+                  "ta",
+                  "mu"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plika_pl",
+              "type": "lexical_item",
+              "form": "Plika pl",
+              "meaning": "Open power meets divine proclamation in the mother-this",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 70,
+                "provenance_note": "Ritual triad cluster 70"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yofra_yo",
+              "type": "lexical_item",
+              "form": "Yofra yo",
+              "meaning": "Open power meets divine proclamation in the mother-this",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 70,
+                "provenance_note": "Ritual triad cluster 70"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plika_yofra",
+              "type": "lexical_item",
+              "form": "Plika yofra",
+              "meaning": "Open power meets divine proclamation in the mother-this",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 70,
+                "provenance_note": "Ritual triad cluster 70"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_71",
+              "type": "corpus_sample",
+              "text": "Kafya lorpa minu",
+              "gloss": "Grace-power protects with light; the small spirit rises",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 71,
+                "forms": [
+                  "kafya",
+                  "lorpa",
+                  "minu"
+                ],
+                "kind": "cluster",
+                "feeling": "grace-power · light-protect · small spirit",
+                "provenance_note": "Ritual triad cluster 71",
+                "compounds": [
+                  "Kafya ka",
+                  "Lorpa lo",
+                  "Kafya lorpa"
+                ],
+                "poetic": "Grace-power protects with light; the small spirit rises.",
+                "reinforces": [
+                  "ka",
+                  "fya",
+                  "lor",
+                  "pa",
+                  "mi",
+                  "nu"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafya_ka",
+              "type": "lexical_item",
+              "form": "Kafya ka",
+              "meaning": "Grace-power protects with light; the small spirit rises",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 71,
+                "provenance_note": "Ritual triad cluster 71"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lorpa_lo",
+              "type": "lexical_item",
+              "form": "Lorpa lo",
+              "meaning": "Grace-power protects with light; the small spirit rises",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 71,
+                "provenance_note": "Ritual triad cluster 71"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafya_lorpa",
+              "type": "lexical_item",
+              "form": "Kafya lorpa",
+              "meaning": "Grace-power protects with light; the small spirit rises",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 71,
+                "provenance_note": "Ritual triad cluster 71"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_72",
+              "type": "corpus_sample",
+              "text": "Yupra makra silu",
+              "gloss": "The divine proclaims the mother-heart; good light flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 72,
+                "forms": [
+                  "yupra",
+                  "makra",
+                  "silu"
+                ],
+                "kind": "cluster",
+                "feeling": "divine proclaim · mother-heart · good flow",
+                "provenance_note": "Ritual triad cluster 72",
+                "compounds": [
+                  "Yupra yu",
+                  "Makra ma",
+                  "Yupra makra"
+                ],
+                "poetic": "The divine proclaims the mother-heart; good light flows.",
+                "reinforces": [
+                  "yu",
+                  "pra",
+                  "ma",
+                  "kra",
+                  "si",
+                  "lu"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yupra_yu",
+              "type": "lexical_item",
+              "form": "Yupra yu",
+              "meaning": "The divine proclaims the mother-heart; good light flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 72,
+                "provenance_note": "Ritual triad cluster 72"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_makra_ma",
+              "type": "lexical_item",
+              "form": "Makra ma",
+              "meaning": "The divine proclaims the mother-heart; good light flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 72,
+                "provenance_note": "Ritual triad cluster 72"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yupra_makra",
+              "type": "lexical_item",
+              "form": "Yupra makra",
+              "meaning": "The divine proclaims the mother-heart; good light flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 72,
+                "provenance_note": "Ritual triad cluster 72"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_73",
+              "type": "corpus_sample",
+              "text": "Torfa yami plaku",
+              "gloss": "The gate blesses the divine small-being in the open place of power",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 73,
+                "forms": [
+                  "torfa",
+                  "yami",
+                  "plaku"
+                ],
+                "kind": "cluster",
+                "feeling": "gate-blessing · divine being · open power-place",
+                "provenance_note": "Ritual triad cluster 73",
+                "compounds": [
+                  "Torfa to",
+                  "Yami ya",
+                  "Torfa yami"
+                ],
+                "poetic": "The gate blesses the divine small-being in the open place of power.",
+                "reinforces": [
+                  "tor",
+                  "fa",
+                  "ya",
+                  "mi",
+                  "pla",
+                  "ku"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_torfa_to",
+              "type": "lexical_item",
+              "form": "Torfa to",
+              "meaning": "The gate blesses the divine small-being in the open place of power",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 73,
+                "provenance_note": "Ritual triad cluster 73"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yami_ya",
+              "type": "lexical_item",
+              "form": "Yami ya",
+              "meaning": "The gate blesses the divine small-being in the open place of power",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 73,
+                "provenance_note": "Ritual triad cluster 73"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_torfa_yami",
+              "type": "lexical_item",
+              "form": "Torfa yami",
+              "meaning": "The gate blesses the divine small-being in the open place of power",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 73,
+                "provenance_note": "Ritual triad cluster 73"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_74",
+              "type": "corpus_sample",
+              "text": "Morka yaflu sipta",
+              "gloss": "Rising power flows divinely; goodness is here",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 74,
+                "forms": [
+                  "morka",
+                  "yaflu",
+                  "sipta"
+                ],
+                "kind": "cluster",
+                "feeling": "rising power · divine flow · good-this",
+                "provenance_note": "Ritual triad cluster 74",
+                "compounds": [
+                  "Morka mo",
+                  "Yaflu ya",
+                  "Morka yaflu"
+                ],
+                "poetic": "Rising power flows divinely; goodness is here.",
+                "reinforces": [
+                  "mor",
+                  "ka",
+                  "ya",
+                  "flu",
+                  "si",
+                  "pta"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_morka_mo",
+              "type": "lexical_item",
+              "form": "Morka mo",
+              "meaning": "Rising power flows divinely; goodness is here",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 74,
+                "provenance_note": "Ritual triad cluster 74"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yaflu_ya",
+              "type": "lexical_item",
+              "form": "Yaflu ya",
+              "meaning": "Rising power flows divinely; goodness is here",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 74,
+                "provenance_note": "Ritual triad cluster 74"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_morka_yaflu",
+              "type": "lexical_item",
+              "form": "Morka yaflu",
+              "meaning": "Rising power flows divinely; goodness is here",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 74,
+                "provenance_note": "Ritual triad cluster 74"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_75",
+              "type": "corpus_sample",
+              "text": "Lakra yomu tafra",
+              "gloss": "Light-heart meets divine-mother; this is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 75,
+                "forms": [
+                  "lakra",
+                  "yomu",
+                  "tafra"
+                ],
+                "kind": "cluster",
+                "feeling": "light-heart · divine-mother · this proclaimed",
+                "provenance_note": "Ritual triad cluster 75",
+                "compounds": [
+                  "Lakra la",
+                  "Yomu yo",
+                  "Lakra yomu"
+                ],
+                "poetic": "Light-heart meets divine-mother; this is proclaimed.",
+                "reinforces": [
+                  "la",
+                  "kra",
+                  "yo",
+                  "mu",
+                  "ta",
+                  "fra"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lakra_la",
+              "type": "lexical_item",
+              "form": "Lakra la",
+              "meaning": "Light-heart meets divine-mother; this is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 75,
+                "provenance_note": "Ritual triad cluster 75"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yomu_yo",
+              "type": "lexical_item",
+              "form": "Yomu yo",
+              "meaning": "Light-heart meets divine-mother; this is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 75,
+                "provenance_note": "Ritual triad cluster 75"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lakra_yomu",
+              "type": "lexical_item",
+              "form": "Lakra yomu",
+              "meaning": "Light-heart meets divine-mother; this is proclaimed",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 75,
+                "provenance_note": "Ritual triad cluster 75"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_76",
+              "type": "corpus_sample",
+              "text": "Plina yofka maru",
+              "gloss": "The open name receives divine craft-power; mother rests",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 76,
+                "forms": [
+                  "plina",
+                  "yofka",
+                  "maru"
+                ],
+                "kind": "cluster",
+                "feeling": "open name · divine craft · mother rest",
+                "provenance_note": "Ritual triad cluster 76",
+                "compounds": [
+                  "Plina pl",
+                  "Yofka yo",
+                  "Plina yofka"
+                ],
+                "poetic": "The open name receives divine craft-power; mother rests.",
+                "reinforces": [
+                  "pli",
+                  "na",
+                  "yo",
+                  "fi",
+                  "ka",
+                  "ma",
+                  "ru"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plina_pl",
+              "type": "lexical_item",
+              "form": "Plina pl",
+              "meaning": "The open name receives divine craft-power; mother rests",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 76,
+                "provenance_note": "Ritual triad cluster 76"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yofka_yo",
+              "type": "lexical_item",
+              "form": "Yofka yo",
+              "meaning": "The open name receives divine craft-power; mother rests",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 76,
+                "provenance_note": "Ritual triad cluster 76"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plina_yofka",
+              "type": "lexical_item",
+              "form": "Plina yofka",
+              "meaning": "The open name receives divine craft-power; mother rests",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 76,
+                "provenance_note": "Ritual triad cluster 76"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_77",
+              "type": "corpus_sample",
+              "text": "Kafro yala sipro",
+              "gloss": "Power rests in divine light; goodness is carried forward",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 77,
+                "forms": [
+                  "kafro",
+                  "yala",
+                  "sipro"
+                ],
+                "kind": "cluster",
+                "feeling": "power-rest · divine light · good bearing",
+                "provenance_note": "Ritual triad cluster 77",
+                "compounds": [
+                  "Kafro ka",
+                  "Yala ya",
+                  "Kafro yala"
+                ],
+                "poetic": "Power rests in divine light; goodness is carried forward.",
+                "reinforces": [
+                  "ka",
+                  "fro",
+                  "ya",
+                  "la",
+                  "si",
+                  "pro"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafro_ka",
+              "type": "lexical_item",
+              "form": "Kafro ka",
+              "meaning": "Power rests in divine light; goodness is carried forward",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 77,
+                "provenance_note": "Ritual triad cluster 77"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yala_ya",
+              "type": "lexical_item",
+              "form": "Yala ya",
+              "meaning": "Power rests in divine light; goodness is carried forward",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 77,
+                "provenance_note": "Ritual triad cluster 77"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_kafro_yala",
+              "type": "lexical_item",
+              "form": "Kafro yala",
+              "meaning": "Power rests in divine light; goodness is carried forward",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 77,
+                "provenance_note": "Ritual triad cluster 77"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_78",
+              "type": "corpus_sample",
+              "text": "Mufya plaro tikna",
+              "gloss": "Mother-grace rests openly; the child-name emerges",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 78,
+                "forms": [
+                  "mufya",
+                  "plaro",
+                  "tikna"
+                ],
+                "kind": "cluster",
+                "feeling": "mother-grace · open rest · child-name",
+                "provenance_note": "Ritual triad cluster 78",
+                "compounds": [
+                  "Mufya mu",
+                  "Plaro pl",
+                  "Mufya plaro"
+                ],
+                "poetic": "Mother-grace rests openly; the child-name emerges.",
+                "reinforces": [
+                  "mu",
+                  "fya",
+                  "pla",
+                  "ro",
+                  "tik",
+                  "na"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_mufya_mu",
+              "type": "lexical_item",
+              "form": "Mufya mu",
+              "meaning": "Mother-grace rests openly; the child-name emerges",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 78,
+                "provenance_note": "Ritual triad cluster 78"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_plaro_pl",
+              "type": "lexical_item",
+              "form": "Plaro pl",
+              "meaning": "Mother-grace rests openly; the child-name emerges",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 78,
+                "provenance_note": "Ritual triad cluster 78"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_mufya_plaro",
+              "type": "lexical_item",
+              "form": "Mufya plaro",
+              "meaning": "Mother-grace rests openly; the child-name emerges",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 78,
+                "provenance_note": "Ritual triad cluster 78"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_79",
+              "type": "corpus_sample",
+              "text": "Yokru lamfa sipla",
+              "gloss": "Divine heart-force blesses the mother-light; goodness opens",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 79,
+                "forms": [
+                  "yokru",
+                  "lamfa",
+                  "sipla"
+                ],
+                "kind": "cluster",
+                "feeling": "divine heart-force · mother-light bless · good open",
+                "provenance_note": "Ritual triad cluster 79",
+                "compounds": [
+                  "Yokru yo",
+                  "Lamfa la",
+                  "Yokru lamfa"
+                ],
+                "poetic": "Divine heart-force blesses the mother-light; goodness opens.",
+                "reinforces": [
+                  "yo",
+                  "kru",
+                  "lam",
+                  "fa",
+                  "si",
+                  "pla"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yokru_yo",
+              "type": "lexical_item",
+              "form": "Yokru yo",
+              "meaning": "Divine heart-force blesses the mother-light; goodness opens",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 79,
+                "provenance_note": "Ritual triad cluster 79"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lamfa_la",
+              "type": "lexical_item",
+              "form": "Lamfa la",
+              "meaning": "Divine heart-force blesses the mother-light; goodness opens",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 79,
+                "provenance_note": "Ritual triad cluster 79"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yokru_lamfa",
+              "type": "lexical_item",
+              "form": "Yokru lamfa",
+              "meaning": "Divine heart-force blesses the mother-light; goodness opens",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 79,
+                "provenance_note": "Ritual triad cluster 79"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_80",
+              "type": "corpus_sample",
+              "text": "Makyo yupra torlu",
+              "gloss": "Mother-knowing is divinely proclaimed; the gate flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 80,
+                "forms": [
+                  "makyo",
+                  "yupra",
+                  "torlu"
+                ],
+                "kind": "cluster",
+                "feeling": "mother-knowing · divine proclaim · gate flow",
+                "provenance_note": "Closes extended ritual triad arc (65–80)",
+                "compounds": [
+                  "Makyo ma",
+                  "Yupra yu",
+                  "Makyo yupra"
+                ],
+                "poetic": "Mother-knowing is divinely proclaimed; the gate flows.",
+                "reinforces": [
+                  "ma",
+                  "kyo",
+                  "yu",
+                  "pra",
+                  "tor",
+                  "lu"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_makyo_ma",
+              "type": "lexical_item",
+              "form": "Makyo ma",
+              "meaning": "Mother-knowing is divinely proclaimed; the gate flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 80,
+                "provenance_note": "Closes extended ritual triad arc (65–80)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yupra_yu",
+              "type": "lexical_item",
+              "form": "Yupra yu",
+              "meaning": "Mother-knowing is divinely proclaimed; the gate flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 80,
+                "provenance_note": "Closes extended ritual triad arc (65–80)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_makyo_yupra",
+              "type": "lexical_item",
+              "form": "Makyo yupra",
+              "meaning": "Mother-knowing is divinely proclaimed; the gate flows",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 80,
+                "provenance_note": "Closes extended ritual triad arc (65–80)"
               }
             }
           ]
