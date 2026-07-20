@@ -19,8 +19,10 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | **H** | Naming / blessing / sealing axis (clusters 49–60) |
 | **I** | Ritual invocation lines (clusters 61–64) |
 | **J** | Extended ritual triads (clusters 65–80) |
+| **K** | Proto-World universal gaps (clusters 81–87) |
+| **L** | Social/body/action/nature/abstract/logic/spatial roots (clusters 88–94) |
 
-## Clusters 12–80
+## Clusters 12–94
 
 | ID | Forms | Domain | Phrase | Interpretation |
 |----|-------|--------|--------|----------------|
@@ -99,7 +101,52 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | 79 | yokru lamfa sipla | abstract | Yokru lamfa sipla | Divine heart-force · mother-light bless · good open |
 | 80 | makyo yupra torlu | abstract | Makyo yupra torlu | Mother-knowing · divine proclaim · gate flow |
 
-**Cluster count: 69** (IDs 12–80 inclusive).
+### Clusters 81–87 (proposal K — universal mini-clusters)
+
+| ID | Forms | Domain | Phrase | Interpretation |
+|----|-------|--------|--------|----------------|
+| 81 | pa ne ti | kinship | Pa ne ti ro ya | Father–kin–child |
+| 82 | si nu to | body | Si nu to kra ro | Eye–ear–hand |
+| 83 | fi wa hi | nature | Fi wa hi kra la | Fire–water–tree |
+| 84 | wi du ro | abstract | Wi du ro ya | Know–bad–rest |
+| 85 | su bu ya | motion | Su bu ya kra | Good–move–divine |
+| 86 | be ni la | abstract | Be ni la ro ya | Head–name–light |
+| 87 | du kra ro | abstract | Du kra ro ya | Heavy–vital–rest |
+
+### Clusters 88–94 (proposal L — gap-fill demonstration)
+
+| ID | Forms | Domain | Phrase | Interpretation |
+|----|-------|--------|--------|----------------|
+| 88 | chi ma loi | kinship | Chi ma loi ro ya | Child–mother–friend |
+| 89 | sa toh tek | motion | Sa toh tek ya | Speak–give–take |
+| 90 | sola luna fe | nature | Sola luna fe kra | Sun–moon–wind |
+| 91 | tem reka lo | abstract | Tem reka lo ya | Time–change–love |
+| 92 | in ex neta | motion | In ex neta ro | Inside–outside–near |
+| 93 | ver never ke | abstract | Ver never ke ya | Truth–false–if |
+| 94 | rama ko ru | body | Rama ko ru kra | Feeling-heart–bone–blood |
+
+**Cluster count: 83** (IDs 12–94 inclusive).
+
+### Proposal L — new atomic roots (selected)
+
+| Root | Meaning | Notes |
+|------|---------|-------|
+| chi | child / youth | independent of ti=small |
+| loi | friend / ally | |
+| sha | other / stranger | |
+| sa | speech / say | |
+| rama | feeling-heart; also many | ra+ma |
+| ko | bone / structure | |
+| peh / dak / toh / tek | create / break / give / take | |
+| nuka | death / end | |
+| sola / luna / fe | sun / moon / wind | |
+| krato / bura | mountain / path | |
+| tem / reka / ver / never | time / change / truth / false | |
+| lo / dunu | love·up / fear | |
+| tima / sura / nema / ke | few / all / none / if | |
+| in / ex / duta / neta | inside / outside / down / near | |
+
+Conflict resolutions (polysemy / register split): `fi` = sacred-verity + fire; `ver` = cognitive truth; `kor` = anatomical heart vs `rama` = feeling-heart; `ru` = rest-flow + blood; `pu` = move + animal; `vi` = knowing-see + living.
 
 ### Cluster 47 morphology
 
@@ -143,6 +190,12 @@ Qaytra blapa torja
 Vi porka yala morkfu
 Yafora mikra talu
 Makyo yupra torlu
+Pa ne ti
+Fi wa hi
+Su bu ya
+Du kra ro
+Chi ma loi
+Sola luna fe
 Wi su ni ve ro ya
 ```
 
@@ -152,7 +205,7 @@ Wi su ni ve ro ya
 from sre.mythar import MytharLexicon
 
 lex = MytharLexicon()
-lex.cluster_ids()           # 12..80
+lex.cluster_ids()           # 12..94
 lex.list_clusters()         # summaries (includes compound clusters)
 lex.gap_fill()              # domain coverage + proposals
 lex.compare_proto_world()   # Mythar ↔ Proto-World table

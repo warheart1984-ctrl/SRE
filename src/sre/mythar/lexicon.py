@@ -16,7 +16,7 @@ DEFAULT_LEXICON = DEFAULT_LEXICON_PATH
 
 
 class MytharLexicon:
-    """Load and query the Mythar Living Lexicon (clusters 12–80)."""
+    """Load and query the Mythar Living Lexicon (clusters 12–94)."""
 
     def __init__(self, path: Path | str | None = None) -> None:
         self.path = Path(path) if path else DEFAULT_LEXICON

@@ -1,4 +1,4 @@
-"""Canonical Mythar Living Lexicon data (clusters 12–80) + optional JSON export."""
+"""Canonical Mythar Living Lexicon data (clusters 12–94) + optional JSON export."""
 
 from __future__ import annotations
 
@@ -9,55 +9,55 @@ from typing import Any
 SRC = "Mythar Living Lexicon / Gap-Fill Draft"
 
 ROOTS: list[tuple[str, str, str]] = [
-    ("ma", "mother / existence / breath-base", "kinship"),
-    ("ta", "earth-mark / stand", "nature"),
+    ("ma", "mother / existence / breath-base (formally anchored kinship root)", "kinship"),
+    ("ta", "earth-mark / stand; also this / that (demonstrative)", "nature"),
     ("la", "light / open", "nature"),
-    ("ka", "vital force / walk-base", "motion"),
-    ("kra", "vital / life-force", "abstract"),
+    ("ka", "vital force / walk-base / elder-heat", "motion"),
+    ("kra", "vital / life-force / power / strength", "abstract"),
     ("ro", "rest / peace / settle", "abstract"),
     ("ya", "divine / sacred", "abstract"),
     ("tila", "cycle / turn", "abstract"),
     ("ba", "power / strength (paired with pa)", "kinship"),
-    ("tor", "gate / threshold", "nature"),
+    ("tor", "gate / threshold / rocky peak", "nature"),
     ("pla", "plain / open land", "nature"),
     ("ve", "see / vision", "body"),
     ("pa", "father / power", "kinship"),
-    ("ti", "child / small / sacred diminutive", "kinship"),
-    ("ne", "sibling / near / kin", "kinship"),
+    ("ti", "child / small / sacred diminutive (size; cf. chi=child)", "kinship"),
+    ("ne", "sibling / near / kin; also no / not (negation sense)", "kinship"),
     ("bro", "sibling / brother-sister class", "kinship"),
     ("te", "you (2sg address)", "kinship"),
-    ("nu", "nose / smell / breath", "body"),
-    ("mu", "mouth / speech aperture", "body"),
+    ("nu", "nose / smell / breath / ear / hear", "body"),
+    ("mu", "mouth / speech aperture; also person / human-breath", "body"),
     ("si", "eye / see / light-of-sight", "body"),
     ("li", "tongue / speech / taste", "body"),
     ("to", "hand / take / give", "body"),
     ("be", "head / mind / top", "body"),
-    ("pe", "foot / base / step", "body"),
-    ("kor", "heart / core", "body"),
+    ("pe", "foot / base / step / stand", "body"),
+    ("kor", "heart / core (anatomical; cf. rama=feeling-heart)", "body"),
     ("bu", "come / go / move", "motion"),
     ("re", "flow / run / river", "motion"),
     ("le", "flow (soft) / glide", "motion"),
-    ("ga", "walk / carry", "motion"),
+    ("ga", "walk / carry / hold", "motion"),
     ("wi", "know / wisdom", "abstract"),
-    ("su", "good / sweet / life", "abstract"),
+    ("su", "good / sweet / life / sky-above (quality sense)", "abstract"),
     ("ni", "name / soul / spirit", "abstract"),
     ("wa", "water / flow", "nature"),
-    ("hi", "tree / high / grow", "nature"),
+    ("hi", "tree / high / grow / wood", "nature"),
     ("bo", "earth / ground", "nature"),
     ("di", "child-sacred variant of ti", "kinship"),
-    ("mi", "spirit-name variant of ni", "abstract"),
-    ("vi", "wisdom-see variant of wi/ve", "abstract"),
+    ("mi", "spirit-name variant of ni; also small / grain", "abstract"),
+    ("vi", "wisdom-see / inner sight; also life / living", "abstract"),
     ("zu", "sweet-life variant of su", "abstract"),
     ("va", "water-flow variant of wa", "nature"),
     ("ki", "power / vital craft (ka/kra lighter); also high-grow", "abstract"),
     ("po", "earth variant of bo", "nature"),
-    ("pu", "move variant of bu", "motion"),
+    ("pu", "move variant of bu; also animal / creature", "motion"),
     ("yu", "grace / knowing-see glide (ya~wi~ve)", "abstract"),
     ("yo", "divine / sacred glide (ya~jor)", "abstract"),
     ("fu", "blessing / fortune", "abstract"),
     ("ua", "flow / existence", "abstract"),
     ("na", "name / spirit (ni-class)", "abstract"),
-    ("ra", "proclaim / intensify / ground", "abstract"),
+    ("ra", "proclaim / intensify / ground; also great / big (scale)", "abstract"),
     ("ara", "proclaim / ground / craft-ending", "abstract"),
     ("akra", "intensified kra — vital force / heart-core", "abstract"),
     ("lmakra", "illuminated mother-heart (la+ma+akra)", "abstract"),
@@ -65,7 +65,7 @@ ROOTS: list[tuple[str, str, str]] = [
     ("tiki", "small sacred power / pure vital spark (ti+ki)", "abstract"),
     ("yocfua", "divine blessing flow / blessed becoming (yo+cfua/fu+ua)", "abstract"),
     ("manalara", "proclaimed mother-light-name (ma+na+la+ra)", "abstract"),
-    ("fi", "truth / sacred verity", "abstract"),
+    ("fi", "truth / sacred verity; fire / flame (elemental)", "abstract"),
     ("aka", "power / gate-force (ka intensified)", "abstract"),
     ("fa", "blessing-light glide (fu+la)", "abstract"),
     ("makra", "mother-heart / existence-vital force (ma+kra)", "abstract"),
@@ -126,10 +126,10 @@ ROOTS: list[tuple[str, str, str]] = [
     ("pli", "open variant of pla", "nature"),
     ("fya", "grace-power (ka+ya)", "abstract"),
     ("lor", "light-protect (la+pa)", "abstract"),
-    ("ku", "place-power / grounded force", "nature"),
+    ("ku", "place-power / grounded force; also ear (nu-class)", "nature"),
     ("flu", "divine flow (ya+lu)", "abstract"),
     ("pta", "this-place / present ground", "abstract"),
-    ("ru", "rest-flow (ro+lu)", "abstract"),
+    ("ru", "rest-flow (ro+lu); also blood / life-flow", "abstract"),
     ("pro", "bearing / proclaim forward", "abstract"),
     ("tik", "child-name sacred (ti+na lighter)", "kinship"),
     ("kru", "heart-force (kra glide)", "abstract"),
@@ -177,6 +177,47 @@ ROOTS: list[tuple[str, str, str]] = [
     ("sipla", "good-open (si+pla)", "nature"),
     ("makyo", "mother-knowing (ma+kyo)", "abstract"),
     ("torlu", "gate-flow (tor+lu)", "nature"),
+    # High-priority Proto-World gap-fill universals (proposal K)
+    ("da", "father-strong / elder (pa-class)", "kinship"),
+    ("hu", "person / human", "kinship"),
+    ("am", "eat / consume", "motion"),
+    ("no", "deep sleep / rest-depth (ro extension)", "abstract"),
+    ("du", "bad / heavy / burden; also two / dual", "abstract"),
+    ("me", "I (oblique / self)", "kinship"),
+    ("mica", "one / single / unity particle", "abstract"),
+    ("ska", "stone / rock", "nature"),
+    ("ula", "sky / above (la+su extension)", "nature"),
+    # Proposal L — social / body / action / nature / abstract / logic / spatial gaps
+    ("chi", "child / youth (independent of ti=small)", "kinship"),
+    ("loi", "friend / companion / ally", "kinship"),
+    ("sha", "other / stranger / foreign", "kinship"),
+    ("sa", "speech / say / mouth-speech", "body"),
+    ("rama", "heart / feeling (ra+ma); also great-many", "body"),
+    ("ko", "bone / structure", "body"),
+    ("peh", "create / shape / make", "motion"),
+    ("dak", "break / cut / destroy", "motion"),
+    ("toh", "give (to-extension)", "motion"),
+    ("tek", "take / seize", "motion"),
+    ("nuka", "death / end (nu+ka)", "abstract"),
+    ("sola", "sun / day", "nature"),
+    ("luna", "moon / night", "nature"),
+    ("fe", "air / wind", "nature"),
+    ("krato", "mountain / great stone (kra+to)", "nature"),
+    ("bura", "path / way (bu+ra)", "motion"),
+    ("tem", "time / duration", "abstract"),
+    ("reka", "change / shift (re+ka)", "abstract"),
+    ("ver", "truth / real (cognitive register; cf. fi sacred-verity)", "abstract"),
+    ("never", "false / not-true (ne+ver)", "abstract"),
+    ("lo", "love / affection; also up / rise", "abstract"),
+    ("dunu", "fear / heavy-hear (du+nu)", "abstract"),
+    ("tima", "few / small-amount (ti+ma)", "abstract"),
+    ("sura", "all / complete (su+ra)", "abstract"),
+    ("nema", "none / no-life (ne+ma)", "abstract"),
+    ("ke", "if / condition", "abstract"),
+    ("in", "inside / within", "motion"),
+    ("ex", "outside / beyond", "motion"),
+    ("duta", "downward / heavy-foot (du+ta)", "motion"),
+    ("neta", "near / close (ne+ta)", "motion"),
 ]
 
 CLUSTERS: list[tuple[int, str, str, str, str, str]] = [
@@ -1359,6 +1400,42 @@ def _clusters_65_80() -> list[dict[str, Any]]:
 
 COMPOUND_CLUSTERS: list[dict[str, Any]] = COMPOUND_CLUSTERS_BASE + _clusters_65_80()
 
+# Proposal K — Proto-World universal mini-clusters (append after compounds for ID order)
+CLUSTERS_81_87: list[tuple[int, str, str, str, str, str]] = [
+    (81, "pa ne ti", "Father-kin-child", "kinship", "Pa ne ti ro ya",
+     "Father–kin–child: family core (order variant of cluster 12)"),
+    (82, "si nu to", "Eye-ear-hand", "body", "Si nu to kra ro",
+     "Eye–ear–hand: full perception triad (order variant of cluster 13)"),
+    (83, "fi wa hi", "Fire-water-tree", "nature", "Fi wa hi kra la",
+     "Fire–water–tree: elemental living triad"),
+    (84, "wi du ro", "Know-bad-rest", "abstract", "Wi du ro ya",
+     "Know the heavy/bad; rest in the divine (wisdom through challenge)"),
+    (85, "su bu ya", "Good-move-divine", "motion", "Su bu ya kra",
+     "The good moves toward the divine (blessed journey)"),
+    (86, "be ni la", "Head-name-light", "abstract", "Be ni la ro ya",
+     "Head–name–light: enlightened mind"),
+    (87, "du kra ro", "Heavy-vital-rest", "abstract", "Du kra ro ya",
+     "Heavy vital force settles (transforming burden)"),
+]
+
+# Proposal L — demonstration mini-clusters for new universal roots
+CLUSTERS_88_94: list[tuple[int, str, str, str, str, str]] = [
+    (88, "chi ma loi", "Child-mother-friend", "kinship", "Chi ma loi ro ya",
+     "Child–mother–friend: social bond triad"),
+    (89, "sa toh tek", "Speak-give-take", "motion", "Sa toh tek ya",
+     "Speak–give–take: communicative exchange"),
+    (90, "sola luna fe", "Sun-moon-wind", "nature", "Sola luna fe kra",
+     "Sun–moon–wind: sky cycle"),
+    (91, "tem reka lo", "Time-change-love", "abstract", "Tem reka lo ya",
+     "Time–change–love: affective becoming"),
+    (92, "in ex neta", "Inside-outside-near", "motion", "In ex neta ro",
+     "Inside–outside–near: spatial field"),
+    (93, "ver never ke", "Truth-false-if", "abstract", "Ver never ke ya",
+     "Truth–falsehood–condition: logic triad"),
+    (94, "rama ko ru", "Heart-bone-blood", "body", "Rama ko ru kra",
+     "Feeling-heart–bone–blood: embodied life"),
+]
+
 INVOCATION = (
     "Ye kra ro ya\n"
     "Lmakra yuckara\n"
@@ -1371,6 +1448,12 @@ INVOCATION = (
     "Vi porka yala morkfu\n"
     "Yafora mikra talu\n"
     "Makyo yupra torlu\n"
+    "Pa ne ti\n"
+    "Fi wa hi\n"
+    "Su bu ya\n"
+    "Du kra ro\n"
+    "Chi ma loi\n"
+    "Sola luna fe\n"
     "Wi su ni ve ro ya"
 )
 
@@ -1408,6 +1491,35 @@ PROTO_WORLD = [
     {"mythar": "qay", "proto_world": "*gʷeyh₃- / *kʷey-", "domain": "abstract", "note": "rooted life"},
     {"mythar": "por", "proto_world": "*bʰer- / *per-", "domain": "motion", "note": "carry / bear"},
     {"mythar": "mor", "proto_world": "*mer- / *men-", "domain": "abstract", "note": "rise / grow"},
+    {"mythar": "da", "proto_world": "*da- / *tata", "domain": "kinship", "note": "father / elder"},
+    {"mythar": "hu", "proto_world": "* hum- / *gʷm̥-", "domain": "kinship", "note": "person / human"},
+    {"mythar": "am", "proto_world": "*h₁ed- / *am-", "domain": "motion", "note": "eat / consume"},
+    {"mythar": "no", "proto_world": "*sneud- / *h₃er-", "domain": "abstract", "note": "deep sleep / rest"},
+    {"mythar": "du", "proto_world": "*dweh₂- / *gʷreh₂-", "domain": "abstract", "note": "two / heavy / bad"},
+    {"mythar": "me", "proto_world": "*me- / *h₁me-", "domain": "kinship", "note": "I (oblique)"},
+    {"mythar": "mica", "proto_world": "*sem- / *oi-no-", "domain": "abstract", "note": "one / single"},
+    {"mythar": "ska", "proto_world": "*h₂ek- / *ḱer-", "domain": "nature", "note": "stone / rock"},
+    {"mythar": "ula", "proto_world": "*h₂ew- / *dyew-", "domain": "nature", "note": "sky / above"},
+    {"mythar": "fi", "proto_world": "*peh₂wr̥ / *h₁yes-", "domain": "nature", "note": "fire / truth (polysemy)"},
+    {"mythar": "chi", "proto_world": "*ǵenh₁- / *tek-", "domain": "kinship", "note": "child / youth"},
+    {"mythar": "loi", "proto_world": "*leubh- / *priH-", "domain": "kinship", "note": "friend / love-ally"},
+    {"mythar": "sha", "proto_world": "*alyo- / *gʰosti-", "domain": "kinship", "note": "other / stranger"},
+    {"mythar": "sa", "proto_world": "*sekʷ- / *bʰeh₂-", "domain": "body", "note": "speak / say"},
+    {"mythar": "rama", "proto_world": "*ḱerd- / *meǵh₂-", "domain": "body", "note": "feeling-heart / many"},
+    {"mythar": "ko", "proto_world": "*ost- / *ḱost-", "domain": "body", "note": "bone"},
+    {"mythar": "peh", "proto_world": "*kʷer- / *dʰeh₁-", "domain": "motion", "note": "make / create"},
+    {"mythar": "dak", "proto_world": "*bʰreg- / *sek-", "domain": "motion", "note": "break / cut"},
+    {"mythar": "toh", "proto_world": "*deh₃-", "domain": "motion", "note": "give"},
+    {"mythar": "tek", "proto_world": "*gʰebʰ- / *h₁ep-", "domain": "motion", "note": "take"},
+    {"mythar": "sola", "proto_world": "*sóh₂wl̥", "domain": "nature", "note": "sun"},
+    {"mythar": "luna", "proto_world": "*mḗh₁n̥s / *leuk-", "domain": "nature", "note": "moon"},
+    {"mythar": "fe", "proto_world": "*h₂weh₁-", "domain": "nature", "note": "wind / air"},
+    {"mythar": "tem", "proto_world": "*temp- / *yeh₂-", "domain": "abstract", "note": "time"},
+    {"mythar": "ver", "proto_world": "*weh₁-ro- / *h₁es-", "domain": "abstract", "note": "truth / real"},
+    {"mythar": "lo", "proto_world": "*leubh- / *h₁el-", "domain": "abstract", "note": "love / up"},
+    {"mythar": "ke", "proto_world": "*kʷe- / *ye-", "domain": "abstract", "note": "if / condition"},
+    {"mythar": "in", "proto_world": "*h₁en-", "domain": "motion", "note": "inside"},
+    {"mythar": "ex", "proto_world": "*h₁eǵʰs-", "domain": "motion", "note": "outside"},
 ]
 
 
@@ -1445,6 +1557,35 @@ def build_lexicon_document() -> dict[str, Any]:
         )
     for compound in COMPOUND_CLUSTERS:
         clusters.append(dict(compound))
+    for cid, forms_s, name, domain, phrase, interp in CLUSTERS_81_87 + CLUSTERS_88_94:
+        forms = forms_s.split()
+        proposal = "K" if cid <= 87 else "L"
+        clusters.append(
+            {
+                "cluster_id": cid,
+                "name": name,
+                "forms": forms,
+                "phrase": phrase,
+                "domain": domain,
+                "interpretation": interp,
+                "source_reference": SRC,
+                "evidence_id": f"evid_myt_cluster_{cid:02d}",
+                "morphemes": [{"form": f, "gloss": gloss.get(f, f)} for f in forms],
+                "metadata": {
+                    "kind": "cluster",
+                    "source": SRC,
+                    "domain": domain,
+                    "cluster_id": cid,
+                    "forms": forms,
+                    "proposal": proposal,
+                    "provenance_note": (
+                        "Proto-World universal gap-fill mini-cluster"
+                        if proposal == "K"
+                        else "Proposal L universal-root demonstration cluster"
+                    ),
+                },
+            }
+        )
 
     evidence: list[dict[str, Any]] = []
     for r in roots:
@@ -1500,9 +1641,8 @@ def build_lexicon_document() -> dict[str, Any]:
     return {
         "lexicon_id": "mythar_lexicon_v01",
         "description": (
-            "Mythar Living Lexicon — gap-fill clusters 12–80 with atomic roots, "
-            "compounds (kra/blessing/naming/emergence/grounding/threshold/growth/triad arcs), "
-            "domain tags, and Proto-World comparisons."
+            "Mythar Living Lexicon — gap-fill clusters 12–94 with atomic roots, "
+            "compounds, Proto-World universals (proposals K–L), and domain tags."
         ),
         "source_reference": SRC,
         "proposals": {
@@ -1516,6 +1656,8 @@ def build_lexicon_document() -> dict[str, Any]:
             "H": "Naming / blessing / sealing axis (makra–makora — clusters 49–60)",
             "I": "Ritual invocation lines (ebro…mufay — clusters 61–64)",
             "J": "Extended ritual triads (yafora…torlu — clusters 65–80)",
+            "K": "Proto-World universal gaps (da/hu/am/no/du/me/mica/ska/ula — clusters 81–87)",
+            "L": "Social/body/action/nature/abstract/logic/spatial roots — clusters 88–94",
         },
         "roots": roots,
         "clusters": clusters,

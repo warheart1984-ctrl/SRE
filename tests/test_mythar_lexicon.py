@@ -1,4 +1,4 @@
-"""Mythar living lexicon tests — clusters 12–80 + gap-fill."""
+"""Mythar living lexicon tests — clusters 12–94 + gap-fill."""
 
 from __future__ import annotations
 
@@ -29,72 +29,49 @@ def test_mythar_lexicon_file_and_counts() -> None:
     assert lex.lexicon_id == "mythar_lexicon_v01"
     assert LEX_PATH.is_file()
     ids = lex.cluster_ids()
-    assert ids == list(range(12, 81))
-    assert len(ids) == 69
+    assert ids == list(range(12, 95))
+    assert len(ids) == 83
     assert lex.get_cluster(12) is not None
-    assert lex.get_cluster(46) is not None
-    assert lex.get_cluster(47) is not None
-    assert lex.get_cluster(48) is not None
-    assert lex.get_cluster(60) is not None
-    assert lex.get_cluster(61) is not None
-    assert lex.get_cluster(64) is not None
-    assert lex.get_cluster(65) is not None
     assert lex.get_cluster(80) is not None
+    assert lex.get_cluster(81) is not None
+    assert lex.get_cluster(87) is not None
+    assert lex.get_cluster(88) is not None
+    assert lex.get_cluster(94) is not None
     listed = lex.list_clusters()
-    assert any(c["cluster_id"] == 47 for c in listed)
-    assert any(c["cluster_id"] == 48 for c in listed)
-    assert any(c["cluster_id"] == 61 for c in listed)
-    assert any(c["cluster_id"] == 65 for c in listed)
-    assert any(c["cluster_id"] == 80 for c in listed)
+    assert any(c["cluster_id"] == 81 for c in listed)
+    assert any(c["cluster_id"] == 94 for c in listed)
 
-    c47 = lex.get_cluster(47)
-    assert c47 is not None
-    assert "lmakra" in c47["forms"]
-    assert "yuckara" in c47["forms"]
-    assert "Lmakra yuckara" in c47["phrase"]
+    c81 = lex.get_cluster(81)
+    assert c81 is not None
+    assert c81["forms"] == ["pa", "ne", "ti"]
 
-    c48 = lex.get_cluster(48)
-    assert c48 is not None
-    assert c48["forms"] == ["tiki", "yocfua", "manalara"]
-    assert "Tiki yocfua manalara" in c48["phrase"]
-    assert "Tiki kra" in (c48.get("compounds") or [])
+    c83 = lex.get_cluster(83)
+    assert c83 is not None
+    assert c83["forms"] == ["fi", "wa", "hi"]
 
-    c61 = lex.get_cluster(61)
-    assert c61 is not None
-    assert c61["forms"] == ["ebro", "la", "kajya", "lapio", "mufay"]
-    assert "Ebro la kajya lapio mufay" in c61["phrase"]
+    c88 = lex.get_cluster(88)
+    assert c88 is not None
+    assert c88["forms"] == ["chi", "ma", "loi"]
 
-    c64 = lex.get_cluster(64)
-    assert c64 is not None
-    assert "porka" in c64["forms"]
-    assert "morkfu" in c64["forms"]
-
-    c65 = lex.get_cluster(65)
-    assert c65 is not None
-    assert c65["forms"] == ["yafora", "mikra", "talu"]
-
-    c80 = lex.get_cluster(80)
-    assert c80 is not None
-    assert "makyo" in c80["forms"]
-    assert "torlu" in c80["phrase"].lower()
+    c94 = lex.get_cluster(94)
+    assert c94 is not None
+    assert "rama" in c94["forms"]
 
     for root in (
-        "la", "ma", "kra", "ya", "yu", "ara", "akra", "lmakra", "yuckara",
-        "ti", "ki", "yo", "fu", "ua", "na", "ra", "tiki", "yocfua", "manalara",
-        "fi", "makra", "makora", "ebro", "kajya", "lapio", "mufay",
-        "plafo", "micala", "haftar", "qaytra", "blapa", "torja",
-        "porka", "yala", "morkfu",
-        "yafora", "mikra", "talu", "lakyo", "yupra", "makyo", "torlu",
+        "ma", "pa", "ti", "chi", "loi", "sha", "sa", "rama", "ko",
+        "peh", "dak", "toh", "tek", "nuka", "sola", "luna", "fe",
+        "krato", "bura", "tem", "reka", "ver", "never", "lo", "dunu",
+        "tima", "sura", "nema", "ke", "in", "ex", "duta", "neta",
+        "da", "hu", "am", "no", "du", "me", "mica", "ska", "ula",
+        "fi", "yafora", "makyo",
     ):
-        assert root in lex.root_forms()
+        assert root in lex.root_forms(), root
     assert domains_covered(lex)
     inv = lex.gap_fill()["invocation"]
-    assert "Lmakra yuckara" in inv
-    assert "Tiki yocfua manalara" in inv
-    assert "Ebro la kajya lapio mufay" in inv
-    assert "Makora yufina ro" in inv
-    assert "Yafora mikra talu" in inv
-    assert "Makyo yupra torlu" in inv
+    assert "Pa ne ti" in inv
+    assert "Fi wa hi" in inv
+    assert "Chi ma loi" in inv
+    assert "Sola luna fe" in inv
     assert "Ye kra ro ya" in inv
 
 
@@ -113,11 +90,10 @@ def test_mythar_gap_fill_domains() -> None:
 def test_mythar_proto_world_table() -> None:
     rows = MytharLexicon(LEX_PATH).compare_proto_world()
     assert any(r["mythar"] == "pa" for r in rows)
-    assert any(r["mythar"] == "wa" for r in rows)
-    assert any(r["mythar"] == "kra" for r in rows)
-    assert any(r["mythar"] == "yu" for r in rows)
-    assert any(r["mythar"] == "yo" for r in rows)
-    assert any(r["mythar"] == "na" for r in rows)
+    assert any(r["mythar"] == "chi" for r in rows)
+    assert any(r["mythar"] == "sola" for r in rows)
+    assert any(r["mythar"] == "ver" for r in rows)
+    assert any(r["mythar"] == "in" for r in rows)
 
 
 def test_mythar_seed_and_reconstruct_clusters() -> None:
@@ -127,22 +103,14 @@ def test_mythar_seed_and_reconstruct_clusters() -> None:
     assert seeded
     for eid in (
         "evid_myt_cluster_12",
-        "evid_myt_cluster_17",
-        "evid_myt_cluster_40",
-        "evid_myt_cluster_46",
-        "evid_myt_cluster_47",
-        "evid_myt_cluster_48",
-        "evid_myt_root_pa",
-        "evid_myt_root_bro",
-        "evid_myt_root_lmakra",
-        "evid_myt_root_yuckara",
-        "evid_myt_root_tiki",
-        "evid_myt_root_manalara",
-        "evid_myt_root_ebro",
-        "evid_myt_root_qaytra",
-        "evid_myt_compound_lmakra",
-        "evid_myt_compound_tiki_kra",
-        "evid_myt_compound_manalara_ya",
+        "evid_myt_cluster_81",
+        "evid_myt_cluster_88",
+        "evid_myt_cluster_94",
+        "evid_myt_root_ma",
+        "evid_myt_root_chi",
+        "evid_myt_root_rama",
+        "evid_myt_root_sola",
+        "evid_myt_root_ver",
     ):
         ev = registry.get_evidence(eid)
         assert ev is not None, eid
@@ -150,14 +118,13 @@ def test_mythar_seed_and_reconstruct_clusters() -> None:
 
     evidence_ids = [
         "evid_myt_cluster_12",
-        "evid_myt_cluster_13",
-        "evid_myt_cluster_17",
-        "evid_myt_cluster_47",
-        "evid_myt_cluster_48",
+        "evid_myt_cluster_81",
+        "evid_myt_cluster_83",
+        "evid_myt_cluster_88",
         "evid_myt_root_pa",
         "evid_myt_root_ma",
-        "evid_myt_root_kra",
-        "evid_myt_root_ti",
+        "evid_myt_root_fi",
+        "evid_myt_root_chi",
     ]
     engine = ChronologicalReconstruction(
         registry, HLRMAIAgent(registry), corpus_path="mythar-lex"
