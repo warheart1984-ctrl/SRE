@@ -12,12 +12,15 @@ from ..evidence.registry import EvidenceRegistry
 _DATA = Path(__file__).resolve().parents[3] / "data"
 DEFAULT_CORPUS = _DATA / "fra_corpus_v01.json"
 IE_CORPUS = _DATA / "ie_cognate_mini_v01.json"
+MYTHAR_LEXICON = _DATA / "mythar_lexicon_v01.json"
 
 CORPUS_CATALOG: dict[str, Path] = {
     "mythar": DEFAULT_CORPUS,
     "fra_test_v01": DEFAULT_CORPUS,
     "ie": IE_CORPUS,
     "ie_cognate_mini_v01": IE_CORPUS,
+    "mythar-lex": MYTHAR_LEXICON,
+    "mythar_lexicon_v01": MYTHAR_LEXICON,
 }
 
 

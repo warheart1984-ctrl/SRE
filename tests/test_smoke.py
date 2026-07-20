@@ -297,6 +297,7 @@ def test_schemas_and_docs_exist() -> None:
         "docs/specs/ConstitutionalLogging.md",
         "docs/specs/API_Contracts.md",
         "docs/specs/ConstitutionalPromotionGates.md",
+        "docs/architecture/MytharGapFill.md",
         "README.md",
     ]
     for rel in required:

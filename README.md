@@ -33,13 +33,16 @@ See [`docs/governance/PromotionPlan_v01.md`](docs/governance/PromotionPlan_v01.m
 | ID | File | Notes |
 |----|------|--------|
 | `mythar` | `data/fra_corpus_v01.json` | Synthetic FRA fixture |
+| `mythar-lex` | `data/mythar_lexicon_v01.json` | Living lexicon clusters **12–48** + atomic roots ([MytharGapFill](docs/architecture/MytharGapFill.md)) |
 | `ie` | `data/ie_cognate_mini_v01.json` | Latin / Spanish / French / Sanskrit — kin, numbers 1–5, body parts, verbs (Fortson / Beekes) |
 
 ## Quick demo
 
 ```powershell
 pip install -e ".[dev]"
+python scripts/generate_mythar_lexicon.py
 python scripts/run_local.py --corpus mythar
+python scripts/run_local.py --corpus mythar-lex
 python scripts/run_local.py --corpus ie --dantomax --with-cih
 pytest -q
 ```

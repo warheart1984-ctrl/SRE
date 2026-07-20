@@ -1,0 +1,3169 @@
+{
+  "lexicon_id": "mythar_lexicon_v01",
+  "description": "Mythar Living Lexicon — gap-fill clusters 12–48 with atomic roots, compounds (lmakra/yuckara; tiki/yocfua/manalara), domain tags, and Proto-World comparisons.",
+  "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+  "proposals": {
+    "A": "Fill kinship triad gaps (pa/ma/ti/ne/bro)",
+    "B": "Fill body–sense inventory (nu/mu/si/li/to/be/pe/kor)",
+    "C": "Fill motion verbs (bu/re/le/ga)",
+    "D": "Fill knowing–spirit set (wi/su/ni/ve)",
+    "E": "Fill nature triad + light (wa/hi/bo/la)",
+    "F": "Kra-axis compounds (lmakra / yuckara — cluster 47)",
+    "G": "Blessing / birth triad (tiki / yocfua / manalara — cluster 48)"
+  },
+  "roots": [
+    {
+      "form": "ma",
+      "meaning": "mother / existence / breath-base",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ma"
+    },
+    {
+      "form": "ta",
+      "meaning": "earth-mark / stand",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ta"
+    },
+    {
+      "form": "la",
+      "meaning": "light / open",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_la"
+    },
+    {
+      "form": "ka",
+      "meaning": "vital force / walk-base",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ka"
+    },
+    {
+      "form": "kra",
+      "meaning": "vital / life-force",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kra"
+    },
+    {
+      "form": "ro",
+      "meaning": "rest / peace / settle",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ro"
+    },
+    {
+      "form": "ya",
+      "meaning": "divine / sacred",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ya"
+    },
+    {
+      "form": "tila",
+      "meaning": "cycle / turn",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tila"
+    },
+    {
+      "form": "ba",
+      "meaning": "power / strength (paired with pa)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ba"
+    },
+    {
+      "form": "tor",
+      "meaning": "gate / threshold",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tor"
+    },
+    {
+      "form": "pla",
+      "meaning": "plain / open land",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pla"
+    },
+    {
+      "form": "ve",
+      "meaning": "see / vision",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ve"
+    },
+    {
+      "form": "pa",
+      "meaning": "father / power",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pa"
+    },
+    {
+      "form": "ti",
+      "meaning": "child / small / sacred diminutive",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ti"
+    },
+    {
+      "form": "ne",
+      "meaning": "sibling / near / kin",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ne"
+    },
+    {
+      "form": "bro",
+      "meaning": "sibling / brother-sister class",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_bro"
+    },
+    {
+      "form": "te",
+      "meaning": "you (2sg address)",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_te"
+    },
+    {
+      "form": "nu",
+      "meaning": "nose / smell / breath",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_nu"
+    },
+    {
+      "form": "mu",
+      "meaning": "mouth / speech aperture",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_mu"
+    },
+    {
+      "form": "si",
+      "meaning": "eye / see / light-of-sight",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_si"
+    },
+    {
+      "form": "li",
+      "meaning": "tongue / speech / taste",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_li"
+    },
+    {
+      "form": "to",
+      "meaning": "hand / take / give",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_to"
+    },
+    {
+      "form": "be",
+      "meaning": "head / mind / top",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_be"
+    },
+    {
+      "form": "pe",
+      "meaning": "foot / base / step",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pe"
+    },
+    {
+      "form": "kor",
+      "meaning": "heart / core",
+      "domain": "body",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_kor"
+    },
+    {
+      "form": "bu",
+      "meaning": "come / go / move",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_bu"
+    },
+    {
+      "form": "re",
+      "meaning": "flow / run / river",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_re"
+    },
+    {
+      "form": "le",
+      "meaning": "flow (soft) / glide",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_le"
+    },
+    {
+      "form": "ga",
+      "meaning": "walk / carry",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ga"
+    },
+    {
+      "form": "wi",
+      "meaning": "know / wisdom",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_wi"
+    },
+    {
+      "form": "su",
+      "meaning": "good / sweet / life",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_su"
+    },
+    {
+      "form": "ni",
+      "meaning": "name / soul / spirit",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ni"
+    },
+    {
+      "form": "wa",
+      "meaning": "water / flow",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_wa"
+    },
+    {
+      "form": "hi",
+      "meaning": "tree / high / grow",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_hi"
+    },
+    {
+      "form": "bo",
+      "meaning": "earth / ground",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_bo"
+    },
+    {
+      "form": "di",
+      "meaning": "child-sacred variant of ti",
+      "domain": "kinship",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_di"
+    },
+    {
+      "form": "mi",
+      "meaning": "spirit-name variant of ni",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_mi"
+    },
+    {
+      "form": "vi",
+      "meaning": "wisdom-see variant of wi/ve",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_vi"
+    },
+    {
+      "form": "zu",
+      "meaning": "sweet-life variant of su",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_zu"
+    },
+    {
+      "form": "va",
+      "meaning": "water-flow variant of wa",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_va"
+    },
+    {
+      "form": "ki",
+      "meaning": "power / vital craft (ka/kra lighter); also high-grow",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ki"
+    },
+    {
+      "form": "po",
+      "meaning": "earth variant of bo",
+      "domain": "nature",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_po"
+    },
+    {
+      "form": "pu",
+      "meaning": "move variant of bu",
+      "domain": "motion",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_pu"
+    },
+    {
+      "form": "yu",
+      "meaning": "grace / knowing-see glide (ya~wi~ve)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yu"
+    },
+    {
+      "form": "yo",
+      "meaning": "divine / sacred glide (ya~jor)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yo"
+    },
+    {
+      "form": "fu",
+      "meaning": "blessing / fortune",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_fu"
+    },
+    {
+      "form": "ua",
+      "meaning": "flow / existence",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ua"
+    },
+    {
+      "form": "na",
+      "meaning": "name / spirit (ni-class)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_na"
+    },
+    {
+      "form": "ra",
+      "meaning": "proclaim / intensify / ground",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ra"
+    },
+    {
+      "form": "ara",
+      "meaning": "proclaim / ground / craft-ending",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_ara"
+    },
+    {
+      "form": "akra",
+      "meaning": "intensified kra — vital force / heart-core",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_akra"
+    },
+    {
+      "form": "lmakra",
+      "meaning": "illuminated mother-heart (la+ma+akra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_lmakra"
+    },
+    {
+      "form": "yuckara",
+      "meaning": "graceful knowing-heart (yu+ckara/kra+ara)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yuckara"
+    },
+    {
+      "form": "tiki",
+      "meaning": "small sacred power / pure vital spark (ti+ki)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_tiki"
+    },
+    {
+      "form": "yocfua",
+      "meaning": "divine blessing flow / blessed becoming (yo+cfua/fu+ua)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_yocfua"
+    },
+    {
+      "form": "manalara",
+      "meaning": "proclaimed mother-light-name (ma+na+la+ra)",
+      "domain": "abstract",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_root_manalara"
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 12,
+      "name": "Father-child-kin",
+      "forms": [
+        "pa",
+        "ti",
+        "ne"
+      ],
+      "phrase": "Pa ti ne ro ya",
+      "domain": "kinship",
+      "interpretation": "Father–child–kin triad; rest in the divine",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_12",
+      "morphemes": [
+        {
+          "form": "pa",
+          "gloss": "father / power"
+        },
+        {
+          "form": "ti",
+          "gloss": "child / small / sacred diminutive"
+        },
+        {
+          "form": "ne",
+          "gloss": "sibling / near / kin"
+        }
+      ]
+    },
+    {
+      "cluster_id": 13,
+      "name": "Breath-eye-hand",
+      "forms": [
+        "nu",
+        "si",
+        "to"
+      ],
+      "phrase": "Nu si to kra ro",
+      "domain": "body",
+      "interpretation": "Breath–sight–hand: vital perception and action at rest",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_13",
+      "morphemes": [
+        {
+          "form": "nu",
+          "gloss": "nose / smell / breath"
+        },
+        {
+          "form": "si",
+          "gloss": "eye / see / light-of-sight"
+        },
+        {
+          "form": "to",
+          "gloss": "hand / take / give"
+        }
+      ]
+    },
+    {
+      "cluster_id": 14,
+      "name": "Move-flow-carry",
+      "forms": [
+        "bu",
+        "re",
+        "ga"
+      ],
+      "phrase": "Bu re ga ya",
+      "domain": "motion",
+      "interpretation": "Come–flow–carry toward the divine",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_14",
+      "morphemes": [
+        {
+          "form": "bu",
+          "gloss": "come / go / move"
+        },
+        {
+          "form": "re",
+          "gloss": "flow / run / river"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        }
+      ]
+    },
+    {
+      "cluster_id": 15,
+      "name": "Know good spirit",
+      "forms": [
+        "wi",
+        "su",
+        "ni"
+      ],
+      "phrase": "Wi su ni ro ya",
+      "domain": "abstract",
+      "interpretation": "Know the good-named spirit; rest in the divine",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_15",
+      "morphemes": [
+        {
+          "form": "wi",
+          "gloss": "know / wisdom"
+        },
+        {
+          "form": "su",
+          "gloss": "good / sweet / life"
+        },
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        }
+      ]
+    },
+    {
+      "cluster_id": 16,
+      "name": "Water-tree-earth",
+      "forms": [
+        "wa",
+        "hi",
+        "bo"
+      ],
+      "phrase": "Wa hi bo kra la",
+      "domain": "nature",
+      "interpretation": "Water–tree–earth: living world under vital light",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_16",
+      "morphemes": [
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        }
+      ]
+    },
+    {
+      "cluster_id": 17,
+      "name": "Father-mother-child",
+      "forms": [
+        "pa",
+        "ma",
+        "ti"
+      ],
+      "phrase": "Pa ma ti ro ya",
+      "domain": "kinship",
+      "interpretation": "Core family triad settled in the divine",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_17",
+      "morphemes": [
+        {
+          "form": "pa",
+          "gloss": "father / power"
+        },
+        {
+          "form": "ma",
+          "gloss": "mother / existence / breath-base"
+        },
+        {
+          "form": "ti",
+          "gloss": "child / small / sacred diminutive"
+        }
+      ]
+    },
+    {
+      "cluster_id": 18,
+      "name": "Kin-see-father",
+      "forms": [
+        "ne",
+        "si",
+        "pa"
+      ],
+      "phrase": "Ne si pa kra ro",
+      "domain": "kinship",
+      "interpretation": "Kin sees the father: ancestral line of sight",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_18",
+      "morphemes": [
+        {
+          "form": "ne",
+          "gloss": "sibling / near / kin"
+        },
+        {
+          "form": "si",
+          "gloss": "eye / see / light-of-sight"
+        },
+        {
+          "form": "pa",
+          "gloss": "father / power"
+        }
+      ]
+    },
+    {
+      "cluster_id": 19,
+      "name": "Sibling-child-kin",
+      "forms": [
+        "bro",
+        "ti",
+        "ne"
+      ],
+      "phrase": "Bro ti ne ya",
+      "domain": "kinship",
+      "interpretation": "Extended family: sibling–child–kin bond",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_19",
+      "morphemes": [
+        {
+          "form": "bro",
+          "gloss": "sibling / brother-sister class"
+        },
+        {
+          "form": "ti",
+          "gloss": "child / small / sacred diminutive"
+        },
+        {
+          "form": "ne",
+          "gloss": "sibling / near / kin"
+        }
+      ]
+    },
+    {
+      "cluster_id": 20,
+      "name": "Divine-kin-mother",
+      "forms": [
+        "ya",
+        "ne",
+        "ma"
+      ],
+      "phrase": "Ya ne ma ro",
+      "domain": "kinship",
+      "interpretation": "Sacred ancestry through mother-kin",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_20",
+      "morphemes": [
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        },
+        {
+          "form": "ne",
+          "gloss": "sibling / near / kin"
+        },
+        {
+          "form": "ma",
+          "gloss": "mother / existence / breath-base"
+        }
+      ]
+    },
+    {
+      "cluster_id": 21,
+      "name": "You-father-rest",
+      "forms": [
+        "te",
+        "pa",
+        "ro"
+      ],
+      "phrase": "Te pa ro ya",
+      "domain": "kinship",
+      "interpretation": "Address to father in peace",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_21",
+      "morphemes": [
+        {
+          "form": "te",
+          "gloss": "you (2sg address)"
+        },
+        {
+          "form": "pa",
+          "gloss": "father / power"
+        },
+        {
+          "form": "ro",
+          "gloss": "rest / peace / settle"
+        }
+      ]
+    },
+    {
+      "cluster_id": 22,
+      "name": "Mother-sibling-divine",
+      "forms": [
+        "ma",
+        "bro",
+        "ya"
+      ],
+      "phrase": "Ma bro ya kra",
+      "domain": "kinship",
+      "interpretation": "Maternal blessing over siblings",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_22",
+      "morphemes": [
+        {
+          "form": "ma",
+          "gloss": "mother / existence / breath-base"
+        },
+        {
+          "form": "bro",
+          "gloss": "sibling / brother-sister class"
+        },
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        }
+      ]
+    },
+    {
+      "cluster_id": 23,
+      "name": "Mouth-breath-eye",
+      "forms": [
+        "mu",
+        "nu",
+        "si"
+      ],
+      "phrase": "Mu nu si ro",
+      "domain": "body",
+      "interpretation": "Mouth–breath–eye: speech, breath, sight",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_23",
+      "morphemes": [
+        {
+          "form": "mu",
+          "gloss": "mouth / speech aperture"
+        },
+        {
+          "form": "nu",
+          "gloss": "nose / smell / breath"
+        },
+        {
+          "form": "si",
+          "gloss": "eye / see / light-of-sight"
+        }
+      ]
+    },
+    {
+      "cluster_id": 24,
+      "name": "Tongue-hand-head",
+      "forms": [
+        "li",
+        "to",
+        "be"
+      ],
+      "phrase": "Li to be ya",
+      "domain": "body",
+      "interpretation": "Tongue–hand–head: speech, craft, mind",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_24",
+      "morphemes": [
+        {
+          "form": "li",
+          "gloss": "tongue / speech / taste"
+        },
+        {
+          "form": "to",
+          "gloss": "hand / take / give"
+        },
+        {
+          "form": "be",
+          "gloss": "head / mind / top"
+        }
+      ]
+    },
+    {
+      "cluster_id": 25,
+      "name": "Foot-high-breath",
+      "forms": [
+        "pe",
+        "hi",
+        "nu"
+      ],
+      "phrase": "Pe hi nu kra",
+      "domain": "body",
+      "interpretation": "Foot lifted; high breath — upright life",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_25",
+      "morphemes": [
+        {
+          "form": "pe",
+          "gloss": "foot / base / step"
+        },
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "nu",
+          "gloss": "nose / smell / breath"
+        }
+      ]
+    },
+    {
+      "cluster_id": 26,
+      "name": "Heart-vital-eye",
+      "forms": [
+        "kor",
+        "kra",
+        "si"
+      ],
+      "phrase": "Kor kra si ro",
+      "domain": "body",
+      "interpretation": "Heart’s vital eye: felt seeing",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_26",
+      "morphemes": [
+        {
+          "form": "kor",
+          "gloss": "heart / core"
+        },
+        {
+          "form": "kra",
+          "gloss": "vital / life-force"
+        },
+        {
+          "form": "si",
+          "gloss": "eye / see / light-of-sight"
+        }
+      ]
+    },
+    {
+      "cluster_id": 27,
+      "name": "Water-mouth-rest",
+      "forms": [
+        "wa",
+        "mu",
+        "ro"
+      ],
+      "phrase": "Wa mu ro ya",
+      "domain": "body",
+      "interpretation": "Water at the mouth; speech at rest",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_27",
+      "morphemes": [
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "mu",
+          "gloss": "mouth / speech aperture"
+        },
+        {
+          "form": "ro",
+          "gloss": "rest / peace / settle"
+        }
+      ]
+    },
+    {
+      "cluster_id": 28,
+      "name": "Earth-tongue-carry",
+      "forms": [
+        "bo",
+        "li",
+        "ga"
+      ],
+      "phrase": "Bo li ga kra",
+      "domain": "body",
+      "interpretation": "Earth-tongue carries: grounded speech",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_28",
+      "morphemes": [
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        },
+        {
+          "form": "li",
+          "gloss": "tongue / speech / taste"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        }
+      ]
+    },
+    {
+      "cluster_id": 29,
+      "name": "Come-carry-flow",
+      "forms": [
+        "bu",
+        "ga",
+        "re"
+      ],
+      "phrase": "Bu ga re ya",
+      "domain": "motion",
+      "interpretation": "Journey: come, carry, flow",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_29",
+      "morphemes": [
+        {
+          "form": "bu",
+          "gloss": "come / go / move"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        },
+        {
+          "form": "re",
+          "gloss": "flow / run / river"
+        }
+      ]
+    },
+    {
+      "cluster_id": 30,
+      "name": "Flow-come-hand",
+      "forms": [
+        "le",
+        "bu",
+        "to"
+      ],
+      "phrase": "Le bu to ro",
+      "domain": "motion",
+      "interpretation": "Flow comes to the hand",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_30",
+      "morphemes": [
+        {
+          "form": "le",
+          "gloss": "flow (soft) / glide"
+        },
+        {
+          "form": "bu",
+          "gloss": "come / go / move"
+        },
+        {
+          "form": "to",
+          "gloss": "hand / take / give"
+        }
+      ]
+    },
+    {
+      "cluster_id": 31,
+      "name": "Know-come-divine",
+      "forms": [
+        "wi",
+        "bu",
+        "ya"
+      ],
+      "phrase": "Wi bu ya kra",
+      "domain": "motion",
+      "interpretation": "Knowledge comes to the divine",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_31",
+      "morphemes": [
+        {
+          "form": "wi",
+          "gloss": "know / wisdom"
+        },
+        {
+          "form": "bu",
+          "gloss": "come / go / move"
+        },
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        }
+      ]
+    },
+    {
+      "cluster_id": 32,
+      "name": "Flow-carry-vital",
+      "forms": [
+        "re",
+        "ga",
+        "kra"
+      ],
+      "phrase": "Re ga kra ro",
+      "domain": "motion",
+      "interpretation": "Vital flow of carrying",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_32",
+      "morphemes": [
+        {
+          "form": "re",
+          "gloss": "flow / run / river"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        },
+        {
+          "form": "kra",
+          "gloss": "vital / life-force"
+        }
+      ]
+    },
+    {
+      "cluster_id": 33,
+      "name": "Good-come-rest",
+      "forms": [
+        "su",
+        "bu",
+        "ro"
+      ],
+      "phrase": "Su bu ro ya",
+      "domain": "motion",
+      "interpretation": "The good comes to rest",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_33",
+      "morphemes": [
+        {
+          "form": "su",
+          "gloss": "good / sweet / life"
+        },
+        {
+          "form": "bu",
+          "gloss": "come / go / move"
+        },
+        {
+          "form": "ro",
+          "gloss": "rest / peace / settle"
+        }
+      ]
+    },
+    {
+      "cluster_id": 34,
+      "name": "High-carry-earth",
+      "forms": [
+        "hi",
+        "ga",
+        "bo"
+      ],
+      "phrase": "Hi ga bo kra",
+      "domain": "motion",
+      "interpretation": "Carry high upon the earth",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_34",
+      "morphemes": [
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        },
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        }
+      ]
+    },
+    {
+      "cluster_id": 35,
+      "name": "Know-name-good",
+      "forms": [
+        "wi",
+        "ni",
+        "su"
+      ],
+      "phrase": "Wi ni su ro",
+      "domain": "abstract",
+      "interpretation": "Know the good name",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_35",
+      "morphemes": [
+        {
+          "form": "wi",
+          "gloss": "know / wisdom"
+        },
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        },
+        {
+          "form": "su",
+          "gloss": "good / sweet / life"
+        }
+      ]
+    },
+    {
+      "cluster_id": 36,
+      "name": "See-know-rest",
+      "forms": [
+        "ve",
+        "wi",
+        "ro"
+      ],
+      "phrase": "Ve wi ro ya",
+      "domain": "abstract",
+      "interpretation": "See and know at rest",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_36",
+      "morphemes": [
+        {
+          "form": "ve",
+          "gloss": "see / vision"
+        },
+        {
+          "form": "wi",
+          "gloss": "know / wisdom"
+        },
+        {
+          "form": "ro",
+          "gloss": "rest / peace / settle"
+        }
+      ]
+    },
+    {
+      "cluster_id": 37,
+      "name": "Name-divine-vital",
+      "forms": [
+        "ni",
+        "ya",
+        "kra"
+      ],
+      "phrase": "Ni ya kra ro",
+      "domain": "abstract",
+      "interpretation": "Divine vital name",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_37",
+      "morphemes": [
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        },
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        },
+        {
+          "form": "kra",
+          "gloss": "vital / life-force"
+        }
+      ]
+    },
+    {
+      "cluster_id": 38,
+      "name": "Good-name-existence",
+      "forms": [
+        "su",
+        "ni",
+        "ma"
+      ],
+      "phrase": "Su ni ma ya",
+      "domain": "abstract",
+      "interpretation": "Good name of existence / mother-being",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_38",
+      "morphemes": [
+        {
+          "form": "su",
+          "gloss": "good / sweet / life"
+        },
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        },
+        {
+          "form": "ma",
+          "gloss": "mother / existence / breath-base"
+        }
+      ]
+    },
+    {
+      "cluster_id": 39,
+      "name": "See-name-divine",
+      "forms": [
+        "ve",
+        "ni",
+        "ya"
+      ],
+      "phrase": "Ve ni ya kra",
+      "domain": "abstract",
+      "interpretation": "See the divine name",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_39",
+      "morphemes": [
+        {
+          "form": "ve",
+          "gloss": "see / vision"
+        },
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        },
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        }
+      ]
+    },
+    {
+      "cluster_id": 40,
+      "name": "Know-good-name-divine",
+      "forms": [
+        "wi",
+        "su",
+        "ni",
+        "ya"
+      ],
+      "phrase": "Wi su ni ya ro",
+      "domain": "abstract",
+      "interpretation": "Know the good divine name (four-morpheme seal)",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_40",
+      "morphemes": [
+        {
+          "form": "wi",
+          "gloss": "know / wisdom"
+        },
+        {
+          "form": "su",
+          "gloss": "good / sweet / life"
+        },
+        {
+          "form": "ni",
+          "gloss": "name / soul / spirit"
+        },
+        {
+          "form": "ya",
+          "gloss": "divine / sacred"
+        }
+      ]
+    },
+    {
+      "cluster_id": 41,
+      "name": "Water-tree-earth",
+      "forms": [
+        "wa",
+        "hi",
+        "bo"
+      ],
+      "phrase": "Wa hi bo kra la",
+      "domain": "nature",
+      "interpretation": "Reinforced living triad: water–tree–earth",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_41",
+      "morphemes": [
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        }
+      ]
+    },
+    {
+      "cluster_id": 42,
+      "name": "Light-water-flow",
+      "forms": [
+        "la",
+        "wa",
+        "re"
+      ],
+      "phrase": "La wa re ya",
+      "domain": "nature",
+      "interpretation": "Light upon flowing water",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_42",
+      "morphemes": [
+        {
+          "form": "la",
+          "gloss": "light / open"
+        },
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "re",
+          "gloss": "flow / run / river"
+        }
+      ]
+    },
+    {
+      "cluster_id": 43,
+      "name": "Earth-high-light",
+      "forms": [
+        "bo",
+        "hi",
+        "la"
+      ],
+      "phrase": "Bo hi la kra",
+      "domain": "nature",
+      "interpretation": "Earth rises into high light",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_43",
+      "morphemes": [
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        },
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "la",
+          "gloss": "light / open"
+        }
+      ]
+    },
+    {
+      "cluster_id": 44,
+      "name": "Water-earth-breath",
+      "forms": [
+        "wa",
+        "bo",
+        "nu"
+      ],
+      "phrase": "Wa bo nu ro",
+      "domain": "nature",
+      "interpretation": "Water and earth breathe",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_44",
+      "morphemes": [
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        },
+        {
+          "form": "nu",
+          "gloss": "nose / smell / breath"
+        }
+      ]
+    },
+    {
+      "cluster_id": 45,
+      "name": "High-water-carry",
+      "forms": [
+        "hi",
+        "wa",
+        "ga"
+      ],
+      "phrase": "Hi wa ga ya",
+      "domain": "nature",
+      "interpretation": "High waters carry",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_45",
+      "morphemes": [
+        {
+          "form": "hi",
+          "gloss": "tree / high / grow"
+        },
+        {
+          "form": "wa",
+          "gloss": "water / flow"
+        },
+        {
+          "form": "ga",
+          "gloss": "walk / carry"
+        }
+      ]
+    },
+    {
+      "cluster_id": 46,
+      "name": "Light-earth-rest",
+      "forms": [
+        "la",
+        "bo",
+        "ro"
+      ],
+      "phrase": "La bo ro kra",
+      "domain": "nature",
+      "interpretation": "Light rests upon the earth",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_46",
+      "morphemes": [
+        {
+          "form": "la",
+          "gloss": "light / open"
+        },
+        {
+          "form": "bo",
+          "gloss": "earth / ground"
+        },
+        {
+          "form": "ro",
+          "gloss": "rest / peace / settle"
+        }
+      ]
+    },
+    {
+      "cluster_id": 47,
+      "name": "Lmakra-yuckara",
+      "forms": [
+        "lmakra",
+        "yuckara"
+      ],
+      "phrase": "Lmakra yuckara ro ya",
+      "domain": "abstract",
+      "interpretation": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+      "poetic": "Light-existence vital-heart — divine-knowing vital-craft",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_47",
+      "compounds": [
+        "Lmakra",
+        "Yuckara",
+        "Lmakra ro",
+        "Yuckara wi"
+      ],
+      "morphemes": [
+        {
+          "form": "lmakra",
+          "gloss": "illuminated mother-heart / light-existence vital-heart",
+          "parts": [
+            {
+              "form": "lm/lam",
+              "from": [
+                "la",
+                "ma"
+              ],
+              "gloss": "light + existence/mother"
+            },
+            {
+              "form": "akra",
+              "from": [
+                "akra",
+                "kra"
+              ],
+              "gloss": "intensified vital force / heart-core"
+            }
+          ]
+        },
+        {
+          "form": "yuckara",
+          "gloss": "graceful knowing-heart / divine vital craft",
+          "parts": [
+            {
+              "form": "yu",
+              "from": [
+                "yu",
+                "ya",
+                "wi",
+                "ve"
+              ],
+              "gloss": "grace or know-see glide"
+            },
+            {
+              "form": "ckara/kra",
+              "from": [
+                "kra"
+              ],
+              "gloss": "vital heart"
+            },
+            {
+              "form": "ara",
+              "from": [
+                "ara"
+              ],
+              "gloss": "proclaim / ground / craft"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "la",
+        "ma",
+        "ya",
+        "kra"
+      ],
+      "metadata": {
+        "feeling": "heart-activation / soul-alignment",
+        "egyptian_ka_kra_note": "Non-doctrinal resonance note: kra ~ Egyptian ka (vital essence) — comparative metaphor only, not constitutional evidence of descent",
+        "gaulish_calibrated_ritual": "La-ma-kra yu-kara u̯edya",
+        "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 47,
+        "forms": [
+          "lmakra",
+          "yuckara"
+        ]
+      }
+    },
+    {
+      "cluster_id": 48,
+      "name": "Tiki-yocfua-manalara",
+      "forms": [
+        "tiki",
+        "yocfua",
+        "manalara"
+      ],
+      "phrase": "Tiki yocfua manalara ro ya",
+      "domain": "abstract",
+      "interpretation": "Three-part blessing / birth-awakening / soul emergence: pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit",
+      "poetic": "Pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit.",
+      "source_reference": "Mythar Living Lexicon / Gap-Fill Draft",
+      "evidence_id": "evid_myt_cluster_48",
+      "compounds": [
+        "Tiki kra",
+        "Yocfua ro",
+        "Manalara ya"
+      ],
+      "morphemes": [
+        {
+          "form": "tiki",
+          "gloss": "small sacred power / pure vital spark / child of heart-force",
+          "parts": [
+            {
+              "form": "ti",
+              "from": [
+                "ti"
+              ],
+              "gloss": "small / sacred / child / pure"
+            },
+            {
+              "form": "ki",
+              "from": [
+                "ki",
+                "ka",
+                "kra"
+              ],
+              "gloss": "power / vital craft (ka/kra lighter)"
+            }
+          ]
+        },
+        {
+          "form": "yocfua",
+          "gloss": "divine blessing flow / graceful fortune / blessed becoming",
+          "parts": [
+            {
+              "form": "yo",
+              "from": [
+                "yo",
+                "ya"
+              ],
+              "gloss": "divine / sacred glide"
+            },
+            {
+              "form": "cfua/fu",
+              "from": [
+                "fu"
+              ],
+              "gloss": "blessing / fortune"
+            },
+            {
+              "form": "ua",
+              "from": [
+                "ua"
+              ],
+              "gloss": "flow / existence"
+            }
+          ]
+        },
+        {
+          "form": "manalara",
+          "gloss": "proclaimed mother-light-name / illuminated existence of named spirit",
+          "parts": [
+            {
+              "form": "ma",
+              "from": [
+                "ma"
+              ],
+              "gloss": "existence / mother"
+            },
+            {
+              "form": "na",
+              "from": [
+                "na"
+              ],
+              "gloss": "name / spirit"
+            },
+            {
+              "form": "la",
+              "from": [
+                "la"
+              ],
+              "gloss": "light"
+            },
+            {
+              "form": "ra",
+              "from": [
+                "ra"
+              ],
+              "gloss": "proclaim / intensify"
+            }
+          ]
+        }
+      ],
+      "reinforces": [
+        "ti",
+        "ki",
+        "ya",
+        "ma",
+        "la",
+        "kra"
+      ],
+      "metadata": {
+        "feeling": "blessing / birth-awakening / soul emergence",
+        "complements": "Complements kra clusters (47) with child + blessing dimensions",
+        "ritual_string": "Tiki yo-fua ma-na-la-ra",
+        "provenance_note": "Links child/sacred ti (clusters 12, 17, 19) and kra-axis compounds (cluster 47)",
+        "kind": "cluster",
+        "source": "Mythar Living Lexicon / Gap-Fill Draft",
+        "domain": "abstract",
+        "cluster_id": 48,
+        "forms": [
+          "tiki",
+          "yocfua",
+          "manalara"
+        ]
+      }
+    }
+  ],
+  "cluster_count": 37,
+  "root_count": 56,
+  "invocation": "Ye kra ro ya\nLmakra yuckara\nTiki yocfua manalara\nWi su ni ve ro ya",
+  "proto_world_comparisons": [
+    {
+      "mythar": "pa",
+      "proto_world": "*pa- / *baba",
+      "domain": "kinship",
+      "note": "father / parent"
+    },
+    {
+      "mythar": "ma",
+      "proto_world": "*ma- / *mama",
+      "domain": "kinship",
+      "note": "mother"
+    },
+    {
+      "mythar": "ti",
+      "proto_world": "*di- / *ti-",
+      "domain": "kinship",
+      "note": "child / small / pure"
+    },
+    {
+      "mythar": "ne",
+      "proto_world": "*na- / *ni-",
+      "domain": "kinship",
+      "note": "near / kin"
+    },
+    {
+      "mythar": "bro",
+      "proto_world": "*bʰréh₂tēr",
+      "domain": "kinship",
+      "note": "brother / sibling"
+    },
+    {
+      "mythar": "nu",
+      "proto_world": "*nu- / *sna-",
+      "domain": "body",
+      "note": "nose / breath"
+    },
+    {
+      "mythar": "si",
+      "proto_world": "*sekʷ- / *okʷ-",
+      "domain": "body",
+      "note": "see / eye"
+    },
+    {
+      "mythar": "to",
+      "proto_world": "*deh₃- / *tek-",
+      "domain": "body",
+      "note": "give / hand"
+    },
+    {
+      "mythar": "kor",
+      "proto_world": "*ḱerd-",
+      "domain": "body",
+      "note": "heart"
+    },
+    {
+      "mythar": "bu",
+      "proto_world": "*gʷem- / *bheu-",
+      "domain": "motion",
+      "note": "come / become"
+    },
+    {
+      "mythar": "re",
+      "proto_world": "*sreu- / *rei-",
+      "domain": "motion",
+      "note": "flow"
+    },
+    {
+      "mythar": "wi",
+      "proto_world": "*weid- / *ǵneh₃-",
+      "domain": "abstract",
+      "note": "know / see"
+    },
+    {
+      "mythar": "su",
+      "proto_world": "*su- / *swād-",
+      "domain": "abstract",
+      "note": "good / sweet"
+    },
+    {
+      "mythar": "ni",
+      "proto_world": "*h₁nómn̥ / *ane-",
+      "domain": "abstract",
+      "note": "name / breath-spirit"
+    },
+    {
+      "mythar": "wa",
+      "proto_world": "*wed- / *akʷ-",
+      "domain": "nature",
+      "note": "water"
+    },
+    {
+      "mythar": "hi",
+      "proto_world": "*ḱel- / *upér",
+      "domain": "nature",
+      "note": "high / cover"
+    },
+    {
+      "mythar": "bo",
+      "proto_world": "*dʰéǵʰōm / *bʰudʰ-",
+      "domain": "nature",
+      "note": "earth / ground"
+    },
+    {
+      "mythar": "la",
+      "proto_world": "*leuk-",
+      "domain": "nature",
+      "note": "light"
+    },
+    {
+      "mythar": "kra",
+      "proto_world": "*ḱerd- / ka",
+      "domain": "abstract",
+      "note": "vital heart / essence"
+    },
+    {
+      "mythar": "yu",
+      "proto_world": "*yu- / *yeu-",
+      "domain": "abstract",
+      "note": "join / grace glide"
+    },
+    {
+      "mythar": "ara",
+      "proto_world": "*h₂er- / *ar-",
+      "domain": "abstract",
+      "note": "fit / craft / ground"
+    },
+    {
+      "mythar": "ki",
+      "proto_world": "*ḱei- / *keh₂-",
+      "domain": "abstract",
+      "note": "vital craft / power"
+    },
+    {
+      "mythar": "yo",
+      "proto_world": "*yeu- / *dyew-",
+      "domain": "abstract",
+      "note": "divine glide"
+    },
+    {
+      "mythar": "fu",
+      "proto_world": "*bʰeh₂- / fortune calque",
+      "domain": "abstract",
+      "note": "blessing"
+    },
+    {
+      "mythar": "ua",
+      "proto_world": "*wed- / *h₂ew-",
+      "domain": "abstract",
+      "note": "flow / existence"
+    },
+    {
+      "mythar": "na",
+      "proto_world": "*h₁nómn̥",
+      "domain": "abstract",
+      "note": "name / spirit"
+    },
+    {
+      "mythar": "ra",
+      "proto_world": "*h₂er- / *reH-",
+      "domain": "abstract",
+      "note": "proclaim / intensify"
+    }
+  ],
+  "languages": [
+    {
+      "code": "MYT",
+      "name": "Mythar",
+      "periods": [
+        {
+          "name": "Living Lexicon",
+          "evidence": [
+            {
+              "evidence_id": "evid_myt_root_ma",
+              "type": "lexical_item",
+              "form": "ma",
+              "meaning": "mother / existence / breath-base",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ta",
+              "type": "lexical_item",
+              "form": "ta",
+              "meaning": "earth-mark / stand",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_la",
+              "type": "lexical_item",
+              "form": "la",
+              "meaning": "light / open",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ka",
+              "type": "lexical_item",
+              "form": "ka",
+              "meaning": "vital force / walk-base",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kra",
+              "type": "lexical_item",
+              "form": "kra",
+              "meaning": "vital / life-force",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ro",
+              "type": "lexical_item",
+              "form": "ro",
+              "meaning": "rest / peace / settle",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ya",
+              "type": "lexical_item",
+              "form": "ya",
+              "meaning": "divine / sacred",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tila",
+              "type": "lexical_item",
+              "form": "tila",
+              "meaning": "cycle / turn",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ba",
+              "type": "lexical_item",
+              "form": "ba",
+              "meaning": "power / strength (paired with pa)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tor",
+              "type": "lexical_item",
+              "form": "tor",
+              "meaning": "gate / threshold",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pla",
+              "type": "lexical_item",
+              "form": "pla",
+              "meaning": "plain / open land",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ve",
+              "type": "lexical_item",
+              "form": "ve",
+              "meaning": "see / vision",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pa",
+              "type": "lexical_item",
+              "form": "pa",
+              "meaning": "father / power",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ti",
+              "type": "lexical_item",
+              "form": "ti",
+              "meaning": "child / small / sacred diminutive",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ne",
+              "type": "lexical_item",
+              "form": "ne",
+              "meaning": "sibling / near / kin",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_bro",
+              "type": "lexical_item",
+              "form": "bro",
+              "meaning": "sibling / brother-sister class",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_te",
+              "type": "lexical_item",
+              "form": "te",
+              "meaning": "you (2sg address)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_nu",
+              "type": "lexical_item",
+              "form": "nu",
+              "meaning": "nose / smell / breath",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_mu",
+              "type": "lexical_item",
+              "form": "mu",
+              "meaning": "mouth / speech aperture",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_si",
+              "type": "lexical_item",
+              "form": "si",
+              "meaning": "eye / see / light-of-sight",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_li",
+              "type": "lexical_item",
+              "form": "li",
+              "meaning": "tongue / speech / taste",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_to",
+              "type": "lexical_item",
+              "form": "to",
+              "meaning": "hand / take / give",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_be",
+              "type": "lexical_item",
+              "form": "be",
+              "meaning": "head / mind / top",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pe",
+              "type": "lexical_item",
+              "form": "pe",
+              "meaning": "foot / base / step",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_kor",
+              "type": "lexical_item",
+              "form": "kor",
+              "meaning": "heart / core",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_bu",
+              "type": "lexical_item",
+              "form": "bu",
+              "meaning": "come / go / move",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_re",
+              "type": "lexical_item",
+              "form": "re",
+              "meaning": "flow / run / river",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_le",
+              "type": "lexical_item",
+              "form": "le",
+              "meaning": "flow (soft) / glide",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ga",
+              "type": "lexical_item",
+              "form": "ga",
+              "meaning": "walk / carry",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_wi",
+              "type": "lexical_item",
+              "form": "wi",
+              "meaning": "know / wisdom",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_su",
+              "type": "lexical_item",
+              "form": "su",
+              "meaning": "good / sweet / life",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ni",
+              "type": "lexical_item",
+              "form": "ni",
+              "meaning": "name / soul / spirit",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_wa",
+              "type": "lexical_item",
+              "form": "wa",
+              "meaning": "water / flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_hi",
+              "type": "lexical_item",
+              "form": "hi",
+              "meaning": "tree / high / grow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_bo",
+              "type": "lexical_item",
+              "form": "bo",
+              "meaning": "earth / ground",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_di",
+              "type": "lexical_item",
+              "form": "di",
+              "meaning": "child-sacred variant of ti",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_mi",
+              "type": "lexical_item",
+              "form": "mi",
+              "meaning": "spirit-name variant of ni",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_vi",
+              "type": "lexical_item",
+              "form": "vi",
+              "meaning": "wisdom-see variant of wi/ve",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_zu",
+              "type": "lexical_item",
+              "form": "zu",
+              "meaning": "sweet-life variant of su",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_va",
+              "type": "lexical_item",
+              "form": "va",
+              "meaning": "water-flow variant of wa",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ki",
+              "type": "lexical_item",
+              "form": "ki",
+              "meaning": "power / vital craft (ka/kra lighter); also high-grow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_po",
+              "type": "lexical_item",
+              "form": "po",
+              "meaning": "earth variant of bo",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_pu",
+              "type": "lexical_item",
+              "form": "pu",
+              "meaning": "move variant of bu",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yu",
+              "type": "lexical_item",
+              "form": "yu",
+              "meaning": "grace / knowing-see glide (ya~wi~ve)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yo",
+              "type": "lexical_item",
+              "form": "yo",
+              "meaning": "divine / sacred glide (ya~jor)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_fu",
+              "type": "lexical_item",
+              "form": "fu",
+              "meaning": "blessing / fortune",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ua",
+              "type": "lexical_item",
+              "form": "ua",
+              "meaning": "flow / existence",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_na",
+              "type": "lexical_item",
+              "form": "na",
+              "meaning": "name / spirit (ni-class)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ra",
+              "type": "lexical_item",
+              "form": "ra",
+              "meaning": "proclaim / intensify / ground",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_ara",
+              "type": "lexical_item",
+              "form": "ara",
+              "meaning": "proclaim / ground / craft-ending",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_akra",
+              "type": "lexical_item",
+              "form": "akra",
+              "meaning": "intensified kra — vital force / heart-core",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_lmakra",
+              "type": "lexical_item",
+              "form": "lmakra",
+              "meaning": "illuminated mother-heart (la+ma+akra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yuckara",
+              "type": "lexical_item",
+              "form": "yuckara",
+              "meaning": "graceful knowing-heart (yu+ckara/kra+ara)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_tiki",
+              "type": "lexical_item",
+              "form": "tiki",
+              "meaning": "small sacred power / pure vital spark (ti+ki)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_yocfua",
+              "type": "lexical_item",
+              "form": "yocfua",
+              "meaning": "divine blessing flow / blessed becoming (yo+cfua/fu+ua)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_root_manalara",
+              "type": "lexical_item",
+              "form": "manalara",
+              "meaning": "proclaimed mother-light-name (ma+na+la+ra)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "root"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_12",
+              "type": "corpus_sample",
+              "text": "Pa ti ne ro ya",
+              "gloss": "Father–child–kin triad; rest in the divine",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 12,
+                "forms": [
+                  "pa",
+                  "ti",
+                  "ne"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_13",
+              "type": "corpus_sample",
+              "text": "Nu si to kra ro",
+              "gloss": "Breath–sight–hand: vital perception and action at rest",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 13,
+                "forms": [
+                  "nu",
+                  "si",
+                  "to"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_14",
+              "type": "corpus_sample",
+              "text": "Bu re ga ya",
+              "gloss": "Come–flow–carry toward the divine",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 14,
+                "forms": [
+                  "bu",
+                  "re",
+                  "ga"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_15",
+              "type": "corpus_sample",
+              "text": "Wi su ni ro ya",
+              "gloss": "Know the good-named spirit; rest in the divine",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 15,
+                "forms": [
+                  "wi",
+                  "su",
+                  "ni"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_16",
+              "type": "corpus_sample",
+              "text": "Wa hi bo kra la",
+              "gloss": "Water–tree–earth: living world under vital light",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 16,
+                "forms": [
+                  "wa",
+                  "hi",
+                  "bo"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_17",
+              "type": "corpus_sample",
+              "text": "Pa ma ti ro ya",
+              "gloss": "Core family triad settled in the divine",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 17,
+                "forms": [
+                  "pa",
+                  "ma",
+                  "ti"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_18",
+              "type": "corpus_sample",
+              "text": "Ne si pa kra ro",
+              "gloss": "Kin sees the father: ancestral line of sight",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 18,
+                "forms": [
+                  "ne",
+                  "si",
+                  "pa"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_19",
+              "type": "corpus_sample",
+              "text": "Bro ti ne ya",
+              "gloss": "Extended family: sibling–child–kin bond",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 19,
+                "forms": [
+                  "bro",
+                  "ti",
+                  "ne"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_20",
+              "type": "corpus_sample",
+              "text": "Ya ne ma ro",
+              "gloss": "Sacred ancestry through mother-kin",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 20,
+                "forms": [
+                  "ya",
+                  "ne",
+                  "ma"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_21",
+              "type": "corpus_sample",
+              "text": "Te pa ro ya",
+              "gloss": "Address to father in peace",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 21,
+                "forms": [
+                  "te",
+                  "pa",
+                  "ro"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_22",
+              "type": "corpus_sample",
+              "text": "Ma bro ya kra",
+              "gloss": "Maternal blessing over siblings",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "kinship",
+                "cluster_id": 22,
+                "forms": [
+                  "ma",
+                  "bro",
+                  "ya"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_23",
+              "type": "corpus_sample",
+              "text": "Mu nu si ro",
+              "gloss": "Mouth–breath–eye: speech, breath, sight",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 23,
+                "forms": [
+                  "mu",
+                  "nu",
+                  "si"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_24",
+              "type": "corpus_sample",
+              "text": "Li to be ya",
+              "gloss": "Tongue–hand–head: speech, craft, mind",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 24,
+                "forms": [
+                  "li",
+                  "to",
+                  "be"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_25",
+              "type": "corpus_sample",
+              "text": "Pe hi nu kra",
+              "gloss": "Foot lifted; high breath — upright life",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 25,
+                "forms": [
+                  "pe",
+                  "hi",
+                  "nu"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_26",
+              "type": "corpus_sample",
+              "text": "Kor kra si ro",
+              "gloss": "Heart’s vital eye: felt seeing",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 26,
+                "forms": [
+                  "kor",
+                  "kra",
+                  "si"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_27",
+              "type": "corpus_sample",
+              "text": "Wa mu ro ya",
+              "gloss": "Water at the mouth; speech at rest",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 27,
+                "forms": [
+                  "wa",
+                  "mu",
+                  "ro"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_28",
+              "type": "corpus_sample",
+              "text": "Bo li ga kra",
+              "gloss": "Earth-tongue carries: grounded speech",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "body",
+                "cluster_id": 28,
+                "forms": [
+                  "bo",
+                  "li",
+                  "ga"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_29",
+              "type": "corpus_sample",
+              "text": "Bu ga re ya",
+              "gloss": "Journey: come, carry, flow",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 29,
+                "forms": [
+                  "bu",
+                  "ga",
+                  "re"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_30",
+              "type": "corpus_sample",
+              "text": "Le bu to ro",
+              "gloss": "Flow comes to the hand",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 30,
+                "forms": [
+                  "le",
+                  "bu",
+                  "to"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_31",
+              "type": "corpus_sample",
+              "text": "Wi bu ya kra",
+              "gloss": "Knowledge comes to the divine",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 31,
+                "forms": [
+                  "wi",
+                  "bu",
+                  "ya"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_32",
+              "type": "corpus_sample",
+              "text": "Re ga kra ro",
+              "gloss": "Vital flow of carrying",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 32,
+                "forms": [
+                  "re",
+                  "ga",
+                  "kra"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_33",
+              "type": "corpus_sample",
+              "text": "Su bu ro ya",
+              "gloss": "The good comes to rest",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 33,
+                "forms": [
+                  "su",
+                  "bu",
+                  "ro"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_34",
+              "type": "corpus_sample",
+              "text": "Hi ga bo kra",
+              "gloss": "Carry high upon the earth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "motion",
+                "cluster_id": 34,
+                "forms": [
+                  "hi",
+                  "ga",
+                  "bo"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_35",
+              "type": "corpus_sample",
+              "text": "Wi ni su ro",
+              "gloss": "Know the good name",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 35,
+                "forms": [
+                  "wi",
+                  "ni",
+                  "su"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_36",
+              "type": "corpus_sample",
+              "text": "Ve wi ro ya",
+              "gloss": "See and know at rest",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 36,
+                "forms": [
+                  "ve",
+                  "wi",
+                  "ro"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_37",
+              "type": "corpus_sample",
+              "text": "Ni ya kra ro",
+              "gloss": "Divine vital name",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 37,
+                "forms": [
+                  "ni",
+                  "ya",
+                  "kra"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_38",
+              "type": "corpus_sample",
+              "text": "Su ni ma ya",
+              "gloss": "Good name of existence / mother-being",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 38,
+                "forms": [
+                  "su",
+                  "ni",
+                  "ma"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_39",
+              "type": "corpus_sample",
+              "text": "Ve ni ya kra",
+              "gloss": "See the divine name",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 39,
+                "forms": [
+                  "ve",
+                  "ni",
+                  "ya"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_40",
+              "type": "corpus_sample",
+              "text": "Wi su ni ya ro",
+              "gloss": "Know the good divine name (four-morpheme seal)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 40,
+                "forms": [
+                  "wi",
+                  "su",
+                  "ni",
+                  "ya"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_41",
+              "type": "corpus_sample",
+              "text": "Wa hi bo kra la",
+              "gloss": "Reinforced living triad: water–tree–earth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 41,
+                "forms": [
+                  "wa",
+                  "hi",
+                  "bo"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_42",
+              "type": "corpus_sample",
+              "text": "La wa re ya",
+              "gloss": "Light upon flowing water",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 42,
+                "forms": [
+                  "la",
+                  "wa",
+                  "re"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_43",
+              "type": "corpus_sample",
+              "text": "Bo hi la kra",
+              "gloss": "Earth rises into high light",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 43,
+                "forms": [
+                  "bo",
+                  "hi",
+                  "la"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_44",
+              "type": "corpus_sample",
+              "text": "Wa bo nu ro",
+              "gloss": "Water and earth breathe",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 44,
+                "forms": [
+                  "wa",
+                  "bo",
+                  "nu"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_45",
+              "type": "corpus_sample",
+              "text": "Hi wa ga ya",
+              "gloss": "High waters carry",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 45,
+                "forms": [
+                  "hi",
+                  "wa",
+                  "ga"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_46",
+              "type": "corpus_sample",
+              "text": "La bo ro kra",
+              "gloss": "Light rests upon the earth",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "nature",
+                "cluster_id": 46,
+                "forms": [
+                  "la",
+                  "bo",
+                  "ro"
+                ],
+                "kind": "cluster"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_47",
+              "type": "corpus_sample",
+              "text": "Lmakra yuckara ro ya",
+              "gloss": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 47,
+                "forms": [
+                  "lmakra",
+                  "yuckara"
+                ],
+                "kind": "cluster",
+                "feeling": "heart-activation / soul-alignment",
+                "egyptian_ka_kra_note": "Non-doctrinal resonance note: kra ~ Egyptian ka (vital essence) — comparative metaphor only, not constitutional evidence of descent",
+                "gaulish_calibrated_ritual": "La-ma-kra yu-kara u̯edya",
+                "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)",
+                "compounds": [
+                  "Lmakra",
+                  "Yuckara",
+                  "Lmakra ro",
+                  "Yuckara wi"
+                ],
+                "poetic": "Light-existence vital-heart — divine-knowing vital-craft",
+                "reinforces": [
+                  "la",
+                  "ma",
+                  "ya",
+                  "kra"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lmakra",
+              "type": "lexical_item",
+              "form": "Lmakra",
+              "meaning": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 47,
+                "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yuckara",
+              "type": "lexical_item",
+              "form": "Yuckara",
+              "meaning": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 47,
+                "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_lmakra_ro",
+              "type": "lexical_item",
+              "form": "Lmakra ro",
+              "meaning": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 47,
+                "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yuckara_wi",
+              "type": "lexical_item",
+              "form": "Yuckara wi",
+              "meaning": "Call-and-response around kra: light-existence vital-heart — divine-knowing vital-craft (heart-activation / soul-alignment)",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 47,
+                "provenance_note": "Links prior kra explorations (clusters 13, 15, 26, 32, 37)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_cluster_48",
+              "type": "corpus_sample",
+              "text": "Tiki yocfua manalara ro ya",
+              "gloss": "Three-part blessing / birth-awakening / soul emergence: pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "cluster_id": 48,
+                "forms": [
+                  "tiki",
+                  "yocfua",
+                  "manalara"
+                ],
+                "kind": "cluster",
+                "feeling": "blessing / birth-awakening / soul emergence",
+                "complements": "Complements kra clusters (47) with child + blessing dimensions",
+                "ritual_string": "Tiki yo-fua ma-na-la-ra",
+                "provenance_note": "Links child/sacred ti (clusters 12, 17, 19) and kra-axis compounds (cluster 47)",
+                "compounds": [
+                  "Tiki kra",
+                  "Yocfua ro",
+                  "Manalara ya"
+                ],
+                "poetic": "Pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit.",
+                "reinforces": [
+                  "ti",
+                  "ki",
+                  "ya",
+                  "ma",
+                  "la",
+                  "kra"
+                ]
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_tiki_kra",
+              "type": "lexical_item",
+              "form": "Tiki kra",
+              "meaning": "Three-part blessing / birth-awakening / soul emergence: pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 48,
+                "provenance_note": "Links child/sacred ti (clusters 12, 17, 19) and kra-axis compounds (cluster 47)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_yocfua_ro",
+              "type": "lexical_item",
+              "form": "Yocfua ro",
+              "meaning": "Three-part blessing / birth-awakening / soul emergence: pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 48,
+                "provenance_note": "Links child/sacred ti (clusters 12, 17, 19) and kra-axis compounds (cluster 47)"
+              }
+            },
+            {
+              "evidence_id": "evid_myt_compound_manalara_ya",
+              "type": "lexical_item",
+              "form": "Manalara ya",
+              "meaning": "Three-part blessing / birth-awakening / soul emergence: pure sacred spark, divine blessed flow, proclaimed mother-light of the named spirit",
+              "metadata": {
+                "source": "Mythar Living Lexicon / Gap-Fill Draft",
+                "domain": "abstract",
+                "kind": "compound",
+                "cluster_id": 48,
+                "provenance_note": "Links child/sacred ti (clusters 12, 17, 19) and kra-axis compounds (cluster 47)"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

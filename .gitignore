@@ -20,3 +20,9 @@ run-local-out.txt
 .ruff_cache/
 .coverage
 htmlcov/
+
+*.pem
+
+*_diag.txt
+
+.DS_Store
