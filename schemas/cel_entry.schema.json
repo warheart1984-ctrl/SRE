@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConstitutionalEvidenceLedgerEntry",
+  "description": "Typed constitutional event in the CEL fabric (Dantomax + FRA + CIH unified audit trail).",
+  "type": "object",
+  "required": [
+    "cel_entry_id",
+    "entry_type",
+    "subject_id",
+    "payload",
+    "timestamp",
+    "position",
+    "prev_cel_hash",
+    "cel_hash",
+    "checksum",
+    "constitutional_article"
+  ],
+  "properties": {
+    "cel_entry_id": { "type": "string" },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "attestation",
+        "correspondence",
+        "hypothesis",
+        "validation",
+        "certification",
+        "evidence",
+        "governance"
+      ]
+    },
+    "subject_id": { "type": "string" },
+    "payload": { "type": "object" },
+    "links": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "position": { "type": "integer", "minimum": 0 },
+    "prev_cel_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "cel_hash": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "checksum": { "type": "string", "minLength": 64, "maxLength": 64 },
+    "dantomax_record_id": { "type": ["string", "null"] },
+    "dantomax_ledger_hash": { "type": ["string", "null"] },
+    "constitutional_article": { "type": "string" }
+  }
+}

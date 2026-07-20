@@ -1,4 +1,4 @@
-"""FRA nine-stage scaffolding (OBSERVE → ARCHIVE) — rule-based vertical slice."""
+"""FRA stage scaffolding — OBSERVE → ARCHIVE (attestation-aware pipeline)."""
 
 from __future__ import annotations
 
@@ -10,12 +10,13 @@ class FRAStages:
 
     STAGE_ORDER = (
         "OBSERVE",
-        "EXTRACT",
-        "BUILD",
-        "TEST",
-        "REFINE",
+        "INGEST",
+        "ATTEST",
         "ALIGN",
+        "CLUSTER",
+        "INFER",
         "VALIDATE",
+        "GOVERN",
         "CERTIFY",
         "ARCHIVE",
     )
@@ -36,15 +37,51 @@ class FRAStages:
             "evidence_ids": [ev.evidence_id for ev in evidence_list],
         }
 
-    def extract(self, analysis: dict[str, Any]) -> dict[str, Any]:
+    def ingest(self, evidence_list: list[Any]) -> dict[str, Any]:
         return {
-            "stage": "EXTRACT",
-            "lexical_clusters": analysis.get("lexical_clusters", []),
-            "phonological_shifts": analysis.get("phonological_shifts", []),
-            "cognate_groups": analysis.get("cognate_groups", []),
+            "stage": "INGEST",
+            "ingested_ids": [ev.evidence_id for ev in evidence_list],
+            "count": len(evidence_list),
         }
 
-    def build(self, hypotheses: dict[str, Any], target_language: str, time_period: str) -> dict[str, Any]:
+    def attest(self, attestation_summary: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "stage": "ATTEST",
+            **attestation_summary,
+        }
+
+    def align(
+        self,
+        proto_model: dict[str, Any] | None,
+        temporal_map: dict[str, Any],
+        *,
+        correspondence_report: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        return {
+            "stage": "ALIGN",
+            "proto_model": proto_model,
+            "temporal_map": temporal_map,
+            "correspondence_report": correspondence_report or {},
+            "aligned": bool(temporal_map.get("alignments"))
+            or bool((correspondence_report or {}).get("sets")),
+        }
+
+    def cluster(self, analysis: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "stage": "CLUSTER",
+            "lexical_clusters": analysis.get("lexical_clusters", []),
+            "cognate_groups": analysis.get("cognate_groups", []),
+            "phonological_shifts": analysis.get("phonological_shifts", []),
+        }
+
+    def infer(
+        self,
+        hypotheses: dict[str, Any],
+        target_language: str,
+        time_period: str,
+        *,
+        correspondence_hypotheses: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
         hyps = list(hypotheses.get("hypotheses") or [])
         top = hyps[0] if hyps else {
             "id": "pf_empty",
@@ -53,16 +90,17 @@ class FRAStages:
             "evidence_links": [],
         }
         return {
-            "stage": "BUILD",
+            "stage": "INFER",
             "id": f"proto_{target_language}_{time_period}".replace(" ", "_"),
             "target_language": target_language,
             "time_period": time_period,
             "proto_forms": hyps,
             "primary": top,
+            "correspondence_hypotheses": correspondence_hypotheses or [],
         }
 
     def test(self, proto_model: dict[str, Any], evidence_list: list[Any]) -> dict[str, Any]:
-        """Score coverage across all proto forms, not only the primary hypothesis."""
+        """Score coverage across all proto forms (used as metrics helper)."""
         forms = list(proto_model.get("proto_forms") or [])
         primary = proto_model.get("primary") or {}
         if primary and not any(p.get("id") == primary.get("id") for p in forms):
@@ -96,7 +134,6 @@ class FRAStages:
             if any(stem in blob for stem in stems):
                 hits += 1
         coverage = (hits / checked) if checked else 0.0
-        # Drift: inverse of coverage (bounded)
         drift = max(0.0, 1.0 - coverage)
         return {
             "stage": "TEST",
@@ -148,14 +185,6 @@ class FRAStages:
             "history": history,
         }
 
-    def align(self, proto_model: dict[str, Any], temporal_map: dict[str, Any]) -> dict[str, Any]:
-        return {
-            "stage": "ALIGN",
-            "proto_model": proto_model,
-            "temporal_map": temporal_map,
-            "aligned": bool(temporal_map.get("alignments")),
-        }
-
     def validate(self, validation: Any) -> dict[str, Any]:
         is_valid = bool(getattr(validation, "is_valid", False))
         return {
@@ -165,9 +194,21 @@ class FRAStages:
             "report": getattr(validation, "report", {}) or {},
         }
 
-    def certify(self, proto_model: dict[str, Any], validation: Any) -> dict[str, Any]:
-        cert_id = f"cert_{proto_model.get('id', 'unknown')}"
+    def govern(self, governance_report: dict[str, Any]) -> dict[str, Any]:
         return {
+            "stage": "GOVERN",
+            **governance_report,
+        }
+
+    def certify(
+        self,
+        proto_model: dict[str, Any],
+        validation: Any,
+        *,
+        certificate_fields: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        cert_id = f"cert_{proto_model.get('id', 'unknown')}"
+        out = {
             "stage": "CERTIFY",
             "certificate_id": cert_id,
             "valid": bool(getattr(validation, "is_valid", False)),
@@ -177,6 +218,9 @@ class FRAStages:
                 "time_period": proto_model.get("time_period"),
             },
         }
+        if certificate_fields:
+            out.update(certificate_fields)
+        return out
 
     def archive(
         self,

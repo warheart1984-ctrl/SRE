@@ -7,6 +7,7 @@ import json
 from datetime import datetime, timezone
 from typing import Any
 
+from .cel import CELEntryType, ConstitutionalEvidenceLedger, CEL_VERSION
 from .dantomax_client import DantomaxClient
 from .models import (
     ConstitutionalStatus,
@@ -29,12 +30,34 @@ class EvidenceRegistry:
     - Integrates with DantomaxClient
     """
 
-    def __init__(self, dantomax_client: DantomaxClient | None = None) -> None:
+    def __init__(
+        self,
+        dantomax_client: DantomaxClient | None = None,
+        cel: ConstitutionalEvidenceLedger | None = None,
+        cel_store: Any | None = None,
+    ) -> None:
         self._store: dict[str, LinguisticEvidence] = {}
         self._status: dict[str, ConstitutionalStatus] = {}
         self._validation_reports: dict[str, ConstitutionalValidationResult] = {}
         self._reconstructions: dict[str, dict[str, Any]] = {}
         self._dantomax = dantomax_client
+        self._cel_store = cel_store
+        if cel is not None:
+            self._cel = cel
+        elif dantomax_client is not None:
+            self._cel = ConstitutionalEvidenceLedger(dantomax_client, store=cel_store)
+        else:
+            self._cel = None
+
+    @property
+    def cel(self) -> ConstitutionalEvidenceLedger | None:
+        """Constitutional Evidence Ledger fabric (when Dantomax attached)."""
+        return self._cel
+
+    @property
+    def cel_store(self) -> Any | None:
+        """CEL persistence store when configured."""
+        return self._cel_store
 
     def add_evidence(self, evidence_data: dict[str, Any]) -> LinguisticEvidence:
         """
@@ -67,6 +90,14 @@ class EvidenceRegistry:
                 validation.report,
             )
             validation.report["dantomax"] = receipt
+            if self._cel is not None:
+                cel_entry = self._cel.record_evidence(
+                    evidence.evidence_id,
+                    sha256_hash=evidence.sha256_hash,
+                    validation_report=validation.report,
+                    dantomax_receipt=receipt,
+                )
+                validation.report["cel"] = {"cel_entry_id": cel_entry.cel_entry_id}
         return evidence
 
     def verify_with_dantomax(self, evidence_id: str) -> dict[str, Any] | None:
@@ -204,6 +235,25 @@ class EvidenceRegistry:
         if constraints.get("require_governance") and not rec.get("governance_approved"):
             failed.append("FAC-V5: Governance Fit")
 
+        # Attestation lineage (Dantomax) — reject unattested / unresolved sources
+        attestation_ids = list(constraints.get("attestation_ids") or [])
+        if constraints.get("require_attestation_lineage"):
+            if self._dantomax is None:
+                failed.append("FAC-V5: Governance Fit")
+                report_extra = {"attestation_error": "dantomax_required"}
+            else:
+                bad = self._dantomax.require_attested_sources(attestation_ids)
+                if bad or not attestation_ids:
+                    failed.append("FAC-V5: Governance Fit")
+                    report_extra = {"attestation_errors": bad or ["missing_attestation_ids"]}
+                else:
+                    report_extra = {
+                        "attestation_ids": attestation_ids,
+                        "attestation_root_hash": self._dantomax.attestation_root_hash,
+                    }
+        else:
+            report_extra = {}
+
         report = {
             "reconstruction_id": reconstruction_id,
             "evidence_count": len(evidence_ids),
@@ -211,8 +261,20 @@ class EvidenceRegistry:
             "metrics": metrics,
             "constraints": constraints,
             "failed_checks": failed,
+            **report_extra,
         }
-        return self._fac_v_result(reconstruction_id, failed, report)
+        result = self._fac_v_result(reconstruction_id, failed, report)
+        if self._cel is not None:
+            cel_entry = self._cel.record_validation(
+                reconstruction_id,
+                {
+                    "is_valid": result.is_valid,
+                    "failed_checks": list(result.failed_checks),
+                    "report": result.report,
+                },
+            )
+            result.report["cel"] = {"cel_entry_id": cel_entry.cel_entry_id}
+        return result
 
     def _fac_v_result(
         self,

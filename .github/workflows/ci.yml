@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -e ".[dev]"
+          pip install -e ".[dev,api]"
 
       - name: Lint
         run: |
@@ -50,4 +50,6 @@ jobs:
           test -f docs/specs/openapi.yaml
           test -f schemas/sovereign_certificate.schema.json
           test -f schemas/governance_trace.schema.json
+          test -f schemas/cel_entry.schema.json
+          test -f docs/governance/CEL_Charter_v01.md
           test -f data/fra_corpus_v01.json

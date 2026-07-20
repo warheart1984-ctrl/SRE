@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sovereign Ledger Explorer</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #1a2332;
+      --border: #2d3a4f;
+      --text: #e8edf4;
+      --muted: #8b9cb3;
+      --accent: #5b9fd4;
+      --ok: #3d9970;
+      --warn: #c9a227;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+    .badge { font-size: 0.75rem; color: var(--muted); }
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    section.full { grid-column: 1 / -1; }
+    h2 { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--accent); }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;
+    }
+    .stat {
+      background: var(--bg);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .stat label { display: block; color: var(--muted); font-size: 0.7rem; }
+    .stat code { word-break: break-all; font-size: 0.72rem; }
+    .ok { color: var(--ok); }
+    .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    input, select, button {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    button {
+      cursor: pointer;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    button:hover { opacity: 0.9; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 500; }
+    tr:hover { background: rgba(91, 159, 212, 0.08); }
+    tr.clickable { cursor: pointer; }
+    pre {
+      background: var(--bg);
+      padding: 0.75rem;
+      border-radius: 6px;
+      overflow: auto;
+      font-size: 0.75rem;
+      max-height: 280px;
+      margin: 0;
+    }
+    .lineage { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+    #status { color: var(--muted); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Sovereign Ledger Explorer</h1>
+      <span class="badge">CEL + Dantomax constitutional fabric</span>
+    </div>
+    <span id="status">Loading…</span>
+  </header>
+  <main>
+    <section class="full">
+      <h2>Fabric overview</h2>
+      <div class="stat-grid" id="fabric-stats"></div>
+    </section>
+    <section>
+      <h2>CEL entries</h2>
+      <div class="controls">
+        <select id="entry-type">
+          <option value="">All types</option>
+          <option value="evidence">evidence</option>
+          <option value="attestation">attestation</option>
+          <option value="correspondence">correspondence</option>
+          <option value="hypothesis">hypothesis</option>
+          <option value="validation">validation</option>
+          <option value="governance">governance</option>
+          <option value="certification">certification</option>
+        </select>
+        <button type="button" id="btn-entries">Refresh</button>
+      </div>
+      <table>
+        <thead><tr><th>Type</th><th>Subject</th><th>Position</th></tr></thead>
+        <tbody id="entries-body"></tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Entry detail</h2>
+      <pre id="entry-detail">Select an entry row…</pre>
+    </section>
+    <section class="full">
+      <h2>Reconstruction lineage</h2>
+      <div class="controls">
+        <input id="recon-id" placeholder="reconstruction_id" style="flex:1;min-width:200px" />
+        <button type="button" id="btn-lineage">Query lineage</button>
+      </div>
+      <p class="lineage" id="lineage-human"></p>
+      <pre id="lineage-json"></pre>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    async function api(path) {
+      const r = await fetch(path);
+      if (!r.ok) throw new Error(`${r.status} ${path}`);
+      return r.json();
+    }
+
+    function stat(label, value, cls) {
+      const d = document.createElement("div");
+      d.className = "stat";
+      d.innerHTML = `<label>${label}</label><code class="${cls || ""}">${value ?? "—"}</code>`;
+      return d;
+    }
+
+    async function loadFabric() {
+      const [fabric, health] = await Promise.all([
+        api("/api/v1/explorer/fabric"),
+        api("/health"),
+      ]);
+      const cel = fabric.cel || {};
+      const grid = $("fabric-stats");
+      grid.replaceChildren(
+        stat("API version", health.api_version),
+        stat("Signing", health.signing_mode),
+        stat("CEL length", cel.length),
+        stat("Integrity", fabric.integrity?.ok ? "OK" : "FAIL", fabric.integrity?.ok ? "ok" : ""),
+        stat("Fabric root", (cel.fabric_root_hash || "").slice(0, 16) + "…"),
+        stat("CEL head", (cel.head || "").slice(0, 16) + "…"),
+        stat("Dantomax head", (fabric.dantomax?.ledger_head || "").slice(0, 16) + "…"),
+        stat("Store", fabric.persistence?.store_path || "in-memory"),
+      );
+      $("status").textContent = `Updated ${new Date().toLocaleTimeString()}`;
+    }
+
+    async function loadEntries() {
+      const t = $("entry-type").value;
+      const q = t ? `?entry_type=${encodeURIComponent(t)}&limit=50` : "?limit=50";
+      const data = await api("/api/v1/explorer/entries" + q);
+      const body = $("entries-body");
+      body.replaceChildren();
+      for (const e of data.entries || []) {
+        const tr = document.createElement("tr");
+        tr.className = "clickable";
+        tr.innerHTML = `<td>${e.entry_type}</td><td>${e.subject_id}</td><td>${e.position}</td>`;
+        tr.onclick = () => showEntry(e.cel_entry_id);
+        body.appendChild(tr);
+      }
+    }
+
+    async function showEntry(id) {
+      try {
+        const d = await api("/api/v1/explorer/entry/" + encodeURIComponent(id));
+        $("entry-detail").textContent = JSON.stringify(d, null, 2);
+      } catch (e) {
+        $("entry-detail").textContent = String(e);
+      }
+    }
+
+    async function loadLineage() {
+      const id = $("recon-id").value.trim();
+      if (!id) return;
+      const [cel, explorer] = await Promise.all([
+        api("/api/v1/cel/lineage/" + encodeURIComponent(id)),
+        api("/api/v1/explorer/reconstruction/" + encodeURIComponent(id)),
+      ]);
+      $("lineage-human").textContent = cel.human_readable || explorer.lineage?.human_readable || "";
+      $("lineage-json").textContent = JSON.stringify({ cel, explorer }, null, 2);
+    }
+
+    $("btn-entries").onclick = loadEntries;
+    $("btn-lineage").onclick = loadLineage;
+    $("entry-type").onchange = loadEntries;
+
+    loadFabric().then(loadEntries).catch((e) => {
+      $("status").textContent = "Error: " + e.message;
+    });
+  </script>
+</body>
+</html>

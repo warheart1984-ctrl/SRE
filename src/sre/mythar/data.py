@@ -1,4 +1,4 @@
-"""Canonical Mythar Living Lexicon data (clusters 12–48) + optional JSON export."""
+"""Canonical Mythar Living Lexicon data (clusters 12–80) + optional JSON export."""
 
 from __future__ import annotations
 
@@ -65,6 +65,118 @@ ROOTS: list[tuple[str, str, str]] = [
     ("tiki", "small sacred power / pure vital spark (ti+ki)", "abstract"),
     ("yocfua", "divine blessing flow / blessed becoming (yo+cfua/fu+ua)", "abstract"),
     ("manalara", "proclaimed mother-light-name (ma+na+la+ra)", "abstract"),
+    ("fi", "truth / sacred verity", "abstract"),
+    ("aka", "power / gate-force (ka intensified)", "abstract"),
+    ("fa", "blessing-light glide (fu+la)", "abstract"),
+    ("makra", "mother-heart / existence-vital force (ma+kra)", "abstract"),
+    ("yufala", "motion blessing-light (yu+fa+la)", "abstract"),
+    ("tina", "sacred child-name (ti+na)", "kinship"),
+    ("rofua", "resting blessing-flow (ro+fu+ua)", "abstract"),
+    ("yakora", "divine heart-craft (ya+kra+ara)", "abstract"),
+    ("lamina", "light small-name (la+mi+na)", "abstract"),
+    ("sufala", "good blessing-light (su+fa+la)", "abstract"),
+    ("yotira", "motion force-child-proclaim (yo+ti+ra)", "abstract"),
+    ("krafu", "vital-force blessing (kra+fu)", "abstract"),
+    ("yumana", "divine existence-name (yu+ma+na)", "abstract"),
+    ("lamara", "light-existence proclamation (la+ma+ra)", "abstract"),
+    ("yufina", "divine blessing-truth-name (yu+fi+na)", "abstract"),
+    ("toraka", "gate-power (tor+aka)", "nature"),
+    ("mafira", "mother-truth proclamation (ma+fi+ra)", "kinship"),
+    ("yukra", "divine knowing-heart (yu+kra)", "abstract"),
+    ("tifala", "child blessing-light (ti+fa+la)", "abstract"),
+    ("ramina", "proclaimed small-name (ra+mi+na)", "abstract"),
+    ("yokra", "divine force-heart (yo+kra)", "abstract"),
+    ("fukara", "blessing heart-craft (fu+kra+ara)", "abstract"),
+    ("lamayu", "light-existence-divine (la+ma+yu)", "abstract"),
+    ("tifura", "child blessing-proclamation (ti+fu+ra)", "abstract"),
+    ("yokala", "divine force-time/light (yo+ka+la)", "abstract"),
+    ("makora", "mother-heart proclamation (ma+kra+ra)", "abstract"),
+    ("e", "emergence / becoming (prefix)", "abstract"),
+    ("ebro", "emergence-carrier / birth-force (e+bro)", "abstract"),
+    ("j", "affirmation / self (prefix)", "abstract"),
+    ("jya", "divine-affirmed self-power (j+ya)", "abstract"),
+    ("ja", "affirmation / self / yes", "abstract"),
+    ("pi", "seed / point / spark", "abstract"),
+    ("fo", "gather / collective / public", "nature"),
+    ("kajya", "divine-affirmed power (ka+jya)", "abstract"),
+    ("lapio", "light-seed place (la+pi+o)", "nature"),
+    ("mufay", "mother-breath blessing in grace (mu+fa+y)", "abstract"),
+    ("haf", "embrace / gather / protect", "abstract"),
+    ("ca", "particle of being / spark-grain", "abstract"),
+    ("plafo", "open plain gathering (pla+fo)", "nature"),
+    ("micala", "spark-light essence (mi+ca+la)", "abstract"),
+    ("haftar", "protective proclamation (haf+ta+ra)", "abstract"),
+    ("qay", "rooted life / living force", "abstract"),
+    ("bla", "open breath / broad flow (pla-soft)", "nature"),
+    ("qaytra", "proclaimed living force (qay+tra)", "abstract"),
+    ("blapa", "open protective flow (bla+pa)", "abstract"),
+    ("torja", "affirmed threshold (tor+ja)", "nature"),
+    ("por", "carry / bear / bring forth", "motion"),
+    ("mor", "rise / grow / swell", "abstract"),
+    ("porka", "carried power (por+ka)", "abstract"),
+    ("yala", "divine light (ya+la)", "abstract"),
+    ("morkfu", "rising blessed force (mor+kfu)", "abstract"),
+    ("lu", "flow-light / present movement", "motion"),
+    ("fro", "force-rest / power-peace (ka+ro)", "abstract"),
+    ("fra", "proclamation glide (ra-soft)", "abstract"),
+    ("kyo", "force-knowing / light-craft", "abstract"),
+    ("yor", "force-divine / yo-force", "abstract"),
+    ("klu", "existence-flow (ma+lu)", "abstract"),
+    ("pra", "proclaim / intensify-good", "abstract"),
+    ("pli", "open variant of pla", "nature"),
+    ("fya", "grace-power (ka+ya)", "abstract"),
+    ("lor", "light-protect (la+pa)", "abstract"),
+    ("ku", "place-power / grounded force", "nature"),
+    ("flu", "divine flow (ya+lu)", "abstract"),
+    ("pta", "this-place / present ground", "abstract"),
+    ("ru", "rest-flow (ro+lu)", "abstract"),
+    ("pro", "bearing / proclaim forward", "abstract"),
+    ("tik", "child-name sacred (ti+na lighter)", "kinship"),
+    ("kru", "heart-force (kra glide)", "abstract"),
+    ("lam", "light-mother (la+ma)", "abstract"),
+    ("yafora", "motion gathering proclaimed (ya+fo+ra)", "abstract"),
+    ("mikra", "small vital-heart (mi+kra)", "abstract"),
+    ("talu", "this-flow / present-movement (ta+lu)", "motion"),
+    ("plamu", "open-mother ground (pla+mu)", "nature"),
+    ("yafika", "divine-truth-power (ya+fi+ka)", "abstract"),
+    ("torla", "gate-light (tor+la)", "nature"),
+    ("kafro", "power-rest / force-peace (ka+fro)", "abstract"),
+    ("yami", "divine small-being (ya+mi)", "abstract"),
+    ("supla", "good-open plain (su+pla)", "nature"),
+    ("mufra", "mother-breath proclamation (mu+fra)", "abstract"),
+    ("lakyo", "light-force-knowing (la+kyo)", "abstract"),
+    ("tinara", "child-name proclaimed (ti+na+ra)", "kinship"),
+    ("yorfa", "force-blessing (yor+fa)", "abstract"),
+    ("maklu", "mother-existence-flow (ma+klu)", "abstract"),
+    ("sipra", "good-proclaimed (si+pra)", "abstract"),
+    ("plika", "open-power (pli+ka)", "abstract"),
+    ("yofra", "divine-proclamation (yo+fra)", "abstract"),
+    ("tamu", "this-mother (ta+mu)", "kinship"),
+    ("kafya", "power-grace (ka+fya)", "abstract"),
+    ("lorpa", "light-protect (lor+pa)", "abstract"),
+    ("minu", "small-spirit (mi+nu)", "abstract"),
+    ("yupra", "motion proclaimed (yu+pra)", "abstract"),
+    ("silu", "good-flow-light (si+lu)", "abstract"),
+    ("torfa", "gate-blessing (tor+fa)", "nature"),
+    ("plaku", "open-power-place (pla+ku)", "nature"),
+    ("morka", "rising power (mor+ka)", "abstract"),
+    ("yaflu", "divine-flow (ya+flu)", "abstract"),
+    ("sipta", "good-this (si+pta)", "abstract"),
+    ("lakra", "light-heart (la+kra)", "abstract"),
+    ("yomu", "motion-mother (yo+mu)", "abstract"),
+    ("tafra", "this-proclaimed (ta+fra)", "abstract"),
+    ("plina", "open-name (pli+na)", "abstract"),
+    ("yofka", "divine-craft-power (yo+fi+ka)", "abstract"),
+    ("maru", "mother-rest (ma+ru)", "abstract"),
+    ("sipro", "good-bearing (si+pro)", "abstract"),
+    ("mufya", "mother-grace (mu+fya)", "abstract"),
+    ("plaro", "open-rest (pla+ro)", "nature"),
+    ("tikna", "child-name (tik+na)", "kinship"),
+    ("yokru", "divine-heart-force (yo+kru)", "abstract"),
+    ("lamfa", "light-mother-blessing (lam+fa)", "abstract"),
+    ("sipla", "good-open (si+pla)", "nature"),
+    ("makyo", "mother-knowing (ma+kyo)", "abstract"),
+    ("torlu", "gate-flow (tor+lu)", "nature"),
 ]
 
 CLUSTERS: list[tuple[int, str, str, str, str, str]] = [
@@ -257,12 +369,1006 @@ CLUSTER_48: dict[str, Any] = {
     },
 }
 
-COMPOUND_CLUSTERS: list[dict[str, Any]] = [CLUSTER_47, CLUSTER_48]
+COMPOUND_CLUSTERS_BASE: list[dict[str, Any]] = [
+    CLUSTER_47,
+    CLUSTER_48,
+    {
+        "cluster_id": 49,
+        "name": "Makra-yufala",
+        "forms": ["makra", "yufala"],
+        "phrase": "Makra yufala ro ya",
+        "domain": "abstract",
+        "interpretation": "Mother-heart in divine blessing-light (heart-axis blessing invocation)",
+        "poetic": "Mother-heart in divine blessing-light.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_49",
+        "compounds": ["Makra ro", "Yufala ya", "Makra yufala"],
+        "morphemes": [
+            {
+                "form": "makra",
+                "gloss": "existence-heart / mother-vital force",
+                "parts": [
+                    {"form": "ma", "from": ["ma"], "gloss": "mother / existence"},
+                    {"form": "kra", "from": ["kra"], "gloss": "vital heart / life-force"},
+                ],
+            },
+            {
+                "form": "yufala",
+                "gloss": "divine blessing-light",
+                "parts": [
+                    {"form": "yu", "from": ["yu", "ya"], "gloss": "divine / grace glide"},
+                    {"form": "fa", "from": ["fa", "fu", "la"], "gloss": "blessing-light"},
+                    {"form": "la", "from": ["la"], "gloss": "light / open"},
+                ],
+            },
+        ],
+        "reinforces": ["ma", "kra", "yu", "fa", "la"],
+        "metadata": {
+            "feeling": "heart-axis blessing invocation",
+            "provenance_note": "Extends kra-axis (47) with blessing-light (fa) glide",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 49,
+            "forms": ["makra", "yufala"],
+        },
+    },
+    {
+        "cluster_id": 50,
+        "name": "Tina-rofua",
+        "forms": ["tina", "rofua"],
+        "phrase": "Tina rofua ro ya",
+        "domain": "kinship",
+        "interpretation": "The child-name rests in blessed flow (identity stabilization / soul-naming)",
+        "poetic": "The child-name rests in blessed flow.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_50",
+        "compounds": ["Tina na", "Rofua ro", "Tina rofua"],
+        "morphemes": [
+            {
+                "form": "tina",
+                "gloss": "sacred child-name",
+                "parts": [
+                    {"form": "ti", "from": ["ti"], "gloss": "child / sacred diminutive"},
+                    {"form": "na", "from": ["na", "ni"], "gloss": "name / spirit"},
+                ],
+            },
+            {
+                "form": "rofua",
+                "gloss": "resting blessing-flow",
+                "parts": [
+                    {"form": "ro", "from": ["ro"], "gloss": "rest / peace"},
+                    {"form": "fu", "from": ["fu"], "gloss": "blessing"},
+                    {"form": "ua", "from": ["ua"], "gloss": "flow / existence"},
+                ],
+            },
+        ],
+        "reinforces": ["ti", "na", "ro", "fu", "ua"],
+        "metadata": {
+            "feeling": "identity stabilization / soul-naming",
+            "provenance_note": "Links child ti (48) with name na and rest ro",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "kinship",
+            "cluster_id": 50,
+            "forms": ["tina", "rofua"],
+        },
+    },
+    {
+        "cluster_id": 51,
+        "name": "Yakora-lamina",
+        "forms": ["yakora", "lamina"],
+        "phrase": "Yakora lamina ro ya",
+        "domain": "abstract",
+        "interpretation": "Divine heart-craft illuminates the small name (name-axis illumination)",
+        "poetic": "Divine heart-craft illuminates the small name.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_51",
+        "compounds": ["Yakora kra", "Lamina na", "Yakora lamina"],
+        "morphemes": [
+            {
+                "form": "yakora",
+                "gloss": "motion heart-craft / divine vital craft",
+                "parts": [
+                    {"form": "ya", "from": ["ya", "yo"], "gloss": "divine / sacred"},
+                    {"form": "kra", "from": ["kra"], "gloss": "vital heart"},
+                    {"form": "ara", "from": ["ara"], "gloss": "craft / proclaim"},
+                ],
+            },
+            {
+                "form": "lamina",
+                "gloss": "light small-name",
+                "parts": [
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                    {"form": "mi", "from": ["mi", "ni"], "gloss": "spirit-name"},
+                    {"form": "na", "from": ["na"], "gloss": "name"},
+                ],
+            },
+        ],
+        "reinforces": ["ya", "kra", "la", "mi", "na"],
+        "metadata": {
+            "feeling": "name-axis illumination",
+            "provenance_note": "Pairs divine craft (yakora) with illuminated naming (lamina)",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 51,
+            "forms": ["yakora", "lamina"],
+        },
+    },
+    {
+        "cluster_id": 52,
+        "name": "Sufala-yotira",
+        "forms": ["sufala", "yotira"],
+        "phrase": "Sufala yotira ro ya",
+        "domain": "abstract",
+        "interpretation": "Good blessing-light proclaims the divine child-force (soul-awakening / proclamation)",
+        "poetic": "Good blessing-light proclaims the divine child-force.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_52",
+        "compounds": ["Sufala la", "Yotira ti", "Sufala yotira"],
+        "morphemes": [
+            {
+                "form": "sufala",
+                "gloss": "good blessing-light",
+                "parts": [
+                    {"form": "su", "from": ["su"], "gloss": "good / sweet"},
+                    {"form": "fa", "from": ["fa", "fu", "la"], "gloss": "blessing-light"},
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                ],
+            },
+            {
+                "form": "yotira",
+                "gloss": "divine force-child-proclamation",
+                "parts": [
+                    {"form": "yo", "from": ["yo", "ya"], "gloss": "divine glide"},
+                    {"form": "ti", "from": ["ti"], "gloss": "child"},
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim / intensify"},
+                ],
+            },
+        ],
+        "reinforces": ["su", "fa", "la", "yo", "ti", "ra"],
+        "metadata": {
+            "feeling": "soul-awakening / proclamation",
+            "provenance_note": "Blessing-light meets child-force proclamation",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 52,
+            "forms": ["sufala", "yotira"],
+        },
+    },
+    {
+        "cluster_id": 53,
+        "name": "Krafu-yumana",
+        "forms": ["krafu", "yumana"],
+        "phrase": "Krafu yumana ro ya",
+        "domain": "abstract",
+        "interpretation": "Blessed vital force names divine existence (heart-naming / soul-naming)",
+        "poetic": "Blessed vital force names divine existence.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_53",
+        "compounds": ["Krafu kra", "Yumana ma", "Krafu yumana"],
+        "morphemes": [
+            {
+                "form": "krafu",
+                "gloss": "vital-force blessing",
+                "parts": [
+                    {"form": "kra", "from": ["kra"], "gloss": "vital heart"},
+                    {"form": "fu", "from": ["fu"], "gloss": "blessing"},
+                ],
+            },
+            {
+                "form": "yumana",
+                "gloss": "motion existence-name / divine existence-name",
+                "parts": [
+                    {"form": "yu", "from": ["yu", "ya"], "gloss": "divine / grace"},
+                    {"form": "ma", "from": ["ma"], "gloss": "existence / mother"},
+                    {"form": "na", "from": ["na", "ni"], "gloss": "name / spirit"},
+                ],
+            },
+        ],
+        "reinforces": ["kra", "fu", "yu", "ma", "na"],
+        "metadata": {
+            "feeling": "heart-naming / soul-naming",
+            "provenance_note": "Kra blessing names existence (ma+na)",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 53,
+            "forms": ["krafu", "yumana"],
+        },
+    },
+    {
+        "cluster_id": 54,
+        "name": "Lamara-yufina",
+        "forms": ["lamara", "yufina"],
+        "phrase": "Lamara yufina ro ya",
+        "domain": "abstract",
+        "interpretation": "Light-existence proclaims the divine blessed true name (truth-axis naming)",
+        "poetic": "Light-existence proclaims the divine blessed true name.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_54",
+        "compounds": ["Lamara la", "Yufina fi", "Lamara yufina"],
+        "morphemes": [
+            {
+                "form": "lamara",
+                "gloss": "light-existence proclamation",
+                "parts": [
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                    {"form": "ma", "from": ["ma"], "gloss": "existence"},
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim"},
+                ],
+            },
+            {
+                "form": "yufina",
+                "gloss": "divine blessing-truth-name",
+                "parts": [
+                    {"form": "yu", "from": ["yu", "ya"], "gloss": "divine"},
+                    {"form": "fi", "from": ["fi"], "gloss": "truth"},
+                    {"form": "na", "from": ["na", "ni"], "gloss": "name"},
+                ],
+            },
+        ],
+        "reinforces": ["la", "ma", "ra", "yu", "fi", "na"],
+        "metadata": {
+            "feeling": "truth-axis naming",
+            "provenance_note": "Introduces fi (truth) into naming compounds",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 54,
+            "forms": ["lamara", "yufina"],
+        },
+    },
+    {
+        "cluster_id": 55,
+        "name": "Toraka-mafira",
+        "forms": ["toraka", "mafira"],
+        "phrase": "Toraka mafira ro ya",
+        "domain": "nature",
+        "interpretation": "The gate-power proclaims mother-truth (threshold / initiation cluster)",
+        "poetic": "The gate-power proclaims mother-truth.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_55",
+        "compounds": ["Toraka tor", "Mafira ma", "Toraka mafira"],
+        "morphemes": [
+            {
+                "form": "toraka",
+                "gloss": "gate-power",
+                "parts": [
+                    {"form": "tor", "from": ["tor"], "gloss": "gate / threshold"},
+                    {"form": "aka", "from": ["aka", "ka"], "gloss": "power / vital force"},
+                ],
+            },
+            {
+                "form": "mafira",
+                "gloss": "mother-truth proclamation",
+                "parts": [
+                    {"form": "ma", "from": ["ma"], "gloss": "mother / existence"},
+                    {"form": "fi", "from": ["fi"], "gloss": "truth"},
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim"},
+                ],
+            },
+        ],
+        "reinforces": ["tor", "aka", "ma", "fi", "ra"],
+        "metadata": {
+            "feeling": "threshold / initiation",
+            "provenance_note": "Gate tor + power aka at mother-truth threshold",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "nature",
+            "cluster_id": 55,
+            "forms": ["toraka", "mafira"],
+        },
+    },
+    {
+        "cluster_id": 56,
+        "name": "Yukra-tifala",
+        "forms": ["yukra", "tifala"],
+        "phrase": "Yukra tifala ro ya",
+        "domain": "kinship",
+        "interpretation": "The knowing-heart blesses the child-light (heart-child alignment)",
+        "poetic": "The knowing-heart blesses the child-light.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_56",
+        "compounds": ["Yukra kra", "Tifala ti", "Yukra tifala"],
+        "morphemes": [
+            {
+                "form": "yukra",
+                "gloss": "divine knowing-heart",
+                "parts": [
+                    {"form": "yu", "from": ["yu", "wi", "ve"], "gloss": "knowing / grace glide"},
+                    {"form": "kra", "from": ["kra"], "gloss": "heart / vital force"},
+                ],
+            },
+            {
+                "form": "tifala",
+                "gloss": "child blessing-light",
+                "parts": [
+                    {"form": "ti", "from": ["ti"], "gloss": "child"},
+                    {"form": "fa", "from": ["fa", "fu", "la"], "gloss": "blessing-light"},
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                ],
+            },
+        ],
+        "reinforces": ["yu", "kra", "ti", "fa", "la"],
+        "metadata": {
+            "feeling": "heart-child alignment",
+            "provenance_note": "Aligns yu+kra heart-knowing with child blessing-light",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "kinship",
+            "cluster_id": 56,
+            "forms": ["yukra", "tifala"],
+        },
+    },
+    {
+        "cluster_id": 57,
+        "name": "Ramina-yokra",
+        "forms": ["ramina", "yokra"],
+        "phrase": "Ramina yokra ro ya",
+        "domain": "abstract",
+        "interpretation": "The proclaimed small-name meets the divine heart-force (identity-heart convergence)",
+        "poetic": "The proclaimed small-name meets the divine heart-force.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_57",
+        "compounds": ["Ramina na", "Yokra kra", "Ramina yokra"],
+        "morphemes": [
+            {
+                "form": "ramina",
+                "gloss": "proclaimed small-name",
+                "parts": [
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim"},
+                    {"form": "mi", "from": ["mi", "ni"], "gloss": "spirit-name"},
+                    {"form": "na", "from": ["na"], "gloss": "name"},
+                ],
+            },
+            {
+                "form": "yokra",
+                "gloss": "divine force-heart",
+                "parts": [
+                    {"form": "yo", "from": ["yo", "ya"], "gloss": "divine force"},
+                    {"form": "kra", "from": ["kra"], "gloss": "heart / vital"},
+                ],
+            },
+        ],
+        "reinforces": ["ra", "mi", "na", "yo", "kra"],
+        "metadata": {
+            "feeling": "identity-heart convergence",
+            "provenance_note": "Named spirit (ramina) converges with divine kra",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 57,
+            "forms": ["ramina", "yokra"],
+        },
+    },
+    {
+        "cluster_id": 58,
+        "name": "Fukara-lamayu",
+        "forms": ["fukara", "lamayu"],
+        "phrase": "Fukara lamayu ro ya",
+        "domain": "abstract",
+        "interpretation": "Blessing-heart-craft in light-existence-divine (blessing-axis expansion)",
+        "poetic": "Blessing-heart-craft in light-existence-divine.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_58",
+        "compounds": ["Fukara fu", "Lamayu la", "Fukara lamayu"],
+        "morphemes": [
+            {
+                "form": "fukara",
+                "gloss": "blessing-heart-craft",
+                "parts": [
+                    {"form": "fu", "from": ["fu"], "gloss": "blessing"},
+                    {"form": "kra", "from": ["kra"], "gloss": "heart"},
+                    {"form": "ara", "from": ["ara"], "gloss": "craft"},
+                ],
+            },
+            {
+                "form": "lamayu",
+                "gloss": "light-existence-divine",
+                "parts": [
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                    {"form": "ma", "from": ["ma"], "gloss": "existence"},
+                    {"form": "yu", "from": ["yu", "ya"], "gloss": "divine / grace"},
+                ],
+            },
+        ],
+        "reinforces": ["fu", "kra", "la", "ma", "yu"],
+        "metadata": {
+            "feeling": "blessing-axis expansion",
+            "provenance_note": "Expands fu+kra craft into la+ma+yu divine field",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 58,
+            "forms": ["fukara", "lamayu"],
+        },
+    },
+    {
+        "cluster_id": 59,
+        "name": "Tifura-yokala",
+        "forms": ["tifura", "yokala"],
+        "phrase": "Tifura yokala ro ya",
+        "domain": "kinship",
+        "interpretation": "The child-blessing is proclaimed in divine force-light (child-axis proclamation)",
+        "poetic": "The child-blessing is proclaimed in divine force-light.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_59",
+        "compounds": ["Tifura ti", "Yokala yo", "Tifura yokala"],
+        "morphemes": [
+            {
+                "form": "tifura",
+                "gloss": "child blessing-proclamation",
+                "parts": [
+                    {"form": "ti", "from": ["ti"], "gloss": "child"},
+                    {"form": "fu", "from": ["fu"], "gloss": "blessing"},
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim"},
+                ],
+            },
+            {
+                "form": "yokala",
+                "gloss": "divine force-time/light",
+                "parts": [
+                    {"form": "yo", "from": ["yo", "ya"], "gloss": "divine force"},
+                    {"form": "ka", "from": ["ka", "kra"], "gloss": "vital / time-force"},
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                ],
+            },
+        ],
+        "reinforces": ["ti", "fu", "ra", "yo", "ka", "la"],
+        "metadata": {
+            "feeling": "child-axis proclamation",
+            "provenance_note": "Child blessing proclaimed in yo+ka+la force-light",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "kinship",
+            "cluster_id": 59,
+            "forms": ["tifura", "yokala"],
+        },
+    },
+    {
+        "cluster_id": 60,
+        "name": "Makora-yufina-ro",
+        "forms": ["makora", "yufina", "ro"],
+        "phrase": "Makora yufina ro",
+        "domain": "abstract",
+        "interpretation": (
+            "The mother-heart proclaims the divine blessed true name in peace "
+            "(completion / sealing formula)"
+        ),
+        "poetic": "The mother-heart proclaims the divine blessed true name in peace.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_60",
+        "compounds": ["Makora ma", "Yufina fi", "Makora yufina ro"],
+        "morphemes": [
+            {
+                "form": "makora",
+                "gloss": "mother-heart proclamation",
+                "parts": [
+                    {"form": "ma", "from": ["ma"], "gloss": "mother / existence"},
+                    {"form": "kra", "from": ["kra"], "gloss": "heart / vital"},
+                    {"form": "ra", "from": ["ra"], "gloss": "proclaim"},
+                ],
+            },
+            {
+                "form": "yufina",
+                "gloss": "motion blessing-truth-name / divine blessed true name",
+                "parts": [
+                    {"form": "yu", "from": ["yu", "ya"], "gloss": "motion / divine"},
+                    {"form": "fi", "from": ["fi"], "gloss": "truth"},
+                    {"form": "na", "from": ["na", "ni"], "gloss": "name"},
+                ],
+            },
+            {
+                "form": "ro",
+                "gloss": "rest / peace / seal",
+                "parts": [
+                    {"form": "ro", "from": ["ro"], "gloss": "rest / peace / settle"},
+                ],
+            },
+        ],
+        "reinforces": ["ma", "kra", "ra", "yu", "fi", "na", "ro"],
+        "metadata": {
+            "feeling": "completion / sealing formula",
+            "sealing_note": "Terminal ro closes the naming arc; ya omitted by design",
+            "provenance_note": "Culminates clusters 49–59 naming and blessing axis",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 60,
+            "forms": ["makora", "yufina", "ro"],
+        },
+    },
+    {
+        "cluster_id": 61,
+        "name": "Ebro-la-kajya-lapio-mufay",
+        "forms": ["ebro", "la", "kajya", "lapio", "mufay"],
+        "phrase": "Ebro la kajya lapio mufay",
+        "domain": "abstract",
+        "interpretation": (
+            "Emergent bearer of light, divine-affirmed power, seed-light place, "
+            "mother-breath blessing (full emergence invocation line)"
+        ),
+        "poetic": (
+            "The one who emerges bearing light, whose power is affirmed by the divine, "
+            "whose light-seed rests in place, blessed by the mother's breath."
+        ),
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_61",
+        "compounds": ["Ebro bro", "Kajya ka", "Lapio la", "Mufay mu"],
+        "morphemes": [
+            {
+                "form": "ebro",
+                "gloss": "emergent bearing / birth-force / emergence-carrier",
+                "parts": [
+                    {"form": "e", "from": ["e"], "gloss": "emergence / becoming"},
+                    {"form": "bro", "from": ["bro"], "gloss": "carry / bear / bring forth"},
+                ],
+            },
+            {
+                "form": "la",
+                "gloss": "light / illumination / light-axis",
+                "parts": [
+                    {"form": "la", "from": ["la"], "gloss": "light / open / clarity"},
+                ],
+            },
+            {
+                "form": "kajya",
+                "gloss": "power affirmed in divine grace / divine-affirmed force",
+                "parts": [
+                    {"form": "ka", "from": ["ka"], "gloss": "power / force"},
+                    {"form": "jya", "from": ["jya", "j", "ya"], "gloss": "self affirmed in divine call"},
+                ],
+            },
+            {
+                "form": "lapio",
+                "gloss": "light-seed place / point of illumination",
+                "parts": [
+                    {"form": "la", "from": ["la"], "gloss": "light"},
+                    {"form": "pi", "from": ["pi", "pe"], "gloss": "seed / point / spark"},
+                    {"form": "o", "from": ["o"], "gloss": "place / grounding vowel"},
+                ],
+            },
+            {
+                "form": "mufay",
+                "gloss": "mother-breath blessing in grace / graceful giving from mother-root",
+                "parts": [
+                    {"form": "mu", "from": ["mu", "ma"], "gloss": "mother-breath / deep existence (ma-class)"},
+                    {"form": "fa", "from": ["fa", "fu"], "gloss": "give / yield / blessing"},
+                    {"form": "y", "from": ["y", "ya"], "gloss": "divine glide / grace marker"},
+                ],
+            },
+        ],
+        "reinforces": ["e", "bro", "la", "ka", "ya", "pi", "mu", "fa"],
+        "metadata": {
+            "feeling": "emergence / full ritual invocation line",
+            "axes": "emergence · light · divine-power · light-seed · mother-blessing",
+            "provenance_note": "Five-syllable ritual line; parallels kra clusters 47–48 breadth",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 61,
+            "forms": ["ebro", "la", "kajya", "lapio", "mufay"],
+        },
+    },
+    {
+        "cluster_id": 62,
+        "name": "Plafo-micala-haftar",
+        "forms": ["plafo", "micala", "haftar"],
+        "phrase": "Plafo micala haftar",
+        "domain": "nature",
+        "interpretation": (
+            "Open plain gathers the spark-light essence, proclaimed in protective embrace "
+            "(grounding invocation)"
+        ),
+        "poetic": "In the wide plain, the small light-being is proclaimed and protected.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_62",
+        "compounds": ["Plafo pla", "Micala mi", "Haftar haf"],
+        "morphemes": [
+            {
+                "form": "plafo",
+                "gloss": "open gathering / plain-collective / wide-ground assembly",
+                "parts": [
+                    {"form": "pla", "from": ["pla"], "gloss": "flat / open / plain"},
+                    {"form": "fo", "from": ["fo"], "gloss": "gather / collective / public"},
+                ],
+            },
+            {
+                "form": "micala",
+                "gloss": "small being of light / spark-light essence",
+                "parts": [
+                    {"form": "mi", "from": ["mi", "ni"], "gloss": "small / spark / grain"},
+                    {"form": "ca", "from": ["ca"], "gloss": "particle of being"},
+                    {"form": "la", "from": ["la"], "gloss": "light / illumination"},
+                ],
+            },
+            {
+                "form": "haftar",
+                "gloss": "protective proclamation / embraced truth-call",
+                "parts": [
+                    {"form": "haf", "from": ["haf"], "gloss": "embrace / gather / protect"},
+                    {"form": "ta", "from": ["ta"], "gloss": "this / demonstrative"},
+                    {"form": "r/ra", "from": ["ra"], "gloss": "proclamation / intensification"},
+                ],
+            },
+        ],
+        "reinforces": ["pla", "fo", "mi", "ca", "la", "haf", "ta", "ra"],
+        "metadata": {
+            "feeling": "grounding / land-light-proclamation",
+            "axes": "open ground · spark-being-light · protective proclamation",
+            "provenance_note": "Grounding-axis parallel to heart (47) and emergence (61)",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "nature",
+            "cluster_id": 62,
+            "forms": ["plafo", "micala", "haftar"],
+        },
+    },
+    {
+        "cluster_id": 63,
+        "name": "Qaytra-blapa-torja",
+        "forms": ["qaytra", "blapa", "torja"],
+        "phrase": "Qaytra blapa torja",
+        "domain": "nature",
+        "interpretation": (
+            "Proclaimed living force, open protective flow, affirmed threshold "
+            "(threshold invocation)"
+        ),
+        "poetic": "Life is proclaimed, protection flows wide, and the gate affirms the self.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_63",
+        "compounds": ["Qaytra qay", "Blapa bla", "Torja tor"],
+        "morphemes": [
+            {
+                "form": "qaytra",
+                "gloss": "proclaimed living force / rooted life called forth",
+                "parts": [
+                    {"form": "qay", "from": ["qay"], "gloss": "rooted life / living force"},
+                    {"form": "tra", "from": ["ta", "ra"], "gloss": "this proclaimed / demonstrative call"},
+                ],
+            },
+            {
+                "form": "blapa",
+                "gloss": "open protective flow / broad guarding breath",
+                "parts": [
+                    {"form": "bla", "from": ["bla", "pla"], "gloss": "open breath / broad flow"},
+                    {"form": "pa", "from": ["pa"], "gloss": "protect / feed / guard (nurturing)"},
+                ],
+            },
+            {
+                "form": "torja",
+                "gloss": "affirmed threshold / gate that says yes",
+                "parts": [
+                    {"form": "tor", "from": ["tor"], "gloss": "gate / threshold"},
+                    {"form": "ja", "from": ["ja", "j"], "gloss": "affirmation / self / yes"},
+                ],
+            },
+        ],
+        "reinforces": ["qay", "ta", "ra", "bla", "pa", "tor", "ja"],
+        "metadata": {
+            "feeling": "threshold / life-protection-gate",
+            "axes": "rooted life · open protection · affirmed threshold",
+            "provenance_note": "Threshold-axis; extends tor (cluster 55) with ja affirmation",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "nature",
+            "cluster_id": 63,
+            "forms": ["qaytra", "blapa", "torja"],
+        },
+    },
+    {
+        "cluster_id": 64,
+        "name": "Vi-porka-yala-morkfu",
+        "forms": ["vi", "porka", "yala", "morkfu"],
+        "phrase": "Vi porka yala morkfu",
+        "domain": "abstract",
+        "interpretation": (
+            "Inner knowing carries power into divine light, where rising blessing grows "
+            "(knowing-power-light-growth invocation)"
+        ),
+        "poetic": "Inner sight bears the force, divine light receives it, and blessed growth follows.",
+        "source_reference": SRC,
+        "evidence_id": "evid_myt_cluster_64",
+        "compounds": ["Vi wi", "Porka por", "Yala ya", "Morkfu mor"],
+        "morphemes": [
+            {
+                "form": "vi",
+                "gloss": "inner knowing / subtle vision / gentle awareness",
+                "parts": [
+                    {"form": "vi", "from": ["vi", "wi", "ve"], "gloss": "inner sight / subtle knowing"},
+                ],
+            },
+            {
+                "form": "porka",
+                "gloss": "carried power / borne force / forward-moving vitality",
+                "parts": [
+                    {"form": "por", "from": ["por", "bro", "ga"], "gloss": "carry / bear / bring forth"},
+                    {"form": "ka", "from": ["ka"], "gloss": "power / vital force"},
+                ],
+            },
+            {
+                "form": "yala",
+                "gloss": "divine light / grace-illumination",
+                "parts": [
+                    {"form": "ya", "from": ["ya", "yo"], "gloss": "divine call / grace"},
+                    {"form": "la", "from": ["la"], "gloss": "light / illumination"},
+                ],
+            },
+            {
+                "form": "morkfu",
+                "gloss": "rising blessed force / growing vital blessing",
+                "parts": [
+                    {"form": "mor", "from": ["mor", "hi"], "gloss": "rise / grow / swell"},
+                    {"form": "kfu", "from": ["kra", "fu", "ka"], "gloss": "vital blessing fusion"},
+                ],
+            },
+        ],
+        "reinforces": ["vi", "por", "ka", "ya", "la", "mor", "fu"],
+        "metadata": {
+            "feeling": "knowing → power → divine light → blessing-growth",
+            "axes": "inner knowing · carried power · divine light · rising blessing",
+            "provenance_note": "Growth-axis culmination; vi particle + por/mor bearing roots",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": "abstract",
+            "cluster_id": 64,
+            "forms": ["vi", "porka", "yala", "morkfu"],
+        },
+    },
+]
+
+
+def _triad_cluster(
+    cluster_id: int,
+    forms: tuple[str, str, str],
+    phrase: str,
+    domain: str,
+    interpretation: str,
+    poetic: str,
+    morpheme_specs: tuple[
+        tuple[str, str, tuple[tuple[str, list[str], str], ...]],
+        tuple[str, str, tuple[tuple[str, list[str], str], ...]],
+        tuple[str, str, tuple[tuple[str, list[str], str], ...]],
+    ],
+    reinforces: list[str],
+    feeling: str,
+    provenance_note: str = "",
+) -> dict[str, Any]:
+    f1, f2, f3 = forms
+    morphemes = [
+        {
+            "form": mf,
+            "gloss": gloss,
+            "parts": [{"form": part, "from": roots, "gloss": pgloss} for part, roots, pgloss in parts],
+        }
+        for mf, gloss, parts in morpheme_specs
+    ]
+    return {
+        "cluster_id": cluster_id,
+        "name": f"{f1.capitalize()}-{f2}-{f3}",
+        "forms": list(forms),
+        "phrase": phrase,
+        "domain": domain,
+        "interpretation": interpretation,
+        "poetic": poetic,
+        "source_reference": SRC,
+        "evidence_id": f"evid_myt_cluster_{cluster_id}",
+        "compounds": [f"{f1.capitalize()} {f1[:2]}", f"{f2.capitalize()} {f2[:2]}", f"{f1.capitalize()} {f2}"],
+        "morphemes": morphemes,
+        "reinforces": reinforces,
+        "metadata": {
+            "feeling": feeling,
+            "provenance_note": provenance_note or f"Ritual triad cluster {cluster_id}",
+            "kind": "cluster",
+            "source": SRC,
+            "domain": domain,
+            "cluster_id": cluster_id,
+            "forms": list(forms),
+        },
+    }
+
+
+def _clusters_65_80() -> list[dict[str, Any]]:
+  P = tuple  # shorthand for morpheme part tuples
+  return [
+    _triad_cluster(
+      65, ("yafora", "mikra", "talu"), "Yafora mikra talu", "abstract",
+      "Divine gathering proclaims the small heart in present flow",
+      "Divine gathering proclaims the small heart in present flow.",
+      (
+        ("yafora", "divine gathering proclaimed", (P("ya", ["ya", "yo"], "divine"), P("fo", ["fo"], "gathering"), P("ra", ["ra"], "proclaimed"))),
+        ("mikra", "small vital-heart", (P("mi", ["mi", "ni"], "small / spirit"), P("kra", ["kra"], "vital heart"))),
+        ("talu", "this-flow / present-movement", (P("ta", ["ta"], "this / demonstrative"), P("lu", ["lu", "le"], "flow-light / movement"))),
+      ),
+      ["ya", "fo", "ra", "mi", "kra", "ta", "lu"], "gathering · small heart · present flow",
+      "Opens extended ritual triad arc (65–80)",
+    ),
+    _triad_cluster(
+      66, ("plamu", "yafika", "torla"), "Plamu yafika torla", "nature",
+      "Mother-ground opens; divine truth-power enters the lighted gate",
+      "Mother-ground opens, divine truth-power enters the lighted gate.",
+      (
+        ("plamu", "open-mother ground", (P("pla", ["pla", "pli"], "open plain"), P("mu", ["mu", "ma"], "mother-breath / ground"))),
+        ("yafika", "divine-truth-power", (P("ya", ["ya"], "divine"), P("fi", ["fi"], "truth"), P("ka", ["ka"], "power"))),
+        ("torla", "gate-light", (P("tor", ["tor"], "gate"), P("la", ["la"], "light"))),
+      ),
+      ["pla", "mu", "ya", "fi", "ka", "tor", "la"], "mother-ground · truth-power · gate-light",
+    ),
+    _triad_cluster(
+      67, ("kafro", "yami", "supla"), "Kafro yami supla", "nature",
+      "Power rests; the divine small-being stands on the good open plain",
+      "Power rests; the divine small-being stands on the good open plain.",
+      (
+        ("kafro", "power-rest / force-peace", (P("ka", ["ka"], "power"), P("fro", ["fro", "ro"], "force-rest"))),
+        ("yami", "divine small-being", (P("ya", ["ya", "yo"], "motion"), P("mi", ["mi"], "small being"))),
+        ("supla", "good-open plain", (P("su", ["su"], "good"), P("pla", ["pla"], "open plain"))),
+      ),
+      ["ka", "fro", "ya", "mi", "su", "pla"], "power-rest · divine being · good plain",
+    ),
+    _triad_cluster(
+      68, ("mufra", "lakyo", "tinara"), "Mufra lakyo tinara", "kinship",
+      "Mother-breath proclaims light-knowing; the child-name is called forth",
+      "Mother-breath proclaims light-knowing; the child-name is called forth.",
+      (
+        ("mufra", "mother-breath proclamation", (P("mu", ["mu", "ma"], "mother-breath"), P("fra", ["fra", "ra"], "proclamation"))),
+        ("lakyo", "light-force-knowing", (P("la", ["la"], "light"), P("kyo", ["kyo", "ki", "wi"], "force-knowing"))),
+        ("tinara", "child-name proclaimed", (P("ti", ["ti", "tik"], "child"), P("na", ["na", "ni"], "name"), P("ra", ["ra"], "proclaimed"))),
+      ),
+      ["mu", "fra", "la", "kyo", "ti", "na", "ra"], "mother-breath · light-knowing · child-name",
+    ),
+    _triad_cluster(
+      69, ("yorfa", "maklu", "sipra"), "Yorfa maklu sipra", "abstract",
+      "Blessed force flows from mother-existence; goodness is proclaimed",
+      "Blessed force flows from mother-existence; goodness is proclaimed.",
+      (
+        ("yorfa", "force-blessing", (P("yor", ["yor", "yo", "ya"], "force-divine"), P("fa", ["fa", "fu"], "blessing"))),
+        ("maklu", "mother-existence-flow", (P("ma", ["ma"], "mother"), P("klu", ["klu", "lu"], "existence-flow"))),
+        ("sipra", "good-proclaimed", (P("si", ["si"], "good-see"), P("pra", ["pra", "ra"], "proclaimed"))),
+      ),
+      ["yor", "fa", "ma", "klu", "si", "pra"], "force-blessing · mother-flow · good proclaimed",
+    ),
+    _triad_cluster(
+      70, ("plika", "yofra", "tamu"), "Plika yofra tamu", "nature",
+      "Open power meets divine proclamation in the mother-this",
+      "Open power meets divine proclamation in the mother-this.",
+      (
+        ("plika", "open-power", (P("pli", ["pli", "pla"], "open"), P("ka", ["ka"], "power"))),
+        ("yofra", "divine-proclamation", (P("yo", ["yo", "ya"], "divine"), P("fra", ["fra", "ra"], "proclamation"))),
+        ("tamu", "this-mother", (P("ta", ["ta"], "this"), P("mu", ["mu", "ma"], "mother"))),
+      ),
+      ["pli", "ka", "yo", "fra", "ta", "mu"], "open power · divine proclaim · this-mother",
+    ),
+    _triad_cluster(
+      71, ("kafya", "lorpa", "minu"), "Kafya lorpa minu", "abstract",
+      "Grace-power protects with light; the small spirit rises",
+      "Grace-power protects with light; the small spirit rises.",
+      (
+        ("kafya", "power-grace", (P("ka", ["ka"], "power"), P("fya", ["fya", "ya"], "grace"))),
+        ("lorpa", "light-protect", (P("lor", ["lor", "la"], "light"), P("pa", ["pa"], "protect"))),
+        ("minu", "small-spirit", (P("mi", ["mi"], "small"), P("nu", ["nu", "ni"], "spirit / breath"))),
+      ),
+      ["ka", "fya", "lor", "pa", "mi", "nu"], "grace-power · light-protect · small spirit",
+    ),
+    _triad_cluster(
+      72, ("yupra", "makra", "silu"), "Yupra makra silu", "abstract",
+      "The divine proclaims the mother-heart; good light flows",
+      "The divine proclaims the mother-heart; good light flows.",
+      (
+        ("yupra", "divine-proclaimed", (P("yu", ["yu", "ya"], "divine"), P("pra", ["pra", "ra"], "proclaimed"))),
+        ("makra", "mother-heart", (P("ma", ["ma"], "mother"), P("kra", ["kra"], "heart"))),
+        ("silu", "good-flow-light", (P("si", ["si", "su"], "good"), P("lu", ["lu", "la"], "flow-light"))),
+      ),
+      ["yu", "pra", "ma", "kra", "si", "lu"], "divine proclaim · mother-heart · good flow",
+    ),
+    _triad_cluster(
+      73, ("torfa", "yami", "plaku"), "Torfa yami plaku", "nature",
+      "The gate blesses the divine small-being in the open place of power",
+      "The gate blesses the divine small-being in the open place of power.",
+      (
+        ("torfa", "gate-blessing", (P("tor", ["tor"], "gate"), P("fa", ["fa", "fu"], "blessing"))),
+        ("yami", "motion small-being", (P("ya", ["ya"], "divine"), P("mi", ["mi"], "small being"))),
+        ("plaku", "open-power-place", (P("pla", ["pla"], "open"), P("ku", ["ku", "ka"], "place-power"))),
+      ),
+      ["tor", "fa", "ya", "mi", "pla", "ku"], "gate-blessing · divine being · open power-place",
+    ),
+    _triad_cluster(
+      74, ("morka", "yaflu", "sipta"), "Morka yaflu sipta", "abstract",
+      "Rising power flows divinely; goodness is here",
+      "Rising power flows divinely; goodness is here.",
+      (
+        ("morka", "rising power", (P("mor", ["mor"], "rise"), P("ka", ["ka"], "power"))),
+        ("yaflu", "divine-flow", (P("ya", ["ya"], "divine"), P("flu", ["flu", "lu"], "flow"))),
+        ("sipta", "good-this", (P("si", ["si", "su"], "good"), P("pta", ["pta", "ta"], "this-place"))),
+      ),
+      ["mor", "ka", "ya", "flu", "si", "pta"], "rising power · divine flow · good-this",
+    ),
+    _triad_cluster(
+      75, ("lakra", "yomu", "tafra"), "Lakra yomu tafra", "abstract",
+      "Light-heart meets divine-mother; this is proclaimed",
+      "Light-heart meets divine-mother; this is proclaimed.",
+      (
+        ("lakra", "light-heart", (P("la", ["la"], "light"), P("kra", ["kra"], "heart"))),
+        ("yomu", "divine-mother", (P("yo", ["yo", "ya"], "divine"), P("mu", ["mu", "ma"], "mother"))),
+        ("tafra", "this-proclaimed", (P("ta", ["ta"], "this"), P("fra", ["fra", "ra"], "proclaimed"))),
+      ),
+      ["la", "kra", "yo", "mu", "ta", "fra"], "light-heart · divine-mother · this proclaimed",
+    ),
+    _triad_cluster(
+      76, ("plina", "yofka", "maru"), "Plina yofka maru", "abstract",
+      "The open name receives divine craft-power; mother rests",
+      "The open name receives divine craft-power; mother rests.",
+      (
+        ("plina", "open-name", (P("pli", ["pli", "pla"], "open"), P("na", ["na", "ni"], "name"))),
+        ("yofka", "divine-craft-power", (P("yo", ["yo"], "motion"), P("fi", ["fi"], "truth-craft"), P("ka", ["ka"], "power"))),
+        ("maru", "mother-rest", (P("ma", ["ma"], "mother"), P("ru", ["ru", "ro"], "rest-flow"))),
+      ),
+      ["pli", "na", "yo", "fi", "ka", "ma", "ru"], "open name · divine craft · mother rest",
+    ),
+    _triad_cluster(
+      77, ("kafro", "yala", "sipro"), "Kafro yala sipro", "abstract",
+      "Power rests in divine light; goodness is carried forward",
+      "Power rests in divine light; goodness is carried forward.",
+      (
+        ("kafro", "power-rest", (P("ka", ["ka"], "power"), P("fro", ["fro", "ro"], "rest"))),
+        ("yala", "divine light", (P("ya", ["ya"], "motion"), P("la", ["la"], "light"))),
+        ("sipro", "good-bearing", (P("si", ["si", "su"], "good"), P("pro", ["pro", "por"], "bearing"))),
+      ),
+      ["ka", "fro", "ya", "la", "si", "pro"], "power-rest · divine light · good bearing",
+    ),
+    _triad_cluster(
+      78, ("mufya", "plaro", "tikna"), "Mufya plaro tikna", "kinship",
+      "Mother-grace rests openly; the child-name emerges",
+      "Mother-grace rests openly; the child-name emerges.",
+      (
+        ("mufya", "mother-grace", (P("mu", ["mu", "ma"], "mother"), P("fya", ["fya", "ya"], "grace"))),
+        ("plaro", "open-rest", (P("pla", ["pla"], "open"), P("ro", ["ro"], "rest"))),
+        ("tikna", "child-name", (P("tik", ["tik", "ti"], "child"), P("na", ["na"], "name"))),
+      ),
+      ["mu", "fya", "pla", "ro", "tik", "na"], "mother-grace · open rest · child-name",
+    ),
+    _triad_cluster(
+      79, ("yokru", "lamfa", "sipla"), "Yokru lamfa sipla", "abstract",
+      "Divine heart-force blesses the mother-light; goodness opens",
+      "Divine heart-force blesses the mother-light; goodness opens.",
+      (
+        ("yokru", "divine-heart-force", (P("yo", ["yo"], "divine"), P("kru", ["kru", "kra"], "heart-force"))),
+        ("lamfa", "light-mother-blessing", (P("lam", ["lam", "la", "ma"], "light-mother"), P("fa", ["fa", "fu"], "blessing"))),
+        ("sipla", "good-open", (P("si", ["si", "su"], "good"), P("pla", ["pla"], "open"))),
+      ),
+      ["yo", "kru", "lam", "fa", "si", "pla"], "divine heart-force · mother-light bless · good open",
+    ),
+    _triad_cluster(
+      80, ("makyo", "yupra", "torlu"), "Makyo yupra torlu", "abstract",
+      "Mother-knowing is divinely proclaimed; the gate flows",
+      "Mother-knowing is divinely proclaimed; the gate flows.",
+      (
+        ("makyo", "mother-knowing", (P("ma", ["ma"], "mother"), P("kyo", ["kyo", "wi"], "knowing-force"))),
+        ("yupra", "divine-proclaimed", (P("yu", ["yu", "ya"], "divine"), P("pra", ["pra", "ra"], "proclaimed"))),
+        ("torlu", "gate-flow", (P("tor", ["tor"], "gate"), P("lu", ["lu", "le"], "flow"))),
+      ),
+      ["ma", "kyo", "yu", "pra", "tor", "lu"], "mother-knowing · divine proclaim · gate flow",
+      "Closes extended ritual triad arc (65–80)",
+    ),
+  ]
+
+
+COMPOUND_CLUSTERS: list[dict[str, Any]] = COMPOUND_CLUSTERS_BASE + _clusters_65_80()
 
 INVOCATION = (
     "Ye kra ro ya\n"
     "Lmakra yuckara\n"
     "Tiki yocfua manalara\n"
+    "Makra yufala\n"
+    "Makora yufina ro\n"
+    "Ebro la kajya lapio mufay\n"
+    "Plafo micala haftar\n"
+    "Qaytra blapa torja\n"
+    "Vi porka yala morkfu\n"
+    "Yafora mikra talu\n"
+    "Makyo yupra torlu\n"
     "Wi su ni ve ro ya"
 )
 
@@ -294,6 +1400,12 @@ PROTO_WORLD = [
     {"mythar": "ua", "proto_world": "*wed- / *h₂ew-", "domain": "abstract", "note": "flow / existence"},
     {"mythar": "na", "proto_world": "*h₁nómn̥", "domain": "abstract", "note": "name / spirit"},
     {"mythar": "ra", "proto_world": "*h₂er- / *reH-", "domain": "abstract", "note": "proclaim / intensify"},
+    {"mythar": "fi", "proto_world": "*h₁yes- / *weid-", "domain": "abstract", "note": "truth / verity"},
+    {"mythar": "ebro", "proto_world": "*h₁egʰ- / *bʰer-", "domain": "abstract", "note": "emergence-carrier"},
+    {"mythar": "pi", "proto_world": "*peh₂-", "domain": "abstract", "note": "seed / point / spark"},
+    {"mythar": "qay", "proto_world": "*gʷeyh₃- / *kʷey-", "domain": "abstract", "note": "rooted life"},
+    {"mythar": "por", "proto_world": "*bʰer- / *per-", "domain": "motion", "note": "carry / bear"},
+    {"mythar": "mor", "proto_world": "*mer- / *men-", "domain": "abstract", "note": "rise / grow"},
 ]
 
 
@@ -386,9 +1498,9 @@ def build_lexicon_document() -> dict[str, Any]:
     return {
         "lexicon_id": "mythar_lexicon_v01",
         "description": (
-            "Mythar Living Lexicon — gap-fill clusters 12–48 with atomic roots, "
-            "compounds (lmakra/yuckara; tiki/yocfua/manalara), domain tags, "
-            "and Proto-World comparisons."
+            "Mythar Living Lexicon — gap-fill clusters 12–80 with atomic roots, "
+            "compounds (kra/blessing/naming/emergence/grounding/threshold/growth/triad arcs), "
+            "domain tags, and Proto-World comparisons."
         ),
         "source_reference": SRC,
         "proposals": {
@@ -399,6 +1511,9 @@ def build_lexicon_document() -> dict[str, Any]:
             "E": "Fill nature triad + light (wa/hi/bo/la)",
             "F": "Kra-axis compounds (lmakra / yuckara — cluster 47)",
             "G": "Blessing / birth triad (tiki / yocfua / manalara — cluster 48)",
+            "H": "Naming / blessing / sealing axis (makra–makora — clusters 49–60)",
+            "I": "Ritual invocation lines (ebro…mufay — clusters 61–64)",
+            "J": "Extended ritual triads (yafora…torlu — clusters 65–80)",
         },
         "roots": roots,
         "clusters": clusters,

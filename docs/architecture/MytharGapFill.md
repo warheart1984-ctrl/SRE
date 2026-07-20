@@ -16,8 +16,11 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | **D** | Knowing–spirit set (`wi` / `su` / `ni` / `ve`) |
 | **F** | Kra-axis compounds (`lmakra` / `yuckara` — cluster 47) |
 | **G** | Blessing / birth triad (`tiki` / `yocfua` / `manalara` — cluster 48) |
+| **H** | Naming / blessing / sealing axis (clusters 49–60) |
+| **I** | Ritual invocation lines (clusters 61–64) |
+| **J** | Extended ritual triads (clusters 65–80) |
 
-## Clusters 12–48
+## Clusters 12–80
 
 | ID | Forms | Domain | Phrase | Interpretation |
 |----|-------|--------|--------|----------------|
@@ -58,8 +61,45 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | 46 | la bo ro | nature | La bo ro kra | Light–earth–rest |
 | **47** | **lmakra yuckara** | abstract | Lmakra yuckara ro ya | Illuminated mother-heart ↔ divine knowing-heart (kra axis) |
 | **48** | **tiki yocfua manalara** | abstract | Tiki yocfua manalara ro ya | Pure sacred spark · divine blessing flow · proclaimed mother-light-name |
+| **49** | **makra yufala** | abstract | Makra yufala ro ya | Mother-heart in divine blessing-light |
+| **50** | **tina rofua** | kinship | Tina rofua ro ya | Child-name rests in blessed flow |
+| **51** | **yakora lamina** | abstract | Yakora lamina ro ya | Divine heart-craft illuminates small name |
+| **52** | **sufala yotira** | abstract | Sufala yotira ro ya | Good blessing-light proclaims divine child-force |
+| **53** | **krafu yumana** | abstract | Krafu yumana ro ya | Blessed vital force names divine existence |
+| **54** | **lamara yufina** | abstract | Lamara yufina ro ya | Light-existence proclaims divine blessed true name |
+| **55** | **toraka mafira** | nature | Toraka mafira ro ya | Gate-power proclaims mother-truth |
+| **56** | **yukra tifala** | kinship | Yukra tifala ro ya | Knowing-heart blesses child-light |
+| **57** | **ramina yokra** | abstract | Ramina yokra ro ya | Proclaimed small-name meets divine heart-force |
+| **58** | **fukara lamayu** | abstract | Fukara lamayu ro ya | Blessing-heart-craft in light-existence-divine |
+| **59** | **tifura yokala** | kinship | Tifura yokala ro ya | Child-blessing proclaimed in divine force-light |
+| **60** | **makora yufina ro** | abstract | Makora yufina ro | Mother-heart proclaims divine blessed true name in peace (seal) |
+| **61** | **ebro la kajya lapio mufay** | abstract | Ebro la kajya lapio mufay | Emergence · light · divine-power · light-seed · mother-blessing |
+| **62** | **plafo micala haftar** | nature | Plafo micala haftar | Open plain · spark-light essence · protective proclamation |
+| **63** | **qaytra blapa torja** | nature | Qaytra blapa torja | Proclaimed life · open protection · affirmed threshold |
+| **64** | **vi porka yala morkfu** | abstract | Vi porka yala morkfu | Inner knowing → carried power → divine light → rising blessing |
 
-**Cluster count: 37** (IDs 12–48 inclusive).
+### Clusters 65–80 (extended ritual triads)
+
+| ID | Forms | Domain | Phrase | Interpretation |
+|----|-------|--------|--------|----------------|
+| 65 | yafora mikra talu | abstract | Yafora mikra talu | Divine gathering · small heart · present flow |
+| 66 | plamu yafika torla | nature | Plamu yafika torla | Mother-ground · truth-power · gate-light |
+| 67 | kafro yami supla | nature | Kafro yami supla | Power-rest · divine being · good plain |
+| 68 | mufra lakyo tinara | kinship | Mufra lakyo tinara | Mother-breath · light-knowing · child-name |
+| 69 | yorfa maklu sipra | abstract | Yorfa maklu sipra | Force-blessing · mother-flow · good proclaimed |
+| 70 | plika yofra tamu | nature | Plika yofra tamu | Open power · divine proclaim · this-mother |
+| 71 | kafya lorpa minu | abstract | Kafya lorpa minu | Grace-power · light-protect · small spirit |
+| 72 | yupra makra silu | abstract | Yupra makra silu | Divine proclaim · mother-heart · good flow |
+| 73 | torfa yami plaku | nature | Torfa yami plaku | Gate-blessing · divine being · open power-place |
+| 74 | morka yaflu sipta | abstract | Morka yaflu sipta | Rising power · divine flow · good-this |
+| 75 | lakra yomu tafra | abstract | Lakra yomu tafra | Light-heart · divine-mother · this proclaimed |
+| 76 | plina yofka maru | abstract | Plina yofka maru | Open name · divine craft-power · mother rest |
+| 77 | kafro yala sipro | abstract | Kafro yala sipro | Power-rest · divine light · good bearing |
+| 78 | mufya plaro tikna | kinship | Mufya plaro tikna | Mother-grace · open rest · child-name |
+| 79 | yokru lamfa sipla | abstract | Yokru lamfa sipla | Divine heart-force · mother-light bless · good open |
+| 80 | makyo yupra torlu | abstract | Makyo yupra torlu | Mother-knowing · divine proclaim · gate flow |
+
+**Cluster count: 69** (IDs 12–80 inclusive).
 
 ### Cluster 47 morphology
 
@@ -80,12 +120,29 @@ Compounds: `Lmakra`, `Yuckara`, `Lmakra ro`, `Yuckara wi`. Ritual (metadata only
 
 Compounds: `Tiki kra`, `Yocfua ro`, `Manalara ya`. Ritual (metadata only): `Tiki yo-fua ma-na-la-ra`.
 
+### Clusters 61–64 (ritual invocation lines)
+
+| ID | Axis | Key new roots |
+|----|------|----------------|
+| 61 | emergence | `e`, `ebro`, `jya`, `pi`, `kajya`, `lapio`, `mufay` |
+| 62 | grounding | `fo`, `haf`, `ca`, `plafo`, `micala`, `haftar` |
+| 63 | threshold | `qay`, `bla`, `ja`, `qaytra`, `blapa`, `torja` |
+| 64 | growth | `por`, `mor`, `porka`, `yala`, `morkfu` (`vi` particle) |
+
 ## Sample invocation
 
 ```
 Ye kra ro ya
 Lmakra yuckara
 Tiki yocfua manalara
+Makra yufala
+Makora yufina ro
+Ebro la kajya lapio mufay
+Plafo micala haftar
+Qaytra blapa torja
+Vi porka yala morkfu
+Yafora mikra talu
+Makyo yupra torlu
 Wi su ni ve ro ya
 ```
 
@@ -95,8 +152,8 @@ Wi su ni ve ro ya
 from sre.mythar import MytharLexicon
 
 lex = MytharLexicon()
-lex.cluster_ids()           # 12..48
-lex.list_clusters()         # summaries (includes 47–48)
+lex.cluster_ids()           # 12..80
+lex.list_clusters()         # summaries (includes compound clusters)
 lex.gap_fill()              # domain coverage + proposals
 lex.compare_proto_world()   # Mythar ↔ Proto-World table
 lex.seed_registry(registry) # FAC-E seed into EvidenceRegistry (+ Dantomax if configured)

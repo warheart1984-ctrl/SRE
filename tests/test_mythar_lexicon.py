@@ -1,4 +1,4 @@
-"""Mythar living lexicon tests — clusters 12–48 + gap-fill."""
+"""Mythar living lexicon tests — clusters 12–80 + gap-fill."""
 
 from __future__ import annotations
 
@@ -29,15 +29,23 @@ def test_mythar_lexicon_file_and_counts() -> None:
     assert lex.lexicon_id == "mythar_lexicon_v01"
     assert LEX_PATH.is_file()
     ids = lex.cluster_ids()
-    assert ids == list(range(12, 49))
-    assert len(ids) == 37
+    assert ids == list(range(12, 81))
+    assert len(ids) == 69
     assert lex.get_cluster(12) is not None
     assert lex.get_cluster(46) is not None
     assert lex.get_cluster(47) is not None
     assert lex.get_cluster(48) is not None
+    assert lex.get_cluster(60) is not None
+    assert lex.get_cluster(61) is not None
+    assert lex.get_cluster(64) is not None
+    assert lex.get_cluster(65) is not None
+    assert lex.get_cluster(80) is not None
     listed = lex.list_clusters()
     assert any(c["cluster_id"] == 47 for c in listed)
     assert any(c["cluster_id"] == 48 for c in listed)
+    assert any(c["cluster_id"] == 61 for c in listed)
+    assert any(c["cluster_id"] == 65 for c in listed)
+    assert any(c["cluster_id"] == 80 for c in listed)
 
     c47 = lex.get_cluster(47)
     assert c47 is not None
@@ -51,15 +59,42 @@ def test_mythar_lexicon_file_and_counts() -> None:
     assert "Tiki yocfua manalara" in c48["phrase"]
     assert "Tiki kra" in (c48.get("compounds") or [])
 
+    c61 = lex.get_cluster(61)
+    assert c61 is not None
+    assert c61["forms"] == ["ebro", "la", "kajya", "lapio", "mufay"]
+    assert "Ebro la kajya lapio mufay" in c61["phrase"]
+
+    c64 = lex.get_cluster(64)
+    assert c64 is not None
+    assert "porka" in c64["forms"]
+    assert "morkfu" in c64["forms"]
+
+    c65 = lex.get_cluster(65)
+    assert c65 is not None
+    assert c65["forms"] == ["yafora", "mikra", "talu"]
+
+    c80 = lex.get_cluster(80)
+    assert c80 is not None
+    assert "makyo" in c80["forms"]
+    assert "torlu" in c80["phrase"].lower()
+
     for root in (
         "la", "ma", "kra", "ya", "yu", "ara", "akra", "lmakra", "yuckara",
         "ti", "ki", "yo", "fu", "ua", "na", "ra", "tiki", "yocfua", "manalara",
+        "fi", "makra", "makora", "ebro", "kajya", "lapio", "mufay",
+        "plafo", "micala", "haftar", "qaytra", "blapa", "torja",
+        "porka", "yala", "morkfu",
+        "yafora", "mikra", "talu", "lakyo", "yupra", "makyo", "torlu",
     ):
         assert root in lex.root_forms()
     assert domains_covered(lex)
     inv = lex.gap_fill()["invocation"]
     assert "Lmakra yuckara" in inv
     assert "Tiki yocfua manalara" in inv
+    assert "Ebro la kajya lapio mufay" in inv
+    assert "Makora yufina ro" in inv
+    assert "Yafora mikra talu" in inv
+    assert "Makyo yupra torlu" in inv
     assert "Ye kra ro ya" in inv
 
 
@@ -72,7 +107,7 @@ def test_mythar_gap_fill_domains() -> None:
         assert name in domains
         assert domains[name]["cluster_count"] >= 5
         assert domains[name]["status"] in {"covered", "thin", "ok"}
-    assert domains["abstract"]["cluster_count"] >= 8  # 15,35–40,47,48
+    assert domains["abstract"]["cluster_count"] >= 20
 
 
 def test_mythar_proto_world_table() -> None:
@@ -103,6 +138,8 @@ def test_mythar_seed_and_reconstruct_clusters() -> None:
         "evid_myt_root_yuckara",
         "evid_myt_root_tiki",
         "evid_myt_root_manalara",
+        "evid_myt_root_ebro",
+        "evid_myt_root_qaytra",
         "evid_myt_compound_lmakra",
         "evid_myt_compound_tiki_kra",
         "evid_myt_compound_manalara_ya",

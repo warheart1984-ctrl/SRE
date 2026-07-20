@@ -13,6 +13,7 @@ class EvidenceType(Enum):
     LEXICAL_ITEM = "lexical_item"
     PHONOLOGICAL_RULE = "phonological_rule"
     CORPUS_SAMPLE = "corpus_sample"
+    RECONSTRUCTION = "reconstruction"
 
 
 class ConstitutionalStatus(Enum):

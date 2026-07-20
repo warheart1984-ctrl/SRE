@@ -37,10 +37,17 @@ class SovereignCertificate:
         fac_e: dict[str, bool] | None = None,
         fac_v: dict[str, bool] | None = None,
         ledger_entry_id: str | None = None,
+        corpus_hash: str | None = None,
+        attestation_root_hash: str | None = None,
+        rule_set_version: str | None = None,
+        reconstruction_ids: list[str] | None = None,
+        validation_summary: dict[str, Any] | None = None,
+        fabric_root_hash: str | None = None,
     ) -> SovereignCertificate:
         now = datetime.now(timezone.utc)
         issued = now.isoformat()
         cert_id = f"cert_{project_id}"
+        recon_ids = list(reconstruction_ids or [reconstruction_id])
         return cls(
             certificate_id=cert_id,
             version="1.0",
@@ -52,8 +59,13 @@ class SovereignCertificate:
             subject={
                 "project_id": project_id,
                 "reconstruction_id": reconstruction_id,
+                "reconstruction_ids": recon_ids,
                 "target_language": target_language,
                 "time_period": time_period,
+                "corpus_hash": corpus_hash,
+                "attestation_root_hash": attestation_root_hash,
+                "fabric_root_hash": fabric_root_hash,
+                "rule_set_version": rule_set_version or "correspondence_engine_v01",
             },
             scope={
                 "domains": domains
@@ -76,6 +88,8 @@ class SovereignCertificate:
                     "v4_alignment": True,
                     "v5_governance_fit": True,
                 },
+                "validation_summary": validation_summary
+                or {"is_valid": True, "failed_checks": []},
             },
             signatures={
                 "council_signature": f"sig_{cert_id}",

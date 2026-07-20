@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Sovereign Reconstruction Engine API
-  version: 0.1.0
+  version: 1.0.0
 servers:
   - url: https://api.sre.local
 paths:
@@ -202,6 +202,152 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SovereignCertificate'
+  /api/v1/cel/head:
+    get:
+      summary: CEL fabric head — summary and integrity
+      operationId: getCelHead
+      tags: [cel]
+      responses:
+        '200':
+          description: CEL head snapshot
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CELHead'
+  /api/v1/cel/entries:
+    get:
+      summary: List CEL entries (paginated)
+      operationId: listCelEntries
+      tags: [cel]
+      parameters:
+        - name: entry_type
+          in: query
+          schema:
+            type: string
+            enum: [attestation, correspondence, hypothesis, validation, certification, evidence, governance]
+        - name: subject_id
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            minimum: 1
+            maximum: 500
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          description: Paginated CEL entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CELEntryPage'
+  /api/v1/cel/lineage/{reconstruction_id}:
+    get:
+      summary: Constitutional lineage for a reconstruction
+      operationId: getCelLineage
+      tags: [cel]
+      parameters:
+        - name: reconstruction_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: CEL lineage path
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CELLineage'
+  /api/v1/explorer/fabric:
+    get:
+      summary: Sovereign Ledger Explorer — fabric overview
+      operationId: getExplorerFabric
+      tags: [explorer]
+      responses:
+        '200':
+          description: CEL + Dantomax fabric overview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerFabric'
+  /api/v1/explorer/entries:
+    get:
+      summary: Sovereign Ledger Explorer — search entries
+      operationId: searchExplorerEntries
+      tags: [explorer]
+      parameters:
+        - name: entry_type
+          in: query
+          schema:
+            type: string
+        - name: subject_id
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Explorer entry search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CELEntryPage'
+  /api/v1/explorer/entry/{cel_entry_id}:
+    get:
+      summary: Sovereign Ledger Explorer — single entry detail
+      operationId: getExplorerEntry
+      tags: [explorer]
+      parameters:
+        - name: cel_entry_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Entry detail with links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerEntryDetail'
+        '404':
+          description: Entry not found
+  /api/v1/explorer/reconstruction/{reconstruction_id}:
+    get:
+      summary: Sovereign Ledger Explorer — full reconstruction path
+      operationId: getExplorerReconstruction
+      tags: [explorer]
+      parameters:
+        - name: reconstruction_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Reconstruction exploration bundle
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExplorerReconstruction'
 components:
   schemas:
     EvidenceSubmission:
@@ -314,3 +460,73 @@ components:
         constitutional_status: { type: object }
         signatures: { type: object }
         validity: { type: object }
+    CELEntry:
+      type: object
+      properties:
+        cel_entry_id: { type: string }
+        entry_type: { type: string }
+        subject_id: { type: string }
+        payload: { type: object }
+        links: { type: array, items: { type: string } }
+        timestamp: { type: string, format: date-time }
+        position: { type: integer }
+        prev_cel_hash: { type: string }
+        cel_hash: { type: string }
+        checksum: { type: string }
+        dantomax_record_id: { type: string, nullable: true }
+        dantomax_ledger_hash: { type: string, nullable: true }
+        constitutional_article: { type: string }
+    CELHead:
+      type: object
+      properties:
+        version: { type: string }
+        length: { type: integer }
+        head: { type: string }
+        fabric_root_hash: { type: string }
+        by_type: { type: object, additionalProperties: { type: integer } }
+        dantomax_head: { type: string, nullable: true }
+        integrity: { type: object }
+    CELEntryPage:
+      type: object
+      properties:
+        entries:
+          type: array
+          items: { $ref: '#/components/schemas/CELEntry' }
+        total: { type: integer }
+        limit: { type: integer }
+        offset: { type: integer }
+        head: { type: string }
+        fabric_root_hash: { type: string }
+    CELLineage:
+      type: object
+      properties:
+        reconstruction_id: { type: string }
+        cel_head: { type: string }
+        fabric_root_hash: { type: string }
+        entries_by_type: { type: object }
+        path: { type: array, items: { type: string } }
+        entry_count: { type: integer }
+        human_readable: { type: string }
+    ExplorerFabric:
+      type: object
+      properties:
+        cel: { $ref: '#/components/schemas/CELHead' }
+        integrity: { type: object }
+        persistence: { type: object, nullable: true }
+        dantomax: { type: object, nullable: true }
+    ExplorerEntryDetail:
+      type: object
+      properties:
+        entry: { $ref: '#/components/schemas/CELEntry' }
+        linked_entries: { type: array, items: { type: object } }
+        dantomax_anchor: { type: object, nullable: true }
+    ExplorerReconstruction:
+      type: object
+      properties:
+        reconstruction_id: { type: string }
+        lineage: { $ref: '#/components/schemas/CELLineage' }
+        entries:
+          type: array
+          items: { $ref: '#/components/schemas/CELEntry' }
+        entry_count: { type: integer }
+        dantomax_lineage: { type: object, nullable: true }

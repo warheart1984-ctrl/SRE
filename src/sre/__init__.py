@@ -1,3 +1,3 @@
-"""Sovereign Reconstruction Engine (SRE) v0.1."""
+"""Sovereign Reconstruction Engine (SRE) v1.0."""
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"

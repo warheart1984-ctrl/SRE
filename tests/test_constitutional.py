@@ -211,7 +211,7 @@ class ConstitutionalPromotionTests(unittest.TestCase):
         result = self.fra.reconstruct_language("Mythar", "Phase I", evidence_ids)
         self.assertEqual(result.get("status"), "COMPLETED", result)
         self.assertEqual(result.get("fra_stage"), "ARCHIVE")
-        self.assertEqual(len(result.get("stages_completed") or []), 9)
+        self.assertEqual(len(result.get("stages_completed") or []), 10)
 
     def test_fra_02_evidence_constrained_iteration(self) -> None:
         result = self.fra.reconstruct_language("Mythar", "Phase I", [])

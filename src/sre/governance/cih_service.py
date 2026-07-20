@@ -153,13 +153,62 @@ class FAECLanguageReconstructionService:
             spec.get("reconstruction_id")
             or f"recon_{project_id}"
         )
+
+        # Reject certification without valid attestation lineage when Dantomax is present
+        dantomax = getattr(self.evidence_registry, "_dantomax", None)
+        attestation_ids = list(spec.get("attestation_ids") or [])
+        attestation_root = None
+        if dantomax is not None and (
+            attestation_ids or spec.get("require_attestation_lineage")
+        ):
+            bad = dantomax.require_attested_sources(attestation_ids)
+            if bad or not attestation_ids:
+                self._projects[project_id]["status"] = "REJECTED"
+                return self._finalize(
+                    trace,
+                    status="REJECTED",
+                    project_id=project_id,
+                    reason="CIH: certification blocked — missing or invalid attestation lineage",
+                    extra={"attestation_errors": bad or ["missing_attestation_ids"]},
+                )
+            attestation_root = dantomax.attestation_root_hash
+            self._append_event(
+                trace,
+                actor="CIH_SERVICE",
+                event_type="ATTESTATION_LINEAGE_VERIFIED",
+                payload={
+                    "attestation_ids": attestation_ids,
+                    "attestation_root_hash": attestation_root,
+                },
+                evidence_links=evidence_sources,
+            )
+
+        cel = getattr(self.evidence_registry, "cel", None)
+        fabric_root = cel.fabric_root_hash if cel is not None else spec.get("fabric_root_hash")
         certificate = SovereignCertificate.issue(
             project_id=project_id,
             reconstruction_id=reconstruction_id,
             target_language=target_language,
             time_period=time_period,
             constraints=dict(spec.get("constraints") or {}),
+            corpus_hash=spec.get("corpus_hash"),
+            attestation_root_hash=attestation_root or spec.get("attestation_root_hash"),
+            fabric_root_hash=fabric_root,
+            rule_set_version=spec.get("rule_set_version"),
+            reconstruction_ids=list(
+                spec.get("reconstruction_ids") or [reconstruction_id]
+            ),
+            validation_summary=dict(spec.get("validation_summary") or {}),
         )
+        if cel is not None:
+            cel_entry = cel.record_certification(
+                certificate.certificate_id,
+                certificate.to_dict(),
+                trace_id=trace["trace_id"],
+                links=[reconstruction_id] + evidence_sources,
+            )
+            certificate.signatures["ledger_entry_id"] = cel_entry.cel_entry_id
+            certificate.subject["fabric_root_hash"] = cel.fabric_root_hash
         self._certificates[certificate.certificate_id] = certificate
         self._projects[project_id]["status"] = "APPROVED"
         self._projects[project_id]["certificate_id"] = certificate.certificate_id
@@ -255,16 +304,22 @@ class FAECLanguageReconstructionService:
         evidence_links: list[str] | None = None,
     ) -> None:
         self._event_seq += 1
-        trace["events"].append(
-            {
-                "event_id": f"ev_{self._event_seq:03d}",
-                "timestamp": _now(),
-                "actor": actor,
-                "type": event_type,
-                "payload": payload,
-                "evidence_links": list(evidence_links or []),
-            }
-        )
+        event = {
+            "event_id": f"ev_{self._event_seq:03d}",
+            "timestamp": _now(),
+            "actor": actor,
+            "type": event_type,
+            "payload": payload,
+            "evidence_links": list(evidence_links or []),
+        }
+        trace["events"].append(event)
+        cel = getattr(self.evidence_registry, "cel", None)
+        if cel is not None:
+            cel.record_governance(
+                trace["trace_id"],
+                event,
+                links=list(evidence_links or []) + [trace.get("project_id", "")],
+            )
 
     def _finalize(
         self,
