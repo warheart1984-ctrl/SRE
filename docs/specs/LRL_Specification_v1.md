@@ -25,6 +25,7 @@ This specification is implementation-neutral and describes:
 ### 2.1 Mythar
 
 - **Type:** Synthetic + living proto-language.
+- **IP status:** Proprietary (Jon Halstead). Reference instance in SRE; not part of CIH/LRL normative content. See `docs/governance/CIH_Mythar_RelationshipCharter_v1.md`.
 - **Artifacts:**
   - Lexicon clusters 12–80 (roots, compounds, semantic axes).
   - Inscription evidence (e.g., `ma taru en`).
