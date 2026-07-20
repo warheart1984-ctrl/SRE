@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CIHConformanceProfile",
+  "description": "Runtime declaration of CIH specification conformance.",
+  "type": "object",
+  "required": [
+    "profile_id",
+    "profile_version",
+    "runtime",
+    "cih_spec",
+    "entities",
+    "invariants",
+    "conformance_gates",
+    "evidence_bindings",
+    "extensions"
+  ],
+  "properties": {
+    "profile_id": { "type": "string" },
+    "profile_version": { "type": "string" },
+    "runtime": {
+      "type": "object",
+      "required": ["name", "implementation_id", "version", "role"],
+      "properties": {
+        "name": { "type": "string" },
+        "implementation_id": { "type": "string" },
+        "version": { "type": "string" },
+        "role": {
+          "type": "string",
+          "enum": ["reference_implementation", "conformant_implementation", "partial_implementation"]
+        }
+      }
+    },
+    "cih_spec": {
+      "type": "object",
+      "required": ["document", "version"],
+      "properties": {
+        "document": { "type": "string" },
+        "version": { "type": "string" },
+        "conformance_requirements": { "type": "string" }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entity_id", "classification", "implementation"],
+        "properties": {
+          "entity_id": { "type": "string" },
+          "classification": {
+            "type": "string",
+            "enum": ["core", "required_binding", "extension"]
+          },
+          "implementation": {
+            "type": "object",
+            "required": ["component", "module"],
+            "properties": {
+              "component": { "type": "string" },
+              "module": { "type": "string" },
+              "schema": { "type": "string" }
+            }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["invariant_id", "enforcement"],
+        "properties": {
+          "invariant_id": { "type": "string" },
+          "description": { "type": "string" },
+          "enforcement": {
+            "type": "string",
+            "enum": ["enforced", "observed", "documented"]
+          },
+          "enforcement_point": { "type": "string" },
+          "gate_id": { "type": "string" },
+          "test": { "type": "string" }
+        }
+      }
+    },
+    "conformance_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gate_id", "classification", "test_module", "test_name"],
+        "properties": {
+          "gate_id": { "type": "string" },
+          "classification": {
+            "type": "string",
+            "enum": ["core", "prerequisite", "extension"]
+          },
+          "test_module": { "type": "string" },
+          "test_name": { "type": "string" },
+          "document": { "type": "string" }
+        }
+      }
+    },
+    "evidence_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["artifact", "source"],
+        "properties": {
+          "artifact": { "type": "string" },
+          "source": { "type": "string" },
+          "cel_entry_types": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "schema": { "type": "string" }
+        }
+      }
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["extension_id", "description", "module"],
+        "properties": {
+          "extension_id": { "type": "string" },
+          "description": { "type": "string" },
+          "module": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "api_bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["operation", "method", "path", "handler"],
+        "properties": {
+          "operation": { "type": "string" },
+          "method": { "type": "string" },
+          "path": { "type": "string" },
+          "handler": { "type": "string" }
+        }
+      }
+    }
+  }
+}

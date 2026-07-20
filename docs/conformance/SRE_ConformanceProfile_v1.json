@@ -1,0 +1,341 @@
+{
+  "profile_id": "sre-cih-conformance-v1",
+  "profile_version": "1.1.0",
+  "runtime": {
+    "name": "Sovereign Reconstruction Engine",
+    "implementation_id": "sre",
+    "version": "1.0.0",
+    "role": "reference_implementation"
+  },
+  "cih_spec": {
+    "document": "docs/specs/CIH_ConstitutionalSpecification_v1.md",
+    "version": "1.0.0",
+    "conformance_requirements": "docs/specs/CIH_ConformanceRequirements_v1.md",
+    "kernel_architecture": "docs/architecture/CIH_ConstitutionalKernel_v1.md",
+    "lrl_specification": "docs/specs/LRL_Specification_v1.md",
+    "cra_architecture": "docs/architecture/CRA_ReferenceArchitecture_v1.md"
+  },
+  "reconstruction_plane": {
+    "layer_id": "LRL",
+    "specification": "docs/specs/LRL_Specification_v1.md",
+    "description": "Linguistic Reconstruction Layer — domain core governed by CIH and evidenced by CEL.",
+    "components": [
+      {
+        "component_id": "fra_pipeline",
+        "module": "src/sre/fra/reconstruction_engine.py",
+        "methodology": "docs/architecture/FRA_Methodology.md"
+      },
+      {
+        "component_id": "linguistics_engine",
+        "module": "src/sre/linguistics/correspondence_engine.py"
+      },
+      {
+        "component_id": "evidence_bound_ai",
+        "module": "src/sre/ai/hlrm_agent.py"
+      },
+      {
+        "component_id": "living_lexicon",
+        "module": "src/sre/mythar/lexicon.py",
+        "documentation": "docs/architecture/MytharGapFill.md"
+      }
+    ],
+    "reference_languages": [
+      {
+        "language_id": "mythar",
+        "name": "Mythar",
+        "type": "synthetic_living_lexicon",
+        "corpus": "data/fra_corpus_v01.json",
+        "lexicon": "data/mythar_lexicon_v01.json",
+        "notes": "First fully worked reconstruction language; phased inscriptions and sound change."
+      },
+      {
+        "language_id": "ie-expanded",
+        "name": "Indo-European (expanded comparative set)",
+        "type": "comparative_cognate",
+        "corpus": "data/ie_cognate_expanded_v01.json",
+        "notes": "Latin, Spanish, French, Sanskrit — numbers, body parts, verbs."
+      }
+    ],
+    "cel_bindings": [
+      {"lrl_event": "evidence_accepted", "cel_entry_type": "evidence"},
+      {"lrl_event": "attestation_registered", "cel_entry_type": "attestation"},
+      {"lrl_event": "correspondence_found", "cel_entry_type": "correspondence"},
+      {"lrl_event": "hypothesis_ranked", "cel_entry_type": "hypothesis"},
+      {"lrl_event": "validation_complete", "cel_entry_type": "validation"},
+      {"lrl_event": "certificate_issued", "cel_entry_type": "certification"}
+    ]
+  },
+  "entities": [
+    {
+      "entity_id": "ProjectSpec",
+      "classification": "core",
+      "implementation": {
+        "component": "CIH Governance Service",
+        "module": "src/sre/governance/cih_service.py"
+      },
+      "notes": "Accepted via approve_reconstruction_project(project_spec dict)."
+    },
+    {
+      "entity_id": "EvidenceBaseline",
+      "classification": "core",
+      "implementation": {
+        "component": "EvidenceRegistry",
+        "module": "src/sre/evidence/registry.py"
+      },
+      "notes": "FAC-E1–E4 validation over spec.evidence_sources before approval."
+    },
+    {
+      "entity_id": "ArchitectureReview",
+      "classification": "core",
+      "implementation": {
+        "component": "CIH Governance Service",
+        "module": "src/sre/governance/cih_service.py"
+      },
+      "notes": "CIH-03 checks target_language, time_period, evidence_sources, architecture."
+    },
+    {
+      "entity_id": "CIHApproval",
+      "classification": "core",
+      "implementation": {
+        "component": "CIH Governance Service",
+        "module": "src/sre/governance/cih_service.py"
+      }
+    },
+    {
+      "entity_id": "SovereignCertificate",
+      "classification": "core",
+      "implementation": {
+        "component": "Sovereign Certificate",
+        "module": "src/sre/governance/certificates.py",
+        "schema": "schemas/sovereign_certificate.schema.json"
+      }
+    },
+    {
+      "entity_id": "GovernanceTrace",
+      "classification": "core",
+      "implementation": {
+        "component": "CIH Governance Service",
+        "module": "src/sre/governance/cih_service.py",
+        "schema": "schemas/governance_trace.schema.json"
+      }
+    },
+    {
+      "entity_id": "ConstitutionalEvidenceLedger",
+      "classification": "required_binding",
+      "implementation": {
+        "component": "CEL",
+        "module": "src/sre/evidence/cel.py",
+        "schema": "schemas/cel_entry.schema.json"
+      },
+      "notes": "SRE binds CIH governance and certification to CEL for audit anchoring."
+    },
+    {
+      "entity_id": "SovereignLedgerExplorer",
+      "classification": "extension",
+      "implementation": {
+        "component": "Ledger Explorer read model",
+        "module": "src/sre/evidence/ledger_explorer.py"
+      },
+      "notes": "Read model beyond CIH core; supports lineage exploration."
+    }
+  ],
+  "invariants": [
+    {
+      "invariant_id": "CIH-INV-01",
+      "description": "No approval without FAC-E baseline over linked evidence.",
+      "enforcement": "enforced",
+      "enforcement_point": "FAECLanguageReconstructionService.approve_reconstruction_project",
+      "gate_id": "CIH-02",
+      "test": "tests/test_constitutional.py::ConstitutionalPromotionTests.test_cih_02_evidence_baseline_blocks_rejected"
+    },
+    {
+      "invariant_id": "CIH-INV-02",
+      "description": "No certificate without architecture review.",
+      "enforcement": "enforced",
+      "enforcement_point": "FAECLanguageReconstructionService.approve_reconstruction_project",
+      "gate_id": "CIH-03",
+      "test": "tests/test_constitutional.py::ConstitutionalPromotionTests.test_cih_03_architecture_review"
+    },
+    {
+      "invariant_id": "CIH-INV-03",
+      "description": "Append-only governance trace on every approval attempt.",
+      "enforcement": "enforced",
+      "enforcement_point": "FAECLanguageReconstructionService._append_event",
+      "gate_id": "CIH-05",
+      "test": "tests/test_constitutional.py::ConstitutionalPromotionTests.test_cih_05_governance_trace"
+    },
+    {
+      "invariant_id": "CIH-INV-04",
+      "description": "Certificate references real CEL ledger entry when CEL is attached.",
+      "enforcement": "enforced",
+      "enforcement_point": "ConstitutionalEvidenceLedger.record_certification",
+      "gate_id": "CEL-06",
+      "test": "tests/test_cel.py"
+    },
+    {
+      "invariant_id": "CIH-INV-05",
+      "description": "Governance decisions reconstructable via trace + CEL lineage.",
+      "enforcement": "observed",
+      "enforcement_point": "SovereignLedgerExplorer.explore_reconstruction",
+      "test": "tests/test_ledger_explorer.py"
+    }
+  ],
+  "conformance_gates": [
+    {
+      "gate_id": "CIH-01",
+      "classification": "core",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_cih_01_project_registration",
+      "document": "docs/specs/CIH_ConformanceRequirements_v1.md"
+    },
+    {
+      "gate_id": "CIH-02",
+      "classification": "core",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_cih_02_evidence_baseline_blocks_rejected",
+      "document": "docs/specs/CIH_ConformanceRequirements_v1.md"
+    },
+    {
+      "gate_id": "CIH-03",
+      "classification": "core",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_cih_03_architecture_review",
+      "document": "docs/specs/CIH_ConformanceRequirements_v1.md"
+    },
+    {
+      "gate_id": "CIH-04",
+      "classification": "core",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_cih_04_certificate_issuance",
+      "document": "docs/specs/CIH_ConformanceRequirements_v1.md"
+    },
+    {
+      "gate_id": "CIH-05",
+      "classification": "core",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_cih_05_governance_trace",
+      "document": "docs/specs/CIH_ConformanceRequirements_v1.md"
+    },
+    {
+      "gate_id": "FAC-E1",
+      "classification": "prerequisite",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_fac_e1_rejects_missing_source_reference",
+      "document": "docs/specs/ConstitutionalPromotionGates.md"
+    },
+    {
+      "gate_id": "FAC-E2",
+      "classification": "prerequisite",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_fac_e2_rejects_claimed_hash_mismatch",
+      "document": "docs/specs/ConstitutionalPromotionGates.md"
+    },
+    {
+      "gate_id": "FAC-E3",
+      "classification": "prerequisite",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_fac_e3_rejects_broken_provenance",
+      "document": "docs/specs/ConstitutionalPromotionGates.md"
+    },
+    {
+      "gate_id": "FAC-E4",
+      "classification": "prerequisite",
+      "test_module": "tests/test_constitutional.py",
+      "test_name": "test_fac_e4_rejects_forbidden_tags",
+      "document": "docs/specs/ConstitutionalPromotionGates.md"
+    },
+    {
+      "gate_id": "CEL-06",
+      "classification": "required_binding",
+      "test_module": "tests/test_cel.py",
+      "test_name": "test_cel_certification_anchor",
+      "document": "docs/governance/CEL_Charter_v01.md"
+    },
+    {
+      "gate_id": "CEL-07",
+      "classification": "required_binding",
+      "test_module": "tests/test_cel.py",
+      "test_name": "test_cel_lineage_query",
+      "document": "docs/governance/CEL_Charter_v01.md"
+    }
+  ],
+  "evidence_bindings": [
+    {
+      "artifact": "Sovereign Certificate",
+      "source": "src/sre/governance/certificates.py",
+      "cel_entry_types": ["certification"],
+      "schema": "schemas/sovereign_certificate.schema.json"
+    },
+    {
+      "artifact": "Governance Trace",
+      "source": "src/sre/governance/cih_service.py",
+      "cel_entry_types": ["governance"],
+      "schema": "schemas/governance_trace.schema.json"
+    },
+    {
+      "artifact": "Evidence Baseline",
+      "source": "src/sre/evidence/registry.py",
+      "cel_entry_types": ["evidence", "validation"],
+      "schema": "schemas/cel_entry.schema.json"
+    },
+    {
+      "artifact": "Conformance attestation",
+      "source": "docs/conformance/SRE_ConformanceProfile_v1.json",
+      "schema": "schemas/cih_conformance_profile.schema.json"
+    }
+  ],
+  "extensions": [
+    {
+      "extension_id": "sovereign_ledger_explorer",
+      "description": "Read model and UI for fabric overview, entry search, and reconstruction lineage.",
+      "module": "src/sre/api/static/explorer.html",
+      "notes": "GET /api/v1/explorer/*; beyond CIH core."
+    },
+    {
+      "extension_id": "constitutional_evidence_ledger",
+      "description": "Unified append-only constitutional audit fabric (Dantomax + FRA + CIH).",
+      "module": "src/sre/evidence/cel.py",
+      "notes": "Required for SRE reference binding; optional for other CIH implementations."
+    },
+    {
+      "extension_id": "remote_kms_signer",
+      "description": "Remote Dantomax/KMS signing abstraction.",
+      "module": "src/sre/evidence/dantomax_signer.py"
+    },
+    {
+      "extension_id": "correspondence_engine",
+      "description": "Sound-change and cognate correspondence search for FRA ALIGN.",
+      "module": "src/sre/linguistics/correspondence_engine.py"
+    },
+    {
+      "extension_id": "mythar_lexicon",
+      "description": "Living lexicon cluster data and lookup.",
+      "module": "src/sre/mythar/lexicon.py"
+    },
+    {
+      "extension_id": "fra_ten_stage_pipeline",
+      "description": "Ten-stage FRA reconstruction pipeline (extends nine-stage baseline).",
+      "module": "src/sre/fra/reconstruction_engine.py"
+    }
+  ],
+  "api_bindings": [
+    {
+      "operation": "register_project",
+      "method": "POST",
+      "path": "/api/v1/cih/projects",
+      "handler": "src/sre/api/handlers/cih.py"
+    },
+    {
+      "operation": "approve_project",
+      "method": "POST",
+      "path": "/api/v1/cih/projects/{project_id}/approve",
+      "handler": "src/sre/api/handlers/cih.py"
+    },
+    {
+      "operation": "get_certificate",
+      "method": "GET",
+      "path": "/api/v1/certificates/{certificate_id}",
+      "handler": "src/sre/api/app.py"
+    }
+  ]
+}

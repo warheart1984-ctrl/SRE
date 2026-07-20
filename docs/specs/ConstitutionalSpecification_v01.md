@@ -45,11 +45,13 @@ No unconstrained generation; all outputs evidence-anchored and governance-tracea
 
 ## Article V — Governance Layer Specification
 
-### Section 1 — CIH Service
+**Normative governance content is defined by CIH**, not by this SRE runtime specification.
 
-Project approval, evidence baseline, architecture review, HYFAL Council hearing, Sovereign certificate issuance.
+- CIH specification: `docs/specs/CIH_ConstitutionalSpecification_v1.md`
+- CIH conformance requirements: `docs/specs/CIH_ConformanceRequirements_v1.md`
+- SRE conformance profile: `docs/conformance/SRE_ConformanceProfile_v1.json`
 
-### Section 2 — Governance Trace
+SRE implements CIH as a reference runtime (`FAECLanguageReconstructionService`, governance traces, Sovereign Certificates, CEL anchoring).
 
 Every reconstruction run must produce a constitutional trace; every decision must be reconstructable.
 

@@ -174,6 +174,9 @@ Machine-readable suite: `tests/test_constitutional.py`.
 
 ## VI. CIH Test Cases (Governance)
 
+**Normative CIH specification:** `docs/specs/CIH_ConstitutionalSpecification_v1.md`  
+**SRE conformance profile:** `docs/conformance/SRE_ConformanceProfile_v1.json`
+
 ### CIH-01 — Project registration
 
 | | |
