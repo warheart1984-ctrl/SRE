@@ -15,6 +15,7 @@ from .handlers.evidence import (
     submit_evidence,
 )
 from .handlers.explorer import (
+    get_conformance_summary,
     get_explorer_entry,
     get_explorer_reconstruction,
     get_fabric_overview,
@@ -172,6 +173,10 @@ def create_app(state: AppState | None = None) -> FastAPI:
     @app.get("/api/v1/explorer/reconstruction/{reconstruction_id}", tags=["explorer"])
     def explorer_reconstruction(reconstruction_id: str) -> dict:
         return get_explorer_reconstruction(app.state.sre.explorer, reconstruction_id)
+
+    @app.get("/api/v1/explorer/conformance", tags=["explorer"])
+    def explorer_conformance() -> dict:
+        return get_conformance_summary()
 
     # --- UI ---
     @app.get("/", response_class=HTMLResponse, include_in_schema=False)

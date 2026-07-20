@@ -97,6 +97,9 @@
     }
     .lineage { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
     #status { color: var(--muted); font-size: 0.8rem; }
+    .fail { color: #c44; }
+    table.conformance td:last-child { text-align: center; }
+    a { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -108,6 +111,20 @@
     <span id="status">Loading…</span>
   </header>
   <main>
+    <section class="full">
+      <h2>Conformance dashboard</h2>
+      <p class="lineage">
+        SRE reference implementation vs
+        <a href="/api/v1/explorer/conformance" target="_blank" rel="noopener">CIH conformance profile</a>
+        ·
+        <code>docs/conformance/SRE_ConformanceProfile_v1.md</code>
+      </p>
+      <div class="stat-grid" id="conformance-stats"></div>
+      <table class="conformance" style="margin-top:0.75rem">
+        <thead><tr><th>Gate</th><th>Classification</th><th>Test</th><th>CI</th></tr></thead>
+        <tbody id="conformance-gates"></tbody>
+      </table>
+    </section>
     <section class="full">
       <h2>Fabric overview</h2>
       <div class="stat-grid" id="fabric-stats"></div>
@@ -160,6 +177,26 @@
       d.className = "stat";
       d.innerHTML = `<label>${label}</label><code class="${cls || ""}">${value ?? "—"}</code>`;
       return d;
+    }
+
+    async function loadConformance() {
+      const data = await api("/api/v1/explorer/conformance");
+      const grid = $("conformance-stats");
+      grid.replaceChildren(
+        stat("Profile", data.profile_id || "—"),
+        stat("Version", data.profile_version || "—"),
+        stat("Runtime", data.runtime?.implementation_id || "—"),
+        stat("Gates", data.counts?.conformance_gates ?? "—"),
+        stat("Invariants", data.counts?.invariants ?? "—"),
+        stat("Entities", data.counts?.entities ?? "—"),
+      );
+      const body = $("conformance-gates");
+      body.replaceChildren();
+      for (const g of data.gates || []) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${g.gate_id}</td><td>${g.classification}</td><td><code>${g.test_name || "—"}</code></td><td class="ok">${g.ci_status || "profiled"}</td>`;
+        body.appendChild(tr);
+      }
     }
 
     async function loadFabric() {
@@ -221,7 +258,7 @@
     $("btn-lineage").onclick = loadLineage;
     $("entry-type").onchange = loadEntries;
 
-    loadFabric().then(loadEntries).catch((e) => {
+    loadConformance().then(loadFabric).then(loadEntries).catch((e) => {
       $("status").textContent = "Error: " + e.message;
     });
   </script>

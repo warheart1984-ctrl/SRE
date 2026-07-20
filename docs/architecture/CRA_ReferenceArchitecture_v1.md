@@ -10,6 +10,8 @@
 | CEL Charter | `docs/governance/CEL_Charter_v01.md` |
 | SRE Conformance Profile | `docs/conformance/SRE_ConformanceProfile_v1.json` |
 
+![Constitutionally Governed Linguistic Reconstruction Architecture](assets/CGLR_Architecture_v1.png)
+
 ---
 
 ## 1. Purpose

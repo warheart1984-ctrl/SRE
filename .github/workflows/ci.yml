@@ -30,6 +30,10 @@ jobs:
         run: |
           pytest -q
 
+      - name: CIH conformance profile tests
+        run: |
+          pytest tests/test_cih_conformance.py -q
+
       - name: Constitutional Artifact Check
         run: |
           echo "Verifying constitutional artifacts..."
@@ -58,5 +62,7 @@ jobs:
           test -f docs/architecture/CRA_ReferenceArchitecture_v1.md
           test -f docs/specs/LRL_Specification_v1.md
           test -f docs/conformance/SRE_ConformanceProfile_v1.json
+          test -f docs/conformance/SRE_ConformanceProfile_v1.md
           test -f schemas/cih_conformance_profile.schema.json
+          test -f tests/test_cih_conformance.py
           test -f data/fra_corpus_v01.json

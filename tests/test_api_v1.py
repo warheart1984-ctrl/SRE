@@ -129,6 +129,16 @@ class TestAPIv1Workflow(unittest.TestCase):
         resp = self.client.get("/")
         self.assertEqual(resp.status_code, 200)
         self.assertIn("Sovereign Ledger Explorer", resp.text)
+        self.assertIn("Conformance dashboard", resp.text)
+
+    def test_explorer_conformance_summary(self) -> None:
+        resp = self.client.get("/api/v1/explorer/conformance")
+        self.assertEqual(resp.status_code, 200)
+        body = resp.json()
+        self.assertEqual(body["status"], "profiled")
+        self.assertEqual(body["profile_id"], "sre-cih-conformance-v1")
+        self.assertGreaterEqual(body["counts"]["conformance_gates"], 11)
+        self.assertTrue(any(g["gate_id"] == "CIH-01" for g in body["gates"]))
 
     def test_health_signing_mode(self) -> None:
         resp = self.client.get("/health")

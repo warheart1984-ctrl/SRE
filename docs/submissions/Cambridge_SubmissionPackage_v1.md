@@ -4,9 +4,15 @@
 **Excludes:** Mythar proprietary IP  
 **Contact / Mythar owner:** Jon Halstead
 
+![Constitutionally Governed Linguistic Reconstruction Architecture](../architecture/assets/CGLR_Architecture_v1.png)
+
+*Framework overview — Mythar linguistic content is excluded from this academic bundle.*
+
 ---
 
 ## 1. Included documents
+
+**Cover letter:** `academic/Cover_Letter_Cambridge.md`
 
 ### Constitutional layer (CIH)
 
@@ -52,6 +58,7 @@
 | Document | Path |
 |----------|------|
 | SRE Conformance Profile | `docs/conformance/SRE_ConformanceProfile_v1.json` |
+| Conformance profile summary | `docs/conformance/SRE_ConformanceProfile_v1.md` |
 | Conformance profile schema | `schemas/cih_conformance_profile.schema.json` |
 | Conformance test suite | `tests/test_cih_conformance.py` |
 | OpenAPI (reference API) | `docs/specs/openapi.yaml` |

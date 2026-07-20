@@ -2,6 +2,10 @@
 
 **Related:** `docs/specs/CIH_ConstitutionalSpecification_v1.md` · `docs/specs/LRL_Specification_v1.md` · `docs/architecture/CRA_ReferenceArchitecture_v1.md`
 
+![Constitutionally Governed Linguistic Reconstruction Architecture](assets/CGLR_Architecture_v1.png)
+
+*Mythar is the governed linguistic domain. CIH is the constitutional standard. SRE is the conformant runtime. CEL is the evidence plane.*
+
 ---
 
 ## 1. Purpose

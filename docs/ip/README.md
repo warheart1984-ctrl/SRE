@@ -17,6 +17,8 @@ Mythar lexicon entries, grammar structures, writing system glyphs, and cosmologi
 - **Sovereign Certificates** — cryptographically attest reconstruction authenticity (`certificates/Mythar_Certificate_Template.md`)
 - **FRA Pipeline** — produces reproducible reconstruction lineage (`docs/architecture/FRA_Methodology.md`)
 
+Architecture diagram: `docs/architecture/assets/CGLR_Architecture_v1.png` · `docs/architecture/CGLR_Architecture_v1.md`
+
 These systems create **cryptographic provenance**, preventing unauthorized duplication.
 
 ---
