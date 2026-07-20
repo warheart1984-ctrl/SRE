@@ -144,3 +144,9 @@ Academic framing: `docs/commercial/Mythar_AcademicPositioning_v1.md`
 | IP protection | `docs/commercial/Mythar_IPProtectionStrategy_v1.md` |
 | CIH–Mythar charter | `docs/governance/CIH_Mythar_RelationshipCharter_v1.md` |
 | Cambridge submission | `docs/submissions/Cambridge_SubmissionPackage_v1.md` |
+| **Publishable Mythar bundle** | `docs/mythar/publishable/` (grammar, lexicon, cosmology, ritual syntax — licensed IP) |
+| Licensing agreement (draft) | `docs/commercial/legal/Mythar_LicensingAgreement_v1.md` |
+| Trademark filing package | `docs/commercial/legal/Mythar_TrademarkFilingPackage_v1.md` |
+| Website copy | `docs/commercial/Mythar_WebsiteCopy_v1.md` |
+| Whitepaper | `docs/commercial/Mythar_Whitepaper_v1.md` |
+| Brand guide | `docs/commercial/Mythar_BrandGuide_v1.md` |

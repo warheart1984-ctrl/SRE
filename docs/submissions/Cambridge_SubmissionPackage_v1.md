@@ -78,7 +78,8 @@
 The following are **not** included in this academic submission:
 
 - `data/mythar_lexicon_v01.json` (commercial lexicon reference in repo — licensed separately)
-- Mythar cosmology, ritual syntax, and writing system materials
+- **`docs/mythar/publishable/`** — full publishable Mythar bundle (grammar, lexicon editions, writing system, sound laws, ritual syntax, cosmology, font spec)
+- Mythar cosmology, ritual syntax, and writing system materials (also under publishable bundle)
 - Mythar commercialization and licensing terms (internal: `docs/commercial/`)
 - Unpublished Mythar cluster semantics beyond open framework description
 
@@ -137,3 +138,4 @@ For owner use only — do not distribute with academic package:
 - `docs/commercial/Mythar_LicensingModel_v1.md`
 - `docs/commercial/Mythar_IPProtectionStrategy_v1.md`
 - `docs/commercial/Mythar_AcademicPositioning_v1.md`
+- `docs/mythar/publishable/` — licensed Mythar linguistic and cosmological materials
