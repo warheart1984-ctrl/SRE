@@ -7,12 +7,13 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from .alignment import AlignCell, weighted_align
+from .features import feature_distance, segment
 from .tokenization import tokenize, tokens_to_str
 
 
 @dataclass
 class CorrespondenceSet:
-    pattern: tuple[str, ...]  # ordered by language key
+    pattern: tuple[str, ...]
     languages: tuple[str, ...]
     count: int
     environments: list[str] = field(default_factory=list)
@@ -35,17 +36,264 @@ class ProtoHypothesis:
 
 
 # Branch-specific directional transforms (proto → daughter heuristics)
+# Format: (proto_segment, daughter_segment, rule_name)
 BRANCH_TRANSFORMS: dict[str, list[tuple[str, str, str]]] = {
-    "lat": [("p", "p", "retain"), ("bh", "f", "italic_aspirate"), ("dh", "f", "italic_aspirate")],
-    "grc": [("bh", "ph", "greek_aspirate"), ("dh", "th", "greek_aspirate"), ("gh", "kh", "greek_aspirate")],
-    "skt": [("e", "a", "indo_iranian_a"), ("o", "a", "indo_iranian_a")],
-    "got": [("p", "f", "grimm"), ("t", "þ", "grimm"), ("k", "h", "grimm")],
-    "ang": [("p", "f", "grimm"), ("t", "þ", "grimm"), ("k", "h", "grimm")],
-    "sga": [("p", "", "celtic_p_loss"), ("kw", "k", "celtic_kw")],
-    "cu": [("s", "s", "retain"), ("k", "k", "retain")],
-    "lit": [("k", "k", "retain"), ("s", "s", "retain")],
-    "hit": [("h", "ḫ", "anatolian_h"), ("e", "e", "retain")],
-    "txb": [("k", "k", "retain"), ("p", "p", "retain")],
+    # Italic / Latin
+    "lat": [
+        ("p", "p", "retain"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "kw", "labiovelar_retain"),
+        ("bʰ", "f", "italic_aspirate"),
+        ("dʰ", "f", "italic_aspirate"),
+        ("gʰ", "h", "italic_gh"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+        ("r", "r", "retain"),
+        ("l", "l", "retain"),
+        ("j", "j", "retain"),
+    ],
+    # Greek
+    "grc": [
+        ("p", "p", "retain"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "p", "greek_labiovelar_p"),
+        ("gʷ", "b", "greek_labiovelar_b"),
+        ("bʰ", "pʰ", "greek_aspirate"),
+        ("dʰ", "tʰ", "greek_aspirate"),
+        ("gʰ", "kʰ", "greek_aspirate"),
+        ("s", "h", "greek_s_aspiration"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+    ],
+    # Sanskrit
+    "skt": [
+        ("p", "p", "retain"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "k", "indo_iranian_kw_k"),
+        ("gʷ", "g", "indo_iranian_gw_g"),
+        ("bʰ", "bʰ", "retain_aspirate"),
+        ("dʰ", "dʰ", "retain_aspirate"),
+        ("gʰ", "gʰ", "retain_aspirate"),
+        ("e", "a", "indo_iranian_a"),
+        ("o", "a", "indo_iranian_a"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+        ("l", "r", "skt_l_r"),
+        ("r", "r", "retain"),
+    ],
+    # Gothic (Germanic)
+    "got": [
+        ("p", "f", "grimm_p"),
+        ("t", "þ", "grimm_t"),
+        ("k", "h", "grimm_k"),
+        ("b", "p", "grimm_b"),
+        ("d", "t", "grimm_d"),
+        ("g", "k", "grimm_g"),
+        ("bʰ", "b", "grimm_aspirate"),
+        ("dʰ", "d", "grimm_aspirate"),
+        ("gʰ", "g", "grimm_aspirate"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+        ("r", "r", "retain"),
+        ("l", "l", "retain"),
+    ],
+    # Old English (Germanic)
+    "ang": [
+        ("p", "f", "grimm_p"),
+        ("t", "þ", "grimm_t"),
+        ("k", "h", "grimm_k"),
+        ("b", "p", "grimm_b"),
+        ("d", "t", "grimm_d"),
+        ("g", "k", "grimm_g"),
+        ("bʰ", "b", "grimm_aspirate"),
+        ("dʰ", "d", "grimm_aspirate"),
+        ("gʰ", "g", "grimm_aspirate"),
+        ("s", "s", "retain"),
+    ],
+    # Old Norse
+    "non": [
+        ("p", "f", "grimm_p"),
+        ("t", "þ", "grimm_t"),
+        ("k", "h", "grimm_k"),
+        ("b", "p", "grimm_b"),
+        ("d", "t", "grimm_d"),
+        ("g", "k", "grimm_g"),
+        ("bʰ", "b", "grimm_aspirate"),
+        ("dʰ", "d", "grimm_aspirate"),
+        ("gʰ", "g", "grimm_aspirate"),
+        ("s", "s", "retain"),
+    ],
+    # Old High German
+    "goh": [
+        ("p", "pf", "high_german_p"),
+        ("t", "ts", "high_german_t"),
+        ("k", "k", "retain"),
+        ("b", "p", "grimm_b"),
+        ("d", "t", "grimm_d"),
+        ("g", "k", "grimm_g"),
+        ("bʰ", "b", "grimm_aspirate"),
+        ("dʰ", "d", "grimm_aspirate"),
+        ("gʰ", "g", "grimm_aspirate"),
+        ("þ", "d", "high_german_þ"),
+    ],
+    # Old Irish (Celtic)
+    "sga": [
+        ("p", "", "celtic_p_loss"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "k", "celtic_kw_k"),
+        ("gʷ", "g", "celtic_gw_g"),
+        ("bʰ", "b", "celtic_aspirate"),
+        ("dʰ", "d", "celtic_aspirate"),
+        ("gʰ", "g", "celtic_aspirate"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+    ],
+    # Old Church Slavonic
+    "cu": [
+        ("p", "p", "retain"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "k", "slavic_kw_k"),
+        ("gʷ", "g", "slavic_gw_g"),
+        ("bʰ", "b", "slavic_aspirate"),
+        ("dʰ", "d", "slavic_aspirate"),
+        ("gʰ", "g", "slavic_aspirate"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+    ],
+    # Lithuanian
+    "lit": [
+        ("p", "p", "retain"),
+        ("b", "b", "retain"),
+        ("t", "t", "retain"),
+        ("d", "d", "retain"),
+        ("k", "k", "retain"),
+        ("g", "g", "retain"),
+        ("kʷ", "k", "baltic_kw_k"),
+        ("gʷ", "g", "baltic_gw_g"),
+        ("bʰ", "b", "baltic_aspirate"),
+        ("dʰ", "d", "baltic_aspirate"),
+        ("gʰ", "g", "baltic_aspirate"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+    ],
+    # Hittite (Anatolian)
+    "hit": [
+        ("p", "p", "retain"),
+        ("b", "p", "hittite_devoice"),
+        ("t", "t", "retain"),
+        ("d", "t", "hittite_devoice"),
+        ("k", "k", "retain"),
+        ("g", "k", "hittite_devoice"),
+        ("kʷ", "ku", "hittite_kw"),
+        ("gʷ", "ku", "hittite_gw"),
+        ("h", "ḫ", "anatolian_h"),
+        ("e", "e", "retain"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+    ],
+    # Tocharian B
+    "txb": [
+        ("p", "p", "retain"),
+        ("b", "p", "tocharian_devoice"),
+        ("t", "t", "retain"),
+        ("d", "t", "tocharian_devoice"),
+        ("k", "k", "retain"),
+        ("g", "k", "tocharian_devoice"),
+        ("s", "s", "retain"),
+        ("m", "m", "retain"),
+        ("n", "n", "retain"),
+        ("r", "r", "retain"),
+        ("l", "l", "retain"),
+    ],
+    # Armenian
+    "hxm": [
+        ("p", "h", "armenian_p_h"),
+        ("b", "p", "armenian_b_p"),
+        ("bʰ", "b", "armenian_aspirate"),
+        ("t", "tʻ", "armenian_t"),
+        ("d", "t", "armenian_d_t"),
+        ("dʰ", "d", "armenian_aspirate"),
+        ("k", "kʻ", "armenian_k"),
+        ("g", "k", "armenian_g_k"),
+        ("gʰ", "g", "armenian_aspirate"),
+    ],
+    # Albanian
+    "alb": [
+        ("bʰ", "b", "albanian_aspirate"),
+        ("dʰ", "d", "albanian_aspirate"),
+        ("gʰ", "g", "albanian_aspirate"),
+        ("kʷ", "s", "albanian_kw_s"),
+        ("gʷ", "z", "albanian_gw_z"),
+        ("s", "gj", "albanian_palatalization"),
+    ],
+    # Avestan (Iranian)
+    "ave": [
+        ("e", "a", "indo_iranian_a"),
+        ("o", "a", "indo_iranian_a"),
+        ("s", "h", "iranian_s_h"),
+        ("bʰ", "b", "iranian_aspirate"),
+        ("dʰ", "d", "iranian_aspirate"),
+        ("gʰ", "g", "iranian_aspirate"),
+    ],
+    # Oscan (Sabellic)
+    "osc": [
+        ("kʷ", "p", "sabellic_kw_p"),
+        ("gʷ", "b", "sabellic_gw_b"),
+        ("bʰ", "f", "italic_aspirate"),
+        ("dʰ", "f", "italic_aspirate"),
+    ],
+}
+
+# Naturalness weights for sound changes — less natural = higher cost
+# Used to prefer more phonetically natural reconstructions
+_NATURALNESS: dict[str, float] = {
+    # Lentition (natural)
+    "grimm_p": 0.8,
+    "grimm_t": 0.8,
+    "grimm_k": 0.8,
+    "greek_aspirate": 0.9,
+    "italic_aspirate": 0.85,
+    # Merger (natural)
+    "indo_iranian_a": 0.9,
+    "celtic_p_loss": 0.7,
+    "hittite_devoice": 0.85,
+    "tocharian_devoice": 0.85,
+    # Retention (neutral)
+    "retain": 1.0,
+    # Unconditioned split (less natural — marks possible issue)
+    "albanian_kw_s": 0.6,
+    "albanian_gw_z": 0.6,
+    "armenian_p_h": 0.7,
+    "high_german_p": 0.75,
+    # Conditioned (natural with environment)
+    "greek_s_aspiration": 0.85,
 }
 
 
@@ -77,7 +325,12 @@ class CorrespondenceEngine:
         """
         Generate confidence-ranked proto hypotheses for a cognate set.
 
-        forms: language_code → surface form (normalized or original)
+        Uses the comparative method:
+          1. Pairwise alignments between all daughter languages
+          2. Discover recurring correspondence sets
+          3. Reconstruct each proto-segment from correspondence evidence
+          4. Infer sound changes from proto → each daughter
+          5. Score regularity and rank alternatives
         """
         attestation_ids = attestation_ids or {}
         flags_by_lang = flags_by_lang or {}
@@ -87,7 +340,7 @@ class CorrespondenceEngine:
 
         alignments = self._pairwise_alignments(forms)
         corr_sets = self._discover_correspondences(forms, alignments)
-        primary = self._majority_vote_proto(forms, corr_sets)
+        primary = self._reconstruct_from_correspondences(forms, corr_sets)
         alternatives = self._generate_competitors(forms, primary, known_proto)
 
         all_ids: list[str] = []
@@ -105,7 +358,8 @@ class CorrespondenceEngine:
                 0.0,
                 min(
                     1.0,
-                    base_conf * reg - exc
+                    base_conf * reg
+                    - exc
                     - self._flag_penalties(flags_by_lang)
                     + (0.05 if loo.get("recovered") else 0.0),
                 ),
@@ -128,7 +382,7 @@ class CorrespondenceEngine:
                             "count": cs.count,
                             "environments": cs.environments[:5],
                         }
-                        for cs in corr_sets[:12]
+                        for cs in corr_sets[:15]
                     ],
                     sound_change_sequence=seq,
                     competing_hypotheses=competitors,
@@ -141,7 +395,6 @@ class CorrespondenceEngine:
             )
 
         hypotheses.sort(key=lambda h: h.confidence, reverse=True)
-        # annotate competing list on each with others' scores
         for h in hypotheses:
             h.competing_hypotheses = [
                 {
@@ -154,9 +407,7 @@ class CorrespondenceEngine:
             ]
         return hypotheses
 
-    def _pairwise_alignments(
-        self, forms: dict[str, str]
-    ) -> dict[tuple[str, str], list[AlignCell]]:
+    def _pairwise_alignments(self, forms: dict[str, str]) -> dict[tuple[str, str], list[AlignCell]]:
         out: dict[tuple[str, str], list[AlignCell]] = {}
         langs = list(forms.keys())
         for i, la in enumerate(langs):
@@ -171,8 +422,6 @@ class CorrespondenceEngine:
         forms: dict[str, str],
         alignments: dict[tuple[str, str], list[AlignCell]],
     ) -> list[CorrespondenceSet]:
-        # Build per-position multi-language columns from pairwise alignments
-        # Heuristic: collect recurring symbol tuples across language pairs
         pair_counts: Counter[tuple[str, str, str, str]] = Counter()
         envs: dict[tuple[str, str, str, str], list[str]] = defaultdict(list)
         for (la, lb), path in alignments.items():
@@ -186,25 +435,135 @@ class CorrespondenceEngine:
                 elif cell.a:
                     prev_a = cell.a.symbol
         sets: list[CorrespondenceSet] = []
-        for (la, sa, lb, sb), cnt in pair_counts.most_common(40):
+        for (la, sa, lb, sb), cnt in pair_counts.most_common(50):
             if cnt < self.min_correspondence_count and sa != sb:
                 continue
-            langs = tuple(sorted([la, lb]))
             pattern = (sa, sb) if la <= lb else (sb, sa)
             sets.append(
                 CorrespondenceSet(
                     pattern=pattern,
-                    languages=langs,
+                    languages=tuple(sorted([la, lb])),
                     count=cnt,
                     environments=envs[(la, sa, lb, sb)],
                 )
             )
         return sets
 
+    def _reconstruct_from_correspondences(
+        self,
+        forms: dict[str, str],
+        corr_sets: list[CorrespondenceSet],
+    ) -> str:
+        """
+        Reconstruct a proto-form using the comparative method.
+
+        For each aligned position, collect what each daughter language has.
+        Use correspondence patterns to vote on the most likely proto-segment,
+        preferring segments that can *explain* other segments via known
+        sound changes (directionality principle).
+        """
+        tokenized = {lang: tokenize(f) for lang, f in forms.items()}
+        max_len = max(len(t) for t in tokenized.values())
+        langs = sorted(forms.keys())
+
+        pos_to_sym: dict[tuple[str, int], str] = {}
+        for lang, toks in tokenized.items():
+            for i, tok in enumerate(toks):
+                pos_to_sym[(lang, i)] = tok.symbol
+
+        # Precompute a lookup of known sound changes: (source_segment, target_language) → [target_segments]
+        # This lets us check: "if proto had X, would it naturally give Y in language Z?"
+        known_changes: dict[str, dict[str, list[str]]] = {}
+        for lang in langs:
+            changes = BRANCH_TRANSFORMS.get(lang, [])
+            for src, dst, _name in changes:
+                known_changes.setdefault(src, {}).setdefault(lang, []).append(dst)
+
+        proto_chars: list[str] = []
+        for pos in range(max_len):
+            column: dict[str, str] = {}
+            for lang in langs:
+                sym = pos_to_sym.get((lang, pos))
+                if sym:
+                    column[lang] = sym
+
+            if not column:
+                continue
+
+            if len(column) < 2:
+                proto_chars.append(list(column.values())[0])
+                continue
+
+            candidates: Counter[str] = Counter()
+
+            for lang_a, sym_a in column.items():
+                for lang_b, sym_b in column.items():
+                    if lang_a >= lang_b:
+                        continue
+
+                    match_weight = 0.0
+                    for cs in corr_sets:
+                        if cs.languages == tuple(sorted([lang_a, lang_b])) and cs.pattern == (
+                            sym_a,
+                            sym_b,
+                        ):
+                            match_weight += min(
+                                cs.count / max(self.min_correspondence_count, 1), 3.0
+                            )
+
+                    if match_weight == 0:
+                        sa = segment(sym_a)
+                        sb = segment(sym_b)
+                        fd = feature_distance(sa, sb)
+                        match_weight = max(0.0, 1.0 - fd)
+
+                    candidates[sym_a] += match_weight
+                    candidates[sym_b] += match_weight
+
+            if not candidates:
+                proto_chars.append(Counter(column.values()).most_common(1)[0][0])
+                continue
+
+            best_sym, best_score = candidates.most_common(1)[0]
+
+            # Directionality refinement: if the best candidate is NOT the
+            # source of a known sound change for other languages in this
+            # column, but another candidate IS, prefer the source candidate.
+            candidate_list = [s for s, _ in candidates.most_common(3)]
+            if len(candidate_list) >= 2:
+                # Score each candidate by how well it explains other segments
+                explain_scores: dict[str, float] = {}
+                for cand in candidate_list:
+                    score = 0.0
+                    for lang, actual_sym in column.items():
+                        if actual_sym == cand:
+                            score += 0.2  # identity match bonus
+                        else:
+                            # Can cand → actual_sym via known changes?
+                            known = known_changes.get(cand, {}).get(lang, [])
+                            if actual_sym in known:
+                                score += 0.5  # known directional change
+                    explain_scores[cand] = score
+
+                best_explain = max(explain_scores, key=explain_scores.get)
+                if explain_scores[best_explain] > explain_scores.get(best_sym, 0):
+                    best_sym = best_explain
+
+            # Tie-breaking
+            if len(candidates) >= 2:
+                second_score = candidates.most_common(2)[1][1]
+                if best_score < second_score * 1.2:
+                    freq = Counter(column.values())
+                    best_sym = freq.most_common(1)[0][0]
+
+            proto_chars.append(best_sym)
+
+        return "".join(proto_chars) or next(iter(forms.values()))
+
     def _majority_vote_proto(
         self, forms: dict[str, str], corr_sets: list[CorrespondenceSet]
     ) -> str:
-        # Prefer longest shared prefix/suffix skeleton via tokenization vote
+        """Simpler per-position majority vote (fallback / baseline)."""
         tokenized = {lang: tokenize(f) for lang, f in forms.items()}
         max_len = max(len(t) for t in tokenized.values())
         chars: list[str] = []
@@ -216,16 +575,13 @@ class CorrespondenceEngine:
             if not votes:
                 break
             top, n = votes.most_common(1)[0]
-            # require relative agreement
             if n >= max(1, len(tokenized) // 2):
                 chars.append(top)
             elif len(votes) >= 2 and votes.most_common(2)[0][1] == votes.most_common(2)[1][1]:
-                # tie → keep first alphabetically for determinism, mark later
                 chars.append(sorted(votes.keys())[0])
             else:
                 chars.append(top)
-        proto = "".join(chars)
-        return proto or next(iter(forms.values()))
+        return "".join(chars) or next(iter(forms.values()))
 
     def _generate_competitors(
         self,
@@ -233,7 +589,7 @@ class CorrespondenceEngine:
         primary: str,
         known_proto: str | None,
     ) -> list[tuple[str, float, str]]:
-        alts: list[tuple[str, float, str]] = [(primary, 0.72, "majority_vote")]
+        alts: list[tuple[str, float, str]] = [(primary, 0.75, "comparative_reconstruction")]
         # length-trimmed competitor
         if len(primary) > 2:
             alts.append((primary[:-1], 0.55, "trimmed_final"))
@@ -245,9 +601,22 @@ class CorrespondenceEngine:
         shortest = min(forms.values(), key=len)
         if shortest not in {primary, longest}:
             alts.append((shortest, 0.35, "eroded"))
+        # majority vote baseline
+        tokenized = {lang: tokenize(f) for lang, f in forms.items()}
+        max_len = max(len(t) for t in tokenized.values())
+        chars: list[str] = []
+        for i in range(max_len):
+            votes: Counter[str] = Counter()
+            for toks in tokenized.values():
+                if i < len(toks):
+                    votes[toks[i].symbol] += 1
+            if votes:
+                chars.append(votes.most_common(1)[0][0])
+        majority = "".join(chars)
+        if majority and majority != primary and len(majority) >= 2:
+            alts.append((majority, 0.5, "position_majority"))
         if known_proto:
             alts.insert(0, (known_proto.lstrip("*"), 0.88, "scholarly_prior"))
-        # dedupe by form keeping best base confidence
         best: dict[str, tuple[float, str]] = {}
         for form, conf, label in alts:
             if form not in best or conf > best[form][0]:
@@ -277,10 +646,10 @@ class CorrespondenceEngine:
                     "cost": round(cell.cost, 4),
                     "direction": directionality,
                 }
-                # annotate known branch transforms
                 for src, dst, name in BRANCH_TRANSFORMS.get(lang, []):
                     if cell.a and cell.b and cell.a.symbol == src and cell.b.symbol == dst:
                         rule["named_transform"] = name
+                        rule["naturalness"] = _NATURALNESS.get(name, 0.5)
                 seq.append(rule)
             seq.append(
                 {
@@ -301,14 +670,25 @@ class CorrespondenceEngine:
         corr_sets: list[CorrespondenceSet],
     ) -> tuple[float, float, list[str], list[str]]:
         named = sum(1 for s in seq if "named_transform" in s)
+        naturalness_sum = sum(s.get("naturalness", 0.5) for s in seq if "named_transform" in s)
         ops = [s for s in seq if s.get("op")]
-        irregular_ops = sum(1 for s in ops if s.get("op") in {"ins", "del"} and s.get("cost", 0) > 1.0)
+        irregular_ops = sum(
+            1 for s in ops if s.get("op") in {"ins", "del"} and s.get("cost", 0) > 1.0
+        )
         recurring = sum(1 for cs in corr_sets if cs.count >= self.min_correspondence_count)
-        reg = 0.45 + 0.1 * min(named, 3) + 0.05 * min(recurring, 4)
+
+        # Regularity base: starts at 0.4, increased by named transforms and correspondences
+        reg = 0.4
+        if named > 0:
+            reg += 0.15 * min(named / max(len(forms), 1), 1.0)
+            reg += 0.1 * min(naturalness_sum / (named or 1), 0.3)
+        reg += 0.05 * min(recurring, 6)
         reg = min(1.0, reg)
+
         exc = irregular_ops * self.irregularity_penalty * 0.15
         conflicts: list[str] = []
         hyp_flags: list[str] = []
+
         for lang, flags in flags_by_lang.items():
             for fl in flags:
                 hyp_flags.append(f"{lang}:{fl}")
@@ -320,7 +700,8 @@ class CorrespondenceEngine:
                         exc += self.analogy_penalty
                     else:
                         exc += self.irregularity_penalty * 0.5
-        # accidental similarity: high align cost with few recurring corrs
+
+        # Accidental similarity detection
         avg_cost = 0.0
         cost_n = 0
         for s in seq:
@@ -333,6 +714,7 @@ class CorrespondenceEngine:
             conflicts.append("possible_accidental_similarity")
             hyp_flags.append("accidental_similarity_risk")
             exc += 0.2
+
         return reg, exc, conflicts, hyp_flags
 
     def _flag_penalties(self, flags_by_lang: dict[str, list[str]]) -> float:
@@ -351,13 +733,10 @@ class CorrespondenceEngine:
         """Withhold one language; check whether proto still predicts a plausible form."""
         if len(forms) < 3:
             return {"applicable": False, "recovered": False}
-        # withhold the longest form language
         withhold_lang = max(forms.keys(), key=lambda k: len(forms[k]))
         remaining = {k: v for k, v in forms.items() if k != withhold_lang}
-        # re-vote proto from remaining
-        alt = self._majority_vote_proto(remaining, [])
+        alt = self._reconstruct_from_correspondences(remaining, [])
         withheld = forms[withhold_lang]
-        # recovery: shared character overlap / edit proximity
         pt, wt = tokenize(alt), tokenize(withheld)
         path, cost = weighted_align(pt, wt)
         max_len = max(len(pt), len(wt), 1)

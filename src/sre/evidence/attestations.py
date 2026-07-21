@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -66,7 +66,7 @@ class HistoricalAttestation:
         if isinstance(self.status, str):
             self.status = AttestationStatus(self.status)
         if not self.ingestion_timestamp:
-            self.ingestion_timestamp = datetime.now(timezone.utc).isoformat()
+            self.ingestion_timestamp = datetime.now(UTC).isoformat()
         if not self.checksum:
             self.checksum = compute_attestation_checksum(self)
 

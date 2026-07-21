@@ -6,8 +6,9 @@ from dataclasses import asdict
 from typing import Any
 
 from ...ai.hlrm_agent import HLRMAIAgent
-from ...fra.reconstruction_engine import ChronologicalReconstruction
 from ...evidence.registry import EvidenceRegistry
+from ...fra.reconstruction_engine import ChronologicalReconstruction
+from ...storage.reconstruction_cache import ReconstructionCache
 
 
 def start_reconstruction(
@@ -15,13 +16,11 @@ def start_reconstruction(
     agent: HLRMAIAgent,
     body: dict[str, Any],
     *,
-    reconstruction_cache: dict[str, dict[str, Any]],
+    reconstruction_cache: ReconstructionCache | dict[str, dict[str, Any]],
 ) -> dict[str, Any]:
     """Wire to POST /api/v1/reconstruction."""
     corpus = str(body.get("corpus_path") or body.get("corpus") or "mythar")
-    evidence_sources = list(
-        body.get("evidence_sources") or body.get("evidence_ids") or []
-    )
+    evidence_sources = list(body.get("evidence_sources") or body.get("evidence_ids") or [])
     constraints = dict(body.get("constraints") or {})
     if body.get("require_attestation_lineage") is True:
         constraints["require_attestation_lineage"] = True
@@ -44,7 +43,7 @@ def start_reconstruction(
 
 
 def get_reconstruction(
-    reconstruction_cache: dict[str, dict[str, Any]],
+    reconstruction_cache: ReconstructionCache | dict[str, dict[str, Any]],
     reconstruction_id: str,
 ) -> dict[str, Any] | None:
     """Wire to GET /api/v1/reconstruction/{reconstruction_id}."""

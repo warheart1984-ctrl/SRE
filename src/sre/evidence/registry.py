@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 
 from .cel import ConstitutionalEvidenceLedger
@@ -19,10 +19,10 @@ from .models import (
 if TYPE_CHECKING:
     from fae.evidence.registry import EvidenceRegistry as FAEEvidenceRegistry
 
+    from ..storage.base import PersistStore
+
 # Substrate authenticity denylist (FAC-E1)
-_INVALID_SOURCE_REFERENCES = frozenset(
-    {"", "invalid", "n/a", "unknown", "none", "null"}
-)
+_INVALID_SOURCE_REFERENCES = frozenset({"", "invalid", "n/a", "unknown", "none", "null"})
 
 
 class EvidenceRegistry:
@@ -39,6 +39,7 @@ class EvidenceRegistry:
         cel: ConstitutionalEvidenceLedger | None = None,
         cel_store: Any | None = None,
         fae_registry: FAEEvidenceRegistry | None = None,
+        persist_store: PersistStore | None = None,
     ) -> None:
         self._store: dict[str, LinguisticEvidence] = {}
         self._status: dict[str, ConstitutionalStatus] = {}
@@ -47,12 +48,19 @@ class EvidenceRegistry:
         self._dantomax = dantomax_client
         self._cel_store = cel_store
         self._fae_registry = fae_registry
+        self._persist_store = persist_store
         if cel is not None:
             self._cel = cel
         elif dantomax_client is not None:
             self._cel = ConstitutionalEvidenceLedger(dantomax_client, store=cel_store)
         else:
             self._cel = None
+        if persist_store is not None:
+            for evidence, status, validation in persist_store.load_evidence():
+                self._store[evidence.evidence_id] = evidence
+                self._status[evidence.evidence_id] = status
+                self._validation_reports[evidence.evidence_id] = validation
+            self._reconstructions.update(persist_store.load_all_reconstruction_meta())
 
     @property
     def cel(self) -> ConstitutionalEvidenceLedger | None:
@@ -84,9 +92,7 @@ class EvidenceRegistry:
         self._store[evidence.evidence_id] = evidence
         self._validation_reports[evidence.evidence_id] = validation
         self._status[evidence.evidence_id] = (
-            ConstitutionalStatus.ACCEPTED
-            if validation.is_valid
-            else ConstitutionalStatus.REJECTED
+            ConstitutionalStatus.ACCEPTED if validation.is_valid else ConstitutionalStatus.REJECTED
         )
         if self._dantomax is not None and validation.is_valid:
             receipt = self._dantomax.register_evidence(
@@ -106,10 +112,9 @@ class EvidenceRegistry:
         if self._fae_registry is not None and validation.is_valid:
             from ..substrate.bridge import mirror_linguistic_evidence_to_fae
 
-            fae_ev = mirror_linguistic_evidence_to_fae(
-                evidence, fae_registry=self._fae_registry
-            )
+            fae_ev = mirror_linguistic_evidence_to_fae(evidence, fae_registry=self._fae_registry)
             validation.report["fae_substrate"] = {"evidence_id": fae_ev.id}
+        self._persist_evidence(evidence)
         return evidence
 
     def verify_with_dantomax(self, evidence_id: str) -> dict[str, Any] | None:
@@ -129,9 +134,7 @@ class EvidenceRegistry:
         """Return constitutional status for evidence_id."""
         return self._status.get(evidence_id)
 
-    def get_validation_report(
-        self, evidence_id: str
-    ) -> ConstitutionalValidationResult | None:
+    def get_validation_report(self, evidence_id: str) -> ConstitutionalValidationResult | None:
         """Wire to GET /api/v1/evidence/{evidence_id}/validation."""
         return self._validation_reports.get(evidence_id)
 
@@ -145,11 +148,33 @@ class EvidenceRegistry:
         validation = self._run_constitutional_validation(evidence, claimed_sha256=None)
         self._validation_reports[evidence_id] = validation
         self._status[evidence_id] = (
-            ConstitutionalStatus.ACCEPTED
-            if validation.is_valid
-            else ConstitutionalStatus.REJECTED
+            ConstitutionalStatus.ACCEPTED if validation.is_valid else ConstitutionalStatus.REJECTED
         )
+        self._persist_evidence(evidence)
         return validation
+
+    def update_evidence_content(
+        self,
+        evidence_id: str,
+        content_patch: dict[str, Any],
+        *,
+        merge_metadata: bool = True,
+    ) -> LinguisticEvidence:
+        """Patch evidence content (e.g. governance CEL binding) and persist."""
+        evidence = self._store.get(evidence_id)
+        if evidence is None:
+            raise KeyError(f"unknown evidence_id: {evidence_id}")
+        if merge_metadata and "metadata" in content_patch:
+            meta = dict(evidence.content.get("metadata") or {})
+            patch_meta = dict(content_patch.get("metadata") or {})
+            if isinstance(meta, dict) and isinstance(patch_meta, dict):
+                merged = {**meta, **patch_meta}
+                content_patch = {**content_patch, "metadata": merged}
+        evidence.content.update(content_patch)
+        validation = self._validation_reports.get(evidence_id)
+        if validation is not None:
+            self._persist_evidence(evidence)
+        return evidence
 
     def register_reconstruction(
         self,
@@ -174,10 +199,12 @@ class EvidenceRegistry:
             "inconsistent": inconsistent,
             "alignment_ok": alignment_ok,
         }
+        if self._persist_store is not None:
+            self._persist_store.save_reconstruction_meta(
+                reconstruction_id, self._reconstructions[reconstruction_id]
+            )
 
-    def validate_reconstruction(
-        self, reconstruction_id: str
-    ) -> ConstitutionalValidationResult:
+    def validate_reconstruction(self, reconstruction_id: str) -> ConstitutionalValidationResult:
         """
         Used by FRA engine and CIH service:
         - aggregate linked evidence
@@ -214,9 +241,7 @@ class EvidenceRegistry:
 
         # FAC-V1 Coverage
         accepted = [
-            eid
-            for eid in evidence_ids
-            if self._status.get(eid) == ConstitutionalStatus.ACCEPTED
+            eid for eid in evidence_ids if self._status.get(eid) == ConstitutionalStatus.ACCEPTED
         ]
         if len(accepted) < min_count or len(evidence_ids) < min_count:
             failed.append("FAC-V1: Coverage")
@@ -299,10 +324,19 @@ class EvidenceRegistry:
             is_valid=len(failed) == 0,
             failed_checks=failed,
             report=report,
-            validated_at=datetime.now(timezone.utc),
+            validated_at=datetime.now(UTC),
         )
 
     # --- Internal helpers ---
+
+    def _persist_evidence(self, evidence: LinguisticEvidence) -> None:
+        if self._persist_store is None:
+            return
+        status = self._status.get(evidence.evidence_id)
+        validation = self._validation_reports.get(evidence.evidence_id)
+        if status is None or validation is None:
+            return
+        self._persist_store.save_evidence(evidence, status, validation)
 
     def _canonicalize(self, evidence_data: dict[str, Any]) -> dict[str, Any]:
         required = ("evidence_id", "evidence_type", "content", "submitted_by")
@@ -333,9 +367,7 @@ class EvidenceRegistry:
             "provenance_chain": canonical_data["provenance_chain"],
             "constitutional_tags": canonical_data["constitutional_tags"],
         }
-        encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode(
-            "utf-8"
-        )
+        encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
         return hashlib.sha256(encoded).hexdigest()
 
     def _build_evidence_object(
@@ -348,7 +380,7 @@ class EvidenceRegistry:
             evidence_type=EvidenceType(evidence_data["evidence_type"]),
             source_reference=evidence_data["source_reference"],
             content=dict(evidence_data["content"]),
-            created_at=datetime.now(timezone.utc),
+            created_at=datetime.now(UTC),
             submitted_by=evidence_data["submitted_by"],
             sha256_hash=sha256_hash,
             provenance_chain=list(evidence_data["provenance_chain"]),
@@ -381,7 +413,7 @@ class EvidenceRegistry:
             is_valid=is_valid,
             failed_checks=failed,
             report=report,
-            validated_at=datetime.now(timezone.utc),
+            validated_at=datetime.now(UTC),
         )
 
     def _check_fac_e1_authenticity(self, evidence: LinguisticEvidence) -> bool:

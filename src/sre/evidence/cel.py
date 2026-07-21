@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import TYPE_CHECKING, Any
 
@@ -74,7 +74,7 @@ class CELEntry:
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def _canonical_entry_body(
@@ -216,8 +216,7 @@ class ConstitutionalEvidenceLedger:
         entry = data if isinstance(data, CELEntry) else CELEntry.from_dict(data)
         if len(self._chain) != entry.position:
             raise ValueError(
-                f"CEL restore position mismatch: expected {len(self._chain)}, "
-                f"got {entry.position}"
+                f"CEL restore position mismatch: expected {len(self._chain)}, got {entry.position}"
             )
         if entry.checksum != compute_cel_checksum(entry):
             raise ValueError(f"CEL restore checksum mismatch: {entry.cel_entry_id}")
@@ -465,9 +464,7 @@ class ConstitutionalEvidenceLedger:
         )
         return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
-    def _format_lineage(
-        self, entries: list[CELEntry], path_order: list[str]
-    ) -> str:
+    def _format_lineage(self, entries: list[CELEntry], path_order: list[str]) -> str:
         parts: list[str] = []
         for kind in path_order:
             typed = [e for e in entries if e.entry_type.value == kind]

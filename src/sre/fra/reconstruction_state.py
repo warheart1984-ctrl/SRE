@@ -7,7 +7,6 @@ from typing import Any
 
 from fae.cycle.fra_cycle import FRACycleStage
 
-
 # SRE domain stage → FAE constitutional stage (many-to-one).
 SRE_TO_FAE_STAGE_MAP: dict[str, FRACycleStage] = {
     "OBSERVE": FRACycleStage.OBSERVE,

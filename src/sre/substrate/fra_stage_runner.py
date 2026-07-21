@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import uuid
+from collections.abc import Callable
 from dataclasses import replace
 from datetime import datetime
-from typing import Any, Callable
+from typing import Any
 
+from fae.api import EvidenceRegistry as FAEEvidenceRegistry
 from fae.cycle.fra_cycle import (
     BuildModelStage,
     CycleContext,
@@ -25,8 +27,8 @@ from fae.metrics.validation import get_validation_engine
 from ..fra.reconstruction_engine import ChronologicalReconstruction
 from ..fra.reconstruction_state import (
     FAE_TO_SRE_STAGE_GROUPS,
-    ReconstructionRunState,
     SRE_TO_FAE_STAGE_MAP,
+    ReconstructionRunState,
 )
 from .fac_evidence import (
     SREAnchoredEvidenceMixin,
@@ -34,7 +36,6 @@ from .fac_evidence import (
     aligned_predictions,
     build_reasoning_explanations,
 )
-from fae.api import EvidenceRegistry as FAEEvidenceRegistry
 
 
 class SREBuildModelStage(SREAnchoredEvidenceMixin, BuildModelStage):
@@ -104,7 +105,9 @@ def _patch_internal_evidence_stages(cycle: GovernedFRACycle) -> None:
             patched.append(SREReasonStage(stage.reasoner))
         elif stage.stage == FRACycleStage.UPDATE_MODEL and isinstance(stage, UpdateModelStage):
             patched.append(SREUpdateModelStage(stage.updater))
-        elif stage.stage == FRACycleStage.MEASURE_REALITY and isinstance(stage, MeasureRealityStage):
+        elif stage.stage == FRACycleStage.MEASURE_REALITY and isinstance(
+            stage, MeasureRealityStage
+        ):
             patched.append(SREMeasureRealityStage(stage.measurers))
         else:
             patched.append(stage)
@@ -140,9 +143,7 @@ class SREFRAPipelineRunner:
         self.drift_threshold = drift_threshold or float(
             engine.constraints.get("drift_threshold", 0.6)
         )
-        self.quality_gate = quality_gate or float(
-            engine.constraints.get("quality_gate", 0.35)
-        )
+        self.quality_gate = quality_gate or float(engine.constraints.get("quality_gate", 0.35))
         self.max_fae_cycles = max_fae_cycles
         self.cycle_id = ""
         self.state: ReconstructionRunState | None = None
@@ -292,9 +293,7 @@ class SREFRAPipelineRunner:
             drift = float(flat.get("drift", state.drift))
             drift_target = float(predictions.get("drift", self.drift_threshold))
             if drift > drift_target:
-                discrepancies.append(
-                    f"drift {drift:.3f} exceeds threshold {drift_target:.3f}"
-                )
+                discrepancies.append(f"drift {drift:.3f} exceeds threshold {drift_target:.3f}")
             return {
                 "alignment_score": alignment_score,
                 "discrepancies": discrepancies,
@@ -402,22 +401,21 @@ class SREGovernedFRACycle(GovernedFRACycle):
                 stage_outputs[stage.stage.value] = result.output
                 context.metadata[stage.stage.value] = result.output
 
-                if stage.stage == FRACycleStage.BUILD_MODEL:
-                    self.model_state = result.output
-                    context = replace(context, model_state=result.output)
-                elif stage.stage == FRACycleStage.UPDATE_MODEL:
+                if (
+                    stage.stage == FRACycleStage.BUILD_MODEL
+                    or stage.stage == FRACycleStage.UPDATE_MODEL
+                ):
                     self.model_state = result.output
                     context = replace(context, model_state=result.output)
 
             domain_ok = (
-                isinstance(self.model_state, dict)
-                and self.model_state.get("status") == "COMPLETED"
+                isinstance(self.model_state, dict) and self.model_state.get("status") == "COMPLETED"
             )
             if not domain_ok:
                 self.csr.end_cycle(self.cycle_id, success=False, final_model=self.model_state)
-                reason = (
-                    self.runner.domain_result or {}
-                ).get("reason", "SRE domain pipeline did not complete")
+                reason = (self.runner.domain_result or {}).get(
+                    "reason", "SRE domain pipeline did not complete"
+                )
                 raise FACInvariantViolation(f"Domain FAC-1 check failed: {reason}")
 
             self.csr.end_cycle(self.cycle_id, success=True, final_model=self.model_state)

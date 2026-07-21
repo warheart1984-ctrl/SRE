@@ -45,9 +45,7 @@ class TestAttestationValidation(unittest.TestCase):
         self.assertTrue(any("unresolved_source" in e for e in errors))
 
     def test_malformed_citation(self) -> None:
-        errors = validate_attestation_fields(
-            _base_att(publication_year=999, source_author="")
-        )
+        errors = validate_attestation_fields(_base_att(publication_year=999, source_author=""))
         self.assertTrue(any("malformed_citation" in e for e in errors))
 
     def test_checksum_integrity(self) -> None:
@@ -78,13 +76,9 @@ class TestDantomaxAttestationLedger(unittest.TestCase):
         )
         new_id = result["attestation"]["attestation_id"]
         self.assertNotEqual(new_id, "att_test_pater")
-        self.assertEqual(
-            self.dmx.get_attestation("att_test_pater").status.value, "superseded"
-        )
+        self.assertEqual(self.dmx.get_attestation("att_test_pater").status.value, "superseded")
         # old checksum identity preserved on superseded record content fields
-        self.assertEqual(
-            self.dmx.get_attestation("att_test_pater").checksum, old_checksum
-        )
+        self.assertEqual(self.dmx.get_attestation("att_test_pater").checksum, old_checksum)
         self.assertIsNotNone(self.dmx.get_attestation(new_id))
 
     def test_reject_evidence(self) -> None:
@@ -104,9 +98,7 @@ class TestDantomaxAttestationLedger(unittest.TestCase):
         self.assertIn("ATTESTATION_REGISTERED", events)
         self.assertIn("ATTESTATION_SUPERSEDED", events)
         self.assertIn("ATTESTATION_CORRECTED", events)
-        self.assertTrue(
-            any(r.event_type == "CORRECT" for r in self.dmx._chain)
-        )
+        self.assertTrue(any(r.event_type == "CORRECT" for r in self.dmx._chain))
 
     def test_lineage_trace(self) -> None:
         self.dmx.register_attestation(_base_att())
@@ -201,9 +193,7 @@ class TestExpandedIEPipeline(unittest.TestCase):
             corpus_path="ie-expanded",
             constraints={"require_attestation_lineage": True},
         )
-        result = engine.reconstruct_language(
-            "Proto-Indo-European", "IE expanded", ids
-        )
+        result = engine.reconstruct_language("Proto-Indo-European", "IE expanded", ids)
         self.assertEqual(result.get("status"), "COMPLETED", result)
         self.assertEqual(result.get("fra_stage"), "ARCHIVE")
         self.assertEqual(len(result.get("stages_completed") or []), 10)
@@ -257,18 +247,14 @@ class TestExpandedIEPipeline(unittest.TestCase):
             corpus_path="mythar",
             constraints={"require_attestation_lineage": True},
         )
-        result = engine.reconstruct_language(
-            "Mythar", "Phase I", ["evid_myt_001", "evid_myt_002"]
-        )
+        result = engine.reconstruct_language("Mythar", "Phase I", ["evid_myt_001", "evid_myt_002"])
         # Mythar has no embedded attestations → cannot certify with lineage required
         self.assertNotEqual(result.get("status"), "COMPLETED")
         self.assertIn(result.get("fra_stage"), {"VALIDATE", "GOVERN", "ATTEST"})
 
     def test_mythar_still_works_without_dantomax(self) -> None:
         registry = EvidenceRegistry()
-        engine = ChronologicalReconstruction(
-            registry, HLRMAIAgent(registry), corpus_path="mythar"
-        )
+        engine = ChronologicalReconstruction(registry, HLRMAIAgent(registry), corpus_path="mythar")
         result = engine.reconstruct_language(
             "Mythar", "Phase I", ["evid_myt_001", "evid_myt_002", "evid_rel_001"]
         )

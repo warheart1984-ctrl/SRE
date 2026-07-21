@@ -7,8 +7,8 @@ from .attestations import (
     compute_attestation_checksum,
     validate_attestation_fields,
 )
-from .cel import CELEntry, CELEntryType, ConstitutionalEvidenceLedger, CEL_VERSION
-from .cel_store import CELStore, DEFAULT_CEL_PATH
+from .cel import CEL_VERSION, CELEntry, CELEntryType, ConstitutionalEvidenceLedger
+from .cel_store import DEFAULT_CEL_PATH, CELStore
 from .dantomax_client import DantomaxClient
 from .dantomax_signer import (
     DantomaxSigner,

@@ -10,6 +10,7 @@ from ..corpus.loader import seed_registry_from_corpus
 from ..evidence.models import LinguisticEvidence
 from ..evidence.registry import EvidenceRegistry
 from .data import DEFAULT_LEXICON_PATH, build_lexicon_document, write_lexicon_json
+from .governance import bind_governance_records_to_cel
 
 DOMAINS = ("kinship", "body", "motion", "abstract", "nature")
 DEFAULT_LEXICON = DEFAULT_LEXICON_PATH
@@ -125,13 +126,28 @@ class MytharLexicon:
     def compare_proto_world(self) -> list[dict[str, Any]]:
         return list(self._data.get("proto_world_comparisons") or [])
 
-    def seed_registry(
-        self, registry: EvidenceRegistry
-    ) -> list[LinguisticEvidence]:
+    def governance_records(self) -> list[tuple[str, dict[str, Any]]]:
+        records: list[tuple[str, dict[str, Any]]] = []
+        for root in self.roots():
+            gov = root.get("cra_governance")
+            eid = str(root.get("evidence_id") or "")
+            if isinstance(gov, dict) and eid:
+                records.append((eid, dict(gov)))
+        for cluster in self.clusters():
+            gov = cluster.get("cra_governance")
+            eid = str(cluster.get("evidence_id") or "")
+            if isinstance(gov, dict) and eid:
+                records.append((eid, dict(gov)))
+        return records
+
+    def seed_registry(self, registry: EvidenceRegistry) -> list[LinguisticEvidence]:
         if not self.path.is_file():
             write_lexicon_json(self.path)
-        return seed_registry_from_corpus(
+        seeded = seed_registry_from_corpus(
             registry,
             path=self.path,
             search_catalog=False,
         )
+        if registry.cel is not None:
+            bind_governance_records_to_cel(registry, self.governance_records())
+        return seeded

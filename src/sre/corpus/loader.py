@@ -116,11 +116,7 @@ def corpus_item_to_evidence_data(
             content[key] = item[key]
 
     meta = item.get("metadata") or {}
-    source_reference = (
-        meta.get("source")
-        or meta.get("site")
-        or f"{language_name} {period} corpus"
-    )
+    source_reference = meta.get("source") or meta.get("site") or f"{language_name} {period} corpus"
     return {
         "evidence_id": item["evidence_id"],
         "evidence_type": evidence_type,

@@ -225,23 +225,15 @@ def test_ie_cognate_corpus_reconstruction() -> None:
     ]
     result = engine.reconstruct_language("Romance", "Classical→Modern", evidence_ids)
     assert result["status"] == "COMPLETED", result
-    forms = [
-        h.get("form", "")
-        for h in result["proto_language_model"].get("proto_forms", [])
-    ]
+    forms = [h.get("form", "") for h in result["proto_language_model"].get("proto_forms", [])]
     assert any(
-        any(stem in f for stem in ("PATER", "MATER", "OINOS", "OKW", "BHER"))
-        for f in forms
+        any(stem in f for stem in ("PATER", "MATER", "OINOS", "OKW", "BHER")) for f in forms
     ), forms
-    analysis = agent.analyze_evidence_patterns(
-        [registry.get_evidence(eid) for eid in evidence_ids]
-    )
+    analysis = agent.analyze_evidence_patterns([registry.get_evidence(eid) for eid in evidence_ids])
     assert analysis["cognate_groups"]
     assert analysis["phonological_shifts"]
     # Induced rules should appear for Romance alignments
-    induced = [
-        s for s in analysis["phonological_shifts"] if s.get("source") == "induced"
-    ]
+    induced = [s for s in analysis["phonological_shifts"] if s.get("source") == "induced"]
     assert induced, analysis["phonological_shifts"]
     # Dantomax attestations present on accepted evidence
     report = registry.get_validation_report("evid_lat_pater")
@@ -257,11 +249,7 @@ def test_ie_corpus_file_present() -> None:
     assert data.get("references")
     # Expanded sets present
     lat = next(lang for lang in data["languages"] if lang["code"] == "LAT")
-    lat_ids = {
-        e["evidence_id"]
-        for per in lat["periods"]
-        for e in per["evidence"]
-    }
+    lat_ids = {e["evidence_id"] for per in lat["periods"] for e in per["evidence"]}
     assert "evid_lat_unus" in lat_ids
     assert "evid_lat_oculus" in lat_ids
     assert "evid_lat_ferre" in lat_ids

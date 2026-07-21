@@ -9,7 +9,7 @@ from .governance import (
     lexicon_governance_model,
     validate_governance_record,
 )
-from .lexicon import DOMAINS, DEFAULT_LEXICON, MytharLexicon
+from .lexicon import DEFAULT_LEXICON, DOMAINS, MytharLexicon
 
 __all__ = [
     "ASSURANCE_LEVELS",

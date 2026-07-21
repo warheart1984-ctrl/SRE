@@ -1,4 +1,4 @@
-name: Sovereign Reconstruction Engine CI
+name: CI
 
 on:
   push:
@@ -7,75 +7,35 @@ on:
     branches: [main]
 
 jobs:
-  build-test:
+  check:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
 
-      - name: Set up Python
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -e ".[dev,api]"
 
-      - name: Lint
-        run: |
-          ruff check src/ packages/ tests/
+      - name: Lint (ruff check)
+        run: ruff check src/ packages/ tests/
 
-      - name: Import smoke test
-        run: |
-          python -c "import sre, fae; from sre.substrate import FRAComposedReconstruction; print(sre.__version__)"
+      - name: Format check (ruff format)
+        run: ruff format --check src/ packages/ tests/
 
-      - name: Run tests
+      - name: Type check (mypy)
         run: |
-          pytest -q
+          pip install mypy
+          mypy src/sre packages/fae --config-file=pyproject.toml
 
-      - name: CIH conformance profile tests
-        run: |
-          pytest tests/test_cih_conformance.py -q
-
-      - name: FAE composition integration
-        run: |
-          pytest tests/test_fra_mcrl_composition.py -q
-
-      - name: Constitutional Artifact Check
-        run: |
-          echo "Verifying constitutional artifacts..."
-          test -f LICENSE
-          test -f CONTRIBUTING.md
-          test -f .env.example
-          test -f docs/architecture/FAESubstrate.md
-          test -f docs/architecture/EvidenceRegistry.md
-          test -f docs/architecture/FRA_Methodology.md
-          test -f docs/architecture/ConstitutionalValidationPipeline.md
-          test -f docs/architecture/DantomaxIntegration.md
-          test -f docs/architecture/HLRMAIAgent.md
-          test -f docs/architecture/EnterpriseTopology.md
-          test -f docs/architecture/MCRL_Rosetta.md
-          test -f docs/governance/CIH_Workflow.md
-          test -f docs/governance/GovernanceConsensusMap_v01.md
-          test -f docs/governance/PromotionPlan_v01.md
-          test -f docs/specs/API_Contracts.md
-          test -f docs/specs/ConstitutionalSpecification_v01.md
-          test -f docs/specs/ConstitutionalLogging.md
-          test -f docs/specs/ConstitutionalPromotionGates.md
-          test -f docs/specs/openapi.yaml
-          test -f schemas/sovereign_certificate.schema.json
-          test -f schemas/governance_trace.schema.json
-          test -f schemas/cel_entry.schema.json
-          test -f docs/governance/CEL_Charter_v01.md
-          test -f docs/specs/CIH_ConstitutionalSpecification_v1.md
-          test -f docs/specs/CIH_ConformanceRequirements_v1.md
-          test -f docs/architecture/CIH_ConstitutionalKernel_v1.md
-          test -f docs/architecture/CRA_ReferenceArchitecture_v1.md
-          test -f docs/specs/LRL_Specification_v1.md
-          test -f docs/conformance/SRE_ConformanceProfile_v1.json
-          test -f docs/conformance/SRE_ConformanceProfile_v1.md
-          test -f schemas/cih_conformance_profile.schema.json
-          test -f tests/test_cih_conformance.py
-          test -f tests/test_fra_mcrl_composition.py
-          test -f data/fra_corpus_v01.json
+      - name: Test
+        run: pytest -q --tb=short

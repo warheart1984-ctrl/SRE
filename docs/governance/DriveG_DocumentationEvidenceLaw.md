@@ -3,6 +3,7 @@
 **ID:** Drive-G-1  
 **Scope:** Entire Drive `G:\` (all projects — not Mythar-only)  
 **Canonical ledger:** [`G:\DRIVE_G_LAWS.md`](../../../DRIVE_G_LAWS.md)  
+**Companion standard:** Drive-G-2 — [`DriveG_MaturityDimensionsStandard.md`](./DriveG_MaturityDimensionsStandard.md)  
 **Status:** Standing law
 
 ## Law

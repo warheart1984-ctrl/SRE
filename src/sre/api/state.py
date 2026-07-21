@@ -8,18 +8,27 @@ from typing import Any
 
 from ..ai.hlrm_agent import HLRMAIAgent
 from ..evidence.cel import ConstitutionalEvidenceLedger
-from ..evidence.cel_store import CELStore, DEFAULT_CEL_PATH
+from ..evidence.cel_store import DEFAULT_CEL_PATH, CELStore
 from ..evidence.dantomax_client import DantomaxClient
 from ..evidence.dantomax_signer import create_signer_from_env
 from ..evidence.ledger_explorer import SovereignLedgerExplorer
 from ..evidence.registry import EvidenceRegistry
 from ..governance.cih_service import FAECLanguageReconstructionService
-from ..substrate import FAEEvidenceRegistry, FactualAlignmentEngine, create_fae
+from ..storage.factory import create_store_from_env
+from ..storage.reconstruction_cache import ReconstructionCache
+from ..substrate import FactualAlignmentEngine, FAEEvidenceRegistry, create_fae
 
 
 def _resolve_cel_path() -> Path:
     raw = os.environ.get("SRE_CEL_STORE_PATH", "").strip()
     return Path(raw) if raw else DEFAULT_CEL_PATH
+
+
+def _resolve_persist_store():
+    backend = os.environ.get("SRE_STORE_BACKEND", "memory").strip().lower()
+    if backend == "memory":
+        return None
+    return create_store_from_env()
 
 
 class AppState:
@@ -30,6 +39,7 @@ class AppState:
         *,
         cel_store_path: str | Path | None = None,
         dantomax_signing_key: str | None = None,
+        persist_store: Any | None = None,
     ) -> None:
         store_path = Path(cel_store_path) if cel_store_path else _resolve_cel_path()
         self.cel_store = CELStore(store_path)
@@ -40,6 +50,8 @@ class AppState:
             self.cel_store,
             dantomax=self.dantomax,
         )
+        persist = persist_store if persist_store is not None else _resolve_persist_store()
+        self.persist_store = persist
         # FAE constitutional substrate (generic FAC/FRA); linguistic registry stays SRE.
         self.fae: FactualAlignmentEngine = create_fae()
         self.fae_registry: FAEEvidenceRegistry = self.fae.registry
@@ -48,6 +60,7 @@ class AppState:
             cel=self.cel,
             cel_store=self.cel_store,
             fae_registry=self.fae_registry,
+            persist_store=persist,
         )
         self.agent = HLRMAIAgent(self.registry, config={})
         self.cih = FAECLanguageReconstructionService(self.registry)
@@ -56,7 +69,7 @@ class AppState:
             dantomax=self.dantomax,
             store=self.cel_store,
         )
-        self.reconstruction_cache: dict[str, dict[str, Any]] = {}
+        self.reconstruction_cache = ReconstructionCache(persist)
         self.project_registry: dict[str, dict[str, Any]] = {}
 
     def require_cel(self) -> ConstitutionalEvidenceLedger:
@@ -71,6 +84,11 @@ class AppState:
             "fabric_root_hash": self.cel.fabric_root_hash,
             "store_path": str(self.cel_store.path),
             "signing_mode": self.dantomax.signing_mode,
+            "persist_backend": (
+                os.environ.get("SRE_STORE_BACKEND", "memory")
+                if self.persist_store is None
+                else type(self.persist_store).__name__
+            ),
         }
 
 

@@ -5,8 +5,8 @@ from __future__ import annotations
 from sre.evidence.models import ConstitutionalStatus
 from sre.evidence.registry import EvidenceRegistry
 from sre.substrate import (
-    FAEEvidenceRegistry,
     FactualAlignmentEngine,
+    FAEEvidenceRegistry,
     create_fae,
     mirror_linguistic_evidence_to_fae,
     reset_fae,
@@ -29,7 +29,7 @@ def test_fae_package_importable() -> None:
 
 
 def test_substrate_reexports_fae() -> None:
-    from sre.substrate import FAEMCRLRosettaEngine, FRACycle, DriftDetectionEngine
+    from sre.substrate import DriftDetectionEngine, FAEMCRLRosettaEngine, FRACycle
 
     assert FRACycle is not None
     assert DriftDetectionEngine is not None

@@ -83,12 +83,16 @@ class FRAStages:
         correspondence_hypotheses: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         hyps = list(hypotheses.get("hypotheses") or [])
-        top = hyps[0] if hyps else {
-            "id": "pf_empty",
-            "form": "*?",
-            "confidence": 0.0,
-            "evidence_links": [],
-        }
+        top = (
+            hyps[0]
+            if hyps
+            else {
+                "id": "pf_empty",
+                "form": "*?",
+                "confidence": 0.0,
+                "evidence_links": [],
+            }
+        )
         return {
             "stage": "INFER",
             "id": f"proto_{target_language}_{time_period}".replace(" ", "_"),

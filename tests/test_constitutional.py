@@ -89,9 +89,7 @@ class ConstitutionalPromotionTests(unittest.TestCase):
         self.assertTrue(any("FAC-E2" in c for c in report.failed_checks))
 
     def test_fac_e2_detects_post_store_tampering(self) -> None:
-        evidence = self.registry.add_evidence(
-            _valid_evidence(evidence_id="evid_e2_tamper")
-        )
+        evidence = self.registry.add_evidence(_valid_evidence(evidence_id="evid_e2_tamper"))
         self.assertEqual(
             self.registry.get_status(evidence.evidence_id),
             ConstitutionalStatus.ACCEPTED,
@@ -157,9 +155,7 @@ class ConstitutionalPromotionTests(unittest.TestCase):
         self.assertTrue(any("FAC-E4" in c for c in report.failed_checks))
 
     def test_fac_e_accepts_valid_evidence(self) -> None:
-        evidence = self.registry.add_evidence(
-            _valid_evidence(evidence_id="evid_ok_001")
-        )
+        evidence = self.registry.add_evidence(_valid_evidence(evidence_id="evid_ok_001"))
         report = self.registry.get_validation_report(evidence.evidence_id)
         assert report is not None
         self.assertEqual(
@@ -282,9 +278,7 @@ class ConstitutionalPromotionTests(unittest.TestCase):
         self.assertEqual(result.get("status"), "UNDER_REVIEW")
 
     def test_cih_02_evidence_baseline_blocks_rejected(self) -> None:
-        self.registry.add_evidence(
-            _valid_evidence(evidence_id="evid_rej", source_reference="")
-        )
+        self.registry.add_evidence(_valid_evidence(evidence_id="evid_rej", source_reference=""))
         result = self.cih.approve_reconstruction_project(
             {
                 "project_id": "proj_gate_002",

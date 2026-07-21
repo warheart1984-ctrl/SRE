@@ -2,8 +2,13 @@
 
 from __future__ import annotations
 
+from datetime import UTC
+
 import pytest
 
+from fae.cycle.fra_cycle import FRACycleStage
+from fae.drift.detection import DriftSeverity, DriftType
+from fae.mcr.rosetta import ExternalRoot
 from sre.fra.reconstruction_state import FAE_TO_SRE_STAGE_GROUPS, SRE_TO_FAE_STAGE_MAP
 from sre.substrate import (
     ComposedRosettaEngine,
@@ -14,9 +19,6 @@ from sre.substrate import (
     reset_mcrl,
 )
 from sre.substrate.fra_composition import ComposedReconstructionResult
-from fae.cycle.fra_cycle import FRACycleStage
-from fae.drift.detection import DriftType, DriftSeverity
-from fae.mcr.rosetta import ExternalRoot
 
 
 @pytest.fixture(autouse=True)
@@ -36,8 +38,16 @@ class TestSREToFAEStageMap:
 
     def test_all_sre_stages_mapped(self):
         sre_stages = (
-            "OBSERVE", "INGEST", "ATTEST", "ALIGN", "CLUSTER",
-            "INFER", "VALIDATE", "GOVERN", "CERTIFY", "ARCHIVE",
+            "OBSERVE",
+            "INGEST",
+            "ATTEST",
+            "ALIGN",
+            "CLUSTER",
+            "INFER",
+            "VALIDATE",
+            "GOVERN",
+            "CERTIFY",
+            "ARCHIVE",
         )
         for stage in sre_stages:
             assert stage in SRE_TO_FAE_STAGE_MAP
@@ -64,11 +74,11 @@ class TestComposedRosettaEngine:
         assert result["fae_alignments"] == []
 
     def test_map_and_align_with_evidence(self):
-        from datetime import datetime, timezone
+        from datetime import datetime
 
-        from sre.evidence.models import LinguisticEvidence, EvidenceType
+        from sre.evidence.models import EvidenceType, LinguisticEvidence
 
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         ev1 = LinguisticEvidence(
             evidence_id="ev_comp_1",
             evidence_type=EvidenceType.INSCRIPTION,
@@ -184,11 +194,11 @@ class TestGovernedFRACycleRecursive:
     """Integration: SRE stages through GovernedFRACycle.run_recursive."""
 
     def test_run_recursive_single_converged_cycle(self):
+        from fae.metrics.validation import get_validation_engine
         from sre.ai.hlrm_agent import HLRMAIAgent
         from sre.evidence.registry import EvidenceRegistry
         from sre.fra.reconstruction_engine import ChronologicalReconstruction
         from sre.substrate.fra_stage_runner import build_sre_governed_fra_cycle
-        from fae.metrics.validation import get_validation_engine
 
         registry = EvidenceRegistry()
         agent = HLRMAIAgent(registry)

@@ -1,0 +1,15 @@
+# TLS termination for SRE API — copy to /etc/caddy/Caddyfile and adjust domain.
+#
+# Prerequisites:
+#   - Caddy 2.x
+#   - SRE API bound to 127.0.0.1:8010 (SRE_API_HOST=127.0.0.1)
+#   - SRE_API_AUTH_REQUIRED=true and SRE_API_KEYS set
+
+api.example.com {
+	encode gzip
+	reverse_proxy 127.0.0.1:8010
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+	}
+}

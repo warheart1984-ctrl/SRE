@@ -1,10 +1,14 @@
-"""Pairwise sound-change induction for cognate form sets."""
+"""Pairwise sound-change induction for cognate form sets.
+
+Also provides a SoundChangeApplier that can apply inferred or known
+sound changes forward (proto → daughter) to test reconstruction hypotheses.
+"""
 
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Iterable
 
 
 @dataclass(frozen=True)
@@ -52,9 +56,7 @@ def levenshtein_align(a: str, b: str) -> list[tuple[str, str, str]]:
     i, j = n, m
     ops_rev: list[tuple[str, str, str]] = []
     while i > 0 or j > 0:
-        if i > 0 and j > 0 and dp[i][j] == dp[i - 1][j - 1] + (
-            0 if a[i - 1] == b[j - 1] else 1
-        ):
+        if i > 0 and j > 0 and dp[i][j] == dp[i - 1][j - 1] + (0 if a[i - 1] == b[j - 1] else 1):
             if a[i - 1] == b[j - 1]:
                 ops_rev.append(("eq", a[i - 1], b[j - 1]))
             else:
@@ -152,3 +154,116 @@ def cognate_form_pairs(
             fb, ib = forms[j]
             pairs.append((fa, fb, ia, ib))
     return pairs
+
+
+class SoundChangeRule:
+    """A single sound change rule (e.g. 'p → f / #_')."""
+
+    def __init__(
+        self,
+        from_seg: str,
+        to_seg: str,
+        left_ctx: str = "",
+        right_ctx: str = "",
+        *,
+        name: str = "",
+    ) -> None:
+        self.from_seg = from_seg
+        self.to_seg = to_seg
+        self.left_ctx = left_ctx
+        self.right_ctx = right_ctx
+        self.name = name or f"{from_seg}→{to_seg}"
+
+    def applies(self, segment: str, left: str, right: str) -> bool:
+        """Check if this rule applies in the given context."""
+        if segment != self.from_seg:
+            return False
+        if self.left_ctx and left != self.left_ctx:
+            return False
+        if self.right_ctx and right != self.right_ctx:
+            return False
+        return True
+
+    @classmethod
+    def from_branch_transform(cls, transform: tuple[str, str, str]) -> SoundChangeRule:
+        """Create a rule from a BRANCH_TRANSFORMS entry (proto_seg, daughter_seg, name)."""
+        return cls(
+            from_seg=transform[0],
+            to_seg=transform[1],
+            name=transform[2],
+        )
+
+
+class SoundChangeApplier:
+    """Apply sound changes forward from a proto-form to predict daughter forms."""
+
+    def __init__(self, rules: list[SoundChangeRule] | None = None) -> None:
+        self.rules = rules or []
+
+    @classmethod
+    def from_branch_transforms(
+        cls,
+        transforms: list[tuple[str, str, str]],
+    ) -> SoundChangeApplier:
+        """Build an applier from a BRANCH_TRANSFORMS-style list."""
+        return cls(rules=[SoundChangeRule.from_branch_transform(t) for t in transforms])
+
+    def apply(self, proto_form: str) -> str:
+        """Apply all rules in sequence to a proto-form string."""
+        from ..linguistics.tokenization import tokenize
+
+        segments = tokenize(proto_form)
+        result_chars: list[str] = []
+        n = len(segments)
+
+        for i, seg in enumerate(segments):
+            left = segments[i - 1].symbol if i > 0 else "#"
+            right = segments[i + 1].symbol if i + 1 < n else "#"
+            applied = False
+            for rule in self.rules:
+                if rule.applies(seg.symbol, left, right):
+                    result_chars.append(rule.to_seg)
+                    applied = True
+                    break
+            if not applied:
+                result_chars.append(seg.symbol)
+
+        return "".join(result_chars)
+
+    def apply_to_languages(
+        self,
+        proto_form: str,
+        branch_transforms: dict[str, list[tuple[str, str, str]]],
+    ) -> dict[str, str]:
+        """Apply branch-specific transforms to predict daughter forms."""
+        predicted: dict[str, str] = {}
+        for branch, transforms in branch_transforms.items():
+            applier = self.from_branch_transforms(transforms)
+            predicted[branch] = applier.apply(proto_form)
+        return predicted
+
+    def score_prediction(
+        self, proto_form: str, target_form: str, rules: list[SoundChangeRule]
+    ) -> dict[str, Any]:
+        """
+        Score how well a set of rules predicts a target form from a proto-form.
+        Returns accuracy metrics and alignment details.
+        """
+        from ..linguistics.alignment import weighted_align
+        from ..linguistics.tokenization import tokenize, tokens_to_str
+
+        applier = SoundChangeApplier(rules)
+        predicted = applier.apply(proto_form)
+        pt = tokens_to_str(tokenize(predicted))
+        tt = tokens_to_str(tokenize(target_form))
+        path, cost = weighted_align(tokenize(predicted), tokenize(target_form))
+        max_len = max(len(pt), len(tt), 1)
+        similarity = 1.0 - (cost / (max_len * 1.1))
+        return {
+            "predicted": predicted,
+            "target": target_form,
+            "alignment_cost": round(cost, 4),
+            "similarity": round(similarity, 4),
+            "perfect_match": predicted == target_form,
+            "edit_ops": len(path),
+        }

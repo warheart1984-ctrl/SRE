@@ -7,15 +7,18 @@ onto the CRA Justification Graph vs Evidence Graph split *as exported fields*:
 - evidence_dependency / assurance_level / cel_lineage → Evidence Graph
 - lifecycle_state / revision_history → Governance Layer (CIH lifecycle semantics)
 
-Evidence today: fields are built and unit-tested. CEL entry IDs remain deferred
-(`binding_status=deferred`) until FAC-E seed writes to the ledger and a binder
-updates lineage — subject_id uses the stable Mythar evidence_id so binding can
-be deterministic. Drive G: do not document lineage as complete while deferred.
+Evidence today: static lexicon JSON keeps ``binding_status=deferred`` placeholders;
+``MytharLexicon.seed_registry`` binds to CEL at runtime when Dantomax/CEL are attached.
+Drive G: document JSON placeholders as deferred; seeded registry metadata as bound only
+when CEL writes succeed.
 """
 
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
+
+if TYPE_CHECKING:
+    from ..evidence.registry import EvidenceRegistry
 
 AssuranceLevel = Literal["experimental", "candidate", "validated"]
 LifecycleState = Literal["Draft", "Review", "Ratified", "Active"]
@@ -72,9 +75,7 @@ PROPOSAL_L_FORMS: frozenset[str] = frozenset(
 )
 
 # Forms created or re-scoped by PGC-5 in lexicon v1.3.
-PGC_V13_SPLIT_FORMS: frozenset[str] = frozenset(
-    {"ska", "krato", "taga", "duma", "alo", "pe"}
-)
+PGC_V13_SPLIT_FORMS: frozenset[str] = frozenset({"ska", "krato", "taga", "duma", "alo", "pe"})
 PGC_V13_CORRECTED_FORMS: frozenset[str] = frozenset({"to", "ta", "du"})
 
 PGC_V13_REVISIONS: dict[str, list[dict[str, str]]] = {
@@ -162,6 +163,49 @@ PGC_V13_REVISIONS: dict[str, list[dict[str, str]]] = {
 }
 
 
+def bind_governance_records_to_cel(
+    registry: EvidenceRegistry,
+    records: list[tuple[str, dict[str, Any]]],
+) -> dict[str, str]:
+    """
+    After FAC-E seed + CEL writes, set ``binding_status=bound`` on governance records.
+
+    Returns mapping ``subject_id → cel_entry_id`` for entries successfully bound.
+    """
+    bound: dict[str, str] = {}
+    for subject_id, governance in records:
+        validation = registry.get_validation_report(subject_id)
+        cel_entry_id: str | None = None
+        if validation is not None:
+            cel_meta = (validation.report or {}).get("cel") or {}
+            raw_id = cel_meta.get("cel_entry_id")
+            if isinstance(raw_id, str) and raw_id:
+                cel_entry_id = raw_id
+        if cel_entry_id is None and registry.cel is not None:
+            for entry in registry.cel.query_by_subject(subject_id):
+                if entry.entry_type.value == "evidence":
+                    cel_entry_id = entry.cel_entry_id
+                    break
+        if not cel_entry_id:
+            continue
+        lineage = dict(governance.get("cel_lineage") or {})
+        lineage.update(
+            {
+                "binding_status": "bound",
+                "subject_id": subject_id,
+                "cel_entry_id": cel_entry_id,
+            }
+        )
+        governance = dict(governance)
+        governance["cel_lineage"] = lineage
+        registry.update_evidence_content(
+            subject_id,
+            {"metadata": {"cra_governance": governance}},
+        )
+        bound[subject_id] = cel_entry_id
+    return bound
+
+
 def cel_lineage_ref(
     *,
     subject_id: str,
@@ -209,8 +253,7 @@ def make_governance(
         "evidence_dependency": evidence_dependency,
         "assurance_level": assurance_level,
         "lifecycle_state": lifecycle_state,
-        "cel_lineage": cel_lineage
-        or cel_lineage_ref(subject_id=subject_id, kind=kind),
+        "cel_lineage": cel_lineage or cel_lineage_ref(subject_id=subject_id, kind=kind),
         "revision_history": list(revision_history or []),
         "cra_refs": {
             "architecture": CRA_REF,
@@ -262,8 +305,7 @@ def classify_root_governance(
             "polysemy axis hygiene under Polysemy Governance Contract."
         )
         evidence = _with_pw(
-            f"PGC corrections ledger; FAC-E1 source={SRC_TAG}; "
-            f"evidence_id={evidence_id}."
+            f"PGC corrections ledger; FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}."
         )
     elif form in PROPOSAL_K_FORMS or form in PROPOSAL_L_FORMS:
         assurance = "candidate"
@@ -273,9 +315,7 @@ def classify_root_governance(
             f"Proposal {proposal} gap-fill admission; "
             "justified as evidence-constrained invention pending ratification."
         )
-        evidence = _with_pw(
-            f"FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}."
-        )
+        evidence = _with_pw(f"FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}.")
     else:
         # Core inventory (proposals A–J era) and compounds — validated Active.
         assurance = "validated"
@@ -284,9 +324,7 @@ def classify_root_governance(
             "Core Living Lexicon inventory (proposals A–J / compound morphology); "
             "constitutional domain coverage under LRL."
         )
-        evidence = _with_pw(
-            f"FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}."
-        )
+        evidence = _with_pw(f"FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}.")
 
     extra: dict[str, Any] = {"domain": domain}
     if polysemy:
@@ -365,8 +403,7 @@ def classify_cluster_governance(
         assurance = "validated"
         lifecycle = "Active"
         justification = (
-            "Core domain triad (proposals A–E); "
-            "baseline Living Lexicon coverage clusters 12–46."
+            "Core domain triad (proposals A–E); baseline Living Lexicon coverage clusters 12–46."
         )
         evidence = f"FAC-E1 source={SRC_TAG}; evidence_id={evidence_id}."
 
@@ -415,11 +452,11 @@ def lexicon_governance_model() -> dict[str, Any]:
             "pgc_v13_corrections": {"assurance": "validated", "lifecycle": "Active"},
         },
         "cel_binding": {
-            "status": "deferred_placeholders",
+            "status": "bound_on_seed_when_cel_configured",
             "how_to_bind": (
-                "On FAC-E seed, record CEL evidence entries with subject_id equal to "
-                "each root/cluster evidence_id; then set cel_lineage.cel_entry_id and "
-                "binding_status=bound. See CEL Charter and scripts/run_local.py --show-cel."
+                "MytharLexicon.seed_registry records FAC-E evidence to CEL when Dantomax "
+                "is attached, then bind_governance_records_to_cel sets cel_lineage.cel_entry_id "
+                "and binding_status=bound on seeded evidence metadata."
             ),
             "subject_id_pattern": {
                 "root": "evid_myt_root_{form}",

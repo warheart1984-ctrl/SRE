@@ -1,4 +1,4 @@
-﻿"""ChronologicalReconstruction — FRA engine (attestation + correspondence slice)."""
+"""ChronologicalReconstruction — FRA engine (attestation + correspondence slice)."""
 
 from __future__ import annotations
 
@@ -153,38 +153,11 @@ class ChronologicalReconstruction:
         return None
 
     def stage_attest(self, state: ReconstructionRunState) -> dict[str, Any] | None:
-        dantomax = state.dantomax
-        cel = state.cel
-        state.attestation_ids = collect_attestation_ids(state.evidence_list)
-        if dantomax is not None:
-            state.att_summary = seed_attestations_from_evidence(
-                dantomax, state.evidence_list, cel=cel
-            )
-            for aid in state.att_summary.get("registered") or []:
-                try:
-                    dantomax.approve_attestation(aid)
-                except ValueError:
-                    pass
-            state.attestation_ids = collect_attestation_ids(state.evidence_list) or list(
-                state.att_summary.get("registered") or []
-            )
-            if state.att_summary.get("errors"):
-                return state.fail(
-                    "ATTEST",
-                    f"attestation errors: {state.att_summary['errors']}",
-                    metrics={"attest": state.att_summary},
-                )
-        else:
-            state.att_summary = {
-                "registered": [],
-                "skipped_duplicates": [],
-                "errors": [],
-                "count": 0,
-                "note": "dantomax_not_attached",
-            }
+        failure = self._process_attestations(state)
+        if failure is not None:
+            return failure
         state.attest_out = self.stages.attest(state.att_summary)
         state.stages_completed.append("ATTEST")
-
         state.analysis = self.ai_agent.analyze_evidence_patterns(state.evidence_list)
         state.flags_by_lang = evidence_flags_by_lang(state.evidence_list)
         state.corr_payload = self._run_correspondence_search(
@@ -193,21 +166,57 @@ class ChronologicalReconstruction:
             state.attestation_ids,
             state.flags_by_lang,
         )
-        if cel is not None:
-            for hyp in state.corr_payload.get("hypotheses") or []:
-                gid = str(hyp.get("cognate_set_id") or "cog")
-                cel.record_correspondence(
-                    gid,
-                    {
-                        "proto_form": hyp.get("proto_form"),
-                        "confidence": hyp.get("confidence"),
-                        "correspondence_sets": hyp.get("correspondence_sets"),
-                        "flags": hyp.get("flags"),
-                        "competing_hypotheses": hyp.get("competing_hypotheses"),
-                    },
-                    links=list(hyp.get("supporting_attestations") or []),
-                )
+        self._record_correspondences_to_cel(state)
         return None
+
+    def _process_attestations(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        dantomax = state.dantomax
+        state.attestation_ids = collect_attestation_ids(state.evidence_list)
+        if dantomax is None:
+            state.att_summary = {
+                "registered": [],
+                "skipped_duplicates": [],
+                "errors": [],
+                "count": 0,
+                "note": "dantomax_not_attached",
+            }
+            return None
+        state.att_summary = seed_attestations_from_evidence(
+            dantomax, state.evidence_list, cel=state.cel
+        )
+        for aid in state.att_summary.get("registered") or []:
+            try:
+                dantomax.approve_attestation(aid)
+            except ValueError:
+                pass
+        state.attestation_ids = collect_attestation_ids(state.evidence_list) or list(
+            state.att_summary.get("registered") or []
+        )
+        if state.att_summary.get("errors"):
+            return state.fail(
+                "ATTEST",
+                f"attestation errors: {state.att_summary['errors']}",
+                metrics={"attest": state.att_summary},
+            )
+        return None
+
+    def _record_correspondences_to_cel(self, state: ReconstructionRunState) -> None:
+        cel = state.cel
+        if cel is None:
+            return
+        for hyp in state.corr_payload.get("hypotheses") or []:
+            gid = str(hyp.get("cognate_set_id") or "cog")
+            cel.record_correspondence(
+                gid,
+                {
+                    "proto_form": hyp.get("proto_form"),
+                    "confidence": hyp.get("confidence"),
+                    "correspondence_sets": hyp.get("correspondence_sets"),
+                    "flags": hyp.get("flags"),
+                    "competing_hypotheses": hyp.get("competing_hypotheses"),
+                },
+                links=list(hyp.get("supporting_attestations") or []),
+            )
 
     def stage_align_cluster(self, state: ReconstructionRunState) -> dict[str, Any] | None:
         state.temporal_map = self.rosetta.map_temporal(state.evidence_list)
@@ -246,9 +255,7 @@ class ChronologicalReconstruction:
             quality_gate=quality_gate,
         )
         state.proto_model = state.refine_out["proto_model"]
-        state.proto_model["correspondence_hypotheses"] = (
-            state.corr_payload.get("hypotheses") or []
-        )
+        state.proto_model["correspondence_hypotheses"] = state.corr_payload.get("hypotheses") or []
         state.test_result = self.stages.test(state.proto_model, state.evidence_list)
         state.drift = float(state.test_result.get("drift", state.drift))
         state.quality = float(state.refine_out.get("quality", state.quality))
@@ -264,9 +271,7 @@ class ChronologicalReconstruction:
         for hyp in state.proto_model.get("proto_forms") or []:
             hyp.setdefault("attestation_ids", list(state.attestation_ids))
         if state.proto_model.get("primary"):
-            state.proto_model["primary"].setdefault(
-                "attestation_ids", list(state.attestation_ids)
-            )
+            state.proto_model["primary"].setdefault("attestation_ids", list(state.attestation_ids))
 
         state.metrics = {
             "drift": state.drift,
@@ -408,9 +413,7 @@ class ChronologicalReconstruction:
                 "attestation_ids": state.attestation_ids,
                 "lineage": state.lineage,
                 "human_lineage": (state.lineage or {}).get("human_readable")
-                or format_human_lineage(
-                    state.lineage or {"path": list(FRAStages.STAGE_ORDER)}
-                ),
+                or format_human_lineage(state.lineage or {"path": list(FRAStages.STAGE_ORDER)}),
                 "cih_state": "PENDING_CERTIFY" if state.gov_ok else "BLOCKED",
             }
         )
@@ -476,15 +479,9 @@ class ChronologicalReconstruction:
         if state.lineage and dantomax is not None:
             state.lineage = dantomax.build_lineage_trace(
                 attestation_ids=state.attestation_ids,
-                cognate_set_id=(state.clustered.get("cognate_groups") or [{}])[0].get(
-                    "group_id"
-                ),
+                cognate_set_id=(state.clustered.get("cognate_groups") or [{}])[0].get("group_id"),
                 correspondence_ids=state.lineage.get("nodes")
-                and [
-                    n["id"]
-                    for n in state.lineage["nodes"]
-                    if n.get("kind") == "correspondence"
-                ]
+                and [n["id"] for n in state.lineage["nodes"] if n.get("kind") == "correspondence"]
                 or [],
                 sound_shift_ids=[
                     n["id"]
@@ -528,6 +525,28 @@ class ChronologicalReconstruction:
         attestation_ids: list[str],
         flags_by_lang: dict[str, list[str]],
     ) -> dict[str, Any]:
+        eid_to_att, eid_to_form = self._build_evidence_mappings(evidence_list)
+        all_hyps, ambiguous, irregular, loo_examples = self._process_cognate_groups(
+            analysis, eid_to_att, eid_to_form, flags_by_lang
+        )
+        if not all_hyps and len(eid_to_form) >= 2:
+            all_hyps = self._run_fallback_reconstruction(
+                eid_to_form, attestation_ids, flags_by_lang
+            )
+        return {
+            "hypotheses": all_hyps,
+            "ambiguous_sets": list(dict.fromkeys(ambiguous)),
+            "flagged_irregular": list(dict.fromkeys(irregular)),
+            "leave_one_out_examples": loo_examples[:5],
+            "alignment_report": {
+                "sets": sum(len(h.get("correspondence_sets") or []) for h in all_hyps),
+                "engine": RULE_SET_VERSION,
+            },
+        }
+
+    def _build_evidence_mappings(
+        self, evidence_list: list[Any]
+    ) -> tuple[dict[str, list[str]], dict[str, tuple[str, str]]]:
         eid_to_att: dict[str, list[str]] = {}
         eid_to_form: dict[str, tuple[str, str]] = {}
         for ev in evidence_list:
@@ -541,64 +560,28 @@ class ChronologicalReconstruction:
             eid_to_att[ev.evidence_id] = list(dict.fromkeys(aids))
             if form:
                 eid_to_form[ev.evidence_id] = (lang, form)
+        return eid_to_att, eid_to_form
 
+    def _process_cognate_groups(
+        self,
+        analysis: dict[str, Any],
+        eid_to_att: dict[str, list[str]],
+        eid_to_form: dict[str, tuple[str, str]],
+        flags_by_lang: dict[str, list[str]],
+    ) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]]]:
         all_hyps: list[dict[str, Any]] = []
         ambiguous: list[str] = []
         irregular: list[str] = []
         loo_examples: list[dict[str, Any]] = []
 
         for group in analysis.get("cognate_groups") or []:
-            members = group.get("members") or []
-            forms: dict[str, str] = {}
-            att_map: dict[str, list[str]] = {}
-            for m in members:
-                lang = str(m.get("language") or "?").lower()
-                form = str(m.get("form") or "")
-                if not form or lang in {"pie", "?"}:
-                    continue
-                # keep first form per language
-                forms.setdefault(lang, form)
-                eid = m.get("evidence_id")
-                if eid and eid in eid_to_att:
-                    att_map.setdefault(lang, []).extend(eid_to_att[eid])
-            if len(forms) < 2:
-                continue
-            # known proto from PIE evidence in same meaning group
-            known = None
-            for m in members:
-                if str(m.get("language") or "").upper() == "PIE":
-                    known = str(m.get("form") or "").lstrip("*")
-            group_flags = {
-                lang: flags_by_lang.get(lang, [])
-                for lang in forms
-                if flags_by_lang.get(lang)
-            }
-            hyps = self.correspondence.reconstruct_set(
-                forms,
-                attestation_ids=att_map,
-                flags_by_lang=group_flags,
-                known_proto=known,
+            result = self._process_single_cognate_group(
+                group, eid_to_att, eid_to_form, flags_by_lang
             )
-            gid = group.get("group_id", "cog")
-            serialized = []
-            for h in hyps:
-                d = {
-                    "cognate_set_id": gid,
-                    "proto_form": h.proto_form,
-                    "confidence": h.confidence,
-                    "supporting_attestations": h.supporting_attestation_ids,
-                    "aligned_daughter_forms": h.aligned_daughter_forms,
-                    "correspondence_sets": h.correspondence_sets,
-                    "sound_change_sequence": h.sound_change_sequence,
-                    "competing_hypotheses": h.competing_hypotheses,
-                    "unresolved_conflicts": h.unresolved_conflicts,
-                    "leave_one_out": h.leave_one_out,
-                    "flags": h.flags,
-                    "regularity_score": h.regularity_score,
-                    "exception_penalty": h.exception_penalty,
-                }
-                serialized.append(d)
-                all_hyps.append(d)
+            if result is None:
+                continue
+            serialized, gid, hyps = result
+            all_hyps.extend(serialized)
             if len(serialized) >= 2:
                 ambiguous.append(gid)
             for h in hyps:
@@ -608,43 +591,93 @@ class ChronologicalReconstruction:
             if hyps and hyps[0].leave_one_out.get("applicable"):
                 loo_examples.append({"cognate_set_id": gid, **hyps[0].leave_one_out})
 
-        # global attestation fallback
-        if not all_hyps and len(eid_to_form) >= 2:
-            forms = {}
-            for lang, form in eid_to_form.values():
-                forms.setdefault(lang, form)
-            hyps = self.correspondence.reconstruct_set(
-                forms,
-                attestation_ids={"*": attestation_ids},
-                flags_by_lang=flags_by_lang,
-            )
-            for h in hyps:
-                all_hyps.append(
-                    {
-                        "cognate_set_id": "cognate_global",
-                        "proto_form": h.proto_form,
-                        "confidence": h.confidence,
-                        "supporting_attestations": h.supporting_attestation_ids,
-                        "aligned_daughter_forms": h.aligned_daughter_forms,
-                        "correspondence_sets": h.correspondence_sets,
-                        "sound_change_sequence": h.sound_change_sequence,
-                        "competing_hypotheses": h.competing_hypotheses,
-                        "unresolved_conflicts": h.unresolved_conflicts,
-                        "leave_one_out": h.leave_one_out,
-                        "flags": h.flags,
-                    }
-                )
+        return all_hyps, ambiguous, irregular, loo_examples
 
-        return {
-            "hypotheses": all_hyps,
-            "ambiguous_sets": list(dict.fromkeys(ambiguous)),
-            "flagged_irregular": list(dict.fromkeys(irregular)),
-            "leave_one_out_examples": loo_examples[:5],
-            "alignment_report": {
-                "sets": sum(len(h.get("correspondence_sets") or []) for h in all_hyps),
-                "engine": RULE_SET_VERSION,
-            },
+    def _process_single_cognate_group(
+        self,
+        group: dict[str, Any],
+        eid_to_att: dict[str, list[str]],
+        eid_to_form: dict[str, tuple[str, str]],
+        flags_by_lang: dict[str, list[str]],
+    ) -> tuple[list[dict[str, Any]], str, Any] | None:
+        members = group.get("members") or []
+        forms: dict[str, str] = {}
+        att_map: dict[str, list[str]] = {}
+        for m in members:
+            lang = str(m.get("language") or "?").lower()
+            form = str(m.get("form") or "")
+            if not form or lang in {"pie", "?"}:
+                continue
+            forms.setdefault(lang, form)
+            eid = m.get("evidence_id")
+            if eid and eid in eid_to_att:
+                att_map.setdefault(lang, []).extend(eid_to_att[eid])
+        if len(forms) < 2:
+            return None
+        known = None
+        for m in members:
+            if str(m.get("language") or "").upper() == "PIE":
+                known = str(m.get("form") or "").lstrip("*")
+        group_flags = {
+            lang: flags_by_lang.get(lang, []) for lang in forms if flags_by_lang.get(lang)
         }
+        hyps = self.correspondence.reconstruct_set(
+            forms,
+            attestation_ids=att_map,
+            flags_by_lang=group_flags,
+            known_proto=known,
+        )
+        gid = group.get("group_id", "cog")
+        serialized = [self._serialize_hypothesis(h, gid) for h in hyps]
+        return serialized, gid, hyps
+
+    def _serialize_hypothesis(self, h: Any, gid: str) -> dict[str, Any]:
+        return {
+            "cognate_set_id": gid,
+            "proto_form": h.proto_form,
+            "confidence": h.confidence,
+            "supporting_attestations": h.supporting_attestation_ids,
+            "aligned_daughter_forms": h.aligned_daughter_forms,
+            "correspondence_sets": h.correspondence_sets,
+            "sound_change_sequence": h.sound_change_sequence,
+            "competing_hypotheses": h.competing_hypotheses,
+            "unresolved_conflicts": h.unresolved_conflicts,
+            "leave_one_out": h.leave_one_out,
+            "flags": h.flags,
+            "regularity_score": h.regularity_score,
+            "exception_penalty": h.exception_penalty,
+        }
+
+    def _run_fallback_reconstruction(
+        self,
+        eid_to_form: dict[str, tuple[str, str]],
+        attestation_ids: list[str],
+        flags_by_lang: dict[str, list[str]],
+    ) -> list[dict[str, Any]]:
+        forms = {}
+        for lang, form in eid_to_form.values():
+            forms.setdefault(lang, form)
+        hyps = self.correspondence.reconstruct_set(
+            forms,
+            attestation_ids={"*": attestation_ids},
+            flags_by_lang=flags_by_lang,
+        )
+        return [
+            {
+                "cognate_set_id": "cognate_global",
+                "proto_form": h.proto_form,
+                "confidence": h.confidence,
+                "supporting_attestations": h.supporting_attestation_ids,
+                "aligned_daughter_forms": h.aligned_daughter_forms,
+                "correspondence_sets": h.correspondence_sets,
+                "sound_change_sequence": h.sound_change_sequence,
+                "competing_hypotheses": h.competing_hypotheses,
+                "unresolved_conflicts": h.unresolved_conflicts,
+                "leave_one_out": h.leave_one_out,
+                "flags": h.flags,
+            }
+            for h in hyps
+        ]
 
     def _merge_hypotheses(
         self,

@@ -15,8 +15,10 @@ from typing import Any
 from fae.mcr.rosetta import (
     AlignmentMode,
     ExternalRoot,
-    MCRLRosettaEngine as FAERosettaEngine,
     get_mcrl_engine,
+)
+from fae.mcr.rosetta import (
+    MCRLRosettaEngine as FAERosettaEngine,
 )
 
 from ..mcrl.rosetta_engine import MCRLRosettaEngine as SRERosettaEngine
@@ -71,13 +73,15 @@ class ComposedRosettaEngine:
                 source_domain="temporal",
                 target_domain="temporal",
             )
-            fae_alignments.append({
-                "id": entry.id,
-                "from_period": from_period,
-                "to_period": to_period,
-                "mode": entry.mode.value,
-                "confidence": entry.alignment_confidence,
-            })
+            fae_alignments.append(
+                {
+                    "id": entry.id,
+                    "from_period": from_period,
+                    "to_period": to_period,
+                    "mode": entry.mode.value,
+                    "confidence": entry.alignment_confidence,
+                }
+            )
 
         return {
             "temporal_map": temporal_map,

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 
@@ -44,7 +44,7 @@ class SovereignCertificate:
         validation_summary: dict[str, Any] | None = None,
         fabric_root_hash: str | None = None,
     ) -> SovereignCertificate:
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         issued = now.isoformat()
         cert_id = f"cert_{project_id}"
         recon_ids = list(reconstruction_ids or [reconstruction_id])
@@ -68,8 +68,7 @@ class SovereignCertificate:
                 "rule_set_version": rule_set_version or "correspondence_engine_v01",
             },
             scope={
-                "domains": domains
-                or ["phonology", "lexicon", "morphology"],
+                "domains": domains or ["phonology", "lexicon", "morphology"],
                 "constraints": constraints or {"max_drift": 0.6, "evidence_min_count": 1},
             },
             constitutional_status={
@@ -88,8 +87,7 @@ class SovereignCertificate:
                     "v4_alignment": True,
                     "v5_governance_fit": True,
                 },
-                "validation_summary": validation_summary
-                or {"is_valid": True, "failed_checks": []},
+                "validation_summary": validation_summary or {"is_valid": True, "failed_checks": []},
             },
             signatures={
                 "council_signature": f"sig_{cert_id}",

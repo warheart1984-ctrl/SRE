@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 from fae.cycle.fra_cycle import CycleContext
 from fae.evidence.registry import EvidenceSource, EvidenceStatus
-
 
 # Domain inference artifacts are anchored to external linguistic evidence,
 # not free-floating model belief (FAC-E1 externality).
@@ -27,8 +26,8 @@ class SREAnchoredEvidenceMixin:
         acquisition_method: str,
         confidence: float = 1.0,
         validation_status: EvidenceStatus | None = None,
-        validator_id: Optional[str] = None,
-        dependencies: Optional[list[str]] = None,
+        validator_id: str | None = None,
+        dependencies: list[str] | None = None,
     ) -> str:
         if source in (EvidenceSource.INTERNAL_MODEL, EvidenceSource.DERIVED_INFERENCE):
             source = _SRE_DOMAIN_SOURCE
@@ -63,7 +62,9 @@ def build_reasoning_explanations(state: Any) -> list[str]:
     return explanations
 
 
-def aligned_predictions(state: Any, quality_gate: float, drift_threshold: float) -> dict[str, float]:
+def aligned_predictions(
+    state: Any, quality_gate: float, drift_threshold: float
+) -> dict[str, float]:
     """Prediction keys aligned with measure_reality for FAC-V3 calibration."""
     return {
         "quality": quality_gate,

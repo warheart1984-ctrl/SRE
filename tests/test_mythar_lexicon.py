@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from sre.ai.hlrm_agent import HLRMAIAgent
+from sre.evidence.dantomax_client import DantomaxClient
 from sre.evidence.models import ConstitutionalStatus
 from sre.evidence.registry import EvidenceRegistry
-from sre.evidence.dantomax_client import DantomaxClient
 from sre.fra.reconstruction_engine import ChronologicalReconstruction
-from sre.ai.hlrm_agent import HLRMAIAgent
 from sre.mythar import MytharLexicon
 from sre.mythar.data import ALLOWED_POLYSEMY, PGC_CONTRACT, PGC_CORRECTIONS, build_lexicon_document
 from sre.mythar.governance import (
@@ -73,12 +73,54 @@ def test_mythar_lexicon_file_and_counts() -> None:
     assert c95["forms"] == ["pu", "hu", "duma"]
 
     for root in (
-        "ma", "pa", "ti", "chi", "loi", "sha", "sa", "rama", "ko",
-        "peh", "dak", "toh", "tek", "nuka", "sola", "luna", "fe",
-        "krato", "bura", "tem", "reka", "ver", "never", "lo", "alo", "dunu",
-        "tima", "sura", "nema", "ke", "in", "ex", "duta", "neta",
-        "da", "hu", "am", "no", "du", "duma", "taga", "me", "mica", "ska", "ula",
-        "fi", "yafora", "makyo",
+        "ma",
+        "pa",
+        "ti",
+        "chi",
+        "loi",
+        "sha",
+        "sa",
+        "rama",
+        "ko",
+        "peh",
+        "dak",
+        "toh",
+        "tek",
+        "nuka",
+        "sola",
+        "luna",
+        "fe",
+        "krato",
+        "bura",
+        "tem",
+        "reka",
+        "ver",
+        "never",
+        "lo",
+        "alo",
+        "dunu",
+        "tima",
+        "sura",
+        "nema",
+        "ke",
+        "in",
+        "ex",
+        "duta",
+        "neta",
+        "da",
+        "hu",
+        "am",
+        "no",
+        "du",
+        "duma",
+        "taga",
+        "me",
+        "mica",
+        "ska",
+        "ula",
+        "fi",
+        "yafora",
+        "makyo",
     ):
         assert root in lex.root_forms(), root
     assert domains_covered(lex)
@@ -228,9 +270,7 @@ def test_mythar_seed_and_reconstruct_clusters() -> None:
         "evid_myt_root_chi",
         "evid_myt_root_duma",
     ]
-    engine = ChronologicalReconstruction(
-        registry, HLRMAIAgent(registry), corpus_path="mythar-lex"
-    )
+    engine = ChronologicalReconstruction(registry, HLRMAIAgent(registry), corpus_path="mythar-lex")
     result = engine.reconstruct_language("Mythar", "Living Lexicon", evidence_ids)
     assert result["status"] == "COMPLETED", result
 

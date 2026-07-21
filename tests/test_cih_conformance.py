@@ -96,7 +96,9 @@ class CIHConformanceProfileTests(unittest.TestCase):
                 self.assertTrue(_resolve(schema).is_file(), f"missing schema {schema}")
 
     def test_core_cih_entities_present(self) -> None:
-        core_ids = {e["entity_id"] for e in self.profile["entities"] if e["classification"] == "core"}
+        core_ids = {
+            e["entity_id"] for e in self.profile["entities"] if e["classification"] == "core"
+        }
         required = {
             "ProjectSpec",
             "EvidenceBaseline",
@@ -105,12 +107,12 @@ class CIHConformanceProfileTests(unittest.TestCase):
             "SovereignCertificate",
             "GovernanceTrace",
         }
-        self.assertTrue(required.issubset(core_ids), f"missing core entities: {required - core_ids}")
+        self.assertTrue(
+            required.issubset(core_ids), f"missing core entities: {required - core_ids}"
+        )
 
     def test_core_cih_gates_mapped_to_tests(self) -> None:
-        core_gates = [
-            g for g in self.profile["conformance_gates"] if g["classification"] == "core"
-        ]
+        core_gates = [g for g in self.profile["conformance_gates"] if g["classification"] == "core"]
         self.assertEqual(len(core_gates), 5)
         for gate in core_gates:
             self.assertTrue(gate["gate_id"].startswith("CIH-"))

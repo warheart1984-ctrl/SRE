@@ -14,9 +14,9 @@ if TYPE_CHECKING:
 
 class SovereignLedgerExplorer:
     """
-    Constitutional read model composing CEL semantic fabric with Dantomax
-  cryptographic anchors. Serves explorer UI and API without duplicating
-    query logic in route handlers.
+      Constitutional read model composing CEL semantic fabric with Dantomax
+    cryptographic anchors. Serves explorer UI and API without duplicating
+      query logic in route handlers.
     """
 
     def __init__(

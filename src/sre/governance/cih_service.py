@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 
 from ..evidence.models import ConstitutionalStatus
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 class FAECLanguageReconstructionService:
@@ -149,18 +149,13 @@ class FAECLanguageReconstructionService:
                 extra={"baseline": baseline},
             )
 
-        reconstruction_id = str(
-            spec.get("reconstruction_id")
-            or f"recon_{project_id}"
-        )
+        reconstruction_id = str(spec.get("reconstruction_id") or f"recon_{project_id}")
 
         # Reject certification without valid attestation lineage when Dantomax is present
         dantomax = getattr(self.evidence_registry, "_dantomax", None)
         attestation_ids = list(spec.get("attestation_ids") or [])
         attestation_root = None
-        if dantomax is not None and (
-            attestation_ids or spec.get("require_attestation_lineage")
-        ):
+        if dantomax is not None and (attestation_ids or spec.get("require_attestation_lineage")):
             bad = dantomax.require_attested_sources(attestation_ids)
             if bad or not attestation_ids:
                 self._projects[project_id]["status"] = "REJECTED"
@@ -195,9 +190,7 @@ class FAECLanguageReconstructionService:
             attestation_root_hash=attestation_root or spec.get("attestation_root_hash"),
             fabric_root_hash=fabric_root,
             rule_set_version=spec.get("rule_set_version"),
-            reconstruction_ids=list(
-                spec.get("reconstruction_ids") or [reconstruction_id]
-            ),
+            reconstruction_ids=list(spec.get("reconstruction_ids") or [reconstruction_id]),
             validation_summary=dict(spec.get("validation_summary") or {}),
         )
         if cel is not None:

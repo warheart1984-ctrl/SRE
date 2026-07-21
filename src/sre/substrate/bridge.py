@@ -11,10 +11,12 @@ from typing import TYPE_CHECKING, Any
 
 from fae.evidence.registry import (
     Evidence,
-    EvidenceRegistry as FAEEvidenceRegistry,
     EvidenceSource,
     EvidenceStatus,
     ProvenanceMetadata,
+)
+from fae.evidence.registry import (
+    EvidenceRegistry as FAEEvidenceRegistry,
 )
 
 if TYPE_CHECKING:

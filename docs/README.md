@@ -20,7 +20,10 @@ Suitable for researchers, integrators, and contributors.
 | [`governance/CIH_Workflow.md`](governance/CIH_Workflow.md) | Governance workflow |
 | [`governance/CEL_Charter_v01.md`](governance/CEL_Charter_v01.md) | Evidence ledger charter |
 | [`governance/PromotionPlan_v01.md`](governance/PromotionPlan_v01.md) | Promotion gates |
-| [`governance/DriveG_DocumentationEvidenceLaw.md`](governance/DriveG_DocumentationEvidenceLaw.md) | Doc ↔ implementation evidence rule |
+| [`governance/DriveG_DocumentationEvidenceLaw.md`](governance/DriveG_DocumentationEvidenceLaw.md) | Doc ↔ implementation evidence rule (Drive-G-1) |
+| [`governance/DriveG_MaturityDimensionsStandard.md`](governance/DriveG_MaturityDimensionsStandard.md) | Constitutional vs product maturity (Drive-G-2) |
+| [`scorecards/sovereign-reconstruction-engine.md`](scorecards/sovereign-reconstruction-engine.md) | This repo's Drive-G-2 scorecard |
+| [`G:\docs\governance\MATURITY_SCORECARD_INDEX.md`](../../../../docs/governance/MATURITY_SCORECARD_INDEX.md) | Drive G scorecard index (all projects) |
 
 ## Mythar IP (separate license)
 

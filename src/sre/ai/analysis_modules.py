@@ -7,6 +7,7 @@ from collections import defaultdict
 from typing import Any
 
 from ..evidence.models import EvidenceType, LinguisticEvidence
+from .cognate_scoring import rank_cognate_groups
 from .sound_change import cognate_form_pairs, induce_sound_changes
 
 _BREATH_GLOSS = re.compile(r"\b(breath|spirit|wind|air)\b", re.IGNORECASE)
@@ -30,7 +31,9 @@ _IE_STEMS: dict[str, re.Pattern[str]] = {
     "oinos": re.compile(r"^(unus|uno|un|eka|one|ains|oen|jedinu|vienas|heis|oynos)", re.I),
     "duwo": re.compile(r"^(duo|dos|deux|dva|two|twai|dau|wu|duwo)", re.I),
     "treyes": re.compile(r"^(tres|trois|tri|three|treis|trayas|threis|trys|trey|treyes)", re.I),
-    "kwetwer": re.compile(r"^(quattuor|cuatro|quatre|catur|four|tettares|fidwor|cethair|keturi)", re.I),
+    "kwetwer": re.compile(
+        r"^(quattuor|cuatro|quatre|catur|four|tettares|fidwor|cethair|keturi)", re.I
+    ),
     "penkwe": re.compile(r"^(quinque|cinco|cinq|panca|five|pente|fimf|coic|penki|pis)", re.I),
     "sweks": re.compile(r"^(sex|hex|sas|saihs|se|sesti|sesi|six|sweks)", re.I),
     "septm": re.compile(r"^(septem|hepta|sapta|sibun|secht|sedmi|septyni|seven)", re.I),
@@ -38,19 +41,25 @@ _IE_STEMS: dict[str, re.Pattern[str]] = {
     "newn": re.compile(r"^(novem|ennea|nava|niun|noi|deveti|devyni|nine)", re.I),
     "dekm": re.compile(r"^(decem|deka|dasa|taihun|deich|deseti|desimt|sak|ten)", re.I),
     "es": re.compile(r"^(esse|est|ser|etre|as|be|eimi|ist|jestu|esti|hes)", re.I),
-    "bher": re.compile(r"^(ferre|fero|llevar|porter|bhar|bear|phero|bairan|berid|bero|berti|bher)", re.I),
+    "bher": re.compile(
+        r"^(ferre|fero|llevar|porter|bhar|bear|phero|bairan|berid|bero|berti|bher)", re.I
+    ),
     "deh3": re.compile(r"^(dare|didomi|dadati|give|dobeir|dati|duoti|giban|deh3)", re.I),
-    "gno": re.compile(r"^(gnoscere|conocer|connaitre|jna|know|gignosko|janati|kunnan|znati|zinoti|gneh3)", re.I),
+    "gno": re.compile(
+        r"^(gnoscere|conocer|connaitre|jna|know|gignosko|janati|kunnan|znati|zinoti|gneh3)", re.I
+    ),
     "weyd": re.compile(r"^(videre|eidon|veda|see|saihwan|veizdeti|weyd)", re.I),
     "klew": re.compile(r"^(audire|akouo|srnoti|hear|hausjan|girdeti|klew)", re.I),
     "ed": re.compile(r"^(edere|comer|manger|ad|eat|edo|atti|itan|ithid|jasti|hed)", re.I),
     "peh3": re.compile(r"^(bibere|pino|pibati|drink|drinkan|gerti|eku|peh3)", re.I),
     "gwem": re.compile(r"^(venire|baino|gam|come|qiman|eiti|iti|gwem)", re.I),
-    "steh2": re.compile(r"^(stare|histemi|tisthati|stand|standan|stati|stoveti|istant|steh2)", re.I),
+    "steh2": re.compile(
+        r"^(stare|histemi|tisthati|stand|standan|stati|stoveti|istant|steh2)", re.I
+    ),
 }
 
 
-def _forms_from_evidence(evidence: LinguisticEvidence) -> list[str]:
+def forms_from_evidence(evidence: LinguisticEvidence) -> list[str]:
     content = evidence.content
     forms: list[str] = []
     if content.get("form"):
@@ -61,13 +70,18 @@ def _forms_from_evidence(evidence: LinguisticEvidence) -> list[str]:
     return forms
 
 
-def _gloss_blob(evidence: LinguisticEvidence) -> str:
+def gloss_blob(evidence: LinguisticEvidence) -> str:
     content = evidence.content
     parts = [content.get("gloss"), content.get("meaning")]
     return " ".join(str(p) for p in parts if p)
 
 
-def _normalize_root(form: str) -> str:
+# Backward-compatible private aliases
+_forms_from_evidence = forms_from_evidence
+_gloss_blob = gloss_blob
+
+
+def normalize_root(form: str) -> str:
     form = form.lower()
     for stem, pattern in _IE_STEMS.items():
         if pattern.match(form):
@@ -84,12 +98,18 @@ def _normalize_root(form: str) -> str:
     return alpha[:4] if alpha else form
 
 
-def _meaning_key(evidence: LinguisticEvidence) -> str:
-    gloss = _gloss_blob(evidence).lower().strip()
+_normalize_root = normalize_root
+
+
+def meaning_key(evidence: LinguisticEvidence) -> str:
+    gloss = gloss_blob(evidence).lower().strip()
     if not gloss:
         return "general"
     primary = gloss.split(",")[0].strip().split()[0]
     return primary or "general"
+
+
+_meaning_key = meaning_key
 
 
 class LexicalAnalyzer:
@@ -100,14 +120,14 @@ class LexicalAnalyzer:
         for evidence in evidence_list:
             if not isinstance(evidence, LinguisticEvidence):
                 continue
-            forms = _forms_from_evidence(evidence)
-            gloss = _gloss_blob(evidence)
-            meaning = _meaning_key(evidence)
+            forms = forms_from_evidence(evidence)
+            gloss = gloss_blob(evidence)
+            meaning = meaning_key(evidence)
             domain = "breath_spirit" if _BREATH_GLOSS.search(gloss) else meaning
             if not forms and meaning != "general":
                 forms = [meaning]
             for form in forms:
-                root = _normalize_root(form)
+                root = normalize_root(form)
                 key = f"{root}:{domain}"
                 bucket = clusters.setdefault(
                     key,
@@ -196,16 +216,16 @@ class CognateDetector:
         for evidence in evidence_list:
             if not isinstance(evidence, LinguisticEvidence):
                 continue
-            gloss = _gloss_blob(evidence)
-            meaning = _meaning_key(evidence)
-            forms = _forms_from_evidence(evidence)
+            gloss = gloss_blob(evidence)
+            meaning = meaning_key(evidence)
+            forms = forms_from_evidence(evidence)
             if not forms and meaning == "general":
                 continue
             if not forms:
                 forms = [meaning]
 
             for form in forms:
-                root = _normalize_root(form)
+                root = normalize_root(form)
                 key = meaning if meaning != "general" else root
                 if _BREATH_GLOSS.search(gloss):
                     key = "mah"
@@ -222,4 +242,4 @@ class CognateDetector:
                     group["evidence_ids"].append(evidence.evidence_id)
                 if gloss and gloss not in group["meanings"]:
                     group["meanings"].append(gloss)
-        return [g for g in groups.values() if len(g["members"]) >= 1]
+        return rank_cognate_groups([g for g in groups.values() if len(g["members"]) >= 1])

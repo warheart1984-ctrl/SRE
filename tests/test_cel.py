@@ -6,7 +6,7 @@ import unittest
 
 from sre.ai.hlrm_agent import HLRMAIAgent
 from sre.corpus.loader import seed_registry_from_corpus
-from sre.evidence.cel import CELEntryType, ConstitutionalEvidenceLedger, CEL_VERSION
+from sre.evidence.cel import CEL_VERSION, CELEntryType, ConstitutionalEvidenceLedger
 from sre.evidence.dantomax_client import DantomaxClient
 from sre.evidence.registry import EvidenceRegistry
 from sre.fra.reconstruction_engine import ChronologicalReconstruction

@@ -6,7 +6,7 @@ import hashlib
 import hmac
 import json
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from .attestations import (
@@ -19,7 +19,7 @@ from .dantomax_signer import DantomaxSigner, LocalHmacSigner
 
 
 def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 @dataclass
@@ -66,9 +66,7 @@ class DantomaxClient:
     """
 
     GENESIS = "0" * 64
-    ATTESTATION_EVENTS = frozenset(
-        {"ATTEST", "SUPERSEDE", "REJECT", "APPROVE", "CORRECT"}
-    )
+    ATTESTATION_EVENTS = frozenset({"ATTEST", "SUPERSEDE", "REJECT", "APPROVE", "CORRECT"})
 
     def __init__(
         self,
@@ -136,11 +134,7 @@ class DantomaxClient:
         )
 
     def verify_evidence(self, evidence_id: str, sha256_hash: str) -> dict[str, Any]:
-        history = [
-            r
-            for r in (self._records.get(evidence_id) or [])
-            if r.event_type == "REGISTER"
-        ]
+        history = [r for r in (self._records.get(evidence_id) or []) if r.event_type == "REGISTER"]
         if not history:
             return {
                 "is_verified": False,
@@ -189,7 +183,9 @@ class DantomaxClient:
         """
         errors = validate_attestation_fields(data)
         if errors:
-            self._gov_event("ATTESTATION_REJECTED", {"errors": errors, "data_id": data.get("attestation_id")})
+            self._gov_event(
+                "ATTESTATION_REJECTED", {"errors": errors, "data_id": data.get("attestation_id")}
+            )
             raise ValueError(f"attestation rejected: {errors}")
 
         att = HistoricalAttestation.from_dict(data)
@@ -239,7 +235,9 @@ class DantomaxClient:
         new_data = dict(new_data)
         new_data["supersedes"] = old_attestation_id
         if "attestation_id" not in new_data or new_data["attestation_id"] == old_attestation_id:
-            new_data["attestation_id"] = f"{old_attestation_id}__v{len(self._attestation_history.get(old_attestation_id, [])) + 1}"
+            new_data["attestation_id"] = (
+                f"{old_attestation_id}__v{len(self._attestation_history.get(old_attestation_id, [])) + 1}"
+            )
 
         result = self.register_attestation(new_data)
         new_id = result["attestation"]["attestation_id"]
@@ -273,9 +271,7 @@ class DantomaxClient:
         reason: str,
     ) -> dict[str, Any]:
         """Governance CORRECT event — always supersedes; never mutates in place."""
-        result = self.supersede_attestation(
-            old_attestation_id, new_data, reason=reason
-        )
+        result = self.supersede_attestation(old_attestation_id, new_data, reason=reason)
         self._gov_event(
             "ATTESTATION_CORRECTED",
             {
@@ -310,7 +306,9 @@ class DantomaxClient:
             attestation_id=attestation_id,
             payload={"reason": reason},
         )
-        self._gov_event("ATTESTATION_REJECTED", {"attestation_id": attestation_id, "reason": reason})
+        self._gov_event(
+            "ATTESTATION_REJECTED", {"attestation_id": attestation_id, "reason": reason}
+        )
         return receipt
 
     def approve_attestation(self, attestation_id: str) -> dict[str, Any]:

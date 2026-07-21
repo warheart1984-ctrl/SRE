@@ -25,11 +25,11 @@ from fae import (
     EvidenceSource,
     EvidenceStatus,
     FACInvariantViolation,
+    FactualAlignmentEngine,
     FAEConfig,
     FRACycle,
     FRACycleError,
     FRACycleStage,
-    FactualAlignmentEngine,
     ProvenanceMetadata,
     StageResult,
     ValidationMetricsEngine,
@@ -41,10 +41,12 @@ from fae import (
 from fae.api import (
     ComponentCertification,
     ComponentStatus,
-    EvidenceRegistry as FAEEvidenceRegistry,
     FACGovernanceHooks,
     FACPolicy,
     GovernedFRACycle,
+)
+from fae.api import (
+    EvidenceRegistry as FAEEvidenceRegistry,
 )
 from fae.evidence.registry import get_registry as get_fae_registry
 from fae.evidence.registry import reset_registry as reset_fae_registry
@@ -53,14 +55,20 @@ from fae.mcr.rosetta import (
     AlignmentMode,
     ExternalGrammarRule,
     ExternalRoot,
-    MCRLRosettaEngine as FAEMCRLRosettaEngine,
     RosettaConformanceProfile,
     get_mcrl_engine,
     reset_mcrl,
 )
+from fae.mcr.rosetta import (
+    MCRLRosettaEngine as FAEMCRLRosettaEngine,
+)
 
 from .bridge import mirror_linguistic_evidence_to_fae
-from .fra_composition import ComposedReconstructionResult, FRAComposedReconstruction, RecursiveCompositionResult
+from .fra_composition import (
+    ComposedReconstructionResult,
+    FRAComposedReconstruction,
+    RecursiveCompositionResult,
+)
 from .fra_stage_runner import (
     FAE_TO_SRE_STAGE_GROUPS,
     SRE_TO_FAE_STAGE_MAP,

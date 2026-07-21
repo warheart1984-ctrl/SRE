@@ -33,9 +33,11 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6"]
 api = ["fastapi>=0.115", "uvicorn[standard]>=0.30", "httpx>=0.27"]
+postgres = ["psycopg[binary]>=3.1"]
 
 [project.scripts]
 sre-api = "sre.api.__main__:main"
+sre = "sre.__main__:cli"
 
 [project.urls]
 Homepage = "https://github.com/warheart1984-ctrl/mythar-sre"
@@ -59,3 +61,28 @@ pythonpath = ["src", "packages"]
 line-length = 100
 target-version = "py311"
 src = ["src", "packages", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "ARG"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_unimported = false
+disallow_untyped_defs = false
+no_implicit_optional = true
+check_untyped_defs = false
+ignore_missing_imports = true
+follow_imports = "normal"
+exclude = [
+  "build/",
+  "dist/",
+  ".eggs/",
+  "src/sre/enterprise/",
+]
