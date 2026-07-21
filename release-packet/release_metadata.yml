@@ -1,0 +1,15 @@
+release:
+  version: "1.0.0"
+  git_commit: "199b8cc"
+  release_day: "2026-07-21"
+  python_versions: "3.11-3.13"
+  test_results:
+    passed: 1233
+    total: 1247
+    pass_rate: "98.9%"
+  versions:
+    benchmark_version: "1.0"
+    methodology_version: "1.0"
+  licenses:
+    framework: "Apache-2.0"
+    creative: "Mythar License"
