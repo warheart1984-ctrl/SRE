@@ -1,0 +1,10 @@
+recursive-include api *
+recursive-include evidence *
+recursive-include mcr *
+recursive-include drift *
+recursive-include state *
+recursive-include metrics *
+recursive-include cycle *
+recursive-include governance *
+recursive-exclude _nested_shadow_fae *
+global-exclude *_nested_shadow*

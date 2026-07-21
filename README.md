@@ -4,6 +4,23 @@ A Constitutional Computing System for Evidence-Constrained Linguistic Reconstruc
 
 The Sovereign Reconstruction Engine (SRE) is a constitutional, evidence-governed system implementing the CIEMS Sovereignty Stack for historical, linguistic, and proto-form reconstruction. Every component operates under constitutional constraints, evidence validation, and governance oversight.
 
+## Constitutional substrate (FAE)
+
+SRE vendors the **Factual Alignment Engine (FAE)** under `packages/fae` and exposes it as the `fae` package plus `sre.substrate`.
+
+| Layer | Package | Role (evidenced) |
+|-------|---------|------------------|
+| Substrate | `fae` / `sre.substrate` | Generic FAC evidence registry, FRA cycle, drift, validation, CSR, MCRL Rosetta — **importable** after `pip install -e .` |
+| Domain | `sre.evidence`, `sre.fra`, … | Linguistic EvidenceRegistry, ChronologicalReconstruction, CEL/Dantomax, Mythar + IE corpora |
+
+**Wired today:** when `EvidenceRegistry` is constructed with a FAE registry (API `AppState` does this), ACCEPTED linguistic evidence is mirrored into the FAE substrate (`validation.report["fae_substrate"]`). Linguistic wire APIs are unchanged.
+
+**Not claimed:** replacing SRE FRA/MCRL domain engines with FAE `FRACycle` / FAE Rosetta end-to-end (parallel stacks remain; composition is prepared via `sre.substrate`).
+
+Standalone FAE tree at `G:\fae` remains an upstream mirror until cutover is declared.
+
+See [`docs/architecture/FAESubstrate.md`](docs/architecture/FAESubstrate.md).
+
 ## Constitutional Foundations
 
 SRE adheres to the CIEMS constitutional invariants:
@@ -51,6 +68,7 @@ Dantomax (`--dantomax`) attaches a local HMAC-signed, hash-chained attestation l
 
 ## Core Components
 
+- **FAE Substrate** — `packages/fae`, `sre.substrate` (mirror path for ACCEPTED evidence)
 - **Evidence Layer** — EvidenceRegistry, SHA256 integrity, Dantomax hooks, FAC-E1–E4
 - **FRA Layer** — ChronologicalReconstruction, nine-stage methodology
 - **AI Layer** — HLRMAIAgent pattern / proto-form / refine stubs
@@ -64,6 +82,7 @@ SRE v0.1 implements:
 
 - Full constitutional documentation and OpenAPI contracts
 - FAC-E Substrate behavior on EvidenceRegistry
+- FAE package vendored and importable; evidence mirror into FAE registry (tested)
 - Typed stubs for FRA / AI / CIH / MCRL
 - Constitutional promotion gate suite
 

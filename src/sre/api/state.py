@@ -14,6 +14,7 @@ from ..evidence.dantomax_signer import create_signer_from_env
 from ..evidence.ledger_explorer import SovereignLedgerExplorer
 from ..evidence.registry import EvidenceRegistry
 from ..governance.cih_service import FAECLanguageReconstructionService
+from ..substrate import FAEEvidenceRegistry, FactualAlignmentEngine, create_fae
 
 
 def _resolve_cel_path() -> Path:
@@ -39,10 +40,14 @@ class AppState:
             self.cel_store,
             dantomax=self.dantomax,
         )
+        # FAE constitutional substrate (generic FAC/FRA); linguistic registry stays SRE.
+        self.fae: FactualAlignmentEngine = create_fae()
+        self.fae_registry: FAEEvidenceRegistry = self.fae.registry
         self.registry = EvidenceRegistry(
             dantomax_client=self.dantomax,
             cel=self.cel,
             cel_store=self.cel_store,
+            fae_registry=self.fae_registry,
         )
         self.agent = HLRMAIAgent(self.registry, config={})
         self.cih = FAECLanguageReconstructionService(self.registry)

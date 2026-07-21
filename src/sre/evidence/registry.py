@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from datetime import datetime, timezone
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .cel import CELEntryType, ConstitutionalEvidenceLedger, CEL_VERSION
 from .dantomax_client import DantomaxClient
@@ -15,6 +15,9 @@ from .models import (
     EvidenceType,
     LinguisticEvidence,
 )
+
+if TYPE_CHECKING:
+    from fae.evidence.registry import EvidenceRegistry as FAEEvidenceRegistry
 
 # Substrate authenticity denylist (FAC-E1)
 _INVALID_SOURCE_REFERENCES = frozenset(
@@ -35,6 +38,7 @@ class EvidenceRegistry:
         dantomax_client: DantomaxClient | None = None,
         cel: ConstitutionalEvidenceLedger | None = None,
         cel_store: Any | None = None,
+        fae_registry: FAEEvidenceRegistry | None = None,
     ) -> None:
         self._store: dict[str, LinguisticEvidence] = {}
         self._status: dict[str, ConstitutionalStatus] = {}
@@ -42,6 +46,7 @@ class EvidenceRegistry:
         self._reconstructions: dict[str, dict[str, Any]] = {}
         self._dantomax = dantomax_client
         self._cel_store = cel_store
+        self._fae_registry = fae_registry
         if cel is not None:
             self._cel = cel
         elif dantomax_client is not None:
@@ -98,6 +103,13 @@ class EvidenceRegistry:
                     dantomax_receipt=receipt,
                 )
                 validation.report["cel"] = {"cel_entry_id": cel_entry.cel_entry_id}
+        if self._fae_registry is not None and validation.is_valid:
+            from ..substrate.bridge import mirror_linguistic_evidence_to_fae
+
+            fae_ev = mirror_linguistic_evidence_to_fae(
+                evidence, fae_registry=self._fae_registry
+            )
+            validation.report["fae_substrate"] = {"evidence_id": fae_ev.id}
         return evidence
 
     def verify_with_dantomax(self, evidence_id: str) -> dict[str, Any] | None:

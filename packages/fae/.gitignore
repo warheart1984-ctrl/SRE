@@ -1,0 +1,132 @@
+# Evidence Registry Storage
+evidence/
+evidence_data/
+
+cache/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info
+*.so
+*.dylib
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Thumbs.db
+
+# Environment and virtual environments
+.venv
+env/
+env.bak
+
+# Testing and coverage
+.coverage.xml
+htmlcov/
+.test_coverage
+
+# Documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+*.rst.inc
+
+# Node.js
+npm-debug.log*
+nodet_modules/
+
+# Docker
+Dockerfile
+.Dockerfile
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Log files
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Eclipse
+.project
+.settings
+
+# Visual Studio Code
+.vscode/
+
+# Other editor files
+*.swp
+*.swo
+*~**
+
+# Windows
+cmake.exe.mutations.2671
+cmake.exe.rebases.2671
+
+# Conformance test artifacts
+test_results/
+conformance_reports/
+
+# Runtime data
+*.data
+*.db
+*.sqlite
+
+# System temp files
+/tmp
+var/log/
+
+# Package
+*.7z
+*.dmg
+*.deb
+*.rpm
+*.tar.gz
+*.zip
+
+# Other
+*.crt
+*.key
+*.pem
+\*.crt
+\*.key
+\*.pem
+\*.p12
+\*.pfx
+
+# Virtual environments
+.venv
+env/
+env.bak
+\venv
+\env\n\env.bak
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.test_coverage
+\
