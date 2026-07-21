@@ -1,10 +1,50 @@
 # Mythar Gap-Fill Living Lexicon
 
-Status: Living data (`data/mythar_lexicon_v01.json`) · Engine: `src/sre/mythar/lexicon.py`
+Status: Living data (`data/mythar_lexicon_v01.json`) · Engine: `src/sre/mythar/lexicon.py` · Governance: `src/sre/mythar/governance.py`  
+**White paper (freeze synthesis):** [`MytharWhitePaper.md`](MytharWhitePaper.md)  
+**Engine suite:** [`MytharEngineSuite.md`](MytharEngineSuite.md)  
+**Drive G:** [`DriveG_DocumentationEvidenceLaw.md`](../governance/DriveG_DocumentationEvidenceLaw.md) — no claim may exceed implementation evidence
+
+## Strategic posture (freeze)
+
+**Core lexicon expansion is declared frozen** in `cra_governance_model.expansion_policy` (JSON). Prefer documentation, CRA/PGC conformance, and reproducibility tooling over admitting new roots or clusters. A CEL governance exception for thaw is **policy intent**—not a runtime admissions gate in current code.
 
 ## Philosophical note
 
-Mythar gap-fill is **evidence-constrained invention**: new roots and clusters are admitted only as tagged drafts with FAC-E1 source refs (`Mythar Living Lexicon / Gap-Fill Draft`). They feed FRA / cognate analysis but remain distinguishable from external comparative corpora (IE mini-set).
+Mythar gap-fill is **evidence-constrained invention**: roots and clusters carry FAC-E1 source refs (`Mythar Living Lexicon / Gap-Fill Draft`). They may feed FRA / cognate analysis but remain distinguishable from external comparative corpora (IE mini-set).
+
+## CRA governance model
+
+Exports CRA Justification vs Evidence fields (`docs/architecture/CRA_ReferenceArchitecture_v1.md`). **Aligns with** LRL-INV-05 for evidence-tagging; lineage is **prepared** (`cel_lineage.subject_id` + `binding_status=deferred`), not ledger-bound until CEL IDs are written.
+
+Each root and cluster exports `cra_governance`:
+
+| Field | Graph | Meaning |
+|-------|-------|---------|
+| **identity** | Justification | `mythar:root:{form}` / `mythar:cluster:{id}` |
+| **justification_dependency** | Justification | Why this entry exists (PGC / proposal / core coverage) |
+| **evidence_dependency** | Evidence | FAC-E1 source, Proto-World note, test clusters |
+| **assurance_level** | Evidence | `experimental` \| `candidate` \| `validated` |
+| **lifecycle_state** | Governance | `Draft` → `Review` → `Ratified` → `Active` |
+| **cel_lineage** | Evidence | Deferred CEL binding; `subject_id` = `evidence_id` |
+| **revision_history** | Governance | Append-only log (includes PGC v1.3 corrections) |
+
+Document policy: `cra_governance_model` in JSON (`mythar.cra_governance.v1`). JSON Schema file: `schemas/mythar_cra_governance.schema.json` *(published; runtime checks use `validate_governance_record` in tests)*.
+
+### Classification defaults
+
+| Class | Assurance | Lifecycle |
+|-------|-----------|-----------|
+| Core clusters 12–46 | validated | Active |
+| Compound / ritual 47–80 | validated | Active |
+| Proposals K–L (81–94) | candidate | Review |
+| Proposal M (95) | candidate | Review |
+| PGC-stable polysemy | validated | Active |
+| PGC v1.3 corrections/splits | validated | Active |
+
+### CEL binding (deferred)
+
+As exported, `binding_status=deferred` with `subject_id` = Mythar `evidence_id`. Real `cel_entry_id` values require a FAC-E seed → CEL write **and** a binder that updates lineage (not automatic today). Charter: `docs/governance/CEL_Charter_v01.md`.
 
 ## Proposals A–E
 
@@ -21,8 +61,49 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | **J** | Extended ritual triads (clusters 65–80) |
 | **K** | Proto-World universal gaps (clusters 81–87) |
 | **L** | Social/body/action/nature/abstract/logic/spatial roots (clusters 88–94) |
+| **M** | PGC corrections / axis validation (cluster 95) |
 
-## Clusters 12–94
+## Polysemy Governance Contract (PGC)
+
+Mythar v1.3 adopts constitutional polysemy rules:
+
+| ID | Rule |
+|----|------|
+| **PGC-1** | Polysemy requires a shared semantic axis |
+| **PGC-2** | Axes must be explicit in the lexicon entry |
+| **PGC-3** | Axes must be constitutional (vowel-core / consonant-force) |
+| **PGC-4** | Axes must be testable (≥1 cluster exercising both senses) |
+| **PGC-5** | No axis → no polysemy (split or remove weaker sense) |
+
+### Validated polysemy (stable)
+
+| Root | Axis | Senses |
+|------|------|--------|
+| fi | intensity → purity | fire · sacred-verity |
+| ru | flow → life-flow | rest-flow · blood |
+| pu | motion → living motion | move · animal |
+| vi | perception → awareness → life | knowing-see · living |
+| ra | scale → magnitude | intensify · great/big/many |
+| ma | origin → life → mother | mother · life/origin |
+| ka | weight → authority → age | force/gravity · elder |
+| la | elevation → illumination | light · sky/above |
+| to | agency | hand · give/take |
+| ta | deixis | this/that only |
+| du | burden | bad/heavy only |
+| nu | sense-aperture | nose/breath · ear |
+| ti | diminutive | small / sacred diminutive |
+
+### PGC-5 corrections
+
+| Root | Violation | Action |
+|------|-----------|--------|
+| to | stone ≠ agency | stone → `ska` / `krato` |
+| ta | foot/stand ≠ deixis | foot/stand → `pe` / `taga` |
+| du | two ≠ burden | two → `duma` |
+
+PGC v1.3 revision history is recorded on affected roots and cluster 95 under `cra_governance.revision_history`.
+
+## Clusters 12–95
 
 | ID | Forms | Domain | Phrase | Interpretation |
 |----|-------|--------|--------|----------------|
@@ -109,7 +190,7 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | 82 | si nu to | body | Si nu to kra ro | Eye–ear–hand |
 | 83 | fi wa hi | nature | Fi wa hi kra la | Fire–water–tree |
 | 84 | wi du ro | abstract | Wi du ro ya | Know–bad–rest |
-| 85 | su bu ya | motion | Su bu ya kra | Good–move–divine |
+| 85 | su pu ya | motion | Su pu ya kra | Good–move–divine |
 | 86 | be ni la | abstract | Be ni la ro ya | Head–name–light |
 | 87 | du kra ro | abstract | Du kra ro ya | Heavy–vital–rest |
 
@@ -124,8 +205,9 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | 92 | in ex neta | motion | In ex neta ro | Inside–outside–near |
 | 93 | ver never ke | abstract | Ver never ke ya | Truth–false–if |
 | 94 | rama ko ru | body | Rama ko ru kra | Feeling-heart–bone–blood |
+| 95 | pu hu duma | kinship | Pu hu duma kra | Animal–person–two (PGC) |
 
-**Cluster count: 83** (IDs 12–94 inclusive).
+**Cluster count: 84** (IDs 12–95 inclusive). Lexicon version **1.3**.
 
 ### Proposal L — new atomic roots (selected)
 
@@ -135,18 +217,20 @@ Mythar gap-fill is **evidence-constrained invention**: new roots and clusters ar
 | loi | friend / ally | |
 | sha | other / stranger | |
 | sa | speech / say | |
-| rama | feeling-heart; also many | ra+ma |
+| rama | feeling-heart | ra+ma |
 | ko | bone / structure | |
 | peh / dak / toh / tek | create / break / give / take | |
 | nuka | death / end | |
 | sola / luna / fe | sun / moon / wind | |
 | krato / bura | mountain / path | |
 | tem / reka / ver / never | time / change / truth / false | |
-| lo / dunu | love·up / fear | |
+| lo / alo / dunu | love / up / fear | alo split from lo |
 | tima / sura / nema / ke | few / all / none / if | |
 | in / ex / duta / neta | inside / outside / down / near | |
+| duma | two / dual | PGC split from du |
+| taga | stand / grounded foot | PGC split from ta |
 
-Conflict resolutions (polysemy / register split): `fi` = sacred-verity + fire; `ver` = cognitive truth; `kor` = anatomical heart vs `rama` = feeling-heart; `ru` = rest-flow + blood; `pu` = move + animal; `vi` = knowing-see + living.
+PGC-stable polysemy: `fi` fire+verity; `ru` rest-flow+blood; `pu` move+animal; `vi` knowing-see+living; `ra` scale; `ma` origin-life-mother; `ka` force-elder; `la` elevation-light. Register split: `ver` = cognitive truth; `kor` = anatomical heart vs `rama` = feeling-heart.
 
 ### Cluster 47 morphology
 
@@ -192,10 +276,11 @@ Yafora mikra talu
 Makyo yupra torlu
 Pa ne ti
 Fi wa hi
-Su bu ya
+Su pu ya
 Du kra ro
 Chi ma loi
 Sola luna fe
+Pu hu duma
 Wi su ni ve ro ya
 ```
 
@@ -205,11 +290,17 @@ Wi su ni ve ro ya
 from sre.mythar import MytharLexicon
 
 lex = MytharLexicon()
-lex.cluster_ids()           # 12..94
+lex.cluster_ids()           # 12..95
 lex.list_clusters()         # summaries (includes compound clusters)
 lex.gap_fill()              # domain coverage + proposals
 lex.compare_proto_world()   # Mythar ↔ Proto-World table
 lex.seed_registry(registry) # FAC-E seed into EvidenceRegistry (+ Dantomax if configured)
+
+# CRA governance (from build / JSON)
+doc = lex.raw
+doc["cra_governance_model"]           # freeze policy + field schema
+lex.roots()[0]["cra_governance"]      # per-root CRA record
+lex.get_cluster(12)["cra_governance"] # per-cluster CRA record
 ```
 
 ## Demo

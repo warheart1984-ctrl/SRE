@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional, TypeVar
 from pathlib import Path
-import uuid
 
 from fae.evidence.registry import (
     EvidenceRegistry,
@@ -250,7 +249,7 @@ class FactualAlignmentEngine:
             
             return context
             
-        except (FRACycleError, FACInvariantViolation) as e:
+        except (FRACycleError, FACInvariantViolation):
             # Log failure
             self.csr.end_cycle(cycle_id, success=False, final_model=cycle.model_state)
             raise
@@ -351,9 +350,6 @@ class FactualAlignmentEngine:
         dependencies: Optional[List[str]] = None
     ) -> ProvenanceMetadata:
         """Create provenance metadata with content hash."""
-        import hashlib
-        import json
-        
         # Create placeholder - actual hash computed at registration
         content_hash = "pending"
         

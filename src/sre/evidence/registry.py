@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Any
 
-from .cel import CELEntryType, ConstitutionalEvidenceLedger, CEL_VERSION
+from .cel import ConstitutionalEvidenceLedger
 from .dantomax_client import DantomaxClient
 from .models import (
     ConstitutionalStatus,

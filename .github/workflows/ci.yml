@@ -24,7 +24,11 @@ jobs:
 
       - name: Lint
         run: |
-          ruff check src/ tests/
+          ruff check src/ packages/ tests/
+
+      - name: Import smoke test
+        run: |
+          python -c "import sre, fae; from sre.substrate import FRAComposedReconstruction; print(sre.__version__)"
 
       - name: Run tests
         run: |
@@ -34,9 +38,17 @@ jobs:
         run: |
           pytest tests/test_cih_conformance.py -q
 
+      - name: FAE composition integration
+        run: |
+          pytest tests/test_fra_mcrl_composition.py -q
+
       - name: Constitutional Artifact Check
         run: |
           echo "Verifying constitutional artifacts..."
+          test -f LICENSE
+          test -f CONTRIBUTING.md
+          test -f .env.example
+          test -f docs/architecture/FAESubstrate.md
           test -f docs/architecture/EvidenceRegistry.md
           test -f docs/architecture/FRA_Methodology.md
           test -f docs/architecture/ConstitutionalValidationPipeline.md
@@ -65,4 +77,5 @@ jobs:
           test -f docs/conformance/SRE_ConformanceProfile_v1.md
           test -f schemas/cih_conformance_profile.schema.json
           test -f tests/test_cih_conformance.py
+          test -f tests/test_fra_mcrl_composition.py
           test -f data/fra_corpus_v01.json

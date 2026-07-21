@@ -16,6 +16,7 @@ from ..corpus.loader import resolve_corpus_path, seed_registry_from_corpus
 from ..linguistics.correspondence_engine import CorrespondenceEngine
 from ..linguistics.lineage import format_human_lineage
 from ..mcrl.rosetta_engine import MCRLRosettaEngine
+from .reconstruction_state import ReconstructionRunState
 from .stages import FRAStages
 
 if TYPE_CHECKING:
@@ -65,10 +66,34 @@ class ChronologicalReconstruction:
         evidence_sources: list[str],
     ) -> dict:
         """Wire to POST /api/v1/reconstruction — returns ReconstructionDetail-shaped dict."""
-        stages_completed: list[str] = []
-        dantomax = getattr(self.evidence_registry, "_dantomax", None)
-        cel = getattr(self.evidence_registry, "cel", None)
+        init = self.begin_run(target_language, time_period, evidence_sources)
+        if isinstance(init, dict):
+            return init
+        state = init
+        for step in (
+            self.stage_observe_ingest,
+            self.stage_attest,
+            self.stage_align_cluster,
+            self.stage_infer,
+            self.stage_validate,
+            self.stage_govern,
+            self.stage_certify,
+            self.stage_archive,
+        ):
+            failure = step(state)
+            if failure is not None:
+                return failure
+        return state.complete()
 
+    def begin_run(
+        self,
+        target_language: str,
+        time_period: str,
+        evidence_sources: list[str],
+        *,
+        iteration: int = 0,
+    ) -> ReconstructionRunState | dict[str, Any]:
+        """Initialize pipeline state; return failure dict when evidence is missing."""
         if not evidence_sources:
             return {
                 "reconstruction_id": None,
@@ -86,8 +111,8 @@ class ChronologicalReconstruction:
             search_catalog=True,
         )
 
-        evidence_list = []
-        missing = []
+        evidence_list: list[Any] = []
+        missing: list[str] = []
         for eid in evidence_sources:
             ev = self.evidence_registry.get_evidence(eid)
             if ev is None:
@@ -110,57 +135,66 @@ class ChronologicalReconstruction:
 
             self.ai_agent = HLRMAIAgent(self.evidence_registry, config={})
 
-        # 1. OBSERVE
-        observed = self.stages.observe(evidence_list)
-        stages_completed.append("OBSERVE")
+        state = ReconstructionRunState(
+            target_language=target_language,
+            time_period=time_period,
+            evidence_sources=list(evidence_sources),
+            evidence_list=evidence_list,
+            iteration=iteration,
+            _engine=self,
+        )
+        return state
 
-        # 2. INGEST
-        ingested = self.stages.ingest(evidence_list)
-        stages_completed.append("INGEST")
+    def stage_observe_ingest(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        state.observed = self.stages.observe(state.evidence_list)
+        state.stages_completed.append("OBSERVE")
+        state.ingested = self.stages.ingest(state.evidence_list)
+        state.stages_completed.append("INGEST")
+        return None
 
-        # 3. ATTEST
-        attestation_ids = collect_attestation_ids(evidence_list)
+    def stage_attest(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        dantomax = state.dantomax
+        cel = state.cel
+        state.attestation_ids = collect_attestation_ids(state.evidence_list)
         if dantomax is not None:
-            att_summary = seed_attestations_from_evidence(
-                dantomax, evidence_list, cel=cel
+            state.att_summary = seed_attestations_from_evidence(
+                dantomax, state.evidence_list, cel=cel
             )
-            # Auto-approve active attestations for demo governance path
-            for aid in att_summary.get("registered") or []:
+            for aid in state.att_summary.get("registered") or []:
                 try:
                     dantomax.approve_attestation(aid)
                 except ValueError:
                     pass
-            attestation_ids = collect_attestation_ids(evidence_list) or list(
-                att_summary.get("registered") or []
+            state.attestation_ids = collect_attestation_ids(state.evidence_list) or list(
+                state.att_summary.get("registered") or []
             )
-            if att_summary.get("errors"):
-                return {
-                    "reconstruction_id": None,
-                    "status": "FAILED",
-                    "fra_stage": "ATTEST",
-                    "reason": f"attestation errors: {att_summary['errors']}",
-                    "stages_completed": stages_completed + ["ATTEST"],
-                    "metrics": {"attest": att_summary},
-                }
+            if state.att_summary.get("errors"):
+                return state.fail(
+                    "ATTEST",
+                    f"attestation errors: {state.att_summary['errors']}",
+                    metrics={"attest": state.att_summary},
+                )
         else:
-            att_summary = {
+            state.att_summary = {
                 "registered": [],
                 "skipped_duplicates": [],
                 "errors": [],
                 "count": 0,
                 "note": "dantomax_not_attached",
             }
-        attest_out = self.stages.attest(att_summary)
-        stages_completed.append("ATTEST")
+        state.attest_out = self.stages.attest(state.att_summary)
+        state.stages_completed.append("ATTEST")
 
-        # Analysis (feeds ALIGN / CLUSTER / INFER)
-        analysis = self.ai_agent.analyze_evidence_patterns(evidence_list)
-        flags_by_lang = evidence_flags_by_lang(evidence_list)
-        corr_payload = self._run_correspondence_search(
-            analysis, evidence_list, attestation_ids, flags_by_lang
+        state.analysis = self.ai_agent.analyze_evidence_patterns(state.evidence_list)
+        state.flags_by_lang = evidence_flags_by_lang(state.evidence_list)
+        state.corr_payload = self._run_correspondence_search(
+            state.analysis,
+            state.evidence_list,
+            state.attestation_ids,
+            state.flags_by_lang,
         )
         if cel is not None:
-            for hyp in corr_payload.get("hypotheses") or []:
+            for hyp in state.corr_payload.get("hypotheses") or []:
                 gid = str(hyp.get("cognate_set_id") or "cog")
                 cel.record_correspondence(
                     gid,
@@ -173,177 +207,175 @@ class ChronologicalReconstruction:
                     },
                     links=list(hyp.get("supporting_attestations") or []),
                 )
+        return None
 
-        # 4. ALIGN
-        temporal_map = self.rosetta.map_temporal(evidence_list)
-        aligned = self.stages.align(
+    def stage_align_cluster(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        state.temporal_map = self.rosetta.map_temporal(state.evidence_list)
+        state.aligned = self.stages.align(
             None,
-            temporal_map,
-            correspondence_report=corr_payload.get("alignment_report"),
+            state.temporal_map,
+            correspondence_report=state.corr_payload.get("alignment_report"),
         )
-        stages_completed.append("ALIGN")
+        state.stages_completed.append("ALIGN")
+        state.clustered = self.stages.cluster(state.analysis)
+        state.stages_completed.append("CLUSTER")
+        return None
 
-        # 5. CLUSTER
-        clustered = self.stages.cluster(analysis)
-        stages_completed.append("CLUSTER")
-
-        # 6. INFER
-        hypotheses = self.ai_agent.predict_proto_forms(analysis)
-        # Merge correspondence-ranked hypotheses
-        if corr_payload.get("hypotheses"):
-            hypotheses = self._merge_hypotheses(hypotheses, corr_payload["hypotheses"])
-        proto_model = self.stages.infer(
+    def stage_infer(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        hypotheses = self.ai_agent.predict_proto_forms(state.analysis)
+        if state.corr_payload.get("hypotheses"):
+            hypotheses = self._merge_hypotheses(hypotheses, state.corr_payload["hypotheses"])
+        state.proto_model = self.stages.infer(
             hypotheses,
-            target_language,
-            time_period,
-            correspondence_hypotheses=corr_payload.get("hypotheses"),
+            state.target_language,
+            state.time_period,
+            correspondence_hypotheses=state.corr_payload.get("hypotheses"),
         )
-        # Progressive refinement (kept as INFER sub-step for FRA-04 compatibility)
-        needs_extra = True
-        test_result = self.stages.test(proto_model, evidence_list)
-        drift = float(test_result.get("drift", 1.0))
-        quality = float(test_result.get("quality", 0.0))
+        state.test_result = self.stages.test(state.proto_model, state.evidence_list)
+        state.drift = float(state.test_result.get("drift", 1.0))
+        state.quality = float(state.test_result.get("quality", 0.0))
         threshold = float(self.constraints["drift_threshold"])
         quality_gate = float(self.constraints["quality_gate"])
-        needs_extra = drift > threshold or quality < quality_gate
+        needs_extra = state.drift > threshold or state.quality < quality_gate
         max_iterations = int(self.constraints["max_iterations"]) if needs_extra else 1
-        refine_out = self.stages.refine(
-            proto_model,
-            analysis,
+        state.refine_out = self.stages.refine(
+            state.proto_model,
+            state.analysis,
             self.ai_agent,
             max_iterations=max_iterations,
             quality_gate=quality_gate,
         )
-        proto_model = refine_out["proto_model"]
-        proto_model["correspondence_hypotheses"] = corr_payload.get("hypotheses") or []
-        test_result = self.stages.test(proto_model, evidence_list)
-        drift = float(test_result.get("drift", drift))
-        quality = float(refine_out.get("quality", quality))
-        stages_completed.append("INFER")
+        state.proto_model = state.refine_out["proto_model"]
+        state.proto_model["correspondence_hypotheses"] = (
+            state.corr_payload.get("hypotheses") or []
+        )
+        state.test_result = self.stages.test(state.proto_model, state.evidence_list)
+        state.drift = float(state.test_result.get("drift", state.drift))
+        state.quality = float(state.refine_out.get("quality", state.quality))
+        state.stages_completed.append("INFER")
 
-        if self.constraints.get("require_drift_metrics") and "drift" not in test_result:
-            return {
-                "reconstruction_id": proto_model.get("id"),
-                "status": "FAILED",
-                "fra_stage": "INFER",
-                "reason": "FRA-03: drift metrics required",
-                "stages_completed": stages_completed,
-                "metrics": test_result,
-            }
-
-        # Attach attestation links onto proto forms
-        for hyp in proto_model.get("proto_forms") or []:
-            hyp.setdefault("attestation_ids", list(attestation_ids))
-        if proto_model.get("primary"):
-            proto_model["primary"].setdefault("attestation_ids", list(attestation_ids))
-
-        metrics = {
-            "drift": drift,
-            "coverage": float(test_result.get("coverage", 0.0)),
-            "quality": quality,
-            "consistency": float(test_result.get("coverage", 0.0)),
-            "evidence_count": len(evidence_list),
-            "observe": observed,
-            "ingest": ingested,
-            "attest": attest_out,
-            "align": aligned,
-            "cluster_summary": {
-                "clusters": len(clustered.get("lexical_clusters") or []),
-                "cognates": len(clustered.get("cognate_groups") or []),
-                "shifts": len(clustered.get("phonological_shifts") or []),
-            },
-            "aligned": aligned.get("aligned", False),
-            "correspondence": {
-                "hypothesis_count": len(corr_payload.get("hypotheses") or []),
-                "ambiguous_sets": corr_payload.get("ambiguous_sets") or [],
-                "flagged_irregular": corr_payload.get("flagged_irregular") or [],
-                "leave_one_out": corr_payload.get("leave_one_out_examples") or [],
-            },
-        }
-
-        recon_id = str(proto_model.get("id"))
-        if cel is not None:
-            cel.record_hypothesis(
-                recon_id,
-                {
-                    "proto_forms": proto_model.get("proto_forms") or [],
-                    "primary": proto_model.get("primary"),
-                    "confidence": quality,
-                    "attestation_ids": list(attestation_ids),
-                    "correspondence_hypothesis_count": len(
-                        corr_payload.get("hypotheses") or []
-                    ),
-                },
-                links=[e.evidence_id for e in evidence_list],
+        if self.constraints.get("require_drift_metrics") and "drift" not in state.test_result:
+            return state.fail(
+                "INFER",
+                "FRA-03: drift metrics required",
+                metrics=state.test_result,
             )
-        # Require lineage when explicitly configured, or when Dantomax has attestations.
+
+        for hyp in state.proto_model.get("proto_forms") or []:
+            hyp.setdefault("attestation_ids", list(state.attestation_ids))
+        if state.proto_model.get("primary"):
+            state.proto_model["primary"].setdefault(
+                "attestation_ids", list(state.attestation_ids)
+            )
+
+        state.metrics = {
+            "drift": state.drift,
+            "coverage": float(state.test_result.get("coverage", 0.0)),
+            "quality": state.quality,
+            "consistency": float(state.test_result.get("coverage", 0.0)),
+            "evidence_count": len(state.evidence_list),
+            "observe": state.observed,
+            "ingest": state.ingested,
+            "attest": state.attest_out,
+            "align": state.aligned,
+            "cluster_summary": {
+                "clusters": len(state.clustered.get("lexical_clusters") or []),
+                "cognates": len(state.clustered.get("cognate_groups") or []),
+                "shifts": len(state.clustered.get("phonological_shifts") or []),
+            },
+            "aligned": state.aligned.get("aligned", False),
+            "correspondence": {
+                "hypothesis_count": len(state.corr_payload.get("hypotheses") or []),
+                "ambiguous_sets": state.corr_payload.get("ambiguous_sets") or [],
+                "flagged_irregular": state.corr_payload.get("flagged_irregular") or [],
+                "leave_one_out": state.corr_payload.get("leave_one_out_examples") or [],
+            },
+            "iteration": state.iteration,
+        }
+        state.recon_id = str(state.proto_model.get("id"))
+        return None
+
+    def stage_validate(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        cel = state.cel
+        dantomax = state.dantomax
+        threshold = float(self.constraints["drift_threshold"])
         require_att = bool(
             self.constraints.get("require_attestation_lineage")
-            or (dantomax is not None and bool(attestation_ids))
+            or (dantomax is not None and bool(state.attestation_ids))
         )
+        if cel is not None:
+            cel.record_hypothesis(
+                state.recon_id,
+                {
+                    "proto_forms": state.proto_model.get("proto_forms") or [],
+                    "primary": state.proto_model.get("primary"),
+                    "confidence": state.quality,
+                    "attestation_ids": list(state.attestation_ids),
+                    "correspondence_hypothesis_count": len(
+                        state.corr_payload.get("hypotheses") or []
+                    ),
+                },
+                links=[e.evidence_id for e in state.evidence_list],
+            )
         self.evidence_registry.register_reconstruction(
-            recon_id,
-            evidence_ids=[e.evidence_id for e in evidence_list],
-            proto_model=proto_model,
-            metrics=metrics,
+            state.recon_id,
+            evidence_ids=[e.evidence_id for e in state.evidence_list],
+            proto_model=state.proto_model,
+            metrics=state.metrics,
             constraints={
                 "evidence_min_count": int(self.constraints["evidence_min_count"]),
                 "drift_threshold": threshold,
                 "require_attestation_lineage": require_att,
-                "attestation_ids": list(attestation_ids),
+                "attestation_ids": list(state.attestation_ids),
             },
             governance_approved=False,
             alignment_ok=True,
         )
+        state.validation = self.evidence_registry.validate_reconstruction(state.recon_id)
+        state.validate_out = self.stages.validate(state.validation)
+        state.stages_completed.append("VALIDATE")
+        if not state.validation.is_valid:
+            return state.fail(
+                "VALIDATE",
+                "validation failed",
+                proto_language_model=state.proto_model,
+                validation=state.validate_out,
+                refinement_halted=state.refine_out.get("refinement_halted"),
+                quality_improved=state.refine_out.get("quality_improved"),
+            )
+        return None
 
-        # 7. VALIDATE
-        validation = self.evidence_registry.validate_reconstruction(recon_id)
-        validate_out = self.stages.validate(validation)
-        stages_completed.append("VALIDATE")
-
-        if not validation.is_valid:
-            return {
-                "reconstruction_id": recon_id,
-                "status": "FAILED",
-                "fra_stage": "VALIDATE",
-                "proto_language_model": proto_model,
-                "validation": validate_out,
-                "stages_completed": stages_completed,
-                "metrics": metrics,
-                "refinement_halted": refine_out.get("refinement_halted"),
-                "quality_improved": refine_out.get("quality_improved"),
-            }
-
-        # 8. GOVERN — attestation lineage gate (only when lineage is required/present)
-        lineage = None
-        gov_ok = True
-        gov_reason = ""
+    def stage_govern(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        dantomax = state.dantomax
+        cel = state.cel
+        state.gov_ok = True
+        state.gov_reason = ""
         must_lineage = bool(self.constraints.get("require_attestation_lineage")) or bool(
-            attestation_ids
+            state.attestation_ids
         )
         if must_lineage:
             if dantomax is None:
-                gov_ok = False
-                gov_reason = "attestation lineage required but Dantomax not attached"
+                state.gov_ok = False
+                state.gov_reason = "attestation lineage required but Dantomax not attached"
             else:
                 bad = (
-                    dantomax.require_attested_sources(attestation_ids)
-                    if attestation_ids
+                    dantomax.require_attested_sources(state.attestation_ids)
+                    if state.attestation_ids
                     else ["missing:no_attestation_ids"]
                 )
                 if bad:
-                    gov_ok = False
-                    gov_reason = f"unattested_or_invalid: {bad}"
+                    state.gov_ok = False
+                    state.gov_reason = f"unattested_or_invalid: {bad}"
                 else:
-                    lineage = dantomax.build_lineage_trace(
-                        attestation_ids=attestation_ids,
-                        cognate_set_id=(clustered.get("cognate_groups") or [{}])[0].get(
+                    state.lineage = dantomax.build_lineage_trace(
+                        attestation_ids=state.attestation_ids,
+                        cognate_set_id=(state.clustered.get("cognate_groups") or [{}])[0].get(
                             "group_id"
                         ),
                         correspondence_ids=[
                             f"corr_{i}"
                             for i, _ in enumerate(
-                                (corr_payload.get("hypotheses") or [{}])[0].get(
+                                (state.corr_payload.get("hypotheses") or [{}])[0].get(
                                     "correspondence_sets"
                                 )
                                 or []
@@ -352,153 +384,133 @@ class ChronologicalReconstruction:
                         sound_shift_ids=[
                             s.get("rule") or s.get("named_transform") or f"shift_{i}"
                             for i, s in enumerate(
-                                (corr_payload.get("hypotheses") or [{}])[0].get(
+                                (state.corr_payload.get("hypotheses") or [{}])[0].get(
                                     "sound_change_sequence"
                                 )
                                 or []
                             )
                             if isinstance(s, dict)
                         ][:5],
-                        proto_form_id=str((proto_model.get("primary") or {}).get("id")),
+                        proto_form_id=str((state.proto_model.get("primary") or {}).get("id")),
                         certification_id=None,
                     )
-        elif dantomax is not None and attestation_ids:
-            lineage = dantomax.build_lineage_trace(
-                attestation_ids=attestation_ids,
-                cognate_set_id=(clustered.get("cognate_groups") or [{}])[0].get("group_id"),
-                proto_form_id=str((proto_model.get("primary") or {}).get("id")),
+        elif dantomax is not None and state.attestation_ids:
+            state.lineage = dantomax.build_lineage_trace(
+                attestation_ids=state.attestation_ids,
+                cognate_set_id=(state.clustered.get("cognate_groups") or [{}])[0].get("group_id"),
+                proto_form_id=str((state.proto_model.get("primary") or {}).get("id")),
             )
 
-        govern_out = self.stages.govern(
+        state.govern_out = self.stages.govern(
             {
-                "passed": gov_ok,
-                "reason": gov_reason,
-                "attestation_ids": attestation_ids,
-                "lineage": lineage,
-                "human_lineage": (lineage or {}).get("human_readable")
-                or format_human_lineage(lineage or {"path": list(FRAStages.STAGE_ORDER)}),
-                "cih_state": "PENDING_CERTIFY" if gov_ok else "BLOCKED",
+                "passed": state.gov_ok,
+                "reason": state.gov_reason,
+                "attestation_ids": state.attestation_ids,
+                "lineage": state.lineage,
+                "human_lineage": (state.lineage or {}).get("human_readable")
+                or format_human_lineage(
+                    state.lineage or {"path": list(FRAStages.STAGE_ORDER)}
+                ),
+                "cih_state": "PENDING_CERTIFY" if state.gov_ok else "BLOCKED",
             }
         )
         if cel is not None:
             cel.record_governance(
-                f"gov_{recon_id}",
+                f"gov_{state.recon_id}",
                 {
                     "event_type": "FRA_GOVERN",
-                    "passed": gov_ok,
-                    "reason": gov_reason,
-                    "attestation_ids": attestation_ids,
-                    "reconstruction_id": recon_id,
+                    "passed": state.gov_ok,
+                    "reason": state.gov_reason,
+                    "attestation_ids": state.attestation_ids,
+                    "reconstruction_id": state.recon_id,
                 },
-                links=list(attestation_ids) + [recon_id],
+                links=list(state.attestation_ids) + [state.recon_id],
             )
-        stages_completed.append("GOVERN")
+        state.stages_completed.append("GOVERN")
+        if not state.gov_ok:
+            return state.fail(
+                "GOVERN",
+                state.gov_reason,
+                proto_language_model=state.proto_model,
+                validation=state.validate_out,
+                governance=state.govern_out,
+            )
+        return None
 
-        if not gov_ok:
-            return {
-                "reconstruction_id": recon_id,
-                "status": "FAILED",
-                "fra_stage": "GOVERN",
-                "reason": gov_reason,
-                "proto_language_model": proto_model,
-                "validation": validate_out,
-                "governance": govern_out,
-                "stages_completed": stages_completed,
-                "metrics": metrics,
-            }
-
-        # 9. CERTIFY
-        corpus_hash = self._corpus_hash()
-        attestation_root = (
-            dantomax.attestation_root_hash if dantomax is not None else None
-        )
-        fabric_root = cel.fabric_root_hash if cel is not None else None
+    def stage_certify(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        dantomax = state.dantomax
+        cel = state.cel
         cert_fields = {
-            "corpus_hash": corpus_hash,
-            "attestation_root_hash": attestation_root,
-            "fabric_root_hash": fabric_root,
+            "corpus_hash": self._corpus_hash(),
+            "attestation_root_hash": (
+                dantomax.attestation_root_hash if dantomax is not None else None
+            ),
+            "fabric_root_hash": cel.fabric_root_hash if cel is not None else None,
             "rule_set_version": RULE_SET_VERSION,
-            "reconstruction_ids": [recon_id]
-            + [str(h.get("id")) for h in (proto_model.get("proto_forms") or []) if h.get("id")],
+            "reconstruction_ids": [state.recon_id]
+            + [
+                str(h.get("id"))
+                for h in (state.proto_model.get("proto_forms") or [])
+                if h.get("id")
+            ],
             "validation_summary": {
-                "is_valid": validation.is_valid,
-                "failed_checks": list(validation.failed_checks or []),
-                "fac_report": getattr(validation, "report", {}) or {},
+                "is_valid": state.validation.is_valid,
+                "failed_checks": list(state.validation.failed_checks or []),
+                "fac_report": getattr(state.validation, "report", {}) or {},
             },
-            "lineage_trace": lineage,
+            "lineage_trace": state.lineage,
         }
-        certificate = self.stages.certify(
-            proto_model, validation, certificate_fields=cert_fields
+        state.certificate = self.stages.certify(
+            state.proto_model, state.validation, certificate_fields=cert_fields
         )
         if cel is not None:
             cel_entry = cel.record_certification(
-                str(certificate.get("certificate_id") or f"cert_{recon_id}"),
-                certificate,
-                links=[recon_id] + list(attestation_ids),
+                str(state.certificate.get("certificate_id") or f"cert_{state.recon_id}"),
+                state.certificate,
+                links=[state.recon_id] + list(state.attestation_ids),
             )
-            certificate["ledger_entry_id"] = cel_entry.cel_entry_id
-            certificate["fabric_root_hash"] = cel.fabric_root_hash
+            state.certificate["ledger_entry_id"] = cel_entry.cel_entry_id
+            state.certificate["fabric_root_hash"] = cel.fabric_root_hash
             cert_fields["ledger_entry_id"] = cel_entry.cel_entry_id
             cert_fields["fabric_root_hash"] = cel.fabric_root_hash
-        if lineage and dantomax is not None:
-            lineage = dantomax.build_lineage_trace(
-                attestation_ids=attestation_ids,
-                cognate_set_id=(clustered.get("cognate_groups") or [{}])[0].get("group_id"),
-                correspondence_ids=lineage.get("nodes")
+        if state.lineage and dantomax is not None:
+            state.lineage = dantomax.build_lineage_trace(
+                attestation_ids=state.attestation_ids,
+                cognate_set_id=(state.clustered.get("cognate_groups") or [{}])[0].get(
+                    "group_id"
+                ),
+                correspondence_ids=state.lineage.get("nodes")
                 and [
                     n["id"]
-                    for n in lineage["nodes"]
+                    for n in state.lineage["nodes"]
                     if n.get("kind") == "correspondence"
                 ]
                 or [],
                 sound_shift_ids=[
                     n["id"]
-                    for n in (lineage.get("nodes") or [])
+                    for n in (state.lineage.get("nodes") or [])
                     if n.get("kind") == "sound_shift"
                 ],
-                proto_form_id=str((proto_model.get("primary") or {}).get("id")),
-                certification_id=certificate.get("certificate_id"),
+                proto_form_id=str((state.proto_model.get("primary") or {}).get("id")),
+                certification_id=state.certificate.get("certificate_id"),
             )
-            certificate["lineage_trace"] = lineage
-            govern_out["lineage"] = lineage
-            govern_out["human_lineage"] = lineage.get("human_readable")
-        stages_completed.append("CERTIFY")
+            state.certificate["lineage_trace"] = state.lineage
+            state.govern_out["lineage"] = state.lineage
+            state.govern_out["human_lineage"] = state.lineage.get("human_readable")
+        state.stages_completed.append("CERTIFY")
+        return None
 
-        # 10. ARCHIVE
-        archive = self.stages.archive(
-            proto_model, certificate, stages_completed, metrics
+    def stage_archive(self, state: ReconstructionRunState) -> dict[str, Any] | None:
+        state.archive = self.stages.archive(
+            state.proto_model, state.certificate, state.stages_completed, state.metrics
         )
-        stages_completed.append("ARCHIVE")
-
-        if set(FRAStages.STAGE_ORDER) - set(stages_completed):
-            return {
-                "reconstruction_id": recon_id,
-                "status": "FAILED",
-                "fra_stage": stages_completed[-1] if stages_completed else "OBSERVE",
-                "reason": "FRA-01: incomplete stage set",
-                "stages_completed": stages_completed,
-                "metrics": metrics,
-            }
-
-        return {
-            "reconstruction_id": recon_id,
-            "status": "COMPLETED",
-            "fra_stage": "ARCHIVE",
-            "proto_language_model": proto_model,
-            "certificate_id": certificate.get("certificate_id"),
-            "certificate": certificate,
-            "archive_record": archive,
-            "validation": validate_out,
-            "governance": govern_out,
-            "stages_completed": stages_completed,
-            "metrics": metrics,
-            "lineage": lineage,
-            "human_lineage": govern_out.get("human_lineage"),
-            "refinement_halted": refine_out.get("refinement_halted"),
-            "quality_improved": refine_out.get("quality_improved"),
-            "correspondence_search": corr_payload,
-            "cel": cel.summary() if cel is not None else None,
-        }
+        state.stages_completed.append("ARCHIVE")
+        if set(FRAStages.STAGE_ORDER) - set(state.stages_completed):
+            return state.fail(
+                state.stages_completed[-1] if state.stages_completed else "OBSERVE",
+                "FRA-01: incomplete stage set",
+            )
+        return None
 
     def _corpus_hash(self) -> str:
         try:

@@ -3,13 +3,32 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sre"
+name = "sovereign-reconstruction-engine"
 version = "1.0.0"
-description = "Sovereign Reconstruction Engine — constitutional evidence-constrained linguistic reconstruction (FAE substrate + Mythar/IE domain)"
+description = "Constitutional evidence-constrained linguistic reconstruction — FAE substrate, FRA/MCRL composition, Mythar/IE domain"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "Constitutional Computing License v1.0 (placeholder)" }
+license = "Apache-2.0"
 authors = [{ name = "HYFAL / SRE" }]
+keywords = [
+  "linguistic-reconstruction",
+  "constitutional-computing",
+  "evidence-registry",
+  "historical-linguistics",
+  "fae",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
 dependencies = []
 
 [project.optional-dependencies]
@@ -19,13 +38,21 @@ api = ["fastapi>=0.115", "uvicorn[standard]>=0.30", "httpx>=0.27"]
 [project.scripts]
 sre-api = "sre.api.__main__:main"
 
+[project.urls]
+Homepage = "https://github.com/warheart1984-ctrl/mythar-sre"
+Documentation = "https://github.com/warheart1984-ctrl/mythar-sre/tree/main/docs"
+Repository = "https://github.com/warheart1984-ctrl/mythar-sre"
+Issues = "https://github.com/warheart1984-ctrl/mythar-sre/issues"
+
 # Dual layout: domain package under src/, FAE constitutional substrate under packages/fae.
 [tool.setuptools.packages.find]
 where = ["src", "packages"]
 
+[tool.setuptools.data-files]
+"share/sre/data" = ["data/*.json"]
+"share/sre/schemas" = ["schemas/*.json"]
+
 [tool.pytest.ini_options]
-# Default: SRE domain + substrate integration. FAE package self-tests live under
-# packages/fae/tests and packages/fae/mcr/tests — run explicitly when hardening FAE.
 testpaths = ["tests"]
 pythonpath = ["src", "packages"]
 

@@ -82,6 +82,7 @@ CRA explicitly separates:
 
 - Provide the primary governed domain.
 - Serve as the reason the constitutional stack exists.
+- Mythar Living Lexicon entries carry CRA governance metadata (`cra_governance`: identity, justification/evidence dependencies, assurance, lifecycle, deferred CEL lineage, revision history). See `docs/architecture/MytharGapFill.md`, `docs/architecture/MytharWhitePaper.md`, and `src/sre/mythar/governance.py`. CEL binding remains deferred until ledger IDs are written (Drive G).
 
 ### 3.3 Runtime Layer (SRE and peers)
 

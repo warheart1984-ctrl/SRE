@@ -15,7 +15,7 @@ from .attestations import (
     compute_attestation_checksum,
     validate_attestation_fields,
 )
-from .dantomax_signer import DantomaxSigner, LocalHmacSigner, create_signer_from_env
+from .dantomax_signer import DantomaxSigner, LocalHmacSigner
 
 
 def _utc_now() -> str:

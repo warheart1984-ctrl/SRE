@@ -1,9 +1,7 @@
 """Tests for Mythar Cross-Language Rosetta Layer (MCRL-1.0)."""
 
 import unittest
-from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Dict, List, Optional
 from pathlib import Path
 import tempfile
 import shutil
@@ -12,7 +10,6 @@ from fae.mcr.rosetta import (
     MCRLRosettaEngine,
     ExternalRoot,
     ExternalGrammarRule,
-    AlignmentEntry,
     AlignmentMode,
     RosettaConformanceProfile,
     EvidenceSource,
@@ -36,8 +33,8 @@ class TestMCRLBasic(unittest.TestCase):
     def test_external_root_registration(self):
         """Test external root registration with constitutional validation."""
         
-        # Create a minimal evidence record for testing
-        evidence_metadata = ProvenanceMetadata(
+        # Create a minimal evidence record for testing (provenance shape reference)
+        _evidence_metadata = ProvenanceMetadata(
             source=EvidenceSource.EXTERNAL_DATABASE,
             source_id="test_db",
             timestamp=datetime.now(),

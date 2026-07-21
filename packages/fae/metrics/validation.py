@@ -5,10 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
-import math
 import statistics
 
-from fae.state.csr import ConstitutionalStateRecord, CycleLog, get_csr
+from fae.state.csr import ConstitutionalStateRecord, get_csr
 from fae.evidence.registry import EvidenceRegistry, get_registry
 
 

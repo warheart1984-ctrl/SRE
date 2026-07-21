@@ -5,12 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
-import statistics
+from typing import Any, Dict, List, Optional
 
 from fae.state.csr import ConstitutionalStateRecord, get_csr
 from fae.evidence.registry import EvidenceRegistry, EvidenceSource, get_registry
-from fae.metrics.validation import ValidationMetricsEngine, CycleValidationReport, get_csr
+from fae.metrics.validation import ValidationMetricsEngine
 
 
 class DriftType(Enum):
@@ -125,9 +124,14 @@ class DriftDetectionEngine:
         for stage in external_stages:
             evs = self.registry.get_by_cycle_and_stage(cycle_id, stage)
             for ev in evs:
-                if ev.source in (EvidenceSource.EXTERNAL_SENSOR, EvidenceSource.EXTERNAL_API,
-                                  EvidenceSource.HUMAN_OBSERVER, EvidenceSource.EXTERNAL_DATABASE,
-                                  EvidenceSource.THIRD_PARTY_AUDIT, EvidenceSource.CRYPTOGRAPHIC_PROOF):
+                if ev.provenance.source in (
+                    EvidenceSource.EXTERNAL_SENSOR,
+                    EvidenceSource.EXTERNAL_API,
+                    EvidenceSource.HUMAN_OBSERVER,
+                    EvidenceSource.EXTERNAL_DATABASE,
+                    EvidenceSource.THIRD_PARTY_AUDIT,
+                    EvidenceSource.CRYPTOGRAPHIC_PROOF,
+                ):
                     external_evidence_count += 1
         
         if external_evidence_count == 0:
@@ -238,7 +242,9 @@ class DriftDetectionEngine:
             for stage in ["observe", "extract_facts", "measure_reality"]:
                 evs = self.registry.get_by_cycle_and_stage(cycle.cycle_id, stage)
                 for ev in evs:
-                    if ev.source in (EvidenceSource.EXTERNAL_SENSOR, EvidenceSource.EXTERNAL_API,
+                    if ev.provenance.source in (
+                        EvidenceSource.EXTERNAL_SENSOR,
+                        EvidenceSource.EXTERNAL_API,
                                       EvidenceSource.HUMAN_OBSERVER, EvidenceSource.EXTERNAL_DATABASE,
                                       EvidenceSource.THIRD_PARTY_AUDIT, EvidenceSource.CRYPTOGRAPHIC_PROOF):
                         has_external = True
@@ -292,14 +298,14 @@ class DriftDetectionEngine:
         
         all_evidence = self.registry.get_by_cycle(cycle_id)
         for ev in all_evidence:
-            age_hours = (now - ev.timestamp).total_seconds() / 3600
+            age_hours = (now - ev.provenance.timestamp).total_seconds() / 3600
             if age_hours > self.thresholds.max_evidence_age_hours:
                 events.append(DriftEvent(
                     cycle_id=cycle_id,
                     drift_type=DriftType.EVIDENCE_DECAY,
                     severity=DriftSeverity.MEDIUM,
-                    message=f"Evidence {ev.evidence_id} is {age_hours:.1f}h old (max: {self.thresholds.max_evidence_age_hours}h)",
-                    metrics={"evidence_age_hours": age_hours, "evidence_id": ev.evidence_id}
+                    message=f"Evidence {ev.id} is {age_hours:.1f}h old (max: {self.thresholds.max_evidence_age_hours}h)",
+                    metrics={"evidence_age_hours": age_hours, "evidence_id": ev.id}
                 ))
         
         return events
@@ -309,8 +315,15 @@ class DriftDetectionEngine:
         events = []
         
         # Check if any evidence in this cycle has INTERNAL_MODEL source and is used for validation
-        internal_evidence = self.registry.get_by_source(EvidenceSource.INTERNAL_MODEL, cycle_id)
-        derived_evidence = self.registry.get_by_source(EvidenceSource.DERIVED_INFERENCE, cycle_id)
+        cycle_evidence = self.registry.get_by_cycle(cycle_id)
+        internal_evidence = [
+            ev for ev in cycle_evidence
+            if ev.provenance.source == EvidenceSource.INTERNAL_MODEL
+        ]
+        derived_evidence = [
+            ev for ev in cycle_evidence
+            if ev.provenance.source == EvidenceSource.DERIVED_INFERENCE
+        ]
         
         circular_count = len(internal_evidence) + len(derived_evidence)
         

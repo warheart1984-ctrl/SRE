@@ -1,29 +1,83 @@
-# Sovereign Reconstruction Engine (SRE) — v0.1
+# Sovereign Reconstruction Engine (SRE) v1.0.0
 
-A Constitutional Computing System for Evidence-Constrained Linguistic Reconstruction
+A constitutional, evidence-governed system for historical and linguistic reconstruction.
+SRE implements the CIEMS sovereignty stack: evidence validation (FAC-E), reconstruction
+validation (FAC-V), the nine-stage FRA loop, MCRL alignment, and CIH governance.
 
-The Sovereign Reconstruction Engine (SRE) is a constitutional, evidence-governed system implementing the CIEMS Sovereignty Stack for historical, linguistic, and proto-form reconstruction. Every component operates under constitutional constraints, evidence validation, and governance oversight.
+**License:** Apache-2.0 for the framework · Mythar creative assets are separately licensed
+(see [docs/ip/README.md](docs/ip/README.md)).
 
-## Constitutional substrate (FAE)
+## What you get
 
-SRE vendors the **Factual Alignment Engine (FAE)** under `packages/fae` and exposes it as the `fae` package plus `sre.substrate`.
+| Layer | Package | Role |
+|-------|---------|------|
+| Substrate | `fae` / `sre.substrate` | FAC evidence registry, FRA cycle, drift, validation, MCRL Rosetta |
+| Domain | `sre.*` | Linguistic evidence, ChronologicalReconstruction, CEL/Dantomax, corpora |
+| API | `sre.api` | FastAPI HTTP surface + constitutional explorer |
 
-| Layer | Package | Role (evidenced) |
-|-------|---------|------------------|
-| Substrate | `fae` / `sre.substrate` | Generic FAC evidence registry, FRA cycle, drift, validation, CSR, MCRL Rosetta — **importable** after `pip install -e .` |
-| Domain | `sre.evidence`, `sre.fra`, … | Linguistic EvidenceRegistry, ChronologicalReconstruction, CEL/Dantomax, Mythar + IE corpora |
+**Wired today:** FAE is vendored under `packages/fae`. ACCEPTED linguistic evidence mirrors
+into the FAE registry. `FRAComposedReconstruction.run_recursive()` drives SRE stage groups
+through `SREGovernedFRACycle` with FAC-V2–V4 validation on the integration test path.
 
-**Wired today:** when `EvidenceRegistry` is constructed with a FAE registry (API `AppState` does this), ACCEPTED linguistic evidence is mirrored into the FAE substrate (`validation.report["fae_substrate"]`). Linguistic wire APIs are unchanged.
+See [`docs/architecture/FAESubstrate.md`](docs/architecture/FAESubstrate.md) for evidence-bound status.
 
-**Not claimed:** replacing SRE FRA/MCRL domain engines with FAE `FRACycle` / FAE Rosetta end-to-end (parallel stacks remain; composition is prepared via `sre.substrate`).
+## Quick start
 
-Standalone FAE tree at `G:\fae` remains an upstream mirror until cutover is declared.
+```bash
+git clone <repo-url>
+cd sovereign-reconstruction-engine
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -e ".[dev,api]"
+cp .env.example .env               # optional: API / Dantomax / KMS settings
+pytest -q
+python scripts/run_local.py --corpus mythar
+```
 
-See [`docs/architecture/FAESubstrate.md`](docs/architecture/FAESubstrate.md).
+Windows (PowerShell): same commands; use `.venv\Scripts\Activate.ps1`.
 
-## Constitutional Foundations
+### HTTP API
 
-SRE adheres to the CIEMS constitutional invariants:
+```bash
+pip install -e ".[api]"
+sre-api
+# or: python -m sre.api
+# Default: http://127.0.0.1:8010
+```
+
+OpenAPI spec: [`docs/specs/openapi.yaml`](docs/specs/openapi.yaml).
+
+## Environment variables
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `SRE_DATA_DIR` | *(repo `data/`)* | Corpus JSON directory when not using a dev checkout |
+| `SRE_API_HOST` | `127.0.0.1` | API bind address |
+| `SRE_API_PORT` | `8010` | API port |
+| `SRE_API_RELOAD` | off | Hot reload for dev (`true` / `1`) |
+| `SRE_CEL_STORE_PATH` | in-memory | Persistent CEL ledger file |
+| `SRE_DANTOMAX_KEY` | generated | Local HMAC signing key (dev only) |
+| `SRE_KMS_MODE` | `local` | `local` or `remote` signing |
+| `SRE_KMS_URL` | — | Remote KMS endpoint when `SRE_KMS_MODE=remote` |
+| `SRE_KMS_AUTH` | — | Authorization header for remote KMS |
+
+Copy [`.env.example`](.env.example) for a annotated template.
+
+## Corpora
+
+| ID | File | Notes |
+|----|------|--------|
+| `mythar` | `data/fra_corpus_v01.json` | Synthetic FRA fixture |
+| `mythar-lex` | `data/mythar_lexicon_v01.json` | Lexicon clusters (dev reference; Mythar IP) |
+| `ie` | `data/ie_cognate_mini_v01.json` | Latin / Spanish / French / Sanskrit mini-corpus |
+
+```bash
+python scripts/run_local.py --corpus mythar
+python scripts/run_local.py --corpus mythar-lex
+python scripts/run_local.py --corpus ie --dantomax --with-cih
+```
+
+## Constitutional foundations
 
 1. No constitutional decision without constitutional evidence.
 2. All evidence must pass FAC-E1 → FAC-E4 validation.
@@ -33,73 +87,36 @@ SRE adheres to the CIEMS constitutional invariants:
 
 ## Promotion status
 
-**Constitutional promotion gates:** FAC-E, FAC-V, FRA, AI, and CIH are live. Remaining work is real-world scale (larger corpora, stronger algorithms, ledger anchoring).
-
 | Gate family | Status |
 |-------------|--------|
 | FAC-E1–E4 | Live |
-| FAC-V1–V5 | Live |
+| FAC-V1–V5 | Live (composed cycle path tested) |
 | FRA-01–04 | Live (Mythar + IE mini-corpus) |
 | AI-01–04 | Live (rule-based, evidence-anchored) |
-| CIH-01–05 | Live (approval, certificate, governance trace) |
+| CIH-01–05 | Live |
 
-See [`docs/governance/PromotionPlan_v01.md`](docs/governance/PromotionPlan_v01.md).
+Details: [`docs/governance/PromotionPlan_v01.md`](docs/governance/PromotionPlan_v01.md).
 
-## Corpora
+## Documentation map
 
-| ID | File | Notes |
-|----|------|--------|
-| `mythar` | `data/fra_corpus_v01.json` | Synthetic FRA fixture |
-| `mythar-lex` | `data/mythar_lexicon_v01.json` | Living lexicon clusters **12–48** + atomic roots ([MytharGapFill](docs/architecture/MytharGapFill.md)) |
-| `ie` | `data/ie_cognate_mini_v01.json` | Latin / Spanish / French / Sanskrit — kin, numbers 1–5, body parts, verbs (Fortson / Beekes) |
+- **Framework (open):** [`docs/README.md`](docs/README.md) — specs, architecture, governance
+- **Mythar (licensed):** [`docs/ip/README.md`](docs/ip/README.md) — not part of Apache-2.0
+- **Contributing:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- **Changelog:** [`CHANGELOG.md`](CHANGELOG.md)
 
-## Quick demo
-
-```powershell
-pip install -e ".[dev]"
-python scripts/generate_mythar_lexicon.py
-python scripts/run_local.py --corpus mythar
-python scripts/run_local.py --corpus mythar-lex
-python scripts/run_local.py --corpus ie --dantomax --with-cih
-pytest -q
-```
-
-Dantomax (`--dantomax`) attaches a local HMAC-signed, hash-chained attestation ledger to every ACCEPTED evidence record.
-
-## Core Components
-
-- **FAE Substrate** — `packages/fae`, `sre.substrate` (mirror path for ACCEPTED evidence)
-- **Evidence Layer** — EvidenceRegistry, SHA256 integrity, Dantomax hooks, FAC-E1–E4
-- **FRA Layer** — ChronologicalReconstruction, nine-stage methodology
-- **AI Layer** — HLRMAIAgent pattern / proto-form / refine stubs
-- **Governance Layer** — FAECLanguageReconstructionService (CIH), Sovereign Certificate
-- **Enterprise Layer** — config / deployment / monitoring stubs
-- **Temporal Layer** — MCRLRosettaEngine, TemporalMapping
-
-## Development Status
-
-SRE v0.1 implements:
-
-- Full constitutional documentation and OpenAPI contracts
-- FAC-E Substrate behavior on EvidenceRegistry
-- FAE package vendored and importable; evidence mirror into FAE registry (tested)
-- Typed stubs for FRA / AI / CIH / MCRL
-- Constitutional promotion gate suite
-
-## Running tests
+## Development
 
 ```bash
-pip install -e ".[dev]"
-pytest -q
-```
-
-On Windows (PowerShell):
-
-```powershell
-pip install -e ".[dev]"
-pytest -q
+make install-api    # or: pip install -e ".[dev,api]"
+make test
+make lint
+make run            # mythar demo
+make smoke          # import check
 ```
 
 ## License
 
-Constitutional Computing License v1.0 (placeholder)
+- **SRE framework** (code, specs, open docs): [Apache License 2.0](LICENSE)
+- **Mythar language assets:** [LICENSES/Mythar_License.md](LICENSES/Mythar_License.md)
+
+Trademarks and Mythar creative works remain proprietary regardless of framework license.

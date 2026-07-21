@@ -1,4 +1,4 @@
-"""Canonical Mythar Living Lexicon data (clusters 12–94) + optional JSON export."""
+"""Canonical Mythar Living Lexicon data (clusters 12–95) + optional JSON export."""
 
 from __future__ import annotations
 
@@ -6,58 +6,215 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .governance import (
+    classify_cluster_governance,
+    classify_root_governance,
+    lexicon_governance_model,
+)
+
 SRC = "Mythar Living Lexicon / Gap-Fill Draft"
 
+# ─── Polysemy Governance Contract (PGC) ───────────────────────────────────────
+# PGC-1: Polysemy requires a shared semantic axis.
+# PGC-2: Axes must be explicit on each polysemous root.
+# PGC-3: Axes must be constitutional (vowel-core / consonant-force semantics).
+# PGC-4: Axes must be testable (at least one cluster exercising both senses).
+# PGC-5: No axis → no polysemy (split or remove the weaker sense).
+
+POLYSEMY_RULE = (
+    "Polysemy is permitted only where the senses share a documented semantic axis."
+)
+
+PGC_CONTRACT: list[dict[str, str]] = [
+    {"id": "PGC-1", "rule": "Polysemy requires a shared semantic axis"},
+    {"id": "PGC-2", "rule": "Axes must be explicit in the lexicon entry"},
+    {
+        "id": "PGC-3",
+        "rule": "Axes must be constitutional (vowel-core / consonant-force semantics)",
+    },
+    {
+        "id": "PGC-4",
+        "rule": "Axes must be testable (cluster where both senses appear without contradiction)",
+    },
+    {"id": "PGC-5", "rule": "No axis → no polysemy (split or remove weaker sense)"},
+]
+
+# Validated polysemy (post K+L audit). Status: stable.
+ALLOWED_POLYSEMY: list[dict[str, Any]] = [
+    {
+        "form": "fi",
+        "axis": "intensity → purity",
+        "senses": ["fire / intense energy", "sacred-verity / pure truth"],
+        "test_clusters": [83, 54],
+        "status": "stable",
+        "rationale": "Fire = intense energy; sacred-verity = pure truth on intensity→purity",
+    },
+    {
+        "form": "ru",
+        "axis": "flow → life-flow",
+        "senses": ["rest-flow / cessation of motion", "blood / internal life-flow"],
+        "test_clusters": [94, 76],
+        "status": "stable",
+        "rationale": "Rest-flow and blood share the flow→life-flow continuum",
+    },
+    {
+        "form": "pu",
+        "axis": "motion → living motion",
+        "senses": ["move (bu-variant)", "animal / creature (autonomous motion)"],
+        "test_clusters": [85, 95],
+        "status": "stable",
+        "rationale": "Animal = entity defined by autonomous motion",
+    },
+    {
+        "form": "vi",
+        "axis": "perception → awareness → life",
+        "senses": ["knowing-see / inner sight", "life / living awareness"],
+        "test_clusters": [64],
+        "status": "stable",
+        "rationale": "Seeing → knowing → living awareness",
+    },
+    {
+        "form": "ra",
+        "axis": "scale → magnitude",
+        "senses": ["proclaim / intensify", "great / big / many"],
+        "test_clusters": [48, 69],
+        "status": "stable",
+        "rationale": "Big → great → many on one magnitude continuum",
+    },
+    {
+        "form": "ma",
+        "axis": "origin → life → mother",
+        "senses": ["mother", "life / origin / existence"],
+        "test_clusters": [17, 60],
+        "status": "stable",
+        "rationale": "Mother as origin of life; life as origin principle",
+    },
+    {
+        "form": "ka",
+        "axis": "weight → authority → age",
+        "senses": ["force / gravity / vital force", "elder / authority"],
+        "test_clusters": [55, 67],
+        "status": "stable",
+        "rationale": "Force → gravity → elder on weight→authority→age",
+    },
+    {
+        "form": "la",
+        "axis": "elevation → illumination",
+        "senses": ["light / illumination", "sky / above"],
+        "test_clusters": [42, 46],
+        "status": "stable",
+        "rationale": "Sky → above → light on elevation→illumination",
+    },
+    {
+        "form": "nu",
+        "axis": "sense-aperture",
+        "senses": ["nose / smell / breath", "ear / hear"],
+        "test_clusters": [13, 82],
+        "status": "stable",
+        "rationale": "Breath- and sound-channel apertures",
+    },
+    {
+        "form": "to",
+        "axis": "agency",
+        "senses": ["hand", "give / take"],
+        "test_clusters": [13, 89],
+        "status": "stable",
+        "rationale": "Hand ↔ give-take on agency axis; stone → ska / krato (PGC-5 split)",
+    },
+    {
+        "form": "ta",
+        "axis": "deixis",
+        "senses": ["this / that (demonstrative)"],
+        "test_clusters": [65, 75],
+        "status": "stable",
+        "rationale": "Demonstrative only; foot/stand → pe / taga (PGC-5 split)",
+    },
+    {
+        "form": "du",
+        "axis": "burden",
+        "senses": ["bad / heavy / burden"],
+        "test_clusters": [84, 87],
+        "status": "stable",
+        "rationale": "Weight-burden axis only; two → duma (PGC-5 split)",
+    },
+    {
+        "form": "ti",
+        "axis": "diminutive",
+        "senses": ["small / sacred diminutive"],
+        "test_clusters": [12, 81],
+        "status": "stable",
+        "rationale": "Size-class diminutive; independent child root is chi",
+    },
+]
+
+PGC_CORRECTIONS: list[dict[str, str]] = [
+    {
+        "form": "to",
+        "violation": "hand / give-take vs stone (agency ≠ mass/solidity)",
+        "action": "Stone sense removed; stone lives at ska / krato",
+    },
+    {
+        "form": "ta",
+        "violation": "foot/stand vs demonstrative (grounding ≠ pointing)",
+        "action": "ta = demonstrative only; foot/stand at pe / taga",
+    },
+    {
+        "form": "du",
+        "violation": "bad/heavy vs two (burden ≠ duality)",
+        "action": "du = burden only; two/dual at duma",
+    },
+]
+
 ROOTS: list[tuple[str, str, str]] = [
-    ("ma", "mother / existence / breath-base (formally anchored kinship root)", "kinship"),
-    ("ta", "earth-mark / stand; also this / that (demonstrative)", "nature"),
-    ("la", "light / open", "nature"),
-    ("ka", "vital force / walk-base / elder-heat", "motion"),
+    ("ma", "mother / life / origin (axis: origin → life → mother)", "kinship"),
+    ("ta", "this / that (demonstrative; axis: deixis; foot/stand → pe / taga)", "abstract"),
+    ("la", "light / sky / above (axis: elevation → illumination)", "nature"),
+    ("ka", "force / gravity / elder (axis: weight → authority → age)", "motion"),
     ("kra", "vital / life-force / power / strength", "abstract"),
     ("ro", "rest / peace / settle", "abstract"),
     ("ya", "divine / sacred", "abstract"),
     ("tila", "cycle / turn", "abstract"),
     ("ba", "power / strength (paired with pa)", "kinship"),
-    ("tor", "gate / threshold / rocky peak", "nature"),
+    ("tor", "gate / threshold", "nature"),
     ("pla", "plain / open land", "nature"),
     ("ve", "see / vision", "body"),
     ("pa", "father / power", "kinship"),
-    ("ti", "child / small / sacred diminutive (size; cf. chi=child)", "kinship"),
-    ("ne", "sibling / near / kin; also no / not (negation sense)", "kinship"),
+    ("ti", "small / sacred diminutive (diminutive axis; child → chi)", "kinship"),
+    ("ne", "sibling / near / kin", "kinship"),
     ("bro", "sibling / brother-sister class", "kinship"),
     ("te", "you (2sg address)", "kinship"),
-    ("nu", "nose / smell / breath / ear / hear", "body"),
-    ("mu", "mouth / speech aperture; also person / human-breath", "body"),
+    ("nu", "nose / smell / breath; ear / hear (sense-aperture axis)", "body"),
+    ("mu", "mouth / speech aperture", "body"),
     ("si", "eye / see / light-of-sight", "body"),
     ("li", "tongue / speech / taste", "body"),
-    ("to", "hand / take / give", "body"),
+    ("to", "hand / give / take (axis: agency; stone → ska / krato)", "body"),
     ("be", "head / mind / top", "body"),
-    ("pe", "foot / base / step / stand", "body"),
+    ("pe", "foot / base / step / stand (grounding; former ta foot-sense)", "body"),
     ("kor", "heart / core (anatomical; cf. rama=feeling-heart)", "body"),
     ("bu", "come / go / move", "motion"),
     ("re", "flow / run / river", "motion"),
     ("le", "flow (soft) / glide", "motion"),
     ("ga", "walk / carry / hold", "motion"),
     ("wi", "know / wisdom", "abstract"),
-    ("su", "good / sweet / life / sky-above (quality sense)", "abstract"),
+    ("su", "good / sweet / life", "abstract"),
     ("ni", "name / soul / spirit", "abstract"),
     ("wa", "water / flow", "nature"),
     ("hi", "tree / high / grow / wood", "nature"),
     ("bo", "earth / ground", "nature"),
     ("di", "child-sacred variant of ti", "kinship"),
-    ("mi", "spirit-name variant of ni; also small / grain", "abstract"),
-    ("vi", "wisdom-see / inner sight; also life / living", "abstract"),
+    ("mi", "spirit-name variant of ni", "abstract"),
+    ("vi", "knowing-see / living awareness (axis: perception → awareness → life)", "abstract"),
     ("zu", "sweet-life variant of su", "abstract"),
     ("va", "water-flow variant of wa", "nature"),
-    ("ki", "power / vital craft (ka/kra lighter); also high-grow", "abstract"),
+    ("ki", "power / vital craft (ka/kra lighter)", "abstract"),
     ("po", "earth variant of bo", "nature"),
-    ("pu", "move variant of bu; also animal / creature", "motion"),
+    ("pu", "move / animal (axis: motion → living motion)", "motion"),
     ("yu", "grace / knowing-see glide (ya~wi~ve)", "abstract"),
     ("yo", "divine / sacred glide (ya~jor)", "abstract"),
     ("fu", "blessing / fortune", "abstract"),
     ("ua", "flow / existence", "abstract"),
     ("na", "name / spirit (ni-class)", "abstract"),
-    ("ra", "proclaim / intensify / ground; also great / big (scale)", "abstract"),
+    ("ra", "proclaim / intensify; great / big / many (axis: scale → magnitude)", "abstract"),
     ("ara", "proclaim / ground / craft-ending", "abstract"),
     ("akra", "intensified kra — vital force / heart-core", "abstract"),
     ("lmakra", "illuminated mother-heart (la+ma+akra)", "abstract"),
@@ -65,7 +222,7 @@ ROOTS: list[tuple[str, str, str]] = [
     ("tiki", "small sacred power / pure vital spark (ti+ki)", "abstract"),
     ("yocfua", "divine blessing flow / blessed becoming (yo+cfua/fu+ua)", "abstract"),
     ("manalara", "proclaimed mother-light-name (ma+na+la+ra)", "abstract"),
-    ("fi", "truth / sacred verity; fire / flame (elemental)", "abstract"),
+    ("fi", "fire / sacred-verity (axis: intensity → purity)", "abstract"),
     ("aka", "power / gate-force (ka intensified)", "abstract"),
     ("fa", "blessing-light glide (fu+la)", "abstract"),
     ("makra", "mother-heart / existence-vital force (ma+kra)", "abstract"),
@@ -126,10 +283,10 @@ ROOTS: list[tuple[str, str, str]] = [
     ("pli", "open variant of pla", "nature"),
     ("fya", "grace-power (ka+ya)", "abstract"),
     ("lor", "light-protect (la+pa)", "abstract"),
-    ("ku", "place-power / grounded force; also ear (nu-class)", "nature"),
+    ("ku", "place-power / grounded force", "nature"),
     ("flu", "divine flow (ya+lu)", "abstract"),
     ("pta", "this-place / present ground", "abstract"),
-    ("ru", "rest-flow (ro+lu); also blood / life-flow", "abstract"),
+    ("ru", "rest-flow / blood / life-flow (axis: flow → life-flow)", "abstract"),
     ("pro", "bearing / proclaim forward", "abstract"),
     ("tik", "child-name sacred (ti+na lighter)", "kinship"),
     ("kru", "heart-force (kra glide)", "abstract"),
@@ -182,33 +339,36 @@ ROOTS: list[tuple[str, str, str]] = [
     ("hu", "person / human", "kinship"),
     ("am", "eat / consume", "motion"),
     ("no", "deep sleep / rest-depth (ro extension)", "abstract"),
-    ("du", "bad / heavy / burden; also two / dual", "abstract"),
+    ("du", "bad / heavy / burden (axis: burden; two → duma)", "abstract"),
+    ("duma", "two / dual (du+ma; split from du per PGC-5)", "abstract"),
     ("me", "I (oblique / self)", "kinship"),
     ("mica", "one / single / unity particle", "abstract"),
-    ("ska", "stone / rock", "nature"),
-    ("ula", "sky / above (la+su extension)", "nature"),
+    ("ska", "stone / rock (mass/solidity; former to-stone sense)", "nature"),
+    ("ula", "sky / above (la extension; dedicated sky form)", "nature"),
     # Proposal L — social / body / action / nature / abstract / logic / spatial gaps
     ("chi", "child / youth (independent of ti=small)", "kinship"),
     ("loi", "friend / companion / ally", "kinship"),
     ("sha", "other / stranger / foreign", "kinship"),
     ("sa", "speech / say / mouth-speech", "body"),
-    ("rama", "heart / feeling (ra+ma); also great-many", "body"),
+    ("rama", "heart / feeling (ra+ma)", "body"),
     ("ko", "bone / structure", "body"),
     ("peh", "create / shape / make", "motion"),
     ("dak", "break / cut / destroy", "motion"),
-    ("toh", "give (to-extension)", "motion"),
+    ("toh", "give (to-extension; agency with to)", "motion"),
     ("tek", "take / seize", "motion"),
+    ("taga", "stand / grounded foot (ta+ga; former ta foot/stand sense)", "motion"),
     ("nuka", "death / end (nu+ka)", "abstract"),
     ("sola", "sun / day", "nature"),
     ("luna", "moon / night", "nature"),
     ("fe", "air / wind", "nature"),
-    ("krato", "mountain / great stone (kra+to)", "nature"),
+    ("krato", "mountain / great stone (kra+to; stone family with ska)", "nature"),
     ("bura", "path / way (bu+ra)", "motion"),
     ("tem", "time / duration", "abstract"),
     ("reka", "change / shift (re+ka)", "abstract"),
     ("ver", "truth / real (cognitive register; cf. fi sacred-verity)", "abstract"),
     ("never", "false / not-true (ne+ver)", "abstract"),
-    ("lo", "love / affection; also up / rise", "abstract"),
+    ("lo", "love / affection", "abstract"),
+    ("alo", "up / rise / above-motion (split from lo)", "motion"),
     ("dunu", "fear / heavy-hear (du+nu)", "abstract"),
     ("tima", "few / small-amount (ti+ma)", "abstract"),
     ("sura", "all / complete (su+ra)", "abstract"),
@@ -216,7 +376,7 @@ ROOTS: list[tuple[str, str, str]] = [
     ("ke", "if / condition", "abstract"),
     ("in", "inside / within", "motion"),
     ("ex", "outside / beyond", "motion"),
-    ("duta", "downward / heavy-foot (du+ta)", "motion"),
+    ("duta", "downward / heavy-ground (du+ta)", "motion"),
     ("neta", "near / close (ne+ta)", "motion"),
 ]
 
@@ -1410,8 +1570,8 @@ CLUSTERS_81_87: list[tuple[int, str, str, str, str, str]] = [
      "Fire–water–tree: elemental living triad"),
     (84, "wi du ro", "Know-bad-rest", "abstract", "Wi du ro ya",
      "Know the heavy/bad; rest in the divine (wisdom through challenge)"),
-    (85, "su bu ya", "Good-move-divine", "motion", "Su bu ya kra",
-     "The good moves toward the divine (blessed journey)"),
+    (85, "su pu ya", "Good-move-divine", "motion", "Su pu ya kra",
+     "The good moves toward the divine (blessed journey; pu = living motion)"),
     (86, "be ni la", "Head-name-light", "abstract", "Be ni la ro ya",
      "Head–name–light: enlightened mind"),
     (87, "du kra ro", "Heavy-vital-rest", "abstract", "Du kra ro ya",
@@ -1436,6 +1596,12 @@ CLUSTERS_88_94: list[tuple[int, str, str, str, str, str]] = [
      "Feeling-heart–bone–blood: embodied life"),
 ]
 
+# Proposal M — PGC correction / axis-validation mini-clusters
+CLUSTERS_95: list[tuple[int, str, str, str, str, str]] = [
+    (95, "pu hu duma", "Animal-person-two", "kinship", "Pu hu duma kra",
+     "Animal–person–two: living motion vs person; dual number at duma (PGC splits)"),
+]
+
 INVOCATION = (
     "Ye kra ro ya\n"
     "Lmakra yuckara\n"
@@ -1450,10 +1616,11 @@ INVOCATION = (
     "Makyo yupra torlu\n"
     "Pa ne ti\n"
     "Fi wa hi\n"
-    "Su bu ya\n"
+    "Su pu ya\n"
     "Du kra ro\n"
     "Chi ma loi\n"
     "Sola luna fe\n"
+    "Pu hu duma\n"
     "Wi su ni ve ro ya"
 )
 
@@ -1498,9 +1665,11 @@ PROTO_WORLD = [
     {"mythar": "du", "proto_world": "*dweh₂- / *gʷreh₂-", "domain": "abstract", "note": "two / heavy / bad"},
     {"mythar": "me", "proto_world": "*me- / *h₁me-", "domain": "kinship", "note": "I (oblique)"},
     {"mythar": "mica", "proto_world": "*sem- / *oi-no-", "domain": "abstract", "note": "one / single"},
-    {"mythar": "ska", "proto_world": "*h₂ek- / *ḱer-", "domain": "nature", "note": "stone / rock"},
+    {"mythar": "ska", "proto_world": "*h₂ek- / *ḱer- / *h₂ḱmōn", "domain": "nature", "note": "stone / rock (PGC: former to-stone sense)"},
     {"mythar": "ula", "proto_world": "*h₂ew- / *dyew-", "domain": "nature", "note": "sky / above"},
-    {"mythar": "fi", "proto_world": "*peh₂wr̥ / *h₁yes-", "domain": "nature", "note": "fire / truth (polysemy)"},
+    {"mythar": "fi", "proto_world": "*peh₂wr̥ / *h₁yes-", "domain": "nature", "note": "fire / sacred-verity (PGC axis intensity→purity)"},
+    {"mythar": "duma", "proto_world": "*dwóh₁", "domain": "abstract", "note": "two / dual (split from du per PGC-5)"},
+    {"mythar": "taga", "proto_world": "*steh₂-", "domain": "motion", "note": "stand (former ta foot/stand sense)"},
     {"mythar": "chi", "proto_world": "*ǵenh₁- / *tek-", "domain": "kinship", "note": "child / youth"},
     {"mythar": "loi", "proto_world": "*leubh- / *priH-", "domain": "kinship", "note": "friend / love-ally"},
     {"mythar": "sha", "proto_world": "*alyo- / *gʰosti-", "domain": "kinship", "note": "other / stranger"},
@@ -1527,64 +1696,144 @@ def _is_compound_cluster(cluster: dict[str, Any]) -> bool:
     return bool(cluster.get("compounds"))
 
 
+def _attach_cluster_governance(
+    cluster: dict[str, Any],
+    *,
+    proposal: str | None = None,
+) -> dict[str, Any]:
+    """Return cluster dict with CRA governance attached (mutates a copy)."""
+    out = dict(cluster)
+    cid = int(out["cluster_id"])
+    meta = dict(out.get("metadata") or {})
+    prop = proposal or meta.get("proposal")
+    if prop is None:
+        if cid >= 95:
+            prop = "M"
+        elif cid >= 88:
+            prop = "L"
+        elif cid >= 81:
+            prop = "K"
+        elif cid >= 65:
+            prop = "J"
+        elif cid >= 61:
+            prop = "I"
+        elif cid >= 49:
+            prop = "H"
+        elif cid == 48:
+            prop = "G"
+        elif cid == 47:
+            prop = "F"
+    out["cra_governance"] = classify_cluster_governance(
+        cluster_id=cid,
+        name=str(out.get("name") or f"cluster-{cid}"),
+        domain=str(out.get("domain") or "abstract"),
+        evidence_id=str(out.get("evidence_id") or f"evid_myt_cluster_{cid:02d}"),
+        proposal=str(prop) if prop else None,
+        provenance_note=(
+            str(meta.get("provenance_note")) if meta.get("provenance_note") else None
+        ),
+    )
+    return out
+
+
 def build_lexicon_document() -> dict[str, Any]:
     gloss = {f: m for f, m, _ in ROOTS}
-    roots = [
-        {
+    poly_by_form = {str(p["form"]): p for p in ALLOWED_POLYSEMY}
+    pw_by_form: dict[str, str] = {}
+    for row in PROTO_WORLD:
+        form = str(row["mythar"])
+        note = f"{row.get('proto_world')} ({row.get('note')})"
+        # Prefer the first comparative row; later duplicates enrich only if absent.
+        pw_by_form.setdefault(form, note)
+    roots: list[dict[str, Any]] = []
+    for form, meaning, domain in ROOTS:
+        evidence_id = f"evid_myt_root_{form}"
+        entry: dict[str, Any] = {
             "form": form,
             "meaning": meaning,
             "domain": domain,
             "source_reference": SRC,
-            "evidence_id": f"evid_myt_root_{form}",
+            "evidence_id": evidence_id,
         }
-        for form, meaning, domain in ROOTS
-    ]
+        polysemy: dict[str, Any] | None = None
+        if form in poly_by_form:
+            p = poly_by_form[form]
+            polysemy = {
+                "axis": p["axis"],
+                "senses": p["senses"],
+                "status": p.get("status", "stable"),
+                "test_clusters": p.get("test_clusters"),
+                "rationale": p.get("rationale"),
+            }
+            entry["polysemy"] = polysemy
+        entry["cra_governance"] = classify_root_governance(
+            form=form,
+            domain=domain,
+            evidence_id=evidence_id,
+            polysemy=polysemy,
+            proto_world_note=pw_by_form.get(form),
+        )
+        roots.append(entry)
     clusters: list[dict[str, Any]] = []
     for cid, forms_s, name, domain, phrase, interp in CLUSTERS:
         forms = forms_s.split()
         clusters.append(
-            {
-                "cluster_id": cid,
-                "name": name,
-                "forms": forms,
-                "phrase": phrase,
-                "domain": domain,
-                "interpretation": interp,
-                "source_reference": SRC,
-                "evidence_id": f"evid_myt_cluster_{cid:02d}",
-                "morphemes": [{"form": f, "gloss": gloss.get(f, f)} for f in forms],
-            }
+            _attach_cluster_governance(
+                {
+                    "cluster_id": cid,
+                    "name": name,
+                    "forms": forms,
+                    "phrase": phrase,
+                    "domain": domain,
+                    "interpretation": interp,
+                    "source_reference": SRC,
+                    "evidence_id": f"evid_myt_cluster_{cid:02d}",
+                    "morphemes": [{"form": f, "gloss": gloss.get(f, f)} for f in forms],
+                }
+            )
         )
     for compound in COMPOUND_CLUSTERS:
-        clusters.append(dict(compound))
-    for cid, forms_s, name, domain, phrase, interp in CLUSTERS_81_87 + CLUSTERS_88_94:
+        clusters.append(_attach_cluster_governance(dict(compound)))
+    for cid, forms_s, name, domain, phrase, interp in (
+        CLUSTERS_81_87 + CLUSTERS_88_94 + CLUSTERS_95
+    ):
         forms = forms_s.split()
-        proposal = "K" if cid <= 87 else "L"
+        if cid <= 87:
+            proposal = "K"
+        elif cid <= 94:
+            proposal = "L"
+        else:
+            proposal = "M"
         clusters.append(
-            {
-                "cluster_id": cid,
-                "name": name,
-                "forms": forms,
-                "phrase": phrase,
-                "domain": domain,
-                "interpretation": interp,
-                "source_reference": SRC,
-                "evidence_id": f"evid_myt_cluster_{cid:02d}",
-                "morphemes": [{"form": f, "gloss": gloss.get(f, f)} for f in forms],
-                "metadata": {
-                    "kind": "cluster",
-                    "source": SRC,
-                    "domain": domain,
+            _attach_cluster_governance(
+                {
                     "cluster_id": cid,
+                    "name": name,
                     "forms": forms,
-                    "proposal": proposal,
-                    "provenance_note": (
-                        "Proto-World universal gap-fill mini-cluster"
-                        if proposal == "K"
-                        else "Proposal L universal-root demonstration cluster"
-                    ),
+                    "phrase": phrase,
+                    "domain": domain,
+                    "interpretation": interp,
+                    "source_reference": SRC,
+                    "evidence_id": f"evid_myt_cluster_{cid:02d}",
+                    "morphemes": [{"form": f, "gloss": gloss.get(f, f)} for f in forms],
+                    "metadata": {
+                        "kind": "cluster",
+                        "source": SRC,
+                        "domain": domain,
+                        "cluster_id": cid,
+                        "forms": forms,
+                        "proposal": proposal,
+                        "provenance_note": (
+                            "Proto-World universal gap-fill mini-cluster"
+                            if proposal == "K"
+                            else "Proposal L universal-root demonstration cluster"
+                            if proposal == "L"
+                            else "Proposal M PGC correction / axis-validation cluster"
+                        ),
+                    },
                 },
-            }
+                proposal=proposal,
+            )
         )
 
     evidence: list[dict[str, Any]] = []
@@ -1640,11 +1889,21 @@ def build_lexicon_document() -> dict[str, Any]:
                 )
     return {
         "lexicon_id": "mythar_lexicon_v01",
+        "lexicon_version": "1.3",
         "description": (
-            "Mythar Living Lexicon — gap-fill clusters 12–94 with atomic roots, "
-            "compounds, Proto-World universals (proposals K–L), and domain tags."
+            "Mythar Living Lexicon v1.3 — gap-fill clusters 12–95 with atomic roots, "
+            "compounds, Proto-World universals (proposals K–M), Polysemy Governance "
+            "Contract (PGC), CRA governance metadata, and domain tags. "
+            "Core expansion frozen — prioritize docs/conformance/tooling."
         ),
         "source_reference": SRC,
+        "cra_governance_model": lexicon_governance_model(),
+        "polysemy_governance": {
+            "contract": PGC_CONTRACT,
+            "rule": POLYSEMY_RULE,
+            "allowed": ALLOWED_POLYSEMY,
+            "corrections": PGC_CORRECTIONS,
+        },
         "proposals": {
             "A": "Fill kinship triad gaps (pa/ma/ti/ne/bro)",
             "B": "Fill body–sense inventory (nu/mu/si/li/to/be/pe/kor)",
@@ -1658,6 +1917,7 @@ def build_lexicon_document() -> dict[str, Any]:
             "J": "Extended ritual triads (yafora…torlu — clusters 65–80)",
             "K": "Proto-World universal gaps (da/hu/am/no/du/me/mica/ska/ula — clusters 81–87)",
             "L": "Social/body/action/nature/abstract/logic/spatial roots — clusters 88–94",
+            "M": "PGC corrections (duma/taga/alo; axis validation — cluster 95)",
         },
         "roots": roots,
         "clusters": clusters,

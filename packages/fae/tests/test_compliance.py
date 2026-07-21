@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import unittest
-from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Dict, List
 from pathlib import Path
 import tempfile
 import shutil
@@ -17,28 +15,12 @@ from fae.api import (
     ProvenanceMetadata,
     EvidenceSource,
     EvidenceStatus,
-    FRACycle,
     FRACycleStage,
-    CycleContext,
-    ValidationMetricsEngine,
-    CycleValidationReport,
-    DriftDetectionEngine,
-    DriftEvent,
     DriftType,
     DriftSeverity,
-    DriftThresholds,
-    ConstitutionalStateRecord,
-    get_csr,
-    get_registry,
     reset_fae,
-    create_fae,
-    quick_cycle,
-    FRACycleError,
     FACInvariantViolation
 )
-from fae.evidence.registry import EvidenceRegistry
-from fae.state.csr import reset_csr
-from fae.evidence.registry import reset_registry
 
 
 class TestFACComplianceChecklist(unittest.TestCase):
@@ -314,7 +296,7 @@ class TestFACComplianceChecklist(unittest.TestCase):
         )
         
         # Try circular: evidence that depends on itself
-        prov_circular = ProvenanceMetadata(
+        _prov_circular = ProvenanceMetadata(
             source=EvidenceSource.EXTERNAL_SENSOR,
             source_id="sensor_d",
             timestamp=datetime.now(),

@@ -1,22 +1,27 @@
-# Sovereign Reconstruction Engine — Makefile v0.1
-.PHONY: install test lint format run
+# Sovereign Reconstruction Engine — Makefile
+
+.PHONY: install install-api test lint format run api smoke
 
 install:
-	@echo "Installing dependencies..."
 	pip install -e ".[dev]"
 
+install-api:
+	pip install -e ".[dev,api]"
+
 test:
-	@echo "Running test suite..."
 	pytest -q
 
 lint:
-	@echo "Linting codebase..."
-	ruff check src/ tests/
+	ruff check src/ packages/ tests/
 
 format:
-	@echo "Formatting codebase..."
-	ruff check --fix src/ tests/
+	ruff check --fix src/ packages/ tests/
 
 run:
-	@echo "Running minimal reconstruction demo..."
-	@bash scripts/run_local.sh || sh scripts/run_local.sh
+	python scripts/run_local.py --corpus mythar
+
+api:
+	sre-api
+
+smoke:
+	python -c "import sre, fae; from sre.substrate import FRAComposedReconstruction; print('ok', sre.__version__)"

@@ -60,6 +60,15 @@ from fae.mcr.rosetta import (
 )
 
 from .bridge import mirror_linguistic_evidence_to_fae
+from .fra_composition import ComposedReconstructionResult, FRAComposedReconstruction, RecursiveCompositionResult
+from .fra_stage_runner import (
+    FAE_TO_SRE_STAGE_GROUPS,
+    SRE_TO_FAE_STAGE_MAP,
+    SREFRAPipelineRunner,
+    SREGovernedFRACycle,
+    build_sre_governed_fra_cycle,
+)
+from .mcrl_composition import ComposedRosettaEngine
 
 __all__ = [
     "AlignmentCheck",
@@ -105,4 +114,13 @@ __all__ = [
     "reset_fae",
     "reset_fae_registry",
     "reset_mcrl",
+    "ComposedReconstructionResult",
+    "ComposedRosettaEngine",
+    "FAE_TO_SRE_STAGE_GROUPS",
+    "FRAComposedReconstruction",
+    "RecursiveCompositionResult",
+    "SRE_TO_FAE_STAGE_MAP",
+    "SREFRAPipelineRunner",
+    "SREGovernedFRACycle",
+    "build_sre_governed_fra_cycle",
 ]

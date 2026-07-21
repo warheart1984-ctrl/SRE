@@ -7,6 +7,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional, TypeVar, Generic
+import uuid
+
 from fae.evidence.registry import EvidenceRegistry, EvidenceSource, ProvenanceMetadata, get_registry
 from fae.state.csr import ConstitutionalStateRecord, CycleLog, get_csr
 
@@ -75,7 +77,7 @@ class FRAStage(ABC, Generic[T]):
         dependencies: Optional[List[str]] = None
     ) -> str:
         """Record evidence in registry and CSR."""
-        from fae.evidence.registry import ProvenanceMetadata, EvidenceStatus
+        from fae.evidence.registry import EvidenceStatus
         import hashlib
         import json
         
@@ -592,7 +594,3 @@ class FRACycleError(Exception):
 class FACInvariantViolation(Exception):
     """FAC-1 constitutional invariant violation."""
     pass
-
-
-# Import uuid at top
-import uuid

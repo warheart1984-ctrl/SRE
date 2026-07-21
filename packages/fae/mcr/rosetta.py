@@ -27,13 +27,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional
 from pathlib import Path
-import hashlib
-import json
 import uuid
 import threading
-from abc import ABC, abstractmethod
 
 
 class AlignmentMode(Enum):
@@ -421,7 +418,10 @@ class MCRLRosettaEngine:
     
     def _validate_root_external(self, root: ExternalRoot) -> bool:
         """FAC-E1: Validate that root is truly external."""
-        return root.source == EvidenceSource.EXTERNAL
+        return root.source not in (
+            EvidenceSource.INTERNAL_MODEL,
+            EvidenceSource.DERIVED_INFERENCE,
+        )
     
     def _detect_circular_dependency(self, root: ExternalRoot) -> bool:
         """FAC-E4: Detect circular evidence dependencies."""

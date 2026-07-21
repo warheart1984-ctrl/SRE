@@ -6,7 +6,6 @@ from typing import Any, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from ..evidence.dantomax_client import DantomaxClient
-    from ..evidence.registry import EvidenceRegistry
 
 
 def extract_attestation_payloads(evidence_list: list[Any]) -> list[dict[str, Any]]:
